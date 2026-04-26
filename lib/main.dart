@@ -10,6 +10,8 @@ void main() {
   );
 }
 
+final counterProvider = StateProvider((ref) => 0);
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
