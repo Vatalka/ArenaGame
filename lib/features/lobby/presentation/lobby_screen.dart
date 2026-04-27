@@ -24,7 +24,7 @@ class LobbyScreen extends StatelessWidget {
                   ),
                 );
               },
-              child: const Text('Enter'),
+              child: const Text('to Battle'),
             )
           ],
         ),
