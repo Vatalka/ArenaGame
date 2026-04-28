@@ -21,7 +21,7 @@ Character _$CharacterFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Character {
   String get name => throw _privateConstructorUsedError;
-  int get hp => throw _privateConstructorUsedError;
+  int get currentHp => throw _privateConstructorUsedError;
   int get maxHp => throw _privateConstructorUsedError;
   int get vitality => throw _privateConstructorUsedError;
   int get strength => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $CharacterCopyWith<$Res> {
   @useResult
   $Res call(
       {String name,
-      int hp,
+      int currentHp,
       int maxHp,
       int vitality,
       int strength,
@@ -63,7 +63,7 @@ class _$CharacterCopyWithImpl<$Res, $Val extends Character>
   @override
   $Res call({
     Object? name = null,
-    Object? hp = null,
+    Object? currentHp = null,
     Object? maxHp = null,
     Object? vitality = null,
     Object? strength = null,
@@ -75,9 +75,9 @@ class _$CharacterCopyWithImpl<$Res, $Val extends Character>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      hp: null == hp
-          ? _value.hp
-          : hp // ignore: cast_nullable_to_non_nullable
+      currentHp: null == currentHp
+          ? _value.currentHp
+          : currentHp // ignore: cast_nullable_to_non_nullable
               as int,
       maxHp: null == maxHp
           ? _value.maxHp
@@ -113,7 +113,7 @@ abstract class _$$CharacterImplCopyWith<$Res>
   @useResult
   $Res call(
       {String name,
-      int hp,
+      int currentHp,
       int maxHp,
       int vitality,
       int strength,
@@ -133,7 +133,7 @@ class __$$CharacterImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
-    Object? hp = null,
+    Object? currentHp = null,
     Object? maxHp = null,
     Object? vitality = null,
     Object? strength = null,
@@ -145,9 +145,9 @@ class __$$CharacterImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      hp: null == hp
-          ? _value.hp
-          : hp // ignore: cast_nullable_to_non_nullable
+      currentHp: null == currentHp
+          ? _value.currentHp
+          : currentHp // ignore: cast_nullable_to_non_nullable
               as int,
       maxHp: null == maxHp
           ? _value.maxHp
@@ -175,15 +175,16 @@ class __$$CharacterImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CharacterImpl implements _Character {
+class _$CharacterImpl extends _Character {
   const _$CharacterImpl(
       {required this.name,
-      required this.hp,
+      required this.currentHp,
       required this.maxHp,
       required this.vitality,
       required this.strength,
       required this.precision,
-      required this.agility});
+      required this.agility})
+      : super._();
 
   factory _$CharacterImpl.fromJson(Map<String, dynamic> json) =>
       _$$CharacterImplFromJson(json);
@@ -191,7 +192,7 @@ class _$CharacterImpl implements _Character {
   @override
   final String name;
   @override
-  final int hp;
+  final int currentHp;
   @override
   final int maxHp;
   @override
@@ -205,7 +206,7 @@ class _$CharacterImpl implements _Character {
 
   @override
   String toString() {
-    return 'Character(name: $name, hp: $hp, maxHp: $maxHp, vitality: $vitality, strength: $strength, precision: $precision, agility: $agility)';
+    return 'Character(name: $name, currentHp: $currentHp, maxHp: $maxHp, vitality: $vitality, strength: $strength, precision: $precision, agility: $agility)';
   }
 
   @override
@@ -214,7 +215,8 @@ class _$CharacterImpl implements _Character {
         (other.runtimeType == runtimeType &&
             other is _$CharacterImpl &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.hp, hp) || other.hp == hp) &&
+            (identical(other.currentHp, currentHp) ||
+                other.currentHp == currentHp) &&
             (identical(other.maxHp, maxHp) || other.maxHp == maxHp) &&
             (identical(other.vitality, vitality) ||
                 other.vitality == vitality) &&
@@ -227,8 +229,8 @@ class _$CharacterImpl implements _Character {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, name, hp, maxHp, vitality, strength, precision, agility);
+  int get hashCode => Object.hash(runtimeType, name, currentHp, maxHp, vitality,
+      strength, precision, agility);
 
   @JsonKey(ignore: true)
   @override
@@ -244,15 +246,16 @@ class _$CharacterImpl implements _Character {
   }
 }
 
-abstract class _Character implements Character {
+abstract class _Character extends Character {
   const factory _Character(
       {required final String name,
-      required final int hp,
+      required final int currentHp,
       required final int maxHp,
       required final int vitality,
       required final int strength,
       required final int precision,
       required final int agility}) = _$CharacterImpl;
+  const _Character._() : super._();
 
   factory _Character.fromJson(Map<String, dynamic> json) =
       _$CharacterImpl.fromJson;
@@ -260,7 +263,7 @@ abstract class _Character implements Character {
   @override
   String get name;
   @override
-  int get hp;
+  int get currentHp;
   @override
   int get maxHp;
   @override

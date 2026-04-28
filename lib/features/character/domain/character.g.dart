@@ -9,7 +9,7 @@ part of 'character.dart';
 _$CharacterImpl _$$CharacterImplFromJson(Map<String, dynamic> json) =>
     _$CharacterImpl(
       name: json['name'] as String,
-      hp: (json['hp'] as num).toInt(),
+      currentHp: (json['currentHp'] as num).toInt(),
       maxHp: (json['maxHp'] as num).toInt(),
       vitality: (json['vitality'] as num).toInt(),
       strength: (json['strength'] as num).toInt(),
@@ -20,7 +20,7 @@ _$CharacterImpl _$$CharacterImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$CharacterImplToJson(_$CharacterImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'hp': instance.hp,
+      'currentHp': instance.currentHp,
       'maxHp': instance.maxHp,
       'vitality': instance.vitality,
       'strength': instance.strength,

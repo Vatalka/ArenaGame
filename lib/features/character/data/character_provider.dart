@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final characterProvider = StateProvider<Character>(
   (ref) {
     return Character(
-      name: 'Hero',
-      hp: 100,
+      name: 'Player',
+      currentHp: 100,
       maxHp: 100,
       vitality: 5,
       strength: 5,
@@ -14,3 +14,7 @@ final characterProvider = StateProvider<Character>(
     );
   },
 );
+
+/// TO DOO:
+// Цей файл треба видалити, а замість нього буде character_service_implementation
+// де буде реалізовано логіку

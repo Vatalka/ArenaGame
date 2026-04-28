@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../application/character_provider.dart';
+import '../data/character_provider.dart';
 
 class CharacterScreen extends ConsumerWidget {
   const CharacterScreen({super.key});
@@ -19,7 +19,7 @@ class CharacterScreen extends ConsumerWidget {
             return Column(
               children: [
                 Text(hero.name),
-                Text("HP: ${hero.hp}/${hero.maxHp}"),
+                Text("HP: ${hero.currentHp}/${hero.maxHp}"),
                 Text("STR: ${hero.strength}"),
                 Text("VIT: ${hero.vitality}"),
                 Text("PRE: ${hero.precision}"),
