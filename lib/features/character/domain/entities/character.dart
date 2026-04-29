@@ -11,18 +11,25 @@ class Character with _$Character {
   const factory Character({
     required String name,
     required int currentHp,
-    required int maxHp,
     required int vitality,
     required int strength,
     required int precision,
     required int agility,
   }) = _Character;
 
-  @override
   int get maxHp => vitality * 10;
 
-  @override
-  int get currentHp => maxHp;
+  factory Character.createDefault(String name) {
+    const defaultVitality = 5;
+    return Character(
+      name: name,
+      currentHp: defaultVitality * 10,
+      vitality: defaultVitality,
+      strength: 5,
+      precision: 5,
+      agility: 5,
+    );
+  }
 
   factory Character.fromJson(Map<String, dynamic> json) =>
       _$CharacterFromJson(json);

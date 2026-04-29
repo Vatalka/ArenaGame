@@ -22,7 +22,6 @@ Character _$CharacterFromJson(Map<String, dynamic> json) {
 mixin _$Character {
   String get name => throw _privateConstructorUsedError;
   int get currentHp => throw _privateConstructorUsedError;
-  int get maxHp => throw _privateConstructorUsedError;
   int get vitality => throw _privateConstructorUsedError;
   int get strength => throw _privateConstructorUsedError;
   int get precision => throw _privateConstructorUsedError;
@@ -42,7 +41,6 @@ abstract class $CharacterCopyWith<$Res> {
   $Res call(
       {String name,
       int currentHp,
-      int maxHp,
       int vitality,
       int strength,
       int precision,
@@ -64,7 +62,6 @@ class _$CharacterCopyWithImpl<$Res, $Val extends Character>
   $Res call({
     Object? name = null,
     Object? currentHp = null,
-    Object? maxHp = null,
     Object? vitality = null,
     Object? strength = null,
     Object? precision = null,
@@ -78,10 +75,6 @@ class _$CharacterCopyWithImpl<$Res, $Val extends Character>
       currentHp: null == currentHp
           ? _value.currentHp
           : currentHp // ignore: cast_nullable_to_non_nullable
-              as int,
-      maxHp: null == maxHp
-          ? _value.maxHp
-          : maxHp // ignore: cast_nullable_to_non_nullable
               as int,
       vitality: null == vitality
           ? _value.vitality
@@ -114,7 +107,6 @@ abstract class _$$CharacterImplCopyWith<$Res>
   $Res call(
       {String name,
       int currentHp,
-      int maxHp,
       int vitality,
       int strength,
       int precision,
@@ -134,7 +126,6 @@ class __$$CharacterImplCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? currentHp = null,
-    Object? maxHp = null,
     Object? vitality = null,
     Object? strength = null,
     Object? precision = null,
@@ -148,10 +139,6 @@ class __$$CharacterImplCopyWithImpl<$Res>
       currentHp: null == currentHp
           ? _value.currentHp
           : currentHp // ignore: cast_nullable_to_non_nullable
-              as int,
-      maxHp: null == maxHp
-          ? _value.maxHp
-          : maxHp // ignore: cast_nullable_to_non_nullable
               as int,
       vitality: null == vitality
           ? _value.vitality
@@ -179,7 +166,6 @@ class _$CharacterImpl extends _Character {
   const _$CharacterImpl(
       {required this.name,
       required this.currentHp,
-      required this.maxHp,
       required this.vitality,
       required this.strength,
       required this.precision,
@@ -194,8 +180,6 @@ class _$CharacterImpl extends _Character {
   @override
   final int currentHp;
   @override
-  final int maxHp;
-  @override
   final int vitality;
   @override
   final int strength;
@@ -206,7 +190,7 @@ class _$CharacterImpl extends _Character {
 
   @override
   String toString() {
-    return 'Character(name: $name, currentHp: $currentHp, maxHp: $maxHp, vitality: $vitality, strength: $strength, precision: $precision, agility: $agility)';
+    return 'Character(name: $name, currentHp: $currentHp, vitality: $vitality, strength: $strength, precision: $precision, agility: $agility)';
   }
 
   @override
@@ -217,7 +201,6 @@ class _$CharacterImpl extends _Character {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.currentHp, currentHp) ||
                 other.currentHp == currentHp) &&
-            (identical(other.maxHp, maxHp) || other.maxHp == maxHp) &&
             (identical(other.vitality, vitality) ||
                 other.vitality == vitality) &&
             (identical(other.strength, strength) ||
@@ -229,8 +212,8 @@ class _$CharacterImpl extends _Character {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, currentHp, maxHp, vitality,
-      strength, precision, agility);
+  int get hashCode => Object.hash(
+      runtimeType, name, currentHp, vitality, strength, precision, agility);
 
   @JsonKey(ignore: true)
   @override
@@ -250,7 +233,6 @@ abstract class _Character extends Character {
   const factory _Character(
       {required final String name,
       required final int currentHp,
-      required final int maxHp,
       required final int vitality,
       required final int strength,
       required final int precision,
@@ -264,8 +246,6 @@ abstract class _Character extends Character {
   String get name;
   @override
   int get currentHp;
-  @override
-  int get maxHp;
   @override
   int get vitality;
   @override

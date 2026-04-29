@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../data/character_provider.dart';
+import '../data/repositories/character_provider.dart';
 
 class CharacterScreen extends ConsumerWidget {
   const CharacterScreen({super.key});

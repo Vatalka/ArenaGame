@@ -1,4 +1,4 @@
-import 'package:arena_game/features/character/domain/repositories/character_service.dart';
+import 'package:arena_game/features/character/domain/repositories/character_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -8,7 +8,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final service = Modular.get<CharacterService>();
+    final service = Modular.get<CharacterRepository>();
     return Scaffold(
       appBar: AppBar(title: const Text('Login Screen')),
       body: Center(
