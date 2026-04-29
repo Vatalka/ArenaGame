@@ -1,3 +1,4 @@
+import 'package:arena_game/core/game_colors.dart';
 import 'package:arena_game/features/auth/presentation/login_screen.dart';
 import 'package:arena_game/features/auth/presentation/game_screen.dart';
 import 'package:arena_game/features/character/data/repositories/character_repository_impl.dart';
@@ -30,9 +31,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Arena game',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+          extensions: [GameColors(health: Colors.green)]),
       routerConfig: Modular.routerConfig,
     );
   }

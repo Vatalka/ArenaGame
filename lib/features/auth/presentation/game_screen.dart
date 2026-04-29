@@ -1,3 +1,4 @@
+import 'package:arena_game/core/game_colors.dart';
 import 'package:arena_game/features/character/domain/repositories/character_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -35,11 +36,15 @@ class GameScreen extends StatelessWidget {
                         value: player.maxHp > 0
                             ? player.currentHp / player.maxHp
                             : 0,
-                        backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
+                        backgroundColor: Theme.of(context)
+                            .colorScheme
+                            .surfaceContainerHighest,
                         valueColor: AlwaysStoppedAnimation<Color>(
                           player.currentHp / player.maxHp < 0.3
                               ? Theme.of(context).colorScheme.error
-                              : Theme.of(context).colorScheme.primary,
+                              : Theme.of(context)
+                                  .extension<GameColors>()!
+                                  .health,
                         ),
                       ),
                     ),
@@ -61,14 +66,17 @@ class GameScreen extends StatelessWidget {
                       width: 100,
                       height: 10,
                       child: LinearProgressIndicator(
-                        value: enemy.maxHp > 0
-                            ? enemy.currentHp / enemy.maxHp
-                            : 0,
-                        backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
+                        value:
+                            enemy.maxHp > 0 ? enemy.currentHp / enemy.maxHp : 0,
+                        backgroundColor: Theme.of(context)
+                            .colorScheme
+                            .surfaceContainerHighest,
                         valueColor: AlwaysStoppedAnimation<Color>(
                           enemy.currentHp / enemy.maxHp < 0.3
                               ? Theme.of(context).colorScheme.error
-                              : Theme.of(context).colorScheme.primary,
+                              : Theme.of(context)
+                                  .extension<GameColors>()!
+                                  .health,
                         ),
                       ),
                     ),
