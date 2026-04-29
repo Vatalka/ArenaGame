@@ -7,9 +7,7 @@ class GameScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final characterService = Modular.get<CharacterRepository>();
-
-    final character = characterService.getHero();
+    final character = Modular.get<CharacterRepository>().getHero();
 
     return Scaffold(
       appBar: AppBar(title: Text('Game Screen')),
@@ -21,7 +19,7 @@ class GameScreen extends StatelessWidget {
             Text('HP: ${character.currentHp} / ${character.maxHp}'),
             ElevatedButton(
               onPressed: () => Modular.to.navigate('/'),
-              child: Text('Back to Home'),
+              child: Text('Back to Login Screen'),
             ),
           ],
         ),
