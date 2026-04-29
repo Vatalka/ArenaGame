@@ -3,7 +3,7 @@ import 'package:arena_game/features/character/domain/repositories/character_repo
 
 class CharacterRepositoryImpl implements CharacterRepository {
   @override
-  Character getHero() {
-    return Character.createDefault('Player');
+  Character getHero(String name) {
+    return Character.createDefault(name);
   }
 }
