@@ -1,4 +1,5 @@
-import 'package:arena_game/core/game_colors.dart';
+import 'package:arena_game/core/theme/game_colors.dart';
+import 'package:arena_game/core/widgets/health_bar.dart';
 import 'package:arena_game/features/character/domain/repositories/character_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -30,7 +31,7 @@ class GameScreen extends StatelessWidget {
                     Text(player.name),
                     Text('HP: ${player.currentHp} / ${player.maxHp}'),
                     SizedBox(
-                      width: 100,
+                      width: 200,
                       height: 10,
                       child: LinearProgressIndicator(
                         value: player.maxHp > 0
@@ -48,6 +49,7 @@ class GameScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+                    HealthBar(currentHP: 1 - 0.1),
                     Text('VIT: ${player.vitality}'),
                     Text('STR: ${player.strength}'),
                     Text('PRE: ${player.precision}'),
@@ -63,7 +65,7 @@ class GameScreen extends StatelessWidget {
                     Text(enemy.name),
                     Text('HP: ${enemy.currentHp} / ${enemy.maxHp}'),
                     SizedBox(
-                      width: 100,
+                      width: 200,
                       height: 10,
                       child: LinearProgressIndicator(
                         value:
