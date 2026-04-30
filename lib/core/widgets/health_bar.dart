@@ -28,7 +28,7 @@ class HealthBar extends StatelessWidget {
             TweenAnimationBuilder<double>(
               duration: const Duration(milliseconds: 1000),
               curve: Curves.easeInOutCubic,
-              tween: Tween<double>(begin: 0, end: currentHP),
+              tween: Tween<double>(begin: currentHP, end: currentHP),
               builder: (context, value, child) {
                 return LinearProgressIndicator(
                   value: value,
@@ -42,7 +42,7 @@ class HealthBar extends StatelessWidget {
             TweenAnimationBuilder<double>(
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeOutCirc, // easeInOutBack
-              tween: Tween<double>(begin: 0, end: currentHP),
+              tween: Tween<double>(begin: currentHP, end: currentHP),
               builder: (context, value, child) {
                 return LinearProgressIndicator(
                   value: value,

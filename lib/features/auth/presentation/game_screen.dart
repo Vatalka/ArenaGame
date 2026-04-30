@@ -4,8 +4,21 @@ import 'package:arena_game/features/character/domain/repositories/character_repo
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class GameScreen extends StatelessWidget {
+class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
+
+  @override
+  State<GameScreen> createState() => _GameScreenState();
+}
+
+class _GameScreenState extends State<GameScreen> {
+  double hp = 1;
+
+  void takeDamage() {
+    setState(() {
+      hp = (hp - 0.15).clamp(0, hp);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,15 +62,29 @@ class GameScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    HealthBar(currentHP: 1 - 0.1),
+                    HealthBar(currentHP: hp),
                     Text('VIT: ${player.vitality}'),
                     Text('STR: ${player.strength}'),
                     Text('PRE: ${player.precision}'),
                     Text('AGI: ${player.agility}'),
                   ],
                 ),
-                const SizedBox(
-                  width: 20,
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ElevatedButton(
+                      onPressed: takeDamage,
+                      child: Icon(Icons.battery_0_bar),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          hp = 1;
+                        });
+                      },
+                      child: Icon(Icons.battery_charging_full),
+                    ),
+                  ],
                 ),
                 Column(
                   mainAxisSize: MainAxisSize.min,
