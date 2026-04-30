@@ -1,5 +1,6 @@
 import 'package:arena_game/core/theme/game_colors.dart';
 import 'package:arena_game/core/widgets/health_bar.dart';
+import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:arena_game/features/character/domain/repositories/character_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -12,11 +13,25 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
+  late Character player;
   double hp = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    player = Modular.get<CharacterRepository>().getHero('Player');
+  }
 
   void takeDamage() {
     setState(() {
-      hp = (hp - 0.15).clamp(0, hp);
+      player = player.copyWith(
+          currentHp: (player.currentHp - 7).clamp(0, player.maxHp));
+    });
+  }
+
+  void restoreHp() {
+    setState(() {
+      player = player.copyWith(currentHp: player.maxHp);
     });
   }
 
@@ -24,7 +39,6 @@ class _GameScreenState extends State<GameScreen> {
   Widget build(BuildContext context) {
     final repository = Modular.get<CharacterRepository>();
 
-    final player = repository.getHero('Player');
     final enemy = repository.getHero('Enemy');
 
     return Scaffold(
@@ -43,26 +57,7 @@ class _GameScreenState extends State<GameScreen> {
                   children: [
                     Text(player.name),
                     Text('HP: ${player.currentHp} / ${player.maxHp}'),
-                    SizedBox(
-                      width: 200,
-                      height: 10,
-                      child: LinearProgressIndicator(
-                        value: player.maxHp > 0
-                            ? player.currentHp / player.maxHp
-                            : 0,
-                        backgroundColor: Theme.of(context)
-                            .colorScheme
-                            .surfaceContainerHighest,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          player.currentHp / player.maxHp < 0.3
-                              ? Theme.of(context).colorScheme.error
-                              : Theme.of(context)
-                                  .extension<GameColors>()!
-                                  .health,
-                        ),
-                      ),
-                    ),
-                    HealthBar(currentHP: hp),
+                    HealthBar(hp: player.currentHp / player.maxHp),
                     Text('VIT: ${player.vitality}'),
                     Text('STR: ${player.strength}'),
                     Text('PRE: ${player.precision}'),
@@ -73,16 +68,19 @@ class _GameScreenState extends State<GameScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.all(4),
+                        minimumSize: Size(50, 0),
+                      ),
                       onPressed: takeDamage,
-                      child: Icon(Icons.battery_0_bar),
+                      child: Icon(
+                        Icons.battery_0_bar,
+                        size: 24,
+                      ),
                     ),
                     ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          hp = 1;
-                        });
-                      },
-                      child: Icon(Icons.battery_charging_full),
+                      onPressed: restoreHp,
+                      child: Icon(Icons.refresh),
                     ),
                   ],
                 ),
@@ -101,7 +99,7 @@ class _GameScreenState extends State<GameScreen> {
                             .colorScheme
                             .surfaceContainerHighest,
                         valueColor: AlwaysStoppedAnimation<Color>(
-                          enemy.currentHp / enemy.maxHp < 0.3
+                          enemy.currentHp / enemy.maxHp < 0.4
                               ? Theme.of(context).colorScheme.error
                               : Theme.of(context)
                                   .extension<GameColors>()!

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HealthBar extends StatelessWidget {
-  final double currentHP;
+  final double hp;
 
   Color getHealthBarColor(double value) {
     if (value > 0.66) {
@@ -13,7 +13,7 @@ class HealthBar extends StatelessWidget {
     }
   }
 
-  const HealthBar({super.key, required this.currentHP});
+  const HealthBar({super.key, required this.hp});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class HealthBar extends StatelessWidget {
             TweenAnimationBuilder<double>(
               duration: const Duration(milliseconds: 1000),
               curve: Curves.easeInOutCubic,
-              tween: Tween<double>(begin: currentHP, end: currentHP),
+              tween: Tween<double>(begin: hp, end: hp),
               builder: (context, value, child) {
                 return LinearProgressIndicator(
                   value: value,
@@ -42,7 +42,7 @@ class HealthBar extends StatelessWidget {
             TweenAnimationBuilder<double>(
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeOutCirc, // easeInOutBack
-              tween: Tween<double>(begin: currentHP, end: currentHP),
+              tween: Tween<double>(begin: hp, end: hp),
               builder: (context, value, child) {
                 return LinearProgressIndicator(
                   value: value,
