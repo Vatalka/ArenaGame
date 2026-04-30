@@ -4,11 +4,23 @@ import 'package:arena_game/features/auth/presentation/game_screen.dart';
 import 'package:arena_game/features/character/data/repositories/character_repository_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'features/character/domain/repositories/character_repository.dart';
 
 void main() {
-  runApp(ModularApp(module: AppModule(), child: MyApp()));
+  runApp(
+    ProviderScope(
+      child: ModularApp(
+        module: AppModule(),
+        child: MyApp(),
+      ),
+    ),
+  );
 }
+
+final characterRepositoryProvider = Provider<CharacterRepository>((ref) {
+  return CharacterRepositoryImpl();
+});
 
 class AppModule extends Module {
   @override

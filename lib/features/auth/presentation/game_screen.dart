@@ -1,45 +1,19 @@
 import 'package:arena_game/core/theme/game_colors.dart';
 import 'package:arena_game/core/widgets/health_bar.dart';
-import 'package:arena_game/features/character/domain/entities/character.dart';
-import 'package:arena_game/features/character/domain/repositories/character_repository.dart';
+import 'package:arena_game/features/character/domain/player_notifier.dart';
+import 'package:arena_game/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class GameScreen extends StatefulWidget {
+class GameScreen extends ConsumerWidget {
   const GameScreen({super.key});
 
   @override
-  State<GameScreen> createState() => _GameScreenState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final player = ref.watch(playerProvider);
 
-class _GameScreenState extends State<GameScreen> {
-  late Character player;
-  double hp = 1;
-
-  @override
-  void initState() {
-    super.initState();
-    player = Modular.get<CharacterRepository>().getHero('Player');
-  }
-
-  void takeDamage() {
-    setState(() {
-      player = player.copyWith(
-          currentHp: (player.currentHp - 7).clamp(0, player.maxHp));
-    });
-  }
-
-  void restoreHp() {
-    setState(() {
-      player = player.copyWith(currentHp: player.maxHp);
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final repository = Modular.get<CharacterRepository>();
-
-    final enemy = repository.getHero('Enemy');
+    final enemy = ref.read(characterRepositoryProvider).getHero('Enemy');
 
     return Scaffold(
       appBar: AppBar(title: Text('Game Screen')),
@@ -52,6 +26,7 @@ class _GameScreenState extends State<GameScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
+                // Player
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -64,6 +39,7 @@ class _GameScreenState extends State<GameScreen> {
                     Text('AGI: ${player.agility}'),
                   ],
                 ),
+                // Actions
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -72,18 +48,21 @@ class _GameScreenState extends State<GameScreen> {
                         padding: const EdgeInsets.all(4),
                         minimumSize: Size(50, 0),
                       ),
-                      onPressed: takeDamage,
-                      child: Icon(
+                      onPressed: () =>
+                          ref.read(playerProvider.notifier).takeDamage(7),
+                      child: const Icon(
                         Icons.battery_0_bar,
                         size: 24,
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: restoreHp,
+                      onPressed: () =>
+                          ref.read(playerProvider.notifier).restoreHp(),
                       child: Icon(Icons.refresh),
                     ),
                   ],
                 ),
+                // Enemy
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
