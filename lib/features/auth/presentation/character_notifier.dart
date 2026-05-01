@@ -1,15 +1,17 @@
 import 'package:arena_game/features/character/domain/entities/character.dart';
-import 'package:arena_game/main.dart';
+import 'package:arena_game/features/character/domain/repositories/character_repository.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final playerProvider = NotifierProvider<PlayerNotifier, Character>(() {
+final characterProvider =
+    NotifierProviderFamily<PlayerNotifier, Character, String>(() {
   return PlayerNotifier();
 });
 
-class PlayerNotifier extends Notifier<Character> {
+class PlayerNotifier extends FamilyNotifier<Character, String> {
   @override
-  Character build() {
-    return ref.read(characterRepositoryProvider).getHero('Player');
+  Character build(String arg) {
+    return Modular.get<CharacterRepository>().getHero(arg);
   }
 
   void takeDamage(int damage) {

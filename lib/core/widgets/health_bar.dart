@@ -1,15 +1,20 @@
+import 'package:arena_game/core/theme/game_colors.dart';
 import 'package:flutter/material.dart';
 
 class HealthBar extends StatelessWidget {
   final double hp;
 
-  Color getHealthBarColor(double value) {
+  Color getHealthBarColor(BuildContext context, double value) {
+    final gameColors = Theme.of(context).extension<GameColors>()!;
+
     if (value > 0.66) {
-      return Color.lerp(Colors.yellow, Colors.green, (value - 0.66) / 0.34)!;
+      return Color.lerp(gameColors.healthMedium, gameColors.healthHigh,
+          (value - 0.66) / 0.34)!;
     } else if (value > 0.33) {
-      return Color.lerp(Colors.red, Colors.yellow, (value - 0.33) / 0.33)!;
+      return Color.lerp(gameColors.healthLow, gameColors.healthMedium,
+          (value - 0.33) / 0.33)!;
     } else {
-      return Colors.red;
+      return gameColors.healthLow;
     }
   }
 
@@ -33,27 +38,28 @@ class HealthBar extends StatelessWidget {
                 return LinearProgressIndicator(
                   value: value,
                   minHeight: 10,
-                  backgroundColor: Colors.grey[300],
-                  valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
+                  backgroundColor:
+                      Theme.of(context).colorScheme.surfaceContainerHigh,
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                      Theme.of(context).colorScheme.surfaceContainerLowest),
                 );
               },
             ),
             // Top layer
             TweenAnimationBuilder<double>(
               duration: const Duration(milliseconds: 300),
-              curve: Curves.easeOutCirc, // easeInOutBack
+              curve: Curves.easeOutCirc,
               tween: Tween<double>(begin: hp, end: hp),
               builder: (context, value, child) {
                 return LinearProgressIndicator(
                   value: value,
                   minHeight: 10,
                   backgroundColor: Colors.transparent,
-                  valueColor:
-                      AlwaysStoppedAnimation<Color>(getHealthBarColor(value)),
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                      getHealthBarColor(context, value)),
                 );
               },
             ),
-
           ],
         ),
       ),

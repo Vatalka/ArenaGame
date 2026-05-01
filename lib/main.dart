@@ -18,10 +18,6 @@ void main() {
   );
 }
 
-final characterRepositoryProvider = Provider<CharacterRepository>((ref) {
-  return CharacterRepositoryImpl();
-});
-
 class AppModule extends Module {
   @override
   void binds(i) {
@@ -45,7 +41,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
-          extensions: [GameColors(health: Colors.green)]),
+          extensions: [
+            GameColors(
+              healthHigh: Colors.green,
+              healthMedium: Colors.yellow,
+              healthLow: Colors.red,
+            ),
+          ]),
       routerConfig: Modular.routerConfig,
     );
   }

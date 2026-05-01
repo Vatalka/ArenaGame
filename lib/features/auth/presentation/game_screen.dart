@@ -1,7 +1,5 @@
-import 'package:arena_game/core/theme/game_colors.dart';
 import 'package:arena_game/core/widgets/health_bar.dart';
-import 'package:arena_game/features/character/domain/player_notifier.dart';
-import 'package:arena_game/main.dart';
+import 'package:arena_game/features/auth/presentation/character_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,9 +9,8 @@ class GameScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final player = ref.watch(playerProvider);
-
-    final enemy = ref.read(characterRepositoryProvider).getHero('Enemy');
+    final player = ref.watch(characterProvider('Player'));
+    final enemy = ref.watch(characterProvider('Enemy'));
 
     return Scaffold(
       appBar: AppBar(title: Text('Game Screen')),
@@ -26,7 +23,7 @@ class GameScreen extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                // Player
+                // Player information:
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -39,7 +36,7 @@ class GameScreen extends ConsumerWidget {
                     Text('AGI: ${player.agility}'),
                   ],
                 ),
-                // Actions
+                // Action buttons:
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -48,44 +45,39 @@ class GameScreen extends ConsumerWidget {
                         padding: const EdgeInsets.all(4),
                         minimumSize: Size(50, 0),
                       ),
-                      onPressed: () =>
-                          ref.read(playerProvider.notifier).takeDamage(7),
+                      onPressed: () => {
+                        ref
+                            .read(characterProvider('Player').notifier)
+                            .takeDamage(7),
+                        ref
+                            .read(characterProvider('Enemy').notifier)
+                            .takeDamage(11),
+                      },
                       child: const Icon(
                         Icons.battery_0_bar,
                         size: 24,
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () =>
-                          ref.read(playerProvider.notifier).restoreHp(),
+                      onPressed: () => {
+                        ref
+                            .read(characterProvider('Player').notifier)
+                            .restoreHp(),
+                        ref
+                            .read(characterProvider('Enemy').notifier)
+                            .restoreHp(),
+                      },
                       child: Icon(Icons.refresh),
                     ),
                   ],
                 ),
-                // Enemy
+                // Enemy information:
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(enemy.name),
                     Text('HP: ${enemy.currentHp} / ${enemy.maxHp}'),
-                    SizedBox(
-                      width: 200,
-                      height: 10,
-                      child: LinearProgressIndicator(
-                        value:
-                            enemy.maxHp > 0 ? enemy.currentHp / enemy.maxHp : 0,
-                        backgroundColor: Theme.of(context)
-                            .colorScheme
-                            .surfaceContainerHighest,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          enemy.currentHp / enemy.maxHp < 0.4
-                              ? Theme.of(context).colorScheme.error
-                              : Theme.of(context)
-                                  .extension<GameColors>()!
-                                  .health,
-                        ),
-                      ),
-                    ),
+                    HealthBar(hp: enemy.currentHp / enemy.maxHp),
                     Text('VIT: ${enemy.vitality}'),
                     Text('STR: ${enemy.strength}'),
                     Text('PRE: ${enemy.precision}'),
