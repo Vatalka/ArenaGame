@@ -1,43 +1,30 @@
-// import 'dart:math';
-
 import 'package:arena_game/features/battle/domain/battle_state.dart';
-import 'package:arena_game/features/character/domain/entities/character.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BattleNotifier extends Notifier<BattleState> {
-  // final _random = Random();
+class BattleNotifier extends StateNotifier<BattleState> {
+  BattleNotifier() : super(const BattleState());
 
-  Character player1 = Character(
-    name: 'player',
-    currentHp: 100,
-    vitality: 1,
-    strength: 1,
-    precision: 1,
-    agility: 1,
-  );
-  Character enemy1 = Character(
-    name: 'enemy',
-    currentHp: 100,
-    vitality: 1,
-    strength: 1,
-    precision: 1,
-    agility: 1,
-  );
-
-  @override
-  BattleState build() {
-    return BattleState(
-      player: player1,
-      enemy: enemy1,
-      battleLog: [],
-    );
+  void selectAttack(Area area) {
+    state = state.copyWith(selectedAttack: area);
   }
 
-  void playerAttack() {
-    state = state.copyWith();
+  void selectedBlock(Area area) {
+    state = state.copyWith(selectedBlock: area);
+  }
+
+  void confirmTurn() {
+    if (state.selectedAttack != null && state.selectedBlock != null) {
+      if (kDebugMode) {
+        print(
+            "Атака в ${state.selectedAttack!.name}, Захист ${state.selectedBlock!.name}");
+      }
+      // Тут буде виклик Firebase або UseCase
+    }
   }
 }
 
-final battleProvider = NotifierProvider<BattleNotifier, BattleState>(() {
+final battleControllerProvider =
+    StateNotifierProvider<BattleNotifier, BattleState>((ref) {
   return BattleNotifier();
 });

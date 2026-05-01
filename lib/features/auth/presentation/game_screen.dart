@@ -1,5 +1,7 @@
 import 'package:arena_game/core/widgets/health_bar.dart';
-import 'package:arena_game/features/auth/presentation/character_notifier.dart';
+import 'package:arena_game/features/battle/data/battle_notifier.dart';
+import 'package:arena_game/features/battle/presentation/selection_group.dart';
+import 'package:arena_game/features/character/presentation/character_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,6 +13,19 @@ class GameScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final player = ref.watch(characterProvider('Player'));
     final enemy = ref.watch(characterProvider('Enemy'));
+
+    final state = ref.watch(battleControllerProvider);
+    final controller = ref.read(battleControllerProvider.notifier);
+
+    void restoreHp() {
+      ref.read(characterProvider('Player').notifier).restoreHp();
+      ref.read(characterProvider('Enemy').notifier).restoreHp();
+    }
+
+    void takeDamage() {
+      ref.read(characterProvider('Player').notifier).takeDamage(7);
+      ref.read(characterProvider('Enemy').notifier).takeDamage(11);
+    }
 
     return Scaffold(
       appBar: AppBar(title: Text('Game Screen')),
@@ -45,28 +60,14 @@ class GameScreen extends ConsumerWidget {
                         padding: const EdgeInsets.all(4),
                         minimumSize: Size(50, 0),
                       ),
-                      onPressed: () => {
-                        ref
-                            .read(characterProvider('Player').notifier)
-                            .takeDamage(7),
-                        ref
-                            .read(characterProvider('Enemy').notifier)
-                            .takeDamage(11),
-                      },
+                      onPressed: takeDamage,
                       child: const Icon(
                         Icons.battery_0_bar,
                         size: 24,
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () => {
-                        ref
-                            .read(characterProvider('Player').notifier)
-                            .restoreHp(),
-                        ref
-                            .read(characterProvider('Enemy').notifier)
-                            .restoreHp(),
-                      },
+                      onPressed: restoreHp,
                       child: Icon(Icons.refresh),
                     ),
                   ],
@@ -83,6 +84,28 @@ class GameScreen extends ConsumerWidget {
                     Text('PRE: ${enemy.precision}'),
                     Text('AGI: ${enemy.agility}'),
                   ],
+                ),
+              ],
+            ),
+            // Selection Group
+            Column(
+              children: [
+                SelectionGroup(
+                  title: "Оберіть куди вдарити",
+                  currentSelection: state.selectedAttack,
+                  onSelected: (area) => controller.selectAttack(area),
+                ),
+                SelectionGroup(
+                  title: "Оберіть що захистити",
+                  currentSelection: state.selectedBlock,
+                  onSelected: (area) => controller.selectedBlock(area),
+                ),
+                ElevatedButton(
+                  onPressed: (state.selectedAttack != null &&
+                          state.selectedBlock != null)
+                      ? () => controller.confirmTurn()
+                      : null,
+                  child: const Text("В БІЙ!"),
                 ),
               ],
             ),

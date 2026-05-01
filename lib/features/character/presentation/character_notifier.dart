@@ -3,11 +3,6 @@ import 'package:arena_game/features/character/domain/repositories/character_repo
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final characterProvider =
-    NotifierProviderFamily<PlayerNotifier, Character, String>(() {
-  return PlayerNotifier();
-});
-
 class PlayerNotifier extends FamilyNotifier<Character, String> {
   @override
   Character build(String arg) {
@@ -24,3 +19,8 @@ class PlayerNotifier extends FamilyNotifier<Character, String> {
     state = state.copyWith(currentHp: state.maxHp);
   }
 }
+
+final characterProvider =
+    NotifierProviderFamily<PlayerNotifier, Character, String>(() {
+  return PlayerNotifier();
+});
