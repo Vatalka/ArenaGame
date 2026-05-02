@@ -1,4 +1,4 @@
-import 'package:arena_game/features/character/data/providers/character_provider.dart';
+import 'package:arena_game/features/character/data/repositories/character_repository.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

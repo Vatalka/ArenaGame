@@ -1,6 +1,6 @@
 import 'package:arena_game/core/widgets/health_bar.dart';
-import 'package:arena_game/features/battle/data/battle_notifier.dart';
-import 'package:arena_game/features/battle/presentation/selection_group.dart';
+import 'package:arena_game/features/battle/presentation/state_management/battle_notifier.dart';
+import 'package:arena_game/features/battle/presentation/widgets/selection_group.dart';
 import 'package:arena_game/features/character/presentation/character_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
