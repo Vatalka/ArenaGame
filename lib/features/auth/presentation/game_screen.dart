@@ -11,20 +11,20 @@ class GameScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final player = ref.watch(characterProvider('Player'));
-    final enemy = ref.watch(characterProvider('Enemy'));
+    final player = ref.watch(characterNotifierProvider('Player'));
+    final enemy = ref.watch(characterNotifierProvider('Enemy'));
 
     final state = ref.watch(battleControllerProvider);
     final controller = ref.read(battleControllerProvider.notifier);
 
     void restoreHp() {
-      ref.read(characterProvider('Player').notifier).restoreHp();
-      ref.read(characterProvider('Enemy').notifier).restoreHp();
+      ref.read(characterNotifierProvider('Player').notifier).restoreHp();
+      ref.read(characterNotifierProvider('Enemy').notifier).restoreHp();
     }
 
     void takeDamage() {
-      ref.read(characterProvider('Player').notifier).takeDamage(7);
-      ref.read(characterProvider('Enemy').notifier).takeDamage(11);
+      ref.read(characterNotifierProvider('Player').notifier).takeDamage(7);
+      ref.read(characterNotifierProvider('Enemy').notifier).takeDamage(11);
     }
 
     return Scaffold(
