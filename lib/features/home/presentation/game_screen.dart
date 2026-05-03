@@ -23,8 +23,12 @@ class GameScreen extends ConsumerWidget {
     }
 
     void takeDamage() {
-      ref.read(characterNotifierProvider('Player').notifier).takeDamage(7);
-      ref.read(characterNotifierProvider('Enemy').notifier).takeDamage(11);
+      ref
+          .read(characterNotifierProvider('Player').notifier)
+          .takeDamage(enemy.strength * 2);
+      ref
+          .read(characterNotifierProvider('Enemy').notifier)
+          .takeDamage(player.strength * 1.6);
     }
 
     return Scaffold(
@@ -66,6 +70,7 @@ class GameScreen extends ConsumerWidget {
                         size: 24,
                       ),
                     ),
+                    SizedBox(height: 4, width: 4),
                     ElevatedButton(
                       onPressed: restoreHp,
                       child: Icon(Icons.refresh),
@@ -100,12 +105,15 @@ class GameScreen extends ConsumerWidget {
                   currentSelection: state.selectedBlock,
                   onSelected: (area) => controller.selectedBlock(area),
                 ),
-                ElevatedButton(
-                  onPressed: (state.selectedAttack != null &&
-                          state.selectedBlock != null)
-                      ? () => controller.confirmTurn()
-                      : null,
-                  child: const Text("В БІЙ!"),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: ElevatedButton(
+                    onPressed: (state.selectedAttack != null &&
+                            state.selectedBlock != null)
+                        ? () => controller.confirmTurn()
+                        : null,
+                    child: const Text("В БІЙ!"),
+                  ),
                 ),
               ],
             ),

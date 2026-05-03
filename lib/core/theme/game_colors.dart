@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class GameColors extends ThemeExtension<GameColors> {
-  final Color healthHigh; // Colors.green
-  final Color healthMedium; // Colors.yellow
-  final Color healthLow; // Colors.red
+  final Color healthHigh;
+  final Color healthMedium;
+  final Color healthLow;
 
   GameColors({
     required this.healthHigh,

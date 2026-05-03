@@ -5,11 +5,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class BattleNotifier extends StateNotifier<BattleState> {
   BattleNotifier() : super(const BattleState());
 
-  void selectAttack(Area area) {
+  void selectAttack(Area? area) {
     state = state.copyWith(selectedAttack: area);
   }
 
-  void selectedBlock(Area area) {
+  void selectedBlock(Area? area) {
     state = state.copyWith(selectedBlock: area);
   }
 
