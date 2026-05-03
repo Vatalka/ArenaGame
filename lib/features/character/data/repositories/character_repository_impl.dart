@@ -3,7 +3,7 @@ import 'package:arena_game/features/character/domain/repositories/character_repo
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'character_repository.g.dart';
+part 'character_repository_impl.g.dart';
 
 @Riverpod(keepAlive: true)
 CharacterRepository characterRepository(Ref ref) {
@@ -13,6 +13,16 @@ CharacterRepository characterRepository(Ref ref) {
 class CharacterRepositoryImpl implements CharacterRepository {
   @override
   Character getHero(String name) {
+    if (name == 'Enemy') {
+      return Character(
+        name: name,
+        currentHp: 70,
+        vitality: 7,
+        strength: 3,
+        precision: 6,
+        agility: 4,
+      );
+    }
     return Character.createDefault(name);
   }
 }

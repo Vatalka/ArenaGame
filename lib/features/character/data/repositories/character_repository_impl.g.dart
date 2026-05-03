@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'character_repository.dart';
+part of 'character_repository_impl.dart';
 
 // **************************************************************************
 // RiverpodGenerator

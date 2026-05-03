@@ -1,5 +1,5 @@
 import 'package:arena_game/core/widgets/health_bar.dart';
-import 'package:arena_game/features/battle/presentation/state_management/battle_notifier.dart';
+import 'package:arena_game/features/battle/presentation/controller/battle_notifier.dart';
 import 'package:arena_game/features/battle/presentation/widgets/selection_group.dart';
 import 'package:arena_game/features/character/presentation/character_notifier.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +28,7 @@ class GameScreen extends ConsumerWidget {
           .takeDamage(enemy.strength * 2);
       ref
           .read(characterNotifierProvider('Enemy').notifier)
-          .takeDamage(player.strength * 1.6);
+          .takeDamage(player.strength * 1.2);
     }
 
     return Scaffold(
@@ -55,27 +55,16 @@ class GameScreen extends ConsumerWidget {
                     Text('AGI: ${player.agility}'),
                   ],
                 ),
-                // Action buttons:
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.all(4),
-                        minimumSize: Size(50, 0),
-                      ),
-                      onPressed: takeDamage,
-                      child: const Icon(
-                        Icons.battery_0_bar,
-                        size: 24,
-                      ),
-                    ),
-                    SizedBox(height: 4, width: 4),
-                    ElevatedButton(
-                      onPressed: restoreHp,
-                      child: Icon(Icons.refresh),
-                    ),
-                  ],
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.all(10),
+                    minimumSize: Size(0, 0),
+                  ),
+                  onPressed: restoreHp,
+                  child: Icon(
+                    Icons.refresh,
+                    size: 24,
+                  ),
                 ),
                 // Enemy information:
                 Column(
@@ -110,7 +99,10 @@ class GameScreen extends ConsumerWidget {
                   child: ElevatedButton(
                     onPressed: (state.selectedAttack != null &&
                             state.selectedBlock != null)
-                        ? () => controller.confirmTurn()
+                        ? () {
+                            controller.confirmTurn();
+                            takeDamage();
+                          }
                         : null,
                     child: const Text("В БІЙ!"),
                   ),
