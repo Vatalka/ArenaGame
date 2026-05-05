@@ -23,7 +23,7 @@ class SelectionGroup extends StatelessWidget {
           children: Area.values.map((area) {
             final isSelected = currentSelection == area;
             return Padding(
-              padding: const EdgeInsets.all(1.0),
+              padding: const EdgeInsets.all(4.0),
               child: ChoiceChip(
                 label: Text(area.name),
                 selected: isSelected,

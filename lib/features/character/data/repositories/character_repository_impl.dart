@@ -14,10 +14,11 @@ class CharacterRepositoryImpl implements CharacterRepository {
   @override
   Character getHero(String name) {
     if (name == 'Enemy') {
+      int vit = 7;
       return Character(
         name: name,
-        currentHp: 70,
-        vitality: 7,
+        currentHp: vit * 10,
+        vitality: vit,
         strength: 3,
         precision: 6,
         agility: 4,

@@ -1,7 +1,7 @@
-import 'package:arena_game/core/widgets/health_bar.dart';
 import 'package:arena_game/features/battle/presentation/controller/battle_notifier.dart';
 import 'package:arena_game/features/battle/presentation/widgets/selection_group.dart';
-import 'package:arena_game/features/character/presentation/character_notifier.dart';
+import 'package:arena_game/features/character/presentation/controller/character_notifier.dart';
+import 'package:arena_game/features/character/presentation/widgets/character_stat_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -28,7 +28,7 @@ class GameScreen extends ConsumerWidget {
           .takeDamage(enemy.strength * 2);
       ref
           .read(characterNotifierProvider('Enemy').notifier)
-          .takeDamage(player.strength * 1.2);
+          .takeDamage(player.strength * 2);
     }
 
     return Scaffold(
@@ -42,43 +42,22 @@ class GameScreen extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                // Player information:
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(player.name),
-                    Text('HP: ${player.currentHp} / ${player.maxHp}'),
-                    HealthBar(hp: player.currentHp / player.maxHp),
-                    Text('VIT: ${player.vitality}'),
-                    Text('STR: ${player.strength}'),
-                    Text('PRE: ${player.precision}'),
-                    Text('AGI: ${player.agility}'),
-                  ],
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.all(10),
-                    minimumSize: Size(0, 0),
-                  ),
-                  onPressed: restoreHp,
-                  child: Icon(
-                    Icons.refresh,
-                    size: 24,
+                CharacterStatCard(character: player),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.all(10),
+                      minimumSize: Size(0, 0),
+                    ),
+                    onPressed: restoreHp,
+                    child: Icon(
+                      Icons.refresh,
+                      size: 24,
+                    ),
                   ),
                 ),
-                // Enemy information:
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(enemy.name),
-                    Text('HP: ${enemy.currentHp} / ${enemy.maxHp}'),
-                    HealthBar(hp: enemy.currentHp / enemy.maxHp),
-                    Text('VIT: ${enemy.vitality}'),
-                    Text('STR: ${enemy.strength}'),
-                    Text('PRE: ${enemy.precision}'),
-                    Text('AGI: ${enemy.agility}'),
-                  ],
-                ),
+                CharacterStatCard(character: enemy),
               ],
             ),
             // Selection Group
