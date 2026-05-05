@@ -1,9 +1,9 @@
-import 'package:arena_game/features/battle/domain/battle_state.dart';
+import 'package:arena_game/features/battle/domain/entities/battle_selection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BattleNotifier extends StateNotifier<BattleState> {
-  BattleNotifier() : super(const BattleState());
+class BattleNotifier extends StateNotifier<BattleSelection> {
+  BattleNotifier() : super(const BattleSelection());
 
   void selectAttack(Area? area) {
     state = state.copyWith(selectedAttack: area);
@@ -25,6 +25,6 @@ class BattleNotifier extends StateNotifier<BattleState> {
 }
 
 final battleControllerProvider =
-    StateNotifierProvider<BattleNotifier, BattleState>((ref) {
+    StateNotifierProvider<BattleNotifier, BattleSelection>((ref) {
   return BattleNotifier();
 });

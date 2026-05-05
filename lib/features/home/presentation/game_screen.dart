@@ -1,3 +1,5 @@
+import 'package:arena_game/features/battle/domain/usecases/deal_damage_usecase.dart';
+import 'package:arena_game/features/battle/domain/usecases/restore_all_hp_usecase.dart';
 import 'package:arena_game/features/battle/presentation/controller/battle_notifier.dart';
 import 'package:arena_game/features/battle/presentation/widgets/selection_group.dart';
 import 'package:arena_game/features/character/presentation/controller/character_notifier.dart';
@@ -18,17 +20,11 @@ class GameScreen extends ConsumerWidget {
     final controller = ref.read(battleControllerProvider.notifier);
 
     void restoreHp() {
-      ref.read(characterNotifierProvider('Player').notifier).restoreHp();
-      ref.read(characterNotifierProvider('Enemy').notifier).restoreHp();
+      ref.read(restoreAllHpUseCaseProvider).execute();
     }
 
-    void takeDamage() {
-      ref
-          .read(characterNotifierProvider('Player').notifier)
-          .takeDamage(enemy.strength * 2);
-      ref
-          .read(characterNotifierProvider('Enemy').notifier)
-          .takeDamage(player.strength * 2);
+    void dealDamage() {
+      ref.read(dealDealDamageUseCaseProvider).execute();
     }
 
     return Scaffold(
@@ -80,7 +76,7 @@ class GameScreen extends ConsumerWidget {
                             state.selectedBlock != null)
                         ? () {
                             controller.confirmTurn();
-                            takeDamage();
+                            dealDamage();
                           }
                         : null,
                     child: const Text("В БІЙ!"),

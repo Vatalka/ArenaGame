@@ -1,4 +1,4 @@
-import 'package:arena_game/features/battle/domain/battle_state.dart';
+import 'package:arena_game/features/battle/domain/entities/battle_selection.dart';
 import 'package:flutter/material.dart';
 
 class SelectionGroup extends StatelessWidget {

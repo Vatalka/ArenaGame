@@ -12,7 +12,7 @@ class CharacterNotifier extends _$CharacterNotifier {
     return repository.getHero(characterName);
   }
 
-  void takeDamage(double damage) {
+  void dealDamage(double damage) {
     state = state.copyWith(
         currentHp: (state.currentHp - damage).round().clamp(0, state.maxHp));
   }

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'battle_state.dart';
+part of 'battle_selection.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,34 +14,34 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-BattleState _$BattleStateFromJson(Map<String, dynamic> json) {
-  return _BattleState.fromJson(json);
+BattleSelection _$BattleSelectionFromJson(Map<String, dynamic> json) {
+  return _BattleSelection.fromJson(json);
 }
 
 /// @nodoc
-mixin _$BattleState {
+mixin _$BattleSelection {
   Area? get selectedAttack => throw _privateConstructorUsedError;
   Area? get selectedBlock => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $BattleStateCopyWith<BattleState> get copyWith =>
+  $BattleSelectionCopyWith<BattleSelection> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $BattleStateCopyWith<$Res> {
-  factory $BattleStateCopyWith(
-          BattleState value, $Res Function(BattleState) then) =
-      _$BattleStateCopyWithImpl<$Res, BattleState>;
+abstract class $BattleSelectionCopyWith<$Res> {
+  factory $BattleSelectionCopyWith(
+          BattleSelection value, $Res Function(BattleSelection) then) =
+      _$BattleSelectionCopyWithImpl<$Res, BattleSelection>;
   @useResult
   $Res call({Area? selectedAttack, Area? selectedBlock});
 }
 
 /// @nodoc
-class _$BattleStateCopyWithImpl<$Res, $Val extends BattleState>
-    implements $BattleStateCopyWith<$Res> {
-  _$BattleStateCopyWithImpl(this._value, this._then);
+class _$BattleSelectionCopyWithImpl<$Res, $Val extends BattleSelection>
+    implements $BattleSelectionCopyWith<$Res> {
+  _$BattleSelectionCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -68,22 +68,22 @@ class _$BattleStateCopyWithImpl<$Res, $Val extends BattleState>
 }
 
 /// @nodoc
-abstract class _$$BattleStateImplCopyWith<$Res>
-    implements $BattleStateCopyWith<$Res> {
-  factory _$$BattleStateImplCopyWith(
-          _$BattleStateImpl value, $Res Function(_$BattleStateImpl) then) =
-      __$$BattleStateImplCopyWithImpl<$Res>;
+abstract class _$$BattleSelectionImplCopyWith<$Res>
+    implements $BattleSelectionCopyWith<$Res> {
+  factory _$$BattleSelectionImplCopyWith(_$BattleSelectionImpl value,
+          $Res Function(_$BattleSelectionImpl) then) =
+      __$$BattleSelectionImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Area? selectedAttack, Area? selectedBlock});
 }
 
 /// @nodoc
-class __$$BattleStateImplCopyWithImpl<$Res>
-    extends _$BattleStateCopyWithImpl<$Res, _$BattleStateImpl>
-    implements _$$BattleStateImplCopyWith<$Res> {
-  __$$BattleStateImplCopyWithImpl(
-      _$BattleStateImpl _value, $Res Function(_$BattleStateImpl) _then)
+class __$$BattleSelectionImplCopyWithImpl<$Res>
+    extends _$BattleSelectionCopyWithImpl<$Res, _$BattleSelectionImpl>
+    implements _$$BattleSelectionImplCopyWith<$Res> {
+  __$$BattleSelectionImplCopyWithImpl(
+      _$BattleSelectionImpl _value, $Res Function(_$BattleSelectionImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +92,7 @@ class __$$BattleStateImplCopyWithImpl<$Res>
     Object? selectedAttack = freezed,
     Object? selectedBlock = freezed,
   }) {
-    return _then(_$BattleStateImpl(
+    return _then(_$BattleSelectionImpl(
       selectedAttack: freezed == selectedAttack
           ? _value.selectedAttack
           : selectedAttack // ignore: cast_nullable_to_non_nullable
@@ -107,11 +107,11 @@ class __$$BattleStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$BattleStateImpl implements _BattleState {
-  const _$BattleStateImpl({this.selectedAttack, this.selectedBlock});
+class _$BattleSelectionImpl implements _BattleSelection {
+  const _$BattleSelectionImpl({this.selectedAttack, this.selectedBlock});
 
-  factory _$BattleStateImpl.fromJson(Map<String, dynamic> json) =>
-      _$$BattleStateImplFromJson(json);
+  factory _$BattleSelectionImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BattleSelectionImplFromJson(json);
 
   @override
   final Area? selectedAttack;
@@ -120,14 +120,14 @@ class _$BattleStateImpl implements _BattleState {
 
   @override
   String toString() {
-    return 'BattleState(selectedAttack: $selectedAttack, selectedBlock: $selectedBlock)';
+    return 'BattleSelection(selectedAttack: $selectedAttack, selectedBlock: $selectedBlock)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BattleStateImpl &&
+            other is _$BattleSelectionImpl &&
             (identical(other.selectedAttack, selectedAttack) ||
                 other.selectedAttack == selectedAttack) &&
             (identical(other.selectedBlock, selectedBlock) ||
@@ -141,24 +141,25 @@ class _$BattleStateImpl implements _BattleState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$BattleStateImplCopyWith<_$BattleStateImpl> get copyWith =>
-      __$$BattleStateImplCopyWithImpl<_$BattleStateImpl>(this, _$identity);
+  _$$BattleSelectionImplCopyWith<_$BattleSelectionImpl> get copyWith =>
+      __$$BattleSelectionImplCopyWithImpl<_$BattleSelectionImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$BattleStateImplToJson(
+    return _$$BattleSelectionImplToJson(
       this,
     );
   }
 }
 
-abstract class _BattleState implements BattleState {
-  const factory _BattleState(
+abstract class _BattleSelection implements BattleSelection {
+  const factory _BattleSelection(
       {final Area? selectedAttack,
-      final Area? selectedBlock}) = _$BattleStateImpl;
+      final Area? selectedBlock}) = _$BattleSelectionImpl;
 
-  factory _BattleState.fromJson(Map<String, dynamic> json) =
-      _$BattleStateImpl.fromJson;
+  factory _BattleSelection.fromJson(Map<String, dynamic> json) =
+      _$BattleSelectionImpl.fromJson;
 
   @override
   Area? get selectedAttack;
@@ -166,6 +167,6 @@ abstract class _BattleState implements BattleState {
   Area? get selectedBlock;
   @override
   @JsonKey(ignore: true)
-  _$$BattleStateImplCopyWith<_$BattleStateImpl> get copyWith =>
+  _$$BattleSelectionImplCopyWith<_$BattleSelectionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
