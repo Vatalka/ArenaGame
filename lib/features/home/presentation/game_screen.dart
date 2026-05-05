@@ -1,4 +1,3 @@
-import 'package:arena_game/features/battle/domain/usecases/deal_damage_usecase.dart';
 import 'package:arena_game/features/battle/domain/usecases/restore_all_hp_usecase.dart';
 import 'package:arena_game/features/battle/presentation/controller/battle_notifier.dart';
 import 'package:arena_game/features/battle/presentation/widgets/selection_group.dart';
@@ -16,16 +15,8 @@ class GameScreen extends ConsumerWidget {
     final player = ref.watch(characterNotifierProvider('Player'));
     final enemy = ref.watch(characterNotifierProvider('Enemy'));
 
-    final state = ref.watch(battleControllerProvider);
-    final controller = ref.read(battleControllerProvider.notifier);
-
-    void restoreHp() {
-      ref.read(restoreAllHpUseCaseProvider).execute();
-    }
-
-    void dealDamage() {
-      ref.read(dealDealDamageUseCaseProvider).execute();
-    }
+    final state = ref.watch(battleNotifierProvider);
+    final controller = ref.read(battleNotifierProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(title: Text('Game Screen')),
@@ -39,6 +30,7 @@ class GameScreen extends ConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 CharacterStatCard(character: player),
+                // Restore HP Button
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
@@ -46,7 +38,8 @@ class GameScreen extends ConsumerWidget {
                       padding: const EdgeInsets.all(10),
                       minimumSize: Size(0, 0),
                     ),
-                    onPressed: restoreHp,
+                    onPressed: () =>
+                        ref.read(restoreAllHpUseCaseProvider).execute(),
                     child: Icon(
                       Icons.refresh,
                       size: 24,
@@ -56,7 +49,6 @@ class GameScreen extends ConsumerWidget {
                 CharacterStatCard(character: enemy),
               ],
             ),
-            // Selection Group
             Column(
               children: [
                 SelectionGroup(
@@ -74,10 +66,9 @@ class GameScreen extends ConsumerWidget {
                   child: ElevatedButton(
                     onPressed: (state.selectedAttack != null &&
                             state.selectedBlock != null)
-                        ? () {
-                            controller.confirmTurn();
-                            dealDamage();
-                          }
+                        ? () => ref
+                            .read(battleNotifierProvider.notifier)
+                            .confirmTurn()
                         : null,
                     child: const Text("В БІЙ!"),
                   ),

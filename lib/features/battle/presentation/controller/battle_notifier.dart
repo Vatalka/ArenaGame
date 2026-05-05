@@ -1,9 +1,16 @@
 import 'package:arena_game/features/battle/domain/entities/battle_selection.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:arena_game/features/battle/domain/usecases/deal_damage_usecase.dart';
 
-class BattleNotifier extends StateNotifier<BattleSelection> {
-  BattleNotifier() : super(const BattleSelection());
+part 'battle_notifier.g.dart';
+
+@riverpod
+class BattleNotifier extends _$BattleNotifier {
+  @override
+  BattleSelection build() {
+    return const BattleSelection();
+  }
 
   void selectAttack(Area? area) {
     state = state.copyWith(selectedAttack: area);
@@ -19,12 +26,7 @@ class BattleNotifier extends StateNotifier<BattleSelection> {
         print(
             "Атака в ${state.selectedAttack!.name}, Захист ${state.selectedBlock!.name}");
       }
-      // Тут буде виклик Firebase або UseCase
+      ref.read(dealDealDamageUseCaseProvider).execute();
     }
   }
 }
-
-final battleControllerProvider =
-    StateNotifierProvider<BattleNotifier, BattleSelection>((ref) {
-  return BattleNotifier();
-});
