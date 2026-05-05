@@ -18,7 +18,7 @@ class SelectionGroup extends StatelessWidget {
     return Column(
       children: [
         Text(title),
-        Row(
+        Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: Area.values.map((area) {
             final isSelected = currentSelection == area;

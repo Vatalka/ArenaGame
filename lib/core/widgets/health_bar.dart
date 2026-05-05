@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 class HealthBar extends StatelessWidget {
   final double hp;
 
+  const HealthBar({super.key, required this.hp});
+
   Color getHealthBarColor(BuildContext context, double value) {
     final gameColors = Theme.of(context).extension<GameColors>()!;
 
@@ -17,8 +19,6 @@ class HealthBar extends StatelessWidget {
       return gameColors.healthLow;
     }
   }
-
-  const HealthBar({super.key, required this.hp});
 
   @override
   Widget build(BuildContext context) {

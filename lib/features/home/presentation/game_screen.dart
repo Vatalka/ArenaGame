@@ -1,5 +1,5 @@
-import 'package:arena_game/features/battle/domain/usecases/restore_all_hp_usecase.dart';
 import 'package:arena_game/features/battle/presentation/controller/battle_notifier.dart';
+import 'package:arena_game/features/battle/presentation/widgets/restore_hp_button.dart';
 import 'package:arena_game/features/battle/presentation/widgets/selection_group.dart';
 import 'package:arena_game/features/character/presentation/controller/character_notifier.dart';
 import 'package:arena_game/features/character/presentation/widgets/character_stat_card.dart';
@@ -23,58 +23,40 @@ class GameScreen extends ConsumerWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
               children: [
                 CharacterStatCard(character: player),
-                // Restore HP Button
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.all(10),
-                      minimumSize: Size(0, 0),
-                    ),
-                    onPressed: () =>
-                        ref.read(restoreAllHpUseCaseProvider).execute(),
-                    child: Icon(
-                      Icons.refresh,
-                      size: 24,
-                    ),
-                  ),
-                ),
+                RestoreHpButton(),
                 CharacterStatCard(character: enemy),
               ],
             ),
-            Column(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SelectionGroup(
-                  title: "Оберіть куди вдарити",
+                  title: 'Attack\narea:',
                   currentSelection: state.selectedAttack,
                   onSelected: (area) => controller.selectAttack(area),
                 ),
+                SizedBox(height: 8, width: 8),
                 SelectionGroup(
-                  title: "Оберіть що захистити",
+                  title: 'Block\narea:',
                   currentSelection: state.selectedBlock,
                   onSelected: (area) => controller.selectedBlock(area),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: ElevatedButton(
-                    onPressed: (state.selectedAttack != null &&
-                            state.selectedBlock != null)
-                        ? () => ref
-                            .read(battleNotifierProvider.notifier)
-                            .confirmTurn()
-                        : null,
-                    child: const Text("В БІЙ!"),
-                  ),
-                ),
               ],
             ),
+            ElevatedButton(
+              onPressed: (state.selectedAttack != null &&
+                      state.selectedBlock != null)
+                  ? () =>
+                      ref.read(battleNotifierProvider.notifier).confirmTurn()
+                  : null,
+              child: const Text("В БІЙ!"),
+            ),
+            SizedBox(height: 8, width: 8),
             ElevatedButton(
               onPressed: () => Modular.to.navigate('/'),
               child: Text('Back to Login Screen'),
