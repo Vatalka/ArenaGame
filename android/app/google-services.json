@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "545091790235",
+    "project_id": "flutter-arena-game",
+    "storage_bucket": "flutter-arena-game.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:545091790235:android:b9c7ea2c6677ca1f70ed3e",
+        "android_client_info": {
+          "package_name": "com.example.arena_game"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbxguI-x0Y8oBtucdgVoaPXFPgQt-J7Sc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
