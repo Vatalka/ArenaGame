@@ -30,6 +30,7 @@ void main() async {
   );
 }
 
+
 class AppModule extends Module {
   @override
   void binds(i) {}
