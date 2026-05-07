@@ -1,0 +1,22 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "flutter-arena-game",
+          "appId": "1:545091790235:android:b9c7ea2c6677ca1f70ed3e",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "flutter-arena-game",
+          "configurations": {
+            "android": "1:545091790235:android:b9c7ea2c6677ca1f70ed3e",
+            "windows": "1:545091790235:web:0af38e50ee291edb70ed3e"
+          }
+        }
+      }
+    }
+  }
+}

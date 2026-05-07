@@ -12,9 +12,6 @@ class GameScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final player = ref.watch(characterNotifierProvider('Player'));
-    final enemy = ref.watch(characterNotifierProvider('Enemy'));
-
     final state = ref.watch(battleNotifierProvider);
     final controller = ref.read(battleNotifierProvider.notifier);
 
@@ -27,22 +24,26 @@ class GameScreen extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CharacterStatCard(character: player),
+                CharacterStatCard(
+                  character: ref.watch(characterNotifierProvider('Player')),
+                ),
                 RestoreHpButton(),
-                CharacterStatCard(character: enemy),
+                CharacterStatCard(
+                  character: ref.watch(characterNotifierProvider('Enemy')),
+                ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SelectionGroup(
-                  title: 'Attack\narea:',
+                  title: 'Attack',
                   currentSelection: state.selectedAttack,
                   onSelected: (area) => controller.selectAttack(area),
                 ),
                 SizedBox(height: 8, width: 8),
                 SelectionGroup(
-                  title: 'Block\narea:',
+                  title: 'Block',
                   currentSelection: state.selectedBlock,
                   onSelected: (area) => controller.selectedBlock(area),
                 ),
