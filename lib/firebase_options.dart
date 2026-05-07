@@ -65,4 +65,5 @@ class DefaultFirebaseOptions {
     authDomain: 'flutter-arena-game.firebaseapp.com',
     storageBucket: 'flutter-arena-game.firebasestorage.app',
   );
+
 }
