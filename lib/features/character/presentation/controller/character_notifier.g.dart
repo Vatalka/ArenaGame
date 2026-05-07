@@ -6,171 +6,102 @@ part of 'character_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$characterNotifierHash() => r'f8c6d803e89210d13c123fe0e029372d7a59698e';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
-abstract class _$CharacterNotifier extends BuildlessNotifier<Character> {
-  late final String characterName;
-
-  Character build(
-    String characterName,
-  );
-}
-
-/// See also [CharacterNotifier].
 @ProviderFor(CharacterNotifier)
-const characterNotifierProvider = CharacterNotifierFamily();
+final characterProvider = CharacterNotifierFamily._();
 
-/// See also [CharacterNotifier].
-class CharacterNotifierFamily extends Family<Character> {
-  /// See also [CharacterNotifier].
-  const CharacterNotifierFamily();
+final class CharacterNotifierProvider
+    extends $NotifierProvider<CharacterNotifier, Character> {
+  CharacterNotifierProvider._({
+    required CharacterNotifierFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'characterProvider',
+         isAutoDispose: false,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
 
-  /// See also [CharacterNotifier].
-  CharacterNotifierProvider call(
-    String characterName,
-  ) {
-    return CharacterNotifierProvider(
-      characterName,
-    );
+  @override
+  String debugGetCreateSourceHash() => _$characterNotifierHash();
+
+  @override
+  String toString() {
+    return r'characterProvider'
+        ''
+        '($argument)';
   }
 
+  @$internal
   @override
-  CharacterNotifierProvider getProviderOverride(
-    covariant CharacterNotifierProvider provider,
-  ) {
-    return call(
-      provider.characterName,
-    );
-  }
+  CharacterNotifier create() => CharacterNotifier();
 
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'characterNotifierProvider';
-}
-
-/// See also [CharacterNotifier].
-class CharacterNotifierProvider
-    extends NotifierProviderImpl<CharacterNotifier, Character> {
-  /// See also [CharacterNotifier].
-  CharacterNotifierProvider(
-    String characterName,
-  ) : this._internal(
-          () => CharacterNotifier()..characterName = characterName,
-          from: characterNotifierProvider,
-          name: r'characterNotifierProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$characterNotifierHash,
-          dependencies: CharacterNotifierFamily._dependencies,
-          allTransitiveDependencies:
-              CharacterNotifierFamily._allTransitiveDependencies,
-          characterName: characterName,
-        );
-
-  CharacterNotifierProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.characterName,
-  }) : super.internal();
-
-  final String characterName;
-
-  @override
-  Character runNotifierBuild(
-    covariant CharacterNotifier notifier,
-  ) {
-    return notifier.build(
-      characterName,
-    );
-  }
-
-  @override
-  Override overrideWith(CharacterNotifier Function() create) {
-    return ProviderOverride(
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(Character value) {
+    return $ProviderOverride(
       origin: this,
-      override: CharacterNotifierProvider._internal(
-        () => create()..characterName = characterName,
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        characterName: characterName,
-      ),
+      providerOverride: $SyncValueProvider<Character>(value),
     );
-  }
-
-  @override
-  NotifierProviderElement<CharacterNotifier, Character> createElement() {
-    return _CharacterNotifierProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is CharacterNotifierProvider &&
-        other.characterName == characterName;
+    return other is CharacterNotifierProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, characterName.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin CharacterNotifierRef on NotifierProviderRef<Character> {
-  /// The parameter `characterName` of this provider.
-  String get characterName;
-}
+String _$characterNotifierHash() => r'f8c6d803e89210d13c123fe0e029372d7a59698e';
 
-class _CharacterNotifierProviderElement
-    extends NotifierProviderElement<CharacterNotifier, Character>
-    with CharacterNotifierRef {
-  _CharacterNotifierProviderElement(super.provider);
+final class CharacterNotifierFamily extends $Family
+    with
+        $ClassFamilyOverride<
+          CharacterNotifier,
+          Character,
+          Character,
+          Character,
+          String
+        > {
+  CharacterNotifierFamily._()
+    : super(
+        retry: null,
+        name: r'characterProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: false,
+      );
+
+  CharacterNotifierProvider call(String characterName) =>
+      CharacterNotifierProvider._(argument: characterName, from: this);
 
   @override
-  String get characterName =>
-      (origin as CharacterNotifierProvider).characterName;
+  String toString() => r'characterProvider';
 }
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+
+abstract class _$CharacterNotifier extends $Notifier<Character> {
+  late final _$args = ref.$arg as String;
+  String get characterName => _$args;
+
+  Character build(String characterName);
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<Character, Character>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<Character, Character>,
+              Character,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, () => build(_$args));
+  }
+}

@@ -7,8 +7,8 @@ class RestoreAllHpUseCase {
   RestoreAllHpUseCase({required this.ref});
 
   void execute() {
-    ref.read(characterNotifierProvider('Player').notifier).restoreHp();
-    ref.read(characterNotifierProvider('Enemy').notifier).restoreHp();
+    ref.read(characterProvider('Player').notifier).restoreHp();
+    ref.read(characterProvider('Enemy').notifier).restoreHp();
   }
 }
 
