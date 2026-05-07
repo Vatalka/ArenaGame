@@ -12,8 +12,8 @@ class GameScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(battleNotifierProvider);
-    final controller = ref.read(battleNotifierProvider.notifier);
+    final state = ref.watch(battleProvider);
+    final controller = ref.read(battleProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(title: Text('Game Screen')),
@@ -25,11 +25,11 @@ class GameScreen extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CharacterStatCard(
-                  character: ref.watch(characterNotifierProvider('Player')),
+                  character: ref.watch(characterProvider('Player')),
                 ),
                 RestoreHpButton(),
                 CharacterStatCard(
-                  character: ref.watch(characterNotifierProvider('Enemy')),
+                  character: ref.watch(characterProvider('Enemy')),
                 ),
               ],
             ),
@@ -53,7 +53,7 @@ class GameScreen extends ConsumerWidget {
               onPressed: (state.selectedAttack != null &&
                       state.selectedBlock != null)
                   ? () =>
-                      ref.read(battleNotifierProvider.notifier).confirmTurn()
+                      ref.read(battleProvider.notifier).confirmTurn()
                   : null,
               child: const Text("В БІЙ!"),
             ),

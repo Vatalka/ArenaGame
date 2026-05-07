@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,164 +9,272 @@ part of 'battle_selection.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-BattleSelection _$BattleSelectionFromJson(Map<String, dynamic> json) {
-  return _BattleSelection.fromJson(json);
-}
 
 /// @nodoc
 mixin _$BattleSelection {
-  Area? get selectedAttack => throw _privateConstructorUsedError;
-  Area? get selectedBlock => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $BattleSelectionCopyWith<BattleSelection> get copyWith =>
-      throw _privateConstructorUsedError;
+ Area? get selectedAttack; Area? get selectedBlock;
+/// Create a copy of BattleSelection
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$BattleSelectionCopyWith<BattleSelection> get copyWith => _$BattleSelectionCopyWithImpl<BattleSelection>(this as BattleSelection, _$identity);
+
+  /// Serializes this BattleSelection to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BattleSelection&&(identical(other.selectedAttack, selectedAttack) || other.selectedAttack == selectedAttack)&&(identical(other.selectedBlock, selectedBlock) || other.selectedBlock == selectedBlock));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,selectedAttack,selectedBlock);
+
+@override
+String toString() {
+  return 'BattleSelection(selectedAttack: $selectedAttack, selectedBlock: $selectedBlock)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $BattleSelectionCopyWith<$Res> {
-  factory $BattleSelectionCopyWith(
-          BattleSelection value, $Res Function(BattleSelection) then) =
-      _$BattleSelectionCopyWithImpl<$Res, BattleSelection>;
-  @useResult
-  $Res call({Area? selectedAttack, Area? selectedBlock});
-}
+abstract mixin class $BattleSelectionCopyWith<$Res>  {
+  factory $BattleSelectionCopyWith(BattleSelection value, $Res Function(BattleSelection) _then) = _$BattleSelectionCopyWithImpl;
+@useResult
+$Res call({
+ Area? selectedAttack, Area? selectedBlock
+});
 
+
+
+
+}
 /// @nodoc
-class _$BattleSelectionCopyWithImpl<$Res, $Val extends BattleSelection>
+class _$BattleSelectionCopyWithImpl<$Res>
     implements $BattleSelectionCopyWith<$Res> {
-  _$BattleSelectionCopyWithImpl(this._value, this._then);
+  _$BattleSelectionCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final BattleSelection _self;
+  final $Res Function(BattleSelection) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? selectedAttack = freezed,
-    Object? selectedBlock = freezed,
-  }) {
-    return _then(_value.copyWith(
-      selectedAttack: freezed == selectedAttack
-          ? _value.selectedAttack
-          : selectedAttack // ignore: cast_nullable_to_non_nullable
-              as Area?,
-      selectedBlock: freezed == selectedBlock
-          ? _value.selectedBlock
-          : selectedBlock // ignore: cast_nullable_to_non_nullable
-              as Area?,
-    ) as $Val);
-  }
+/// Create a copy of BattleSelection
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? selectedAttack = freezed,Object? selectedBlock = freezed,}) {
+  return _then(_self.copyWith(
+selectedAttack: freezed == selectedAttack ? _self.selectedAttack : selectedAttack // ignore: cast_nullable_to_non_nullable
+as Area?,selectedBlock: freezed == selectedBlock ? _self.selectedBlock : selectedBlock // ignore: cast_nullable_to_non_nullable
+as Area?,
+  ));
 }
 
-/// @nodoc
-abstract class _$$BattleSelectionImplCopyWith<$Res>
-    implements $BattleSelectionCopyWith<$Res> {
-  factory _$$BattleSelectionImplCopyWith(_$BattleSelectionImpl value,
-          $Res Function(_$BattleSelectionImpl) then) =
-      __$$BattleSelectionImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({Area? selectedAttack, Area? selectedBlock});
 }
 
-/// @nodoc
-class __$$BattleSelectionImplCopyWithImpl<$Res>
-    extends _$BattleSelectionCopyWithImpl<$Res, _$BattleSelectionImpl>
-    implements _$$BattleSelectionImplCopyWith<$Res> {
-  __$$BattleSelectionImplCopyWithImpl(
-      _$BattleSelectionImpl _value, $Res Function(_$BattleSelectionImpl) _then)
-      : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? selectedAttack = freezed,
-    Object? selectedBlock = freezed,
-  }) {
-    return _then(_$BattleSelectionImpl(
-      selectedAttack: freezed == selectedAttack
-          ? _value.selectedAttack
-          : selectedAttack // ignore: cast_nullable_to_non_nullable
-              as Area?,
-      selectedBlock: freezed == selectedBlock
-          ? _value.selectedBlock
-          : selectedBlock // ignore: cast_nullable_to_non_nullable
-              as Area?,
-    ));
-  }
+/// Adds pattern-matching-related methods to [BattleSelection].
+extension BattleSelectionPatterns on BattleSelection {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _BattleSelection value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _BattleSelection() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _BattleSelection value)  $default,){
+final _that = this;
+switch (_that) {
+case _BattleSelection():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _BattleSelection value)?  $default,){
+final _that = this;
+switch (_that) {
+case _BattleSelection() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Area? selectedAttack,  Area? selectedBlock)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _BattleSelection() when $default != null:
+return $default(_that.selectedAttack,_that.selectedBlock);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Area? selectedAttack,  Area? selectedBlock)  $default,) {final _that = this;
+switch (_that) {
+case _BattleSelection():
+return $default(_that.selectedAttack,_that.selectedBlock);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Area? selectedAttack,  Area? selectedBlock)?  $default,) {final _that = this;
+switch (_that) {
+case _BattleSelection() when $default != null:
+return $default(_that.selectedAttack,_that.selectedBlock);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$BattleSelectionImpl implements _BattleSelection {
-  const _$BattleSelectionImpl({this.selectedAttack, this.selectedBlock});
 
-  factory _$BattleSelectionImpl.fromJson(Map<String, dynamic> json) =>
-      _$$BattleSelectionImplFromJson(json);
+class _BattleSelection implements BattleSelection {
+  const _BattleSelection({this.selectedAttack, this.selectedBlock});
+  factory _BattleSelection.fromJson(Map<String, dynamic> json) => _$BattleSelectionFromJson(json);
 
-  @override
-  final Area? selectedAttack;
-  @override
-  final Area? selectedBlock;
+@override final  Area? selectedAttack;
+@override final  Area? selectedBlock;
 
-  @override
-  String toString() {
-    return 'BattleSelection(selectedAttack: $selectedAttack, selectedBlock: $selectedBlock)';
-  }
+/// Create a copy of BattleSelection
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$BattleSelectionCopyWith<_BattleSelection> get copyWith => __$BattleSelectionCopyWithImpl<_BattleSelection>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$BattleSelectionImpl &&
-            (identical(other.selectedAttack, selectedAttack) ||
-                other.selectedAttack == selectedAttack) &&
-            (identical(other.selectedBlock, selectedBlock) ||
-                other.selectedBlock == selectedBlock));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, selectedAttack, selectedBlock);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$BattleSelectionImplCopyWith<_$BattleSelectionImpl> get copyWith =>
-      __$$BattleSelectionImplCopyWithImpl<_$BattleSelectionImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$BattleSelectionImplToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$BattleSelectionToJson(this, );
 }
 
-abstract class _BattleSelection implements BattleSelection {
-  const factory _BattleSelection(
-      {final Area? selectedAttack,
-      final Area? selectedBlock}) = _$BattleSelectionImpl;
-
-  factory _BattleSelection.fromJson(Map<String, dynamic> json) =
-      _$BattleSelectionImpl.fromJson;
-
-  @override
-  Area? get selectedAttack;
-  @override
-  Area? get selectedBlock;
-  @override
-  @JsonKey(ignore: true)
-  _$$BattleSelectionImplCopyWith<_$BattleSelectionImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BattleSelection&&(identical(other.selectedAttack, selectedAttack) || other.selectedAttack == selectedAttack)&&(identical(other.selectedBlock, selectedBlock) || other.selectedBlock == selectedBlock));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,selectedAttack,selectedBlock);
+
+@override
+String toString() {
+  return 'BattleSelection(selectedAttack: $selectedAttack, selectedBlock: $selectedBlock)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$BattleSelectionCopyWith<$Res> implements $BattleSelectionCopyWith<$Res> {
+  factory _$BattleSelectionCopyWith(_BattleSelection value, $Res Function(_BattleSelection) _then) = __$BattleSelectionCopyWithImpl;
+@override @useResult
+$Res call({
+ Area? selectedAttack, Area? selectedBlock
+});
+
+
+
+
+}
+/// @nodoc
+class __$BattleSelectionCopyWithImpl<$Res>
+    implements _$BattleSelectionCopyWith<$Res> {
+  __$BattleSelectionCopyWithImpl(this._self, this._then);
+
+  final _BattleSelection _self;
+  final $Res Function(_BattleSelection) _then;
+
+/// Create a copy of BattleSelection
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? selectedAttack = freezed,Object? selectedBlock = freezed,}) {
+  return _then(_BattleSelection(
+selectedAttack: freezed == selectedAttack ? _self.selectedAttack : selectedAttack // ignore: cast_nullable_to_non_nullable
+as Area?,selectedBlock: freezed == selectedBlock ? _self.selectedBlock : selectedBlock // ignore: cast_nullable_to_non_nullable
+as Area?,
+  ));
+}
+
+
+}
+
+// dart format on

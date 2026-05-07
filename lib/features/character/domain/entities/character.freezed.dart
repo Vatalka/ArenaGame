@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,253 +9,284 @@ part of 'character.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Character _$CharacterFromJson(Map<String, dynamic> json) {
-  return _Character.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Character {
-  String get name => throw _privateConstructorUsedError;
-  int get currentHp => throw _privateConstructorUsedError;
-  int get vitality => throw _privateConstructorUsedError;
-  int get strength => throw _privateConstructorUsedError;
-  int get precision => throw _privateConstructorUsedError;
-  int get agility => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $CharacterCopyWith<Character> get copyWith =>
-      throw _privateConstructorUsedError;
+ String get name; int get currentHp; int get vitality; int get strength; int get precision; int get agility;
+/// Create a copy of Character
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CharacterCopyWith<Character> get copyWith => _$CharacterCopyWithImpl<Character>(this as Character, _$identity);
+
+  /// Serializes this Character to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Character&&(identical(other.name, name) || other.name == name)&&(identical(other.currentHp, currentHp) || other.currentHp == currentHp)&&(identical(other.vitality, vitality) || other.vitality == vitality)&&(identical(other.strength, strength) || other.strength == strength)&&(identical(other.precision, precision) || other.precision == precision)&&(identical(other.agility, agility) || other.agility == agility));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,name,currentHp,vitality,strength,precision,agility);
+
+@override
+String toString() {
+  return 'Character(name: $name, currentHp: $currentHp, vitality: $vitality, strength: $strength, precision: $precision, agility: $agility)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $CharacterCopyWith<$Res> {
-  factory $CharacterCopyWith(Character value, $Res Function(Character) then) =
-      _$CharacterCopyWithImpl<$Res, Character>;
-  @useResult
-  $Res call(
-      {String name,
-      int currentHp,
-      int vitality,
-      int strength,
-      int precision,
-      int agility});
-}
+abstract mixin class $CharacterCopyWith<$Res>  {
+  factory $CharacterCopyWith(Character value, $Res Function(Character) _then) = _$CharacterCopyWithImpl;
+@useResult
+$Res call({
+ String name, int currentHp, int vitality, int strength, int precision, int agility
+});
 
+
+
+
+}
 /// @nodoc
-class _$CharacterCopyWithImpl<$Res, $Val extends Character>
+class _$CharacterCopyWithImpl<$Res>
     implements $CharacterCopyWith<$Res> {
-  _$CharacterCopyWithImpl(this._value, this._then);
+  _$CharacterCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final Character _self;
+  final $Res Function(Character) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? name = null,
-    Object? currentHp = null,
-    Object? vitality = null,
-    Object? strength = null,
-    Object? precision = null,
-    Object? agility = null,
-  }) {
-    return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      currentHp: null == currentHp
-          ? _value.currentHp
-          : currentHp // ignore: cast_nullable_to_non_nullable
-              as int,
-      vitality: null == vitality
-          ? _value.vitality
-          : vitality // ignore: cast_nullable_to_non_nullable
-              as int,
-      strength: null == strength
-          ? _value.strength
-          : strength // ignore: cast_nullable_to_non_nullable
-              as int,
-      precision: null == precision
-          ? _value.precision
-          : precision // ignore: cast_nullable_to_non_nullable
-              as int,
-      agility: null == agility
-          ? _value.agility
-          : agility // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
-  }
+/// Create a copy of Character
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? currentHp = null,Object? vitality = null,Object? strength = null,Object? precision = null,Object? agility = null,}) {
+  return _then(_self.copyWith(
+name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,currentHp: null == currentHp ? _self.currentHp : currentHp // ignore: cast_nullable_to_non_nullable
+as int,vitality: null == vitality ? _self.vitality : vitality // ignore: cast_nullable_to_non_nullable
+as int,strength: null == strength ? _self.strength : strength // ignore: cast_nullable_to_non_nullable
+as int,precision: null == precision ? _self.precision : precision // ignore: cast_nullable_to_non_nullable
+as int,agility: null == agility ? _self.agility : agility // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
 }
 
-/// @nodoc
-abstract class _$$CharacterImplCopyWith<$Res>
-    implements $CharacterCopyWith<$Res> {
-  factory _$$CharacterImplCopyWith(
-          _$CharacterImpl value, $Res Function(_$CharacterImpl) then) =
-      __$$CharacterImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String name,
-      int currentHp,
-      int vitality,
-      int strength,
-      int precision,
-      int agility});
 }
 
-/// @nodoc
-class __$$CharacterImplCopyWithImpl<$Res>
-    extends _$CharacterCopyWithImpl<$Res, _$CharacterImpl>
-    implements _$$CharacterImplCopyWith<$Res> {
-  __$$CharacterImplCopyWithImpl(
-      _$CharacterImpl _value, $Res Function(_$CharacterImpl) _then)
-      : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? name = null,
-    Object? currentHp = null,
-    Object? vitality = null,
-    Object? strength = null,
-    Object? precision = null,
-    Object? agility = null,
-  }) {
-    return _then(_$CharacterImpl(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      currentHp: null == currentHp
-          ? _value.currentHp
-          : currentHp // ignore: cast_nullable_to_non_nullable
-              as int,
-      vitality: null == vitality
-          ? _value.vitality
-          : vitality // ignore: cast_nullable_to_non_nullable
-              as int,
-      strength: null == strength
-          ? _value.strength
-          : strength // ignore: cast_nullable_to_non_nullable
-              as int,
-      precision: null == precision
-          ? _value.precision
-          : precision // ignore: cast_nullable_to_non_nullable
-              as int,
-      agility: null == agility
-          ? _value.agility
-          : agility // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
+/// Adds pattern-matching-related methods to [Character].
+extension CharacterPatterns on Character {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Character value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _Character() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Character value)  $default,){
+final _that = this;
+switch (_that) {
+case _Character():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Character value)?  $default,){
+final _that = this;
+switch (_that) {
+case _Character() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String name,  int currentHp,  int vitality,  int strength,  int precision,  int agility)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _Character() when $default != null:
+return $default(_that.name,_that.currentHp,_that.vitality,_that.strength,_that.precision,_that.agility);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String name,  int currentHp,  int vitality,  int strength,  int precision,  int agility)  $default,) {final _that = this;
+switch (_that) {
+case _Character():
+return $default(_that.name,_that.currentHp,_that.vitality,_that.strength,_that.precision,_that.agility);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String name,  int currentHp,  int vitality,  int strength,  int precision,  int agility)?  $default,) {final _that = this;
+switch (_that) {
+case _Character() when $default != null:
+return $default(_that.name,_that.currentHp,_that.vitality,_that.strength,_that.precision,_that.agility);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$CharacterImpl extends _Character {
-  const _$CharacterImpl(
-      {required this.name,
-      required this.currentHp,
-      required this.vitality,
-      required this.strength,
-      required this.precision,
-      required this.agility})
-      : super._();
 
-  factory _$CharacterImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CharacterImplFromJson(json);
+class _Character extends Character {
+  const _Character({required this.name, required this.currentHp, required this.vitality, required this.strength, required this.precision, required this.agility}): super._();
+  factory _Character.fromJson(Map<String, dynamic> json) => _$CharacterFromJson(json);
 
-  @override
-  final String name;
-  @override
-  final int currentHp;
-  @override
-  final int vitality;
-  @override
-  final int strength;
-  @override
-  final int precision;
-  @override
-  final int agility;
+@override final  String name;
+@override final  int currentHp;
+@override final  int vitality;
+@override final  int strength;
+@override final  int precision;
+@override final  int agility;
 
-  @override
-  String toString() {
-    return 'Character(name: $name, currentHp: $currentHp, vitality: $vitality, strength: $strength, precision: $precision, agility: $agility)';
-  }
+/// Create a copy of Character
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$CharacterCopyWith<_Character> get copyWith => __$CharacterCopyWithImpl<_Character>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CharacterImpl &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.currentHp, currentHp) ||
-                other.currentHp == currentHp) &&
-            (identical(other.vitality, vitality) ||
-                other.vitality == vitality) &&
-            (identical(other.strength, strength) ||
-                other.strength == strength) &&
-            (identical(other.precision, precision) ||
-                other.precision == precision) &&
-            (identical(other.agility, agility) || other.agility == agility));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, name, currentHp, vitality, strength, precision, agility);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$CharacterImplCopyWith<_$CharacterImpl> get copyWith =>
-      __$$CharacterImplCopyWithImpl<_$CharacterImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$CharacterImplToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$CharacterToJson(this, );
 }
 
-abstract class _Character extends Character {
-  const factory _Character(
-      {required final String name,
-      required final int currentHp,
-      required final int vitality,
-      required final int strength,
-      required final int precision,
-      required final int agility}) = _$CharacterImpl;
-  const _Character._() : super._();
-
-  factory _Character.fromJson(Map<String, dynamic> json) =
-      _$CharacterImpl.fromJson;
-
-  @override
-  String get name;
-  @override
-  int get currentHp;
-  @override
-  int get vitality;
-  @override
-  int get strength;
-  @override
-  int get precision;
-  @override
-  int get agility;
-  @override
-  @JsonKey(ignore: true)
-  _$$CharacterImplCopyWith<_$CharacterImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Character&&(identical(other.name, name) || other.name == name)&&(identical(other.currentHp, currentHp) || other.currentHp == currentHp)&&(identical(other.vitality, vitality) || other.vitality == vitality)&&(identical(other.strength, strength) || other.strength == strength)&&(identical(other.precision, precision) || other.precision == precision)&&(identical(other.agility, agility) || other.agility == agility));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,name,currentHp,vitality,strength,precision,agility);
+
+@override
+String toString() {
+  return 'Character(name: $name, currentHp: $currentHp, vitality: $vitality, strength: $strength, precision: $precision, agility: $agility)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$CharacterCopyWith<$Res> implements $CharacterCopyWith<$Res> {
+  factory _$CharacterCopyWith(_Character value, $Res Function(_Character) _then) = __$CharacterCopyWithImpl;
+@override @useResult
+$Res call({
+ String name, int currentHp, int vitality, int strength, int precision, int agility
+});
+
+
+
+
+}
+/// @nodoc
+class __$CharacterCopyWithImpl<$Res>
+    implements _$CharacterCopyWith<$Res> {
+  __$CharacterCopyWithImpl(this._self, this._then);
+
+  final _Character _self;
+  final $Res Function(_Character) _then;
+
+/// Create a copy of Character
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? currentHp = null,Object? vitality = null,Object? strength = null,Object? precision = null,Object? agility = null,}) {
+  return _then(_Character(
+name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,currentHp: null == currentHp ? _self.currentHp : currentHp // ignore: cast_nullable_to_non_nullable
+as int,vitality: null == vitality ? _self.vitality : vitality // ignore: cast_nullable_to_non_nullable
+as int,strength: null == strength ? _self.strength : strength // ignore: cast_nullable_to_non_nullable
+as int,precision: null == precision ? _self.precision : precision // ignore: cast_nullable_to_non_nullable
+as int,agility: null == agility ? _self.agility : agility // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
+
+// dart format on
