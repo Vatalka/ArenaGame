@@ -28,47 +28,50 @@ class HealthBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(3),
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(),
-        child: Stack(
-          children: [
-            // Bottom layer
-            TweenAnimationBuilder<double>(
-              duration: const Duration(milliseconds: 1000),
-              curve: Curves.easeInOutCubic,
-              tween: Tween<double>(begin: hp, end: hp),
-              builder: (context, value, child) {
-                return LinearProgressIndicator(
-                  value: value,
-                  minHeight: 10,
-                  backgroundColor: Theme.of(
-                    context,
-                  ).colorScheme.surfaceContainerHigh,
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    Theme.of(context).colorScheme.surfaceContainerLowest,
-                  ),
-                );
-              },
-            ),
-            // Top layer
-            TweenAnimationBuilder<double>(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeOutCirc,
-              tween: Tween<double>(begin: hp, end: hp),
-              builder: (context, value, child) {
-                return LinearProgressIndicator(
-                  value: value,
-                  minHeight: 10,
-                  backgroundColor: Colors.transparent,
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    getHealthBarColor(context, value),
-                  ),
-                );
-              },
-            ),
-          ],
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(3),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(),
+          child: Stack(
+            children: [
+              // Bottom layer
+              TweenAnimationBuilder<double>(
+                duration: const Duration(milliseconds: 1000),
+                curve: Curves.easeInOutCubic,
+                tween: Tween<double>(begin: hp, end: hp),
+                builder: (context, value, child) {
+                  return LinearProgressIndicator(
+                    value: value,
+                    minHeight: 10,
+                    backgroundColor: Theme.of(
+                      context,
+                    ).colorScheme.surfaceContainerHigh,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      Theme.of(context).colorScheme.surfaceContainerLowest,
+                    ),
+                  );
+                },
+              ),
+              // Top layer
+              TweenAnimationBuilder<double>(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeOutCirc,
+                tween: Tween<double>(begin: hp, end: hp),
+                builder: (context, value, child) {
+                  return LinearProgressIndicator(
+                    value: value,
+                    minHeight: 10,
+                    backgroundColor: Colors.transparent,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      getHealthBarColor(context, value),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
