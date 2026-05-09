@@ -34,14 +34,13 @@ class GameScreen extends ConsumerWidget {
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 SelectionGroup(
                   title: 'Attack',
                   currentSelection: state.selectedAttack,
                   onSelected: (area) => controller.selectAttack(area),
                 ),
-                SizedBox(height: 8, width: 8),
                 SelectionGroup(
                   title: 'Block',
                   currentSelection: state.selectedBlock,
@@ -56,7 +55,6 @@ class GameScreen extends ConsumerWidget {
                   : null,
               child: const Text("В БІЙ!"),
             ),
-            SizedBox(height: 8, width: 8),
             ElevatedButton(
               onPressed: () => Modular.to.navigate('/'),
               child: Text('Back to Login Screen'),
