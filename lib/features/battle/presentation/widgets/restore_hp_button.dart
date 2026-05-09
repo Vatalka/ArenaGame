@@ -7,20 +7,14 @@ class RestoreHpButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.all(10),
-          minimumSize: Size(0, 0),
-          shape: const CircleBorder(),
-        ),
-        onPressed: () => ref.read(restoreAllHpUseCaseProvider).execute(),
-        child: Icon(
-          Icons.refresh,
-          size: 24,
-        ),
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.all(10),
+        minimumSize: Size(0, 0),
+        shape: const CircleBorder(),
       ),
+      onPressed: () => ref.read(restoreAllHpUseCaseProvider).execute(),
+      child: Icon(Icons.refresh, size: 24),
     );
   }
 }

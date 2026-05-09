@@ -10,15 +10,17 @@ class CharacterStatCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final hpPercent = character.currentHp / character.maxHp;
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(character.name),
-        Text('HP: ${character.currentHp} / ${character.maxHp}'),
-        HealthBar(hp: hpPercent),
-        Text('VIT: ${character.vitality}'),
-        Text('STR: ${character.strength}'),
-      ],
+    return Expanded(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(character.name),
+          Text('HP: ${character.currentHp} / ${character.maxHp}'),
+          HealthBar(hp: hpPercent),
+          Text('VIT: ${character.vitality}'),
+          Text('STR: ${character.strength}'),
+        ],
+      ),
     );
   }
 }

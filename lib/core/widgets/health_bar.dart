@@ -10,11 +10,17 @@ class HealthBar extends StatelessWidget {
     final gameColors = Theme.of(context).extension<GameColors>()!;
 
     if (value > 0.66) {
-      return Color.lerp(gameColors.healthMedium, gameColors.healthHigh,
-          (value - 0.66) / 0.34)!;
+      return Color.lerp(
+        gameColors.healthMedium,
+        gameColors.healthHigh,
+        (value - 0.66) / 0.33,
+      )!;
     } else if (value > 0.33) {
-      return Color.lerp(gameColors.healthLow, gameColors.healthMedium,
-          (value - 0.33) / 0.33)!;
+      return Color.lerp(
+        gameColors.healthLow,
+        gameColors.healthMedium,
+        (value - 0.33) / 0.33,
+      )!;
     } else {
       return gameColors.healthLow;
     }
@@ -24,9 +30,8 @@ class HealthBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(3),
-      child: SizedBox(
-        height: 10,
-        width: 200,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(),
         child: Stack(
           children: [
             // Bottom layer
@@ -38,10 +43,12 @@ class HealthBar extends StatelessWidget {
                 return LinearProgressIndicator(
                   value: value,
                   minHeight: 10,
-                  backgroundColor:
-                      Theme.of(context).colorScheme.surfaceContainerHigh,
+                  backgroundColor: Theme.of(
+                    context,
+                  ).colorScheme.surfaceContainerHigh,
                   valueColor: AlwaysStoppedAnimation<Color>(
-                      Theme.of(context).colorScheme.surfaceContainerLowest),
+                    Theme.of(context).colorScheme.surfaceContainerLowest,
+                  ),
                 );
               },
             ),
@@ -56,7 +63,8 @@ class HealthBar extends StatelessWidget {
                   minHeight: 10,
                   backgroundColor: Colors.transparent,
                   valueColor: AlwaysStoppedAnimation<Color>(
-                      getHealthBarColor(context, value)),
+                    getHealthBarColor(context, value),
+                  ),
                 );
               },
             ),

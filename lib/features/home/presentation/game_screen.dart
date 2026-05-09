@@ -50,10 +50,9 @@ class GameScreen extends ConsumerWidget {
               ],
             ),
             ElevatedButton(
-              onPressed: (state.selectedAttack != null &&
-                      state.selectedBlock != null)
-                  ? () =>
-                      ref.read(battleProvider.notifier).confirmTurn()
+              onPressed:
+                  (state.selectedAttack != null && state.selectedBlock != null)
+                  ? () => ref.read(battleProvider.notifier).confirmTurn()
                   : null,
               child: const Text("В БІЙ!"),
             ),
