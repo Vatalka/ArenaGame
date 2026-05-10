@@ -50,20 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCbxguI-x0Y8oBtucdgVoaPXFPgQt-J7Sc',
-    appId: '1:545091790235:android:b9c7ea2c6677ca1f70ed3e',
+    apiKey: String.fromEnvironment('FIREBASE_API_KEY'),
+    appId: String.fromEnvironment('FIREBASE_APP_ID'),
     messagingSenderId: '545091790235',
     projectId: 'flutter-arena-game',
     storageBucket: 'flutter-arena-game.firebasestorage.app',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyAdlHImBXnAi8O9ofVb9YuKgJAmC9VRVWQ',
-    appId: '1:545091790235:web:0af38e50ee291edb70ed3e',
+    apiKey: String.fromEnvironment('FIREBASE_API_KEY'),
+    appId: String.fromEnvironment('FIREBASE_APP_ID'),
     messagingSenderId: '545091790235',
     projectId: 'flutter-arena-game',
     authDomain: 'flutter-arena-game.firebaseapp.com',
     storageBucket: 'flutter-arena-game.firebasestorage.app',
   );
-
 }
