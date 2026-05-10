@@ -1,3 +1,4 @@
+import 'package:arena_game/core/widgets/stat_selector_row.dart';
 import 'package:arena_game/features/character/creation/presentation/controller/creation_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -41,8 +42,36 @@ class CreationScreen extends ConsumerWidget {
                 Text('Remaining\npoints: ${state.remainingPoints}'),
               ],
             ),
-            // StatSelectorRow('vitality'),
-            // StatSelectorRow('strength'),
+            Tooltip(
+              message: '1 VIT = 5 hit point',
+              child: StatSelectorRow(
+                label: 'Vitality',
+                value: state.vitality,
+                isIncrementEnabled: state.remainingPoints > 0,
+                isDecrementEnabled: state.vitality > 3,
+                onIncrement: () => ref
+                    .read(creationProvider.notifier)
+                    .incrementStat('vitality'),
+                onDecrement: () => ref
+                    .read(creationProvider.notifier)
+                    .decrementStat('vitality'),
+              ),
+            ),
+            Tooltip(
+              message: '1 STR = 2 damage',
+              child: StatSelectorRow(
+                label: 'Strength',
+                value: state.strength,
+                isIncrementEnabled: state.remainingPoints > 0,
+                isDecrementEnabled: state.strength > 3,
+                onIncrement: () => ref
+                    .read(creationProvider.notifier)
+                    .incrementStat('strength'),
+                onDecrement: () => ref
+                    .read(creationProvider.notifier)
+                    .decrementStat('strength'),
+              ),
+            ),
             ElevatedButton(
               onPressed: state.isValid
                   ? () => Modular.to.navigate('game')
