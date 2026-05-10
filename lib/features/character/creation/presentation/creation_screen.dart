@@ -11,7 +11,7 @@ class CreationScreen extends ConsumerWidget {
     final state = ref.watch(creationProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Login Screen')),
+      appBar: AppBar(title: const Text('Creation Screen')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -19,14 +19,32 @@ class CreationScreen extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text('Enter character name'), // тут буде TextField()
-                Text('Remaining points: 5'),
+                SizedBox(
+                  width: 200,
+                  child: TextField(
+                    onChanged: (value) =>
+                        ref.read(creationProvider.notifier).updateName(value),
+                    decoration: InputDecoration(
+                      labelText: 'Enter character name',
+                      filled: true,
+                      fillColor: Theme.of(
+                        context,
+                      ).colorScheme.surfaceContainerLowest,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      errorText: state.nameError,
+                    ),
+                    maxLength: 15,
+                  ),
+                ),
+                Text('Remaining\npoints: ${state.remainingPoints}'),
               ],
             ),
             // StatSelectorRow('vitality'),
             // StatSelectorRow('strength'),
             ElevatedButton(
-              onPressed: (state.remainingPoints == 0 && state.name != '')
+              onPressed: state.isValid
                   ? () => Modular.to.navigate('game')
                   : null,
               child: const Text("Create"),

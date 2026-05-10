@@ -1,4 +1,4 @@
-import 'package:arena_game/features/character/creation/domain/entities/creation_state.dart';
+import 'package:arena_game/features/character/creation/domain/entities/creation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'creation_notifier.g.dart';
