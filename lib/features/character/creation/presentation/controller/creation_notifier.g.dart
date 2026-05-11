@@ -13,7 +13,7 @@ part of 'creation_notifier.dart';
 final creationProvider = CreationNotifierProvider._();
 
 final class CreationNotifierProvider
-    extends $NotifierProvider<CreationNotifier, CreationState> {
+    extends $NotifierProvider<CreationNotifier, Creation> {
   CreationNotifierProvider._()
     : super(
         from: null,
@@ -33,27 +33,27 @@ final class CreationNotifierProvider
   CreationNotifier create() => CreationNotifier();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(CreationState value) {
+  Override overrideWithValue(Creation value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<CreationState>(value),
+      providerOverride: $SyncValueProvider<Creation>(value),
     );
   }
 }
 
-String _$creationNotifierHash() => r'bb60527cdfd12417aedded5408f6129d23bcd41b';
+String _$creationNotifierHash() => r'29bb838e842684006c0f7fbf6db50a6a2e727d2c';
 
-abstract class _$CreationNotifier extends $Notifier<CreationState> {
-  CreationState build();
+abstract class _$CreationNotifier extends $Notifier<Creation> {
+  Creation build();
   @$mustCallSuper
   @override
   void runBuild() {
-    final ref = this.ref as $Ref<CreationState, CreationState>;
+    final ref = this.ref as $Ref<Creation, Creation>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<CreationState, CreationState>,
-              CreationState,
+              AnyNotifier<Creation, Creation>,
+              Creation,
               Object?,
               Object?
             >;

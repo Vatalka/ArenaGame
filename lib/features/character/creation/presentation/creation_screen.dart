@@ -1,5 +1,6 @@
 import 'package:arena_game/core/theme/game_colors.dart';
 import 'package:arena_game/core/widgets/stat_selector_row.dart';
+import 'package:arena_game/features/character/creation/domain/entities/stat_type.dart';
 import 'package:arena_game/features/character/creation/presentation/controller/creation_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -80,27 +81,27 @@ class CreationScreen extends ConsumerWidget {
                 ),
               ],
             ),
-            StatSelectorRow(
-              label: 'Vitality',
-              value: state.vitality,
-              isIncrementEnabled: state.remainingPoints > 0,
-              isDecrementEnabled: state.vitality > 3,
-              onIncrement: () =>
-                  ref.read(creationProvider.notifier).incrementStat('vitality'),
-              onDecrement: () =>
-                  ref.read(creationProvider.notifier).decrementStat('vitality'),
+            Column(
+              children: StatType.values.map((type) {
+                return StatSelectorRow(
+                  type: type,
+                  value: ref.watch(
+                    creationProvider.select((s) => s.getValueFor(type)),
+                  ),
+                  onIncrement: state.remainingPoints > 0
+                      ? () => ref
+                            .read(creationProvider.notifier)
+                            .incrementStat(type)
+                      : null,
+                  onDecrement:
+                      ref.read(creationProvider.notifier).canDecrement(type)
+                      ? () => ref
+                            .read(creationProvider.notifier)
+                            .decrementStat(type)
+                      : null,
+                );
+              }).toList(),
             ),
-            StatSelectorRow(
-              label: 'Strength',
-              value: state.strength,
-              isIncrementEnabled: state.remainingPoints > 0,
-              isDecrementEnabled: state.strength > 3,
-              onIncrement: () =>
-                  ref.read(creationProvider.notifier).incrementStat('strength'),
-              onDecrement: () =>
-                  ref.read(creationProvider.notifier).decrementStat('strength'),
-            ),
-
             ElevatedButton(
               onPressed: state.isValid
                   ? () => Modular.to.navigate('game')

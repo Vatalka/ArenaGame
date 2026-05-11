@@ -1,46 +1,37 @@
 import 'package:arena_game/core/theme/game_colors.dart';
+import 'package:arena_game/features/character/creation/domain/entities/stat_type.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-const Map<String, String> statDescriptions = {
-  'Vitality': '1 VIT = 5 HP',
-  'Strength': '1 STR = 2 DMG',
-};
-
-class StatSelectorRow extends ConsumerWidget {
-  final String label;
+class StatSelectorRow extends StatelessWidget {
+  final StatType type;
   final int value;
-  final VoidCallback onIncrement;
-  final VoidCallback onDecrement;
-  final bool isIncrementEnabled;
-  final bool isDecrementEnabled;
+  final VoidCallback? onIncrement;
+  final VoidCallback? onDecrement;
 
   const StatSelectorRow({
     super.key,
-    required this.label,
+    required this.type,
     required this.value,
     required this.onIncrement,
     required this.onDecrement,
-    this.isIncrementEnabled = true,
-    this.isDecrementEnabled = true,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       child: Row(
         children: [
           Tooltip(
-            message: statDescriptions[label] ?? 'Description missing',
+            message: type.description,
             child: Text(
-              label.toUpperCase(),
+              type.label.toUpperCase(),
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
           ),
           Spacer(),
           IconButton(
-            onPressed: isDecrementEnabled ? onDecrement : null,
+            onPressed: onDecrement,
             icon: const Icon(Icons.remove_circle_outline),
             color: Theme.of(context).colorScheme.onSecondaryContainer,
           ),
@@ -53,7 +44,7 @@ class StatSelectorRow extends ConsumerWidget {
             ),
           ),
           IconButton(
-            onPressed: isIncrementEnabled ? onIncrement : null,
+            onPressed: onIncrement,
             icon: const Icon(Icons.add_circle_outline),
             color: Theme.of(context).extension<GameColors>()!.healthHigh,
           ),
