@@ -2,6 +2,11 @@ import 'package:arena_game/core/theme/game_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+const Map<String, String> statDescriptions = {
+  'Vitality': '1 VIT = 5 HP',
+  'Strength': '1 STR = 2 DMG',
+};
+
 class StatSelectorRow extends ConsumerWidget {
   final String label;
   final int value;
@@ -26,24 +31,25 @@ class StatSelectorRow extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       child: Row(
         children: [
-          Expanded(
-            flex: 2,
+          Tooltip(
+            message: statDescriptions[label] ?? 'Description missing',
             child: Text(
               label.toUpperCase(),
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
           ),
+          Spacer(),
           IconButton(
             onPressed: isDecrementEnabled ? onDecrement : null,
             icon: const Icon(Icons.remove_circle_outline),
-            color: Theme.of(context).extension<GameColors>()!.healthLow,
+            color: Theme.of(context).colorScheme.onSecondaryContainer,
           ),
           SizedBox(
             width: 40,
             child: Text(
               '$value',
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
             ),
           ),
           IconButton(
