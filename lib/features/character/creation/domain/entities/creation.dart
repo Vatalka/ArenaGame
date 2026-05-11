@@ -7,11 +7,13 @@ part 'creation.g.dart';
 
 @freezed
 abstract class Creation with _$Creation {
+  static const int initialStatValue = 3;
+
   const factory Creation({
     @Default('') String name,
     @Default(5) int remainingPoints,
-    @Default(3) int vitality,
-    @Default(3) int strength,
+    @Default(Creation.initialStatValue) int vitality,
+    @Default(Creation.initialStatValue) int strength,
   }) = _Creation;
 
   const Creation._();
@@ -21,6 +23,14 @@ abstract class Creation with _$Creation {
       StatType.vitality => vitality,
       StatType.strength => strength,
     };
+  }
+
+  bool canIncrement(StatType type) {
+    return remainingPoints > 0;
+  }
+
+  bool canDecrement(StatType type) {
+    return getValueFor(type) > Creation.initialStatValue;
   }
 
   bool get isValid => name.trim().length >= 3 && remainingPoints == 0;

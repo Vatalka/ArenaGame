@@ -88,13 +88,12 @@ class CreationScreen extends ConsumerWidget {
                   value: ref.watch(
                     creationProvider.select((s) => s.getValueFor(type)),
                   ),
-                  onIncrement: state.remainingPoints > 0
+                  onIncrement: state.canIncrement(type)
                       ? () => ref
                             .read(creationProvider.notifier)
                             .incrementStat(type)
                       : null,
-                  onDecrement:
-                      ref.read(creationProvider.notifier).canDecrement(type)
+                  onDecrement: state.canDecrement(type)
                       ? () => ref
                             .read(creationProvider.notifier)
                             .decrementStat(type)

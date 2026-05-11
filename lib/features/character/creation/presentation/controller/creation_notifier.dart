@@ -12,6 +12,7 @@ class CreationNotifier extends _$CreationNotifier {
   void updateName(String name) => state = state.copyWith(name: name);
 
   void incrementStat(StatType type) {
+    if (!state.canIncrement(type)) return;
     state = state.copyWith(
       vitality: type == StatType.vitality ? state.vitality + 1 : state.vitality,
       strength: type == StatType.strength ? state.strength + 1 : state.strength,
@@ -19,19 +20,8 @@ class CreationNotifier extends _$CreationNotifier {
     );
   }
 
-  bool canDecrement(StatType type) {
-    final currentValue = getValueFor(type);
-    return currentValue > 3;
-  }
-
-  int getValueFor(StatType type) {
-    return switch (type) {
-      StatType.vitality => state.vitality,
-      StatType.strength => state.strength,
-    };
-  }
-
   void decrementStat(StatType type) {
+    if (!state.canDecrement(type)) return;
     state = state.copyWith(
       vitality: type == StatType.vitality ? state.vitality - 1 : state.vitality,
       strength: type == StatType.strength ? state.strength - 1 : state.strength,
