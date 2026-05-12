@@ -9,7 +9,7 @@ class CharacterNotifier extends _$CharacterNotifier {
   @override
   Character build(String characterName) {
     final repository = ref.watch(characterRepositoryProvider);
-    return repository.getHero(characterName);
+    return repository.getCharacter(characterName);
   }
 
   void dealDamage(double damage) {

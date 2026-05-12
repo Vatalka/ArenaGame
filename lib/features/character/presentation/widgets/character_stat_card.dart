@@ -1,4 +1,4 @@
-import 'package:arena_game/core/widgets/health_bar.dart';
+import 'package:arena_game/features/character/presentation/widgets/health_bar.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:flutter/widgets.dart';
 

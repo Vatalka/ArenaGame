@@ -11,7 +11,7 @@ abstract class Creation with _$Creation {
 
   const factory Creation({
     @Default('') String name,
-    @Default(5) int remainingPoints,
+    @Default(Creation.initialStatValue) int remainingPoints,
     @Default(Creation.initialStatValue) int vitality,
     @Default(Creation.initialStatValue) int strength,
   }) = _Creation;

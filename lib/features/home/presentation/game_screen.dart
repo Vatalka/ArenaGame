@@ -13,9 +13,6 @@ class GameScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(battleProvider);
-    final controller = ref.read(battleProvider.notifier);
-
     return Scaffold(
       appBar: AppBar(title: Text('Game Screen')),
       body: Center(
@@ -28,7 +25,6 @@ class GameScreen extends ConsumerWidget {
                 CharacterStatCard(
                   character: ref.watch(characterProvider('Player')),
                 ),
-                RestoreHpButton(),
                 CharacterStatCard(
                   character: ref.watch(characterProvider('Enemy')),
                 ),
@@ -39,17 +35,20 @@ class GameScreen extends ConsumerWidget {
               children: [
                 SelectionGroup(
                   title: 'Attack',
-                  currentSelection: state.selectedAttack,
-                  onSelected: (area) => controller.selectAttack(area),
+                  currentSelection: ref.watch(battleProvider).selectedAttack,
+                  onSelected: (area) =>
+                      ref.read(battleProvider.notifier).selectAttack(area),
                 ),
                 SelectionGroup(
                   title: 'Block',
-                  currentSelection: state.selectedBlock,
-                  onSelected: (area) => controller.selectedBlock(area),
+                  currentSelection: ref.watch(battleProvider).selectedBlock,
+                  onSelected: (area) =>
+                      ref.read(battleProvider.notifier).selectBlock(area),
                 ),
               ],
             ),
             AttackConfirmButton(),
+            RestoreHpButton(),
             ElevatedButton(
               onPressed: () => Modular.to.navigate('/'),
               child: Text('Back to Login Screen'),

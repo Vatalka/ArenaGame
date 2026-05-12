@@ -15,7 +15,7 @@ class BattleNotifier extends _$BattleNotifier {
     state = state.copyWith(selectedAttack: area);
   }
 
-  void selectedBlock(Area? area) {
+  void selectBlock(Area? area) {
     state = state.copyWith(selectedBlock: area);
   }
 

@@ -11,7 +11,7 @@ CharacterRepository characterRepository(Ref ref) {
 
 class CharacterRepositoryImpl implements CharacterRepository {
   @override
-  Character getHero(String name) {
+  Character getCharacter(String name) {
     if (name == 'Enemy') {
       int vit = 7;
       return Character(
