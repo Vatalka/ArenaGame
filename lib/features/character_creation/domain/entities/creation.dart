@@ -1,4 +1,4 @@
-import 'package:arena_game/features/character/creation/domain/entities/stat_type.dart';
+import 'package:arena_game/features/character_creation/domain/entities/stat_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'creation.freezed.dart';

@@ -1,5 +1,5 @@
-import 'package:arena_game/features/character/creation/domain/entities/creation.dart';
-import 'package:arena_game/features/character/creation/domain/entities/stat_type.dart';
+import 'package:arena_game/features/character_creation/domain/entities/creation.dart';
+import 'package:arena_game/features/character_creation/domain/entities/stat_type.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'creation_notifier.g.dart';

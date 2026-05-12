@@ -1,7 +1,7 @@
 import 'package:arena_game/core/theme/game_colors.dart';
-import 'package:arena_game/core/widgets/stat_selector_row.dart';
-import 'package:arena_game/features/character/creation/domain/entities/stat_type.dart';
-import 'package:arena_game/features/character/creation/presentation/controller/creation_notifier.dart';
+import 'package:arena_game/features/character_creation/presentation/widgets/stat_selector_row.dart';
+import 'package:arena_game/features/character_creation/domain/entities/stat_type.dart';
+import 'package:arena_game/features/character_creation/presentation/controller/creation_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

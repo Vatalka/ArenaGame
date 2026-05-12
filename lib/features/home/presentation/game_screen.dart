@@ -1,4 +1,5 @@
 import 'package:arena_game/features/battle/presentation/controller/battle_notifier.dart';
+import 'package:arena_game/features/battle/presentation/widgets/attack_confirm_button.dart';
 import 'package:arena_game/features/battle/presentation/widgets/restore_hp_button.dart';
 import 'package:arena_game/features/battle/presentation/widgets/selection_group.dart';
 import 'package:arena_game/features/character/presentation/controller/character_notifier.dart';
@@ -48,13 +49,7 @@ class GameScreen extends ConsumerWidget {
                 ),
               ],
             ),
-            ElevatedButton(
-              onPressed:
-                  (state.selectedAttack != null && state.selectedBlock != null)
-                  ? () => ref.read(battleProvider.notifier).confirmTurn()
-                  : null,
-              child: const Text("В БІЙ!"),
-            ),
+            AttackConfirmButton(),
             ElevatedButton(
               onPressed: () => Modular.to.navigate('/'),
               child: Text('Back to Login Screen'),

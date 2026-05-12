@@ -1,5 +1,5 @@
 import 'package:arena_game/core/theme/game_colors.dart';
-import 'package:arena_game/features/character/creation/domain/entities/stat_type.dart';
+import 'package:arena_game/features/character_creation/domain/entities/stat_type.dart';
 import 'package:flutter/material.dart';
 
 class StatSelectorRow extends StatelessWidget {

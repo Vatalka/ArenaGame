@@ -1,6 +1,6 @@
 import 'package:arena_game/core/theme/game_colors.dart';
 import 'package:arena_game/features/auth/presentation/login_screen.dart';
-import 'package:arena_game/features/character/creation/presentation/creation_screen.dart';
+import 'package:arena_game/features/character_creation/presentation/widgets/creation_screen.dart';
 import 'package:arena_game/features/home/presentation/game_screen.dart';
 import 'package:arena_game/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';

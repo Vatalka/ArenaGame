@@ -209,8 +209,8 @@ return $default(_that.selectedAttack,_that.selectedBlock);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _BattleSelection implements BattleSelection {
-  const _BattleSelection({this.selectedAttack, this.selectedBlock});
+class _BattleSelection extends BattleSelection {
+  const _BattleSelection({this.selectedAttack, this.selectedBlock}): super._();
   factory _BattleSelection.fromJson(Map<String, dynamic> json) => _$BattleSelectionFromJson(json);
 
 @override final  Area? selectedAttack;

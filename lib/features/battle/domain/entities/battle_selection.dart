@@ -11,6 +11,10 @@ abstract class BattleSelection with _$BattleSelection {
   const factory BattleSelection({Area? selectedAttack, Area? selectedBlock}) =
   _BattleSelection;
 
+  const BattleSelection._();
+
+  bool get isTurnReady => selectedAttack != null && selectedBlock != null;
+
   factory BattleSelection.fromJson(Map<String, dynamic> json) =>
       _$BattleSelectionFromJson(json);
 }
