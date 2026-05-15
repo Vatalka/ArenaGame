@@ -7,15 +7,15 @@ class DealDamageUseCase {
   DealDamageUseCase(this.ref);
 
   void execute() {
-    final player = ref.read(characterProvider('Player'));
-    final enemy = ref.read(characterProvider('Enemy'));
+    final player = ref.read(characterProvider);
+    final enemy = ref.read(characterProvider);
 
     ref
-        .read(characterProvider('Player').notifier)
-        .dealDamage(enemy.strength * 2);
+        .read(characterProvider.notifier)
+        .dealDamage(enemy.strength);
     ref
-        .read(characterProvider('Enemy').notifier)
-        .dealDamage(player.strength * 2);
+        .read(characterProvider.notifier)
+        .dealDamage(player.strength);
   }
 }
 

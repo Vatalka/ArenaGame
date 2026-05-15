@@ -8,7 +8,8 @@ part of 'creation.dart';
 
 _Creation _$CreationFromJson(Map<String, dynamic> json) => _Creation(
   name: json['name'] as String? ?? '',
-  remainingPoints: (json['remainingPoints'] as num?)?.toInt() ?? 5,
+  remainingPoints:
+      (json['remainingPoints'] as num?)?.toInt() ?? Creation.initialStatValue,
   vitality: (json['vitality'] as num?)?.toInt() ?? Creation.initialStatValue,
   strength: (json['strength'] as num?)?.toInt() ?? Creation.initialStatValue,
 );

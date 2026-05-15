@@ -212,7 +212,7 @@ return $default(_that.name,_that.remainingPoints,_that.vitality,_that.strength);
 @JsonSerializable()
 
 class _Creation extends Creation {
-  const _Creation({this.name = '', this.remainingPoints = 5, this.vitality = Creation.initialStatValue, this.strength = Creation.initialStatValue}): super._();
+  const _Creation({this.name = '', this.remainingPoints = Creation.initialStatValue, this.vitality = Creation.initialStatValue, this.strength = Creation.initialStatValue}): super._();
   factory _Creation.fromJson(Map<String, dynamic> json) => _$CreationFromJson(json);
 
 @override@JsonKey() final  String name;

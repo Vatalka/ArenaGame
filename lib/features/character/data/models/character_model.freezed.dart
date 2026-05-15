@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'character.dart';
+part of 'character_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -11,38 +11,41 @@ part of 'character.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
+
 /// @nodoc
-mixin _$Character {
+mixin _$CharacterModel {
 
  String get id; String get name; int get currentHp; int get vitality; int get strength;
-/// Create a copy of Character
+/// Create a copy of CharacterModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$CharacterCopyWith<Character> get copyWith => _$CharacterCopyWithImpl<Character>(this as Character, _$identity);
+$CharacterModelCopyWith<CharacterModel> get copyWith => _$CharacterModelCopyWithImpl<CharacterModel>(this as CharacterModel, _$identity);
 
+  /// Serializes this CharacterModel to a JSON map.
+  Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Character&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.currentHp, currentHp) || other.currentHp == currentHp)&&(identical(other.vitality, vitality) || other.vitality == vitality)&&(identical(other.strength, strength) || other.strength == strength));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CharacterModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.currentHp, currentHp) || other.currentHp == currentHp)&&(identical(other.vitality, vitality) || other.vitality == vitality)&&(identical(other.strength, strength) || other.strength == strength));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,id,name,currentHp,vitality,strength);
 
 @override
 String toString() {
-  return 'Character(id: $id, name: $name, currentHp: $currentHp, vitality: $vitality, strength: $strength)';
+  return 'CharacterModel(id: $id, name: $name, currentHp: $currentHp, vitality: $vitality, strength: $strength)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $CharacterCopyWith<$Res>  {
-  factory $CharacterCopyWith(Character value, $Res Function(Character) _then) = _$CharacterCopyWithImpl;
+abstract mixin class $CharacterModelCopyWith<$Res>  {
+  factory $CharacterModelCopyWith(CharacterModel value, $Res Function(CharacterModel) _then) = _$CharacterModelCopyWithImpl;
 @useResult
 $Res call({
  String id, String name, int currentHp, int vitality, int strength
@@ -53,14 +56,14 @@ $Res call({
 
 }
 /// @nodoc
-class _$CharacterCopyWithImpl<$Res>
-    implements $CharacterCopyWith<$Res> {
-  _$CharacterCopyWithImpl(this._self, this._then);
+class _$CharacterModelCopyWithImpl<$Res>
+    implements $CharacterModelCopyWith<$Res> {
+  _$CharacterModelCopyWithImpl(this._self, this._then);
 
-  final Character _self;
-  final $Res Function(Character) _then;
+  final CharacterModel _self;
+  final $Res Function(CharacterModel) _then;
 
-/// Create a copy of Character
+/// Create a copy of CharacterModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? currentHp = null,Object? vitality = null,Object? strength = null,}) {
   return _then(_self.copyWith(
@@ -76,8 +79,8 @@ as int,
 }
 
 
-/// Adds pattern-matching-related methods to [Character].
-extension CharacterPatterns on Character {
+/// Adds pattern-matching-related methods to [CharacterModel].
+extension CharacterModelPatterns on CharacterModel {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -90,10 +93,10 @@ extension CharacterPatterns on Character {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Character value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _CharacterModel value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _Character() when $default != null:
+case _CharacterModel() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -112,10 +115,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Character value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _CharacterModel value)  $default,){
 final _that = this;
 switch (_that) {
-case _Character():
+case _CharacterModel():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -133,10 +136,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Character value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _CharacterModel value)?  $default,){
 final _that = this;
 switch (_that) {
-case _Character() when $default != null:
+case _CharacterModel() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -156,7 +159,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  int currentHp,  int vitality,  int strength)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _Character() when $default != null:
+case _CharacterModel() when $default != null:
 return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strength);case _:
   return orElse();
 
@@ -177,7 +180,7 @@ return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strengt
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  int currentHp,  int vitality,  int strength)  $default,) {final _that = this;
 switch (_that) {
-case _Character():
+case _CharacterModel():
 return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strength);case _:
   throw StateError('Unexpected subclass');
 
@@ -197,7 +200,7 @@ return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strengt
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  int currentHp,  int vitality,  int strength)?  $default,) {final _that = this;
 switch (_that) {
-case _Character() when $default != null:
+case _CharacterModel() when $default != null:
 return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strength);case _:
   return null;
 
@@ -207,11 +210,11 @@ return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strengt
 }
 
 /// @nodoc
+@JsonSerializable()
 
-
-class _Character extends Character {
-  const _Character({required this.id, required this.name, required this.currentHp, required this.vitality, required this.strength}): super._();
-  
+class _CharacterModel implements CharacterModel {
+  const _CharacterModel({required this.id, required this.name, required this.currentHp, required this.vitality, required this.strength});
+  factory _CharacterModel.fromJson(Map<String, dynamic> json) => _$CharacterModelFromJson(json);
 
 @override final  String id;
 @override final  String name;
@@ -219,34 +222,37 @@ class _Character extends Character {
 @override final  int vitality;
 @override final  int strength;
 
-/// Create a copy of Character
+/// Create a copy of CharacterModel
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$CharacterCopyWith<_Character> get copyWith => __$CharacterCopyWithImpl<_Character>(this, _$identity);
+_$CharacterModelCopyWith<_CharacterModel> get copyWith => __$CharacterModelCopyWithImpl<_CharacterModel>(this, _$identity);
 
-
+@override
+Map<String, dynamic> toJson() {
+  return _$CharacterModelToJson(this, );
+}
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Character&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.currentHp, currentHp) || other.currentHp == currentHp)&&(identical(other.vitality, vitality) || other.vitality == vitality)&&(identical(other.strength, strength) || other.strength == strength));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CharacterModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.currentHp, currentHp) || other.currentHp == currentHp)&&(identical(other.vitality, vitality) || other.vitality == vitality)&&(identical(other.strength, strength) || other.strength == strength));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,id,name,currentHp,vitality,strength);
 
 @override
 String toString() {
-  return 'Character(id: $id, name: $name, currentHp: $currentHp, vitality: $vitality, strength: $strength)';
+  return 'CharacterModel(id: $id, name: $name, currentHp: $currentHp, vitality: $vitality, strength: $strength)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$CharacterCopyWith<$Res> implements $CharacterCopyWith<$Res> {
-  factory _$CharacterCopyWith(_Character value, $Res Function(_Character) _then) = __$CharacterCopyWithImpl;
+abstract mixin class _$CharacterModelCopyWith<$Res> implements $CharacterModelCopyWith<$Res> {
+  factory _$CharacterModelCopyWith(_CharacterModel value, $Res Function(_CharacterModel) _then) = __$CharacterModelCopyWithImpl;
 @override @useResult
 $Res call({
  String id, String name, int currentHp, int vitality, int strength
@@ -257,17 +263,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$CharacterCopyWithImpl<$Res>
-    implements _$CharacterCopyWith<$Res> {
-  __$CharacterCopyWithImpl(this._self, this._then);
+class __$CharacterModelCopyWithImpl<$Res>
+    implements _$CharacterModelCopyWith<$Res> {
+  __$CharacterModelCopyWithImpl(this._self, this._then);
 
-  final _Character _self;
-  final $Res Function(_Character) _then;
+  final _CharacterModel _self;
+  final $Res Function(_CharacterModel) _then;
 
-/// Create a copy of Character
+/// Create a copy of CharacterModel
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? currentHp = null,Object? vitality = null,Object? strength = null,}) {
-  return _then(_Character(
+  return _then(_CharacterModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,currentHp: null == currentHp ? _self.currentHp : currentHp // ignore: cast_nullable_to_non_nullable

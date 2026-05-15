@@ -1,28 +1,30 @@
+import 'package:arena_game/features/character/data/models/character_model.dart';
+import 'package:hive/hive.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
-import 'package:arena_game/features/character/domain/repositories/character_repository.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:arena_game/features/character/domain/repositories/i_character_repository.dart';
 
-part 'character_repository_impl.g.dart';
+class CharacterRepositoryImpl implements ICharacterRepository {
+  static const String _characterBoxName = 'character_box';
+  static const String _characterKey = 'current_character';
 
-@Riverpod(keepAlive: true)
-CharacterRepository characterRepository(Ref ref) {
-  return CharacterRepositoryImpl();
-}
-
-class CharacterRepositoryImpl implements CharacterRepository {
   @override
-  Character getCharacter(String name) {
-    if (name == 'Enemy') {
-      int vit = 7;
-      return Character(
-        name: name,
-        currentHp: vit * 10,
-        vitality: vit,
-        strength: 3,
-        precision: 6,
-        agility: 4,
-      );
-    }
-    return Character.createDefault(name);
+  Future<void> saveCharacter(Character character) async {
+    final box = await Hive.openBox<Map>(_characterBoxName);
+    final characterModel = CharacterModel.fromEntity(character);
+    final characterMap = characterModel.toJson();
+    await box.put(_characterKey, characterMap);
+  }
+
+  @override
+  Character? getCharacter() {
+    final box = Hive.box<Map>(_characterBoxName);
+    final characterMap = box.get(_characterKey);
+
+    if (characterMap == null) return null;
+    final Map<String, dynamic> targetMap = Map<String, dynamic>.from(
+      characterMap,
+    );
+    final characterModel = CharacterModel.fromJson(targetMap);
+    return characterModel.toEntity();
   }
 }

@@ -2,7 +2,6 @@ import 'package:arena_game/features/battle/presentation/controller/battle_notifi
 import 'package:arena_game/features/battle/presentation/widgets/attack_confirm_button.dart';
 import 'package:arena_game/features/battle/presentation/widgets/restore_hp_button.dart';
 import 'package:arena_game/features/battle/presentation/widgets/selection_group.dart';
-import 'package:arena_game/features/character/presentation/controller/character_notifier.dart';
 import 'package:arena_game/features/character/presentation/widgets/character_stat_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -19,17 +18,7 @@ class GameScreen extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CharacterStatCard(
-                  character: ref.watch(characterProvider('Player')),
-                ),
-                CharacterStatCard(
-                  character: ref.watch(characterProvider('Enemy')),
-                ),
-              ],
-            ),
+            CharacterStatCard(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

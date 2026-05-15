@@ -8,6 +8,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'features/character/data/repositories/character_repository_impl.dart';
+import 'features/character/domain/repositories/i_character_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,18 +25,21 @@ void main() async {
 
   runApp(
     ProviderScope(
-      child: ModularApp(
-        module: AppModule(),
-        child: MyApp(),
-      ),
+      overrides: [
+        characterRepositoryProvider.overrideWith(
+          (ref) => CharacterRepositoryImpl(),
+        ),
+      ],
+      child: ModularApp(module: AppModule(), child: MyApp()),
     ),
   );
 }
 
-
 class AppModule extends Module {
   @override
-  void binds(i) {}
+  void binds(i) {
+    // i.addLazySingleton<ICharacterRepository>(CharacterRepositoryImpl.new);
+  }
 
   @override
   void routes(r) {
@@ -52,15 +57,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Arena game',
       theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-          extensions: [
-            GameColors(
-              healthHigh: Colors.green,
-              healthMedium: Colors.yellow,
-              healthLow: Colors.red,
-            ),
-          ]),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+        extensions: [
+          GameColors(
+            healthHigh: Colors.green,
+            healthMedium: Colors.yellow,
+            healthLow: Colors.red,
+          ),
+        ],
+      ),
       routerConfig: Modular.routerConfig,
     );
   }

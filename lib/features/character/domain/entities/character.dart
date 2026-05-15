@@ -2,35 +2,30 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'character.freezed.dart';
 
-part 'character.g.dart';
-
 @freezed
 abstract class Character with _$Character {
   const Character._();
 
   const factory Character({
+    required String id,
     required String name,
     required int currentHp,
     required int vitality,
     required int strength,
-    required int precision,
-    required int agility,
   }) = _Character;
 
   int get maxHp => vitality * 10;
 
-  factory Character.createDefault(String name) {
-    const defaultVitality = 5;
+  int get damage => strength;
+
+  factory Character.createDefault() {
+    const defaultValue = 10;
     return Character(
-      name: name,
-      currentHp: defaultVitality * 10,
-      vitality: defaultVitality,
-      strength: 5,
-      precision: 5,
-      agility: 5,
+      id: '',
+      name: '',
+      currentHp: defaultValue * 10,
+      vitality: defaultValue,
+      strength: defaultValue,
     );
   }
-
-  factory Character.fromJson(Map<String, dynamic> json) =>
-      _$CharacterFromJson(json);
 }

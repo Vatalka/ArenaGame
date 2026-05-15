@@ -1,6 +1,4 @@
-import 'package:arena_game/core/theme/game_colors.dart';
-import 'package:arena_game/features/character_creation/presentation/widgets/stat_selector_row.dart';
-import 'package:arena_game/features/character_creation/domain/entities/stat_type.dart';
+import 'package:arena_game/features/character/presentation/controller/character_notifier.dart';
 import 'package:arena_game/features/character_creation/presentation/controller/creation_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -19,91 +17,34 @@ class CreationScreen extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 16,
+            SizedBox(
+              width: 200,
+              child: TextField(
+                onChanged: (value) =>
+                    ref.read(creationProvider.notifier).updateName(value),
+                decoration: InputDecoration(
+                  labelText: 'Enter character name',
+                  filled: true,
+                  fillColor: Theme.of(
+                    context,
+                  ).colorScheme.surfaceContainerLowest,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                  child: SizedBox(
-                    width: 200,
-                    child: TextField(
-                      onChanged: (value) =>
-                          ref.read(creationProvider.notifier).updateName(value),
-                      decoration: InputDecoration(
-                        labelText: 'Enter character name',
-                        filled: true,
-                        fillColor: Theme.of(
-                          context,
-                        ).colorScheme.surfaceContainerLowest,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        errorText: state.nameError,
-                      ),
-                      maxLength: 15,
-                    ),
-                  ),
+                  errorText: state.nameError,
                 ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 8,
-                      horizontal: 16,
-                    ),
-                    child: Text.rich(
-                      TextSpan(
-                        text: 'Remaining points:  ',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: '${state.remainingPoints}',
-                            style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                              color: state.remainingPoints == 0
-                                  ? Theme.of(
-                                      context,
-                                    ).colorScheme.onSecondaryContainer
-                                  : Theme.of(
-                                      context,
-                                    ).extension<GameColors>()!.healthHigh,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Column(
-              children: StatType.values.map((type) {
-                return StatSelectorRow(
-                  type: type,
-                  value: ref.watch(
-                    creationProvider.select((s) => s.getValueFor(type)),
-                  ),
-                  onIncrement: state.canIncrement(type)
-                      ? () => ref
-                            .read(creationProvider.notifier)
-                            .incrementStat(type)
-                      : null,
-                  onDecrement: state.canDecrement(type)
-                      ? () => ref
-                            .read(creationProvider.notifier)
-                            .decrementStat(type)
-                      : null,
-                );
-              }).toList(),
+                maxLength: 15,
+              ),
             ),
             ElevatedButton(
               onPressed: state.isValid
-                  ? () => Modular.to.navigate('game')
+                  ? () {
+                      ref
+                          .read(characterProvider.notifier)
+                          .saveCreatedCharacter();
+                      Future.delayed(const Duration(seconds: 2));
+                      Modular.to.navigate('game');
+                    }
                   : null,
               child: const Text("Create"),
             ),
