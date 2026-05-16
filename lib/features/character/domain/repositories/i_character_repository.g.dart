@@ -55,14 +55,19 @@ final class CharacterRepositoryProvider
 }
 
 String _$characterRepositoryHash() =>
-    r'aa41082ed82be5bbd3a2045ce2b236facb6df06f';
+    r'6b1c046a07218444e65bc4aa9504b3903b2dfc02';
 
 @ProviderFor(activeCharacter)
 final activeCharacterProvider = ActiveCharacterProvider._();
 
 final class ActiveCharacterProvider
-    extends $FunctionalProvider<Character?, Character?, Character?>
-    with $Provider<Character?> {
+    extends
+        $FunctionalProvider<
+          AsyncValue<Character?>,
+          Character?,
+          FutureOr<Character?>
+        >
+    with $FutureModifier<Character?>, $FutureProvider<Character?> {
   ActiveCharacterProvider._()
     : super(
         from: null,
@@ -79,21 +84,13 @@ final class ActiveCharacterProvider
 
   @$internal
   @override
-  $ProviderElement<Character?> $createElement($ProviderPointer pointer) =>
-      $ProviderElement(pointer);
+  $FutureProviderElement<Character?> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
 
   @override
-  Character? create(Ref ref) {
+  FutureOr<Character?> create(Ref ref) {
     return activeCharacter(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(Character? value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<Character?>(value),
-    );
   }
 }
 
-String _$activeCharacterHash() => r'd195cdc6752903dc82d927524550ec3aa8172c9e';
+String _$activeCharacterHash() => r'2338c3b3718996c27e4b6046ab30d458d3d8843b';

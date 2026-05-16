@@ -9,7 +9,7 @@ class PlayerNotifier extends _$PlayerNotifier {
   @override
   Character build() {
     final initialData = ref.watch(activeCharacterProvider);
-    return initialData ?? Character.createDefault();
+    return initialData.value ?? Character.createDefault();
   }
 
   void dealDamage(int amount) {

@@ -14,7 +14,7 @@ class LoginScreen extends ConsumerWidget {
         child: ElevatedButton(
           onPressed: () async {
             await ref.read(authRepositoryProvider).signInAnonymously();
-            Modular.to.navigate('creation');
+            Modular.to.navigate('/');
           },
           child: const Text('Login as a Guest'),
         ),

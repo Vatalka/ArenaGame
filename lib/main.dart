@@ -1,5 +1,6 @@
 import 'package:arena_game/core/theme/game_colors.dart';
 import 'package:arena_game/features/auth/presentation/login_screen.dart';
+import 'package:arena_game/features/auth/presentation/splash_screen.dart';
 import 'package:arena_game/features/character/presentation/widgets/creation_screen.dart';
 import 'package:arena_game/features/home/presentation/game_screen.dart';
 import 'package:arena_game/firebase_options.dart';
@@ -46,9 +47,10 @@ class AppModule extends Module {
 
   @override
   void routes(r) {
-    r.child('/', child: (context) => LoginScreen());
-    r.child('/game', child: (context) => GameScreen());
-    r.child('/creation', child: (context) => CreationScreen());
+    r.child('/', child: (_) => SplashScreen());
+    r.child('/login', child: (_) => LoginScreen());
+    r.child('/creation', child: (_) => CreationScreen());
+    r.child('/game', child: (_) => GameScreen());
   }
 }
 

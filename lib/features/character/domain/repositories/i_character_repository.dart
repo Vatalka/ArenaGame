@@ -6,18 +6,18 @@ part 'i_character_repository.g.dart';
 abstract interface class ICharacterRepository {
   Future<void> saveCharacter(Character newCharacter);
 
-  Character? getCharacter();
+  Future<Character?> getCharacter();
 }
 
 @riverpod
 ICharacterRepository characterRepository(Ref ref) {
   throw UnimplementedError(
-    'Має бути перевизначений у main.dart',
+    'Override in main.dart',
   );
 }
 
 @riverpod
-Character? activeCharacter(Ref ref) {
+Future<Character?> activeCharacter(Ref ref) async {
   final repository = ref.watch(characterRepositoryProvider);
-  return repository.getCharacter();
+  return await repository.getCharacter();
 }

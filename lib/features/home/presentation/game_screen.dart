@@ -18,6 +18,11 @@ class GameScreen extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Placeholder(
+              fallbackWidth: 200,
+              fallbackHeight: 200,
+              child: Center(child: Text('Battle Log')),
+            ),
             Expanded(child: CharacterStatCard()),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -39,7 +44,7 @@ class GameScreen extends ConsumerWidget {
             AttackConfirmButton(),
             RestoreHpButton(),
             ElevatedButton(
-              onPressed: () => Modular.to.navigate('/'),
+              onPressed: () => Modular.to.navigate('/login'),
               child: Text('Back to Login Screen'),
             ),
           ],

@@ -16,8 +16,8 @@ class CharacterRepositoryImpl implements ICharacterRepository {
   }
 
   @override
-  Character? getCharacter() {
-    final box = Hive.box<Map>(_characterBoxName);
+  Future<Character?> getCharacter() async {
+    final box = await Hive.openBox<Map>(_characterBoxName);
     final characterMap = box.get(_characterKey);
 
     if (characterMap == null) return null;
