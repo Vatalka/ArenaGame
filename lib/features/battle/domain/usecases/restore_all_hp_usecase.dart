@@ -1,4 +1,4 @@
-import 'package:arena_game/features/character/presentation/controller/character_notifier.dart';
+import 'package:arena_game/features/battle/presentation/controller/player_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RestoreAllHpUseCase {
@@ -7,7 +7,7 @@ class RestoreAllHpUseCase {
   RestoreAllHpUseCase({required this.ref});
 
   void execute() {
-    ref.read(characterProvider.notifier).restoreHp();
+    ref.read(playerProvider.notifier).restoreHp();
   }
 }
 

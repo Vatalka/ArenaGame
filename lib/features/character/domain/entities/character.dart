@@ -21,11 +21,19 @@ abstract class Character with _$Character {
   factory Character.createDefault() {
     const defaultValue = 10;
     return Character(
-      id: '',
-      name: '',
+      id: 'Unknown',
+      name: 'Default',
       currentHp: defaultValue * 10,
       vitality: defaultValue,
       strength: defaultValue,
     );
+  }
+
+  bool get isValid => name.trim().length >= 3;
+
+  String? get nameError {
+    if (name.isEmpty) return null;
+    if (name.trim().length < 3) return 'Name is too short';
+    return null;
   }
 }

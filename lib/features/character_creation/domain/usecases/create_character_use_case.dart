@@ -1,3 +1,0 @@
-class CreateCharacterUseCase {
-  void execute() {}
-}

@@ -18,7 +18,7 @@ class GameScreen extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CharacterStatCard(),
+            Expanded(child: CharacterStatCard()),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

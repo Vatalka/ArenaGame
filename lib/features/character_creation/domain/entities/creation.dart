@@ -33,14 +33,6 @@ abstract class Creation with _$Creation {
     return getValueFor(type) > Creation.initialStatValue;
   }
 
-  bool get isValid => name.trim().length >= 3;
-
-  String? get nameError {
-    if (name.isEmpty) return null;
-    if (name.trim().length < 3) return 'Name is too short';
-    return null;
-  }
-
   factory Creation.fromJson(Map<String, dynamic> json) =>
       _$CreationFromJson(json);
 }

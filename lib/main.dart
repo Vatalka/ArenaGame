@@ -1,6 +1,6 @@
 import 'package:arena_game/core/theme/game_colors.dart';
 import 'package:arena_game/features/auth/presentation/login_screen.dart';
-import 'package:arena_game/features/character_creation/presentation/widgets/creation_screen.dart';
+import 'package:arena_game/features/character/presentation/widgets/creation_screen.dart';
 import 'package:arena_game/features/home/presentation/game_screen.dart';
 import 'package:arena_game/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -10,6 +10,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'features/character/data/repositories/character_repository_impl.dart';
 import 'features/character/domain/repositories/i_character_repository.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +23,8 @@ void main() async {
       print("Помилка ініціалізації Firebase: $e");
     }
   }
+
+  await Hive.initFlutter();
 
   runApp(
     ProviderScope(

@@ -1,5 +1,4 @@
 import 'package:arena_game/features/character/presentation/controller/character_notifier.dart';
-import 'package:arena_game/features/character_creation/presentation/controller/creation_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,7 +8,7 @@ class CreationScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(creationProvider);
+    final state = ref.watch(characterProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Creation Screen')),
@@ -21,7 +20,7 @@ class CreationScreen extends ConsumerWidget {
               width: 200,
               child: TextField(
                 onChanged: (value) =>
-                    ref.read(creationProvider.notifier).updateName(value),
+                    ref.read(characterProvider.notifier).updateName(value),
                 decoration: InputDecoration(
                   labelText: 'Enter character name',
                   filled: true,
@@ -38,11 +37,10 @@ class CreationScreen extends ConsumerWidget {
             ),
             ElevatedButton(
               onPressed: state.isValid
-                  ? () {
-                      ref
+                  ? () async {
+                      await ref
                           .read(characterProvider.notifier)
                           .saveCreatedCharacter();
-                      Future.delayed(const Duration(seconds: 2));
                       Modular.to.navigate('game');
                     }
                   : null,

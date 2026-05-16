@@ -12,17 +12,8 @@ class CharacterNotifier extends _$CharacterNotifier {
   Future<void> saveCreatedCharacter() async {
     final repository = ref.read(characterRepositoryProvider);
     await repository.saveCharacter(state);
+    ref.invalidate(activeCharacterProvider);
   }
 
   void updateName(String name) => state = state.copyWith(name: name);
-
-  void dealDamage(int damage) {
-    state = state.copyWith(
-      currentHp: (state.currentHp - damage).clamp(0, state.maxHp),
-    );
-  }
-
-  void restoreHp() {
-    state = state.copyWith(currentHp: state.maxHp);
-  }
 }
