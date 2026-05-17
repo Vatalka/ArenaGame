@@ -1,4 +1,5 @@
 import 'package:arena_game/features/battle/presentation/controller/battle_notifier.dart';
+import 'package:arena_game/features/battle/presentation/controller/player_notifier.dart';
 import 'package:arena_game/features/battle/presentation/widgets/attack_confirm_button.dart';
 import 'package:arena_game/features/battle/presentation/widgets/restore_hp_button.dart';
 import 'package:arena_game/features/battle/presentation/widgets/selection_group.dart';
@@ -23,7 +24,9 @@ class GameScreen extends ConsumerWidget {
               fallbackHeight: 200,
               child: Center(child: Text('Battle Log')),
             ),
-            Expanded(child: CharacterStatCard()),
+            Expanded(
+              child: CharacterStatCard(character: ref.watch(playerProvider)),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -44,8 +47,8 @@ class GameScreen extends ConsumerWidget {
             AttackConfirmButton(),
             RestoreHpButton(),
             ElevatedButton(
-              onPressed: () => Modular.to.navigate('/login'),
-              child: Text('Back to Login Screen'),
+              onPressed: () => Modular.to.navigate('/selection'),
+              child: Text('Back to Selection Screen'),
             ),
           ],
         ),

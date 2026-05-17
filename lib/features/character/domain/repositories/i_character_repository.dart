@@ -4,20 +4,28 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'i_character_repository.g.dart';
 
 abstract interface class ICharacterRepository {
-  Future<void> saveCharacter(Character newCharacter);
+  Future<void> saveCharacter(Character character);
 
   Future<Character?> getCharacter();
+
+  Future<List<Character>> getAllCharacters();
+
+  Future<void> deleteCharacter();
 }
 
 @riverpod
 ICharacterRepository characterRepository(Ref ref) {
-  throw UnimplementedError(
-    'Override in main.dart',
-  );
+  throw UnimplementedError('Override in main.dart');
 }
 
 @riverpod
 Future<Character?> activeCharacter(Ref ref) async {
   final repository = ref.watch(characterRepositoryProvider);
   return await repository.getCharacter();
+}
+
+@riverpod
+Future<List<Character>> allCharacters(Ref ref) async {
+  final repository = ref.watch(characterRepositoryProvider);
+  return await repository.getAllCharacters();
 }

@@ -94,3 +94,42 @@ final class ActiveCharacterProvider
 }
 
 String _$activeCharacterHash() => r'2338c3b3718996c27e4b6046ab30d458d3d8843b';
+
+@ProviderFor(allCharacters)
+final allCharactersProvider = AllCharactersProvider._();
+
+final class AllCharactersProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<Character>>,
+          List<Character>,
+          FutureOr<List<Character>>
+        >
+    with $FutureModifier<List<Character>>, $FutureProvider<List<Character>> {
+  AllCharactersProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'allCharactersProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$allCharactersHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<List<Character>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<Character>> create(Ref ref) {
+    return allCharacters(ref);
+  }
+}
+
+String _$allCharactersHash() => r'12cf163da6a74c3f8cedcf1907fac77cf2e98b12';

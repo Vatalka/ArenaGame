@@ -27,4 +27,19 @@ class CharacterRepositoryImpl implements ICharacterRepository {
     final characterModel = CharacterModel.fromJson(targetMap);
     return characterModel.toEntity();
   }
+
+  @override
+  Future<List<Character>> getAllCharacters() async {
+    final box = await Hive.openBox<Map>(_characterBoxName);
+    return box.values.map((data) {
+      final model = CharacterModel.fromJson(Map<String, dynamic>.from(data));
+      return model.toEntity();
+    }).toList();
+  }
+
+  @override
+  Future<void> deleteCharacter() async {
+    final box = await Hive.openBox(_characterBoxName);
+    await box.delete(_characterKey);
+  }
 }

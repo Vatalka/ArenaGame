@@ -9,6 +9,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'features/auth/presentation/character_selection_screen.dart';
 import 'features/character/data/repositories/character_repository_impl.dart';
 import 'features/character/domain/repositories/i_character_repository.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -47,8 +48,8 @@ class AppModule extends Module {
 
   @override
   void routes(r) {
-    r.child('/', child: (_) => SplashScreen());
-    r.child('/login', child: (_) => LoginScreen());
+    r.child('/', child: (_) => LoginScreen());
+    r.child('/selection', child: (_) => CharacterSelectionScreen());
     r.child('/creation', child: (_) => CreationScreen());
     r.child('/game', child: (_) => GameScreen());
   }
