@@ -41,7 +41,7 @@ class CreationScreen extends ConsumerWidget {
                       await ref
                           .read(characterProvider.notifier)
                           .saveCreatedCharacter();
-                      Modular.to.navigate('game');
+                      Modular.to.navigate('/selection');
                     }
                   : null,
               child: const Text("Create"),

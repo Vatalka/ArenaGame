@@ -1,6 +1,5 @@
 import 'package:arena_game/core/theme/game_colors.dart';
 import 'package:arena_game/features/auth/presentation/login_screen.dart';
-import 'package:arena_game/features/auth/presentation/splash_screen.dart';
 import 'package:arena_game/features/character/presentation/widgets/creation_screen.dart';
 import 'package:arena_game/features/home/presentation/game_screen.dart';
 import 'package:arena_game/firebase_options.dart';
@@ -30,11 +29,6 @@ void main() async {
 
   runApp(
     ProviderScope(
-      overrides: [
-        characterRepositoryProvider.overrideWith(
-          (ref) => CharacterRepositoryImpl(),
-        ),
-      ],
       child: ModularApp(module: AppModule(), child: MyApp()),
     ),
   );
@@ -43,7 +37,7 @@ void main() async {
 class AppModule extends Module {
   @override
   void binds(i) {
-    // i.addLazySingleton<ICharacterRepository>(CharacterRepositoryImpl.new);
+    i.addLazySingleton<ICharacterRepository>(CharacterRepositoryImpl.new);
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:arena_game/features/character/domain/entities/character.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'i_character_repository.g.dart';
@@ -15,7 +16,7 @@ abstract interface class ICharacterRepository {
 
 @riverpod
 ICharacterRepository characterRepository(Ref ref) {
-  throw UnimplementedError('Override in main.dart');
+  return Modular.get<ICharacterRepository>();
 }
 
 @riverpod

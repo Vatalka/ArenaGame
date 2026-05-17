@@ -26,7 +26,7 @@ class SelectionGroup extends StatelessWidget {
               padding: const EdgeInsets.all(2.0),
               child: ChoiceChip(
                 label: SizedBox(
-                  width: MediaQuery.of(context).size.width / 3,
+                  width: MediaQuery.of(context).size.width / 4,
                   child: Center(child: Text(area.name)),
                 ),
                 selected: isSelected,

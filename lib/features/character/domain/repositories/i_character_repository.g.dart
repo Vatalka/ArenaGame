@@ -55,7 +55,7 @@ final class CharacterRepositoryProvider
 }
 
 String _$characterRepositoryHash() =>
-    r'6b1c046a07218444e65bc4aa9504b3903b2dfc02';
+    r'83393d6d772896f641b6f9d8a831d955cad5adb2';
 
 @ProviderFor(activeCharacter)
 final activeCharacterProvider = ActiveCharacterProvider._();

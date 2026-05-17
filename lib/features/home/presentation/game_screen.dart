@@ -20,8 +20,7 @@ class GameScreen extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Placeholder(
-              fallbackWidth: 200,
-              fallbackHeight: 200,
+              fallbackHeight: 100,
               child: Center(child: Text('Battle Log')),
             ),
             Expanded(
@@ -49,6 +48,14 @@ class GameScreen extends ConsumerWidget {
             ElevatedButton(
               onPressed: () => Modular.to.navigate('/selection'),
               child: Text('Back to Selection Screen'),
+            ),
+            ElevatedButton(
+              onPressed: () => Modular.to.navigate('/creation'),
+              child: Text('Back to Creation Screen'),
+            ),
+            ElevatedButton(
+              onPressed: () => Modular.to.navigate('/'),
+              child: Text('Back to Login Screen'),
             ),
           ],
         ),
