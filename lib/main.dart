@@ -8,6 +8,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'features/auth/data/auth_repository_impl.dart';
+import 'features/auth/domain/i_auth_repository.dart';
 import 'features/auth/presentation/character_selection_screen.dart';
 import 'features/character/data/repositories/character_repository_impl.dart';
 import 'features/character/domain/repositories/i_character_repository.dart';
@@ -38,6 +40,7 @@ class AppModule extends Module {
   @override
   void binds(i) {
     i.addLazySingleton<ICharacterRepository>(CharacterRepositoryImpl.new);
+    i.addLazySingleton<IAuthRepository>(AuthRepositoryImpl.new);
   }
 
   @override
