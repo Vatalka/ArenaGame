@@ -1,4 +1,3 @@
-import 'package:arena_game/features/character/domain/repositories/i_character_repository.dart';
 import 'package:arena_game/features/character/presentation/controller/character_notifier.dart';
 import 'package:arena_game/features/character/presentation/widgets/character_stat_card.dart';
 import 'package:flutter/foundation.dart';
@@ -38,7 +37,7 @@ class SelectionScreen extends ConsumerWidget {
                           .deleteCharacter();
                     } catch (e) {
                       if (kDebugMode) {
-                        print('Не вдалося видалити персонажа: $e');
+                        print('Unable to delete character: $e');
                       }
                     }
                   },

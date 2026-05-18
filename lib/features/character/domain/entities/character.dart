@@ -22,7 +22,7 @@ abstract class Character with _$Character {
     const defaultValue = 10;
     return Character(
       id: 'Unknown',
-      name: 'Default',
+      name: '',
       currentHp: defaultValue * 10,
       vitality: defaultValue,
       strength: defaultValue,
