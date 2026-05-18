@@ -39,7 +39,7 @@ class CharacterRepositoryImpl implements ICharacterRepository {
 
   @override
   Future<void> deleteCharacter() async {
-    final box = await Hive.openBox(_characterBoxName);
+    final box = await Hive.openBox<Map>(_characterBoxName);
     await box.delete(_characterKey);
   }
 }

@@ -4,7 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'player_notifier.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class PlayerNotifier extends _$PlayerNotifier {
   @override
   Character build() {
@@ -20,10 +20,5 @@ class PlayerNotifier extends _$PlayerNotifier {
 
   void restoreHp() {
     state = state.copyWith(currentHp: state.maxHp);
-  }
-
-  Future<void> syncWithDatabase() async {
-    final repository = ref.read(characterRepositoryProvider);
-    await repository.saveCharacter(state);
   }
 }

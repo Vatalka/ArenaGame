@@ -25,8 +25,3 @@ Future<Character?> activeCharacter(Ref ref) async {
   return await repository.getCharacter();
 }
 
-@riverpod
-Future<List<Character>> allCharacters(Ref ref) async {
-  final repository = ref.watch(characterRepositoryProvider);
-  return await repository.getAllCharacters();
-}

@@ -1,11 +1,13 @@
 import 'package:arena_game/features/character/domain/repositories/i_character_repository.dart';
+import 'package:arena_game/features/character/presentation/controller/character_notifier.dart';
 import 'package:arena_game/features/character/presentation/widgets/character_stat_card.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CharacterSelectionScreen extends ConsumerWidget {
-  const CharacterSelectionScreen({super.key});
+class SelectionScreen extends ConsumerWidget {
+  const SelectionScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,16 +27,26 @@ class CharacterSelectionScreen extends ConsumerWidget {
             itemCount: characters.length,
             itemBuilder: (context, index) {
               final char = characters[index];
-              return Card(
-                margin: const EdgeInsets.all(8.0),
-                child: ListTile(
-                  contentPadding: const EdgeInsets.all(16.0),
-                  title: CharacterStatCard(character: char),
-                  trailing: const Icon(Icons.play_arrow),
-                  onTap: () {
-                    Modular.to.navigate('/game');
+              return ListTile(
+                contentPadding: const EdgeInsets.all(8.0),
+                title: CharacterStatCard(character: char),
+                trailing: IconButton(
+                  onPressed: () async {
+                    try {
+                      await ref
+                          .read(allCharactersProvider.notifier)
+                          .deleteCharacter();
+                    } catch (e) {
+                      if (kDebugMode) {
+                        print('Не вдалося видалити персонажа: $e');
+                      }
+                    }
                   },
+                  icon: Icon(Icons.delete),
                 ),
+                onTap: () {
+                  Modular.to.navigate('/game');
+                },
               );
             },
           );

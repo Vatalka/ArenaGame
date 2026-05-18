@@ -1,19 +1,18 @@
-import 'package:arena_game/features/battle/domain/usecases/restore_all_hp_usecase.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class RestoreHpButton extends ConsumerWidget {
-  const RestoreHpButton({super.key});
+class RestoreHpButton extends StatelessWidget {
+  final VoidCallback onTap;
+
+  const RestoreHpButton({super.key, required this.onTap});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.all(10),
-        minimumSize: Size(0, 0),
         shape: const CircleBorder(),
       ),
-      onPressed: () => ref.read(restoreAllHpUseCaseProvider).execute(),
+      onPressed: onTap,
       child: Icon(Icons.refresh, size: 24),
     );
   }

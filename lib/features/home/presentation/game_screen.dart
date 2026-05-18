@@ -20,12 +20,10 @@ class GameScreen extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Placeholder(
-              fallbackHeight: 100,
+              fallbackHeight: 150,
               child: Center(child: Text('Battle Log')),
             ),
-            Expanded(
-              child: CharacterStatCard(character: ref.watch(playerProvider)),
-            ),
+            CharacterStatCard(character: ref.watch(playerProvider)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -44,7 +42,11 @@ class GameScreen extends ConsumerWidget {
               ],
             ),
             AttackConfirmButton(),
-            RestoreHpButton(),
+            RestoreHpButton(
+              onTap: () {
+                ref.read(playerProvider.notifier).restoreHp();
+              },
+            ),
             ElevatedButton(
               onPressed: () => Modular.to.navigate('/selection'),
               child: Text('Back to Selection Screen'),

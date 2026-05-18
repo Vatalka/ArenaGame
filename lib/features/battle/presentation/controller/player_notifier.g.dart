@@ -20,7 +20,7 @@ final class PlayerNotifierProvider
         argument: null,
         retry: null,
         name: r'playerProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -41,7 +41,7 @@ final class PlayerNotifierProvider
   }
 }
 
-String _$playerNotifierHash() => r'72a50c49edcfafeef8b6b6a93a02d1593a3c5483';
+String _$playerNotifierHash() => r'69c9bc5983db656558ae7d25f041937b46a6133b';
 
 abstract class _$PlayerNotifier extends $Notifier<Character> {
   Character build();

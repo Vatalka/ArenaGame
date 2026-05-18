@@ -4,7 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'character_notifier.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 class CharacterNotifier extends _$CharacterNotifier {
   @override
   Character build() => Character.createDefault();
@@ -16,4 +16,20 @@ class CharacterNotifier extends _$CharacterNotifier {
   }
 
   void updateName(String name) => state = state.copyWith(name: name);
+}
+
+@riverpod
+class AllCharacters extends _$AllCharacters {
+  @override
+  FutureOr<List<Character>> build() async {
+    final repository = ref.watch(characterRepositoryProvider);
+    return await repository.getAllCharacters();
+  }
+
+  Future<void> deleteCharacter() async {
+    final repository = ref.read(characterRepositoryProvider);
+    await repository.deleteCharacter();
+    ref.invalidateSelf();
+    ref.invalidate(activeCharacterProvider);
+  }
 }
