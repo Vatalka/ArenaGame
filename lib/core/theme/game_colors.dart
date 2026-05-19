@@ -31,3 +31,4 @@ class GameColors extends ThemeExtension<GameColors> {
     );
   }
 }
+
