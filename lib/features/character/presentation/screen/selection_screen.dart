@@ -1,3 +1,4 @@
+import 'package:arena_game/features/battle/presentation/controller/player_notifier.dart';
 import 'package:arena_game/features/character/presentation/controller/character_notifier.dart';
 import 'package:arena_game/features/character/presentation/widgets/character_stat_card.dart';
 import 'package:flutter/foundation.dart';
@@ -11,6 +12,7 @@ class SelectionScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final charactersAsync = ref.watch(allCharactersProvider);
+    final activeChar = ref.watch(playerProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text('SelectionScreen')),
@@ -25,7 +27,10 @@ class SelectionScreen extends ConsumerWidget {
           return ListView.builder(
             itemCount: characters.length,
             itemBuilder: (context, index) {
-              final char = characters[index];
+              var char = characters[index];
+              if (char.id == activeChar.id) {
+                char = activeChar;
+              }
               return ListTile(
                 contentPadding: const EdgeInsets.all(8.0),
                 title: CharacterStatCard(character: char),
