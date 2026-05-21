@@ -12,7 +12,6 @@ class SelectionScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final charactersAsync = ref.watch(selectionControllerProvider);
-    final activeCharacter = ref.watch(playerProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text('SelectionScreen')),
@@ -28,9 +27,6 @@ class SelectionScreen extends ConsumerWidget {
             itemCount: characters.length,
             itemBuilder: (context, index) {
               var char = characters[index];
-              if (char.id == activeCharacter.id) {
-                char = activeCharacter;
-              }
               return ListTile(
                 contentPadding: const EdgeInsets.all(8.0),
                 title: CharacterStatCard(character: char),
