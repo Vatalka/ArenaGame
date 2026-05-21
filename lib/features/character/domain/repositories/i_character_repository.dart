@@ -5,23 +5,16 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'i_character_repository.g.dart';
 
 abstract interface class ICharacterRepository {
-  Future<void> saveCharacter(Character character);
+  Future<void> saveCharacter(Character character, int slot);
 
-  Future<Character?> getCharacter();
+  Future<Character?> getCharacter(int slot);
 
   Future<List<Character>> getAllCharacters();
 
-  Future<void> deleteCharacter();
+  Future<void> deleteCharacter(int slot);
 }
 
 @riverpod
 ICharacterRepository characterRepository(Ref ref) {
   return Modular.get<ICharacterRepository>();
 }
-
-@riverpod
-Future<Character?> activeCharacter(Ref ref) async {
-  final repository = ref.watch(characterRepositoryProvider);
-  return await repository.getCharacter();
-}
-

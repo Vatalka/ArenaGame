@@ -13,6 +13,7 @@ class GameScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final activeChar = ref.watch(playerProvider);
     return Scaffold(
       appBar: AppBar(title: Text('Game Screen')),
       body: Center(
@@ -23,7 +24,7 @@ class GameScreen extends ConsumerWidget {
               fallbackHeight: 150,
               child: Center(child: Text('Battle Log')),
             ),
-            CharacterStatCard(character: ref.watch(playerProvider)),
+            CharacterStatCard(character: activeChar),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -52,7 +53,7 @@ class GameScreen extends ConsumerWidget {
               child: Text('Back to Selection Screen'),
             ),
             ElevatedButton(
-              onPressed: () => Modular.to.navigate('/creation'),
+              onPressed: () => Modular.to.navigate('/creation', arguments: 1),
               child: Text('Back to Creation Screen'),
             ),
             ElevatedButton(

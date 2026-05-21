@@ -1,5 +1,6 @@
 import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:arena_game/features/character/domain/repositories/i_character_repository.dart';
+import 'package:arena_game/features/character/presentation/controller/active_character_notifier.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'character_notifier.g.dart';
@@ -9,10 +10,10 @@ class CharacterNotifier extends _$CharacterNotifier {
   @override
   Character build() => Character.createDefault();
 
-  Future<void> saveCreatedCharacter() async {
+  Future<void> saveCharacter(int slot) async {
     final repository = ref.read(characterRepositoryProvider);
-    await repository.saveCharacter(state);
-    ref.invalidate(activeCharacterProvider);
+    await repository.saveCharacter(state, slot);
+    ref.invalidate(allCharactersProvider);
   }
 
   void updateName(String name) => state = state.copyWith(name: name);
@@ -26,9 +27,9 @@ class AllCharacters extends _$AllCharacters {
     return await repository.getAllCharacters();
   }
 
-  Future<void> deleteCharacter() async {
+  Future<void> deleteCharacter(int slot) async {
     final repository = ref.read(characterRepositoryProvider);
-    await repository.deleteCharacter();
+    await repository.deleteCharacter(slot);
     ref.invalidateSelf();
     ref.invalidate(activeCharacterProvider);
   }

@@ -1,5 +1,5 @@
 import 'package:arena_game/features/character/domain/entities/character.dart';
-import 'package:arena_game/features/character/domain/repositories/i_character_repository.dart';
+import 'package:arena_game/features/character/presentation/controller/active_character_notifier.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'player_notifier.g.dart';
@@ -9,7 +9,7 @@ class PlayerNotifier extends _$PlayerNotifier {
   @override
   Character build() {
     final initialData = ref.watch(activeCharacterProvider);
-    return initialData.value ?? Character.createDefault();
+    return initialData ?? Character.createDefault();
   }
 
   void dealDamage(int amount) {

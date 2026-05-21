@@ -41,7 +41,7 @@ final class CharacterNotifierProvider
   }
 }
 
-String _$characterNotifierHash() => r'd30c170488edad3e308517a9034b8aef5473d942';
+String _$characterNotifierHash() => r'a5f07355d0804edc31de76a41383a2b4d3992d81';
 
 abstract class _$CharacterNotifier extends $Notifier<Character> {
   Character build();
@@ -85,7 +85,7 @@ final class AllCharactersProvider
   AllCharacters create() => AllCharacters();
 }
 
-String _$allCharactersHash() => r'cccd21f160edc16a72abdda564b2826fa5b88dee';
+String _$allCharactersHash() => r'86fcdaca1a00a53e4e2f6a724da216c70ff752e5';
 
 abstract class _$AllCharacters extends $AsyncNotifier<List<Character>> {
   FutureOr<List<Character>> build();
