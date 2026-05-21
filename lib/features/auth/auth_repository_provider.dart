@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'auth_provider.g.dart';
+part 'auth_repository_provider.g.dart';
 
 @riverpod
 IAuthRepository authRepository(Ref ref) {

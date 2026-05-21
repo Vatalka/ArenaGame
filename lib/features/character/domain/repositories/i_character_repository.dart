@@ -1,5 +1,5 @@
+import 'package:arena_game/features/character/data/repositories/character_repository_impl.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'i_character_repository.g.dart';
@@ -16,7 +16,7 @@ abstract interface class ICharacterRepository {
 
 @riverpod
 ICharacterRepository characterRepository(Ref ref) {
-  return Modular.get<ICharacterRepository>();
+  return CharacterRepositoryImpl();
 }
 
 @riverpod

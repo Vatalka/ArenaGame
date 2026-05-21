@@ -1,5 +1,5 @@
 import 'package:arena_game/features/battle/presentation/controller/player_notifier.dart';
-import 'package:arena_game/features/character/presentation/controller/character_notifier.dart';
+import 'package:arena_game/features/character/presentation/controller/selection_controller.dart';
 import 'package:arena_game/features/character/presentation/widgets/character_stat_card.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +11,8 @@ class SelectionScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final charactersAsync = ref.watch(allCharactersProvider);
-    final activeChar = ref.watch(playerProvider);
+    final charactersAsync = ref.watch(selectionControllerProvider);
+    final activeCharacter = ref.watch(playerProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text('SelectionScreen')),
@@ -28,8 +28,8 @@ class SelectionScreen extends ConsumerWidget {
             itemCount: characters.length,
             itemBuilder: (context, index) {
               var char = characters[index];
-              if (char.id == activeChar.id) {
-                char = activeChar;
+              if (char.id == activeCharacter.id) {
+                char = activeCharacter;
               }
               return ListTile(
                 contentPadding: const EdgeInsets.all(8.0),
@@ -38,8 +38,8 @@ class SelectionScreen extends ConsumerWidget {
                   onPressed: () async {
                     try {
                       await ref
-                          .read(allCharactersProvider.notifier)
-                          .deleteCharacter();
+                          .read(selectionControllerProvider.notifier)
+                          .removeCharacter();
                     } catch (e) {
                       if (kDebugMode) {
                         print('Unable to delete character: $e');
