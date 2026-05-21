@@ -7,21 +7,14 @@ part 'i_character_repository.g.dart';
 abstract interface class ICharacterRepository {
   Future<void> saveCharacter(Character character);
 
-  Future<Character?> getCharacter();
+  Future<Character?> getCharacter(String id);
 
   Future<List<Character>> getAllCharacters();
 
-  Future<void> deleteCharacter();
+  Future<void> deleteCharacter(String id);
 }
 
 @riverpod
 ICharacterRepository characterRepository(Ref ref) {
   return CharacterRepositoryImpl();
 }
-
-@riverpod
-Future<Character?> activeCharacter(Ref ref) async {
-  final repository = ref.watch(characterRepositoryProvider);
-  return await repository.getCharacter();
-}
-

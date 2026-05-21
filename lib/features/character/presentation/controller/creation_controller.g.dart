@@ -42,7 +42,7 @@ final class CreationControllerProvider
 }
 
 String _$creationControllerHash() =>
-    r'60f33292135efa10bf7676979ef2605f3d2210ef';
+    r'35995c62d380abbb2d08230e3e1bd07357b2e993';
 
 abstract class _$CreationController extends $Notifier<Character> {
   Character build();

@@ -21,7 +21,7 @@ abstract class Character with _$Character {
   factory Character.createDefault() {
     const defaultValue = 10;
     return Character(
-      id: 'Unknown',
+      id: DateTime.now().microsecondsSinceEpoch.toString(),
       name: '',
       currentHp: defaultValue * 10,
       vitality: defaultValue,

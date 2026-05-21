@@ -39,7 +39,7 @@ class SelectionScreen extends ConsumerWidget {
                     try {
                       await ref
                           .read(selectionControllerProvider.notifier)
-                          .removeCharacter();
+                          .removeCharacter(char.id);
                     } catch (e) {
                       if (kDebugMode) {
                         print('Unable to delete character: $e');
@@ -49,6 +49,7 @@ class SelectionScreen extends ConsumerWidget {
                   icon: Icon(Icons.delete),
                 ),
                 onTap: () {
+                  ref.read(playerProvider.notifier).selectCharacter(char);
                   Modular.to.navigate('/game');
                 },
               );
