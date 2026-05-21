@@ -1,34 +1,14 @@
-import 'package:arena_game/features/character/presentation/controller/creation_controller.dart';
+import 'package:arena_game/features/character/presentation/controller/character_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CreationScreen extends ConsumerStatefulWidget {
+class CreationScreen extends ConsumerWidget {
   const CreationScreen({super.key});
 
   @override
-  ConsumerState<CreationScreen> createState() => _CreationScreenState();
-}
-
-class _CreationScreenState extends ConsumerState<CreationScreen> {
-  late final TextEditingController _nameController;
-
-  @override
-  void initState() {
-    super.initState();
-    _nameController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _nameController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final controller = ref.read(creationControllerProvider.notifier);
-    final state = ref.watch(creationControllerProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(characterProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Creation Screen')),
@@ -39,8 +19,8 @@ class _CreationScreenState extends ConsumerState<CreationScreen> {
             SizedBox(
               width: 200,
               child: TextField(
-                controller: _nameController,
-                onChanged: (value) => controller.updateName(value),
+                onChanged: (value) =>
+                    ref.read(characterProvider.notifier).updateName(value),
                 decoration: InputDecoration(
                   labelText: 'Enter character name',
                   filled: true,
@@ -58,7 +38,9 @@ class _CreationScreenState extends ConsumerState<CreationScreen> {
             ElevatedButton(
               onPressed: state.isValid
                   ? () async {
-                      await controller.createAndSave();
+                      await ref
+                          .read(characterProvider.notifier)
+                          .saveCreatedCharacter();
                       Modular.to.navigate('/selection');
                     }
                   : null,
