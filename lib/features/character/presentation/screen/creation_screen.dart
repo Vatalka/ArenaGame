@@ -8,7 +8,6 @@ class CreationScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final int slot = Modular.args.data;
     final state = ref.watch(characterProvider);
 
     return Scaffold(
@@ -41,7 +40,7 @@ class CreationScreen extends ConsumerWidget {
                   ? () async {
                       await ref
                           .read(characterProvider.notifier)
-                          .saveCharacter(slot);
+                          .saveCreatedCharacter();
                       Modular.to.navigate('/selection');
                     }
                   : null,

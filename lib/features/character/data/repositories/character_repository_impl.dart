@@ -4,25 +4,28 @@ import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:arena_game/features/character/domain/repositories/i_character_repository.dart';
 
 class CharacterRepositoryImpl implements ICharacterRepository {
-  static const String _characterBox = 'character_box';
+  static const String _characterBoxName = 'character_box';
 
   @override
-  Future<void> saveCharacter(Character character, int slot) async {
-    if (slot < 1 || slot > 3) {
-      throw Exception('Only slots 1 to 3 are allowed');
+  Future<void> saveCharacter(Character character) async {
+    final box = await Hive.openBox<Map>(_characterBoxName);
+
+    if (box.length >= 3 && !box.containsKey(character.id)) {
+      throw Exception('Character limit reached (maximum 3)!');
     }
-    final box = await Hive.openBox<Map>(_characterBox);
+
     final characterModel = CharacterModel.fromEntity(character);
     final characterMap = characterModel.toJson();
-    await box.put('character_$slot', characterMap);
+    await box.put(character.id, characterMap);
   }
 
   @override
-  Future<Character?> getCharacter(int slot) async {
-    final box = await Hive.openBox<Map>(_characterBox);
-    final characterMap = box.get('character_$slot');
+  Future<Character?> getCharacter(String id) async {
+    final box = await Hive.openBox<Map>(_characterBoxName);
+    final characterMap = box.get(id);
 
     if (characterMap == null) return null;
+
     final Map<String, dynamic> targetMap = Map<String, dynamic>.from(
       characterMap,
     );
@@ -32,7 +35,7 @@ class CharacterRepositoryImpl implements ICharacterRepository {
 
   @override
   Future<List<Character>> getAllCharacters() async {
-    final box = await Hive.openBox<Map>(_characterBox);
+    final box = await Hive.openBox<Map>(_characterBoxName);
     return box.values.map((data) {
       final model = CharacterModel.fromJson(Map<String, dynamic>.from(data));
       return model.toEntity();
@@ -40,8 +43,8 @@ class CharacterRepositoryImpl implements ICharacterRepository {
   }
 
   @override
-  Future<void> deleteCharacter(int slot) async {
-    final box = await Hive.openBox<Map>(_characterBox);
-    await box.delete('character_$slot');
+  Future<void> deleteCharacter(String id) async {
+    final box = await Hive.openBox<Map>(_characterBoxName);
+    await box.delete(id);
   }
 }

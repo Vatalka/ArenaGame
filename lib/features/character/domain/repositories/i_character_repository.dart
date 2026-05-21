@@ -1,20 +1,20 @@
+import 'package:arena_game/features/character/data/repositories/character_repository_impl.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'i_character_repository.g.dart';
 
 abstract interface class ICharacterRepository {
-  Future<void> saveCharacter(Character character, int slot);
+  Future<void> saveCharacter(Character character);
 
-  Future<Character?> getCharacter(int slot);
+  Future<Character?> getCharacter(String id);
 
   Future<List<Character>> getAllCharacters();
 
-  Future<void> deleteCharacter(int slot);
+  Future<void> deleteCharacter(String id);
 }
 
 @riverpod
 ICharacterRepository characterRepository(Ref ref) {
-  return Modular.get<ICharacterRepository>();
+  return CharacterRepositoryImpl();
 }
