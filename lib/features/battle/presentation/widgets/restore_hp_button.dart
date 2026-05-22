@@ -9,7 +9,6 @@ class RestoreHpButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.all(10),
         shape: const CircleBorder(),
       ),
       onPressed: onTap,

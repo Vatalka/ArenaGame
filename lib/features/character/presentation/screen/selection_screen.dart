@@ -23,33 +23,75 @@ class SelectionScreen extends ConsumerWidget {
             });
             return const Center(child: CircularProgressIndicator());
           }
-          return ListView.builder(
-            itemCount: characters.length,
-            itemBuilder: (context, index) {
-              var char = characters[index];
-              return ListTile(
-                contentPadding: const EdgeInsets.all(8.0),
-                title: CharacterStatCard(character: char),
-                trailing: IconButton(
-                  onPressed: () async {
-                    try {
-                      await ref
-                          .read(selectionControllerProvider.notifier)
-                          .removeCharacter(char.id);
-                    } catch (e) {
-                      if (kDebugMode) {
-                        print('Unable to delete character: $e');
-                      }
-                    }
+          final isLimitReached = characters.length >= 3;
+          return Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: characters.length,
+                  itemBuilder: (context, index) {
+                    var char = characters[index];
+                    return ListTile(
+                      title: CharacterStatCard(character: char),
+                      trailing: IconButton(
+                        onPressed: () async {
+                          try {
+                            await ref
+                                .read(selectionControllerProvider.notifier)
+                                .removeCharacter(char.id);
+                          } catch (e) {
+                            if (kDebugMode) {
+                              print('Unable to delete character: $e');
+                            }
+                          }
+                        },
+                        icon: Icon(Icons.delete),
+                      ),
+                      onTap: () {
+                        ref.read(playerProvider.notifier).selectCharacter(char);
+                        Modular.to.navigate('/game');
+                      },
+                    );
                   },
-                  icon: Icon(Icons.delete),
                 ),
-                onTap: () {
-                  ref.read(playerProvider.notifier).selectCharacter(char);
-                  Modular.to.navigate('/game');
-                },
-              );
-            },
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  // height: 50,
+                  child: ElevatedButton(
+                    onPressed: isLimitReached
+                        ? () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: const Text(
+                                  'Maximum number of Characters 3',
+                                ),
+                                backgroundColor: Theme.of(
+                                  context,
+                                ).colorScheme.error,
+                                duration: const Duration(seconds: 2),
+                              ),
+                            );
+                          }
+                        : () {
+                            Modular.to.navigate('/creation');
+                          },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: isLimitReached ? Colors.grey : null,
+                    ),
+                    child: const Text(
+                      'Create new Character',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           );
         },
         loading: () => const Center(child: CircularProgressIndicator()),

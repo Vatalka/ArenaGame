@@ -20,9 +20,8 @@ class GameScreen extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Placeholder(
-              fallbackHeight: 150,
-              child: Center(child: Text('Battle Log')),
+            Expanded(
+              child: Placeholder(child: Center(child: Text('Battle Log'))),
             ),
             CharacterStatCard(character: activeChar),
             Row(
@@ -48,17 +47,18 @@ class GameScreen extends ConsumerWidget {
                 ref.read(playerProvider.notifier).restoreHp();
               },
             ),
-            ElevatedButton(
-              onPressed: () => Modular.to.navigate('/selection'),
-              child: Text('Back to Selection Screen'),
-            ),
-            ElevatedButton(
-              onPressed: () => Modular.to.navigate('/creation', arguments: 1),
-              child: Text('Back to Creation Screen'),
-            ),
-            ElevatedButton(
-              onPressed: () => Modular.to.navigate('/'),
-              child: Text('Back to Login Screen'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () => Modular.to.navigate('/selection'),
+                  child: Text('Selection\nScreen'),
+                ),
+                ElevatedButton(
+                  onPressed: () => Modular.to.navigate('/'),
+                  child: Text('Login\nScreen'),
+                ),
+              ],
             ),
           ],
         ),

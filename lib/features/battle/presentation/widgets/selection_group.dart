@@ -16,8 +16,9 @@ class SelectionGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 2,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(4.0),
         child: Column(
           children: [
             Text(title),
@@ -28,6 +29,7 @@ class SelectionGroup extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: ChoiceChip(
+                    pressElevation: 2,
                     label: SizedBox(
                       width: MediaQuery.of(context).size.width / 4,
                       child: Center(child: Text(area.name)),
@@ -36,7 +38,7 @@ class SelectionGroup extends StatelessWidget {
                     onSelected: (bool selected) {
                       onSelected(selected ? area : null);
                     },
-                    elevation: 2,
+                    elevation: 4,
                     showCheckmark: false,
                   ),
                 );
