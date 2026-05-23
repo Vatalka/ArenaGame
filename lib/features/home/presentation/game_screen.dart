@@ -14,8 +14,8 @@ class GameScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final activeChar = ref.watch(playerProvider);
+    final bot = ref.watch(playerProvider);
     return Scaffold(
-      appBar: AppBar(title: Text('Game Screen')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -23,7 +23,13 @@ class GameScreen extends ConsumerWidget {
             Expanded(
               child: Placeholder(child: Center(child: Text('Battle Log'))),
             ),
-            CharacterCard(character: activeChar),
+            Row(
+              children: [
+                Expanded(child: CharacterCard(character: activeChar)),
+                Expanded(child: CharacterCard(character: bot)),
+              ],
+            ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -52,11 +58,11 @@ class GameScreen extends ConsumerWidget {
               children: [
                 ElevatedButton(
                   onPressed: () => Modular.to.navigate('/selection'),
-                  child: Text('Selection\nScreen'),
+                  child: Text('Select'),
                 ),
                 ElevatedButton(
                   onPressed: () => Modular.to.navigate('/'),
-                  child: Text('Login\nScreen'),
+                  child: Text('Login'),
                 ),
               ],
             ),

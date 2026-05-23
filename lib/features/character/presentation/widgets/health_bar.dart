@@ -32,8 +32,8 @@ class HealthBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(3),
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(),
+        child: SizedBox(
+          width: double.infinity,
           child: Stack(
             children: [
               // Bottom layer
@@ -45,9 +45,7 @@ class HealthBar extends StatelessWidget {
                   return LinearProgressIndicator(
                     value: value,
                     minHeight: 10,
-                    backgroundColor: Theme.of(
-                      context,
-                    ).colorScheme.surfaceContainerHigh,
+                    backgroundColor: Theme.of(context).colorScheme.surfaceDim,
                     valueColor: AlwaysStoppedAnimation<Color>(
                       Theme.of(context).colorScheme.surfaceContainerLowest,
                     ),

@@ -13,7 +13,7 @@ class CreationScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Creation Screen'),
+        title: const Text('Creation'),
         leading: IconButton(
           onPressed: () => Modular.to.navigate('/'),
           icon: Icon(Icons.arrow_back),

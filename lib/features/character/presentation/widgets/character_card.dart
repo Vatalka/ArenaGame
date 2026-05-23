@@ -12,15 +12,20 @@ class CharacterCard extends StatelessWidget {
     final hpPercent = character.currentHp / character.maxHp;
     return Card(
       color: Theme.of(context).colorScheme.secondaryContainer,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(character.name),
-          Text('HP: ${character.currentHp} / ${character.maxHp}'),
-          HealthBar(hp: hpPercent),
-          Text('VIT: ${character.vitality}'),
-          Text('STR: ${character.strength}'),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Text(
+              character.name,
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            ),
+            Text('HP: ${character.currentHp} / ${character.maxHp}'),
+            HealthBar(hp: hpPercent),
+            Text('VIT: ${character.vitality}'),
+            Text('STR: ${character.strength}'),
+          ],
+        ),
       ),
     );
   }

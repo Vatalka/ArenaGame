@@ -15,7 +15,7 @@ class SelectionScreen extends ConsumerWidget {
     final player = ref.read(playerProvider.notifier);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('SelectionScreen')),
+      appBar: AppBar(title: const Text('Characters')),
       body: charactersAsync.when(
         data: (characters) {
           final isLimitReached = characters.length >= 3;
@@ -27,16 +27,10 @@ class SelectionScreen extends ConsumerWidget {
                   itemBuilder: (context, index) {
                     var char = characters[index];
                     return ListTile(
-                      horizontalTitleGap: 0.0,
-                      contentPadding: const EdgeInsets.only(left: 16),
+                      horizontalTitleGap: 8.0,
+                      contentPadding: const EdgeInsets.only(left: 16, right: 8),
                       title: CharacterCard(character: char),
                       trailing: IconButton(
-                        // iconSize: 30,
-                        // padding: EdgeInsets.zero,
-                        // constraints: const BoxConstraints(),
-                        // style: IconButton.styleFrom(
-                        //   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        // ),
                         onPressed: () async {
                           await controller.removeCharacter(char.id);
                         },
@@ -67,7 +61,8 @@ class SelectionScreen extends ConsumerWidget {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: const Text(
-                                  'Maximum number of characters 3',
+                                  textAlign: TextAlign.center,
+                                  'Character limit 3',
                                 ),
                                 backgroundColor: Theme.of(
                                   context,

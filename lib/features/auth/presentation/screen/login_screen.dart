@@ -10,7 +10,6 @@ class LoginScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login Screen')),
       body: Center(
         child: ElevatedButton(
           onPressed: () async {
