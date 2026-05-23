@@ -1,7 +1,6 @@
 import 'package:arena_game/features/battle/presentation/controller/player_notifier.dart';
 import 'package:arena_game/features/character/presentation/controller/selection_controller.dart';
 import 'package:arena_game/features/character/presentation/widgets/character_card.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,7 +11,8 @@ class SelectionScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final charactersAsync = ref.watch(selectionControllerProvider);
-    final selectionController = ref.read(selectionControllerProvider.notifier);
+    final controller = ref.read(selectionControllerProvider.notifier);
+    final player = ref.read(playerProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(title: const Text('SelectionScreen')),
@@ -27,25 +27,28 @@ class SelectionScreen extends ConsumerWidget {
                   itemBuilder: (context, index) {
                     var char = characters[index];
                     return ListTile(
+                      horizontalTitleGap: 0.0,
+                      contentPadding: const EdgeInsets.only(left: 16),
                       title: CharacterCard(character: char),
                       trailing: IconButton(
+                        // iconSize: 30,
+                        // padding: EdgeInsets.zero,
+                        // constraints: const BoxConstraints(),
+                        // style: IconButton.styleFrom(
+                        //   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        // ),
                         onPressed: () async {
-                          try {
-                            await selectionController.removeCharacter(char.id);
-                          } catch (e) {
-                            if (kDebugMode) {
-                              print('Unable to delete character: $e');
-                            }
-                          }
+                          await controller.removeCharacter(char.id);
                         },
                         icon: Icon(
                           Icons.delete,
                           color: Theme.of(context).colorScheme.errorContainer,
                           size: 30,
                         ),
+                        tooltip: 'delete',
                       ),
                       onTap: () {
-                        ref.read(playerProvider.notifier).selectCharacter(char);
+                        player.selectCharacter(char);
                         Modular.to.navigate('/game');
                       },
                     );

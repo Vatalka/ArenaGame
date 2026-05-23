@@ -1,6 +1,7 @@
 import 'package:arena_game/features/battle/presentation/controller/player_notifier.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:arena_game/features/character/domain/repositories/i_character_repository.dart';
+import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'selection_controller.g.dart';
@@ -13,9 +14,16 @@ class SelectionController extends _$SelectionController {
   }
 
   Future<void> removeCharacter(String id) async {
-    state = const AsyncValue.loading();
-    await ref.read(characterRepositoryProvider).deleteCharacter(id);
-    ref.invalidateSelf();
-    ref.invalidate(playerProvider);
+    try {
+      state = const AsyncValue.loading();
+      await ref.read(characterRepositoryProvider).deleteCharacter(id);
+      ref.invalidateSelf();
+      ref.invalidate(playerProvider);
+    } catch (e, st) {
+      state = AsyncValue.error(e, st);
+      if (kDebugMode) {
+        print('Unable to delete character: $e');
+      }
+    }
   }
 }

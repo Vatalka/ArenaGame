@@ -11,7 +11,7 @@ class CharacterCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final hpPercent = character.currentHp / character.maxHp;
     return Card(
-      elevation: 2.0,
+      color: Theme.of(context).colorScheme.secondaryContainer,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
