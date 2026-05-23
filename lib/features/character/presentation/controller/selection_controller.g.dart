@@ -34,7 +34,7 @@ final class SelectionControllerProvider
 }
 
 String _$selectionControllerHash() =>
-    r'b6e5e6644546a91617627751ed3b23d64fdbec79';
+    r'74abeeae38b782b2069fdb1cf70093ebaa34dfa3';
 
 abstract class _$SelectionController extends $AsyncNotifier<List<Character>> {
   FutureOr<List<Character>> build();

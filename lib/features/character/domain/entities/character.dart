@@ -29,7 +29,7 @@ abstract class Character with _$Character {
     );
   }
 
-  bool get isValid => name.trim().length >= 3;
+  bool get nameIsValid => name.trim().length >= 3;
 
   String? get nameError {
     if (name.isEmpty) return null;

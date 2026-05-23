@@ -3,7 +3,7 @@ import 'package:arena_game/features/battle/presentation/controller/player_notifi
 import 'package:arena_game/features/battle/presentation/widgets/attack_confirm_button.dart';
 import 'package:arena_game/features/battle/presentation/widgets/restore_hp_button.dart';
 import 'package:arena_game/features/battle/presentation/widgets/selection_group.dart';
-import 'package:arena_game/features/character/presentation/widgets/character_stat_card.dart';
+import 'package:arena_game/features/character/presentation/widgets/character_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,7 +23,7 @@ class GameScreen extends ConsumerWidget {
             Expanded(
               child: Placeholder(child: Center(child: Text('Battle Log'))),
             ),
-            CharacterStatCard(character: activeChar),
+            CharacterCard(character: activeChar),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

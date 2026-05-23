@@ -2,10 +2,10 @@ import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:arena_game/features/character/presentation/widgets/health_bar.dart';
 import 'package:flutter/material.dart';
 
-class CharacterStatCard extends StatelessWidget {
+class CharacterCard extends StatelessWidget {
   final Character character;
 
-  const CharacterStatCard({super.key, required this.character});
+  const CharacterCard({super.key, required this.character});
 
   @override
   Widget build(BuildContext context) {

@@ -8,10 +8,17 @@ class CreationScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(creationControllerProvider);
+    final characterState = ref.watch(creationControllerProvider);
+    final creationController = ref.read(creationControllerProvider.notifier);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Creation Screen')),
+      appBar: AppBar(
+        title: const Text('Creation Screen'),
+        leading: IconButton(
+          onPressed: () => Modular.to.navigate('/'),
+          icon: Icon(Icons.arrow_back),
+        ),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -19,9 +26,7 @@ class CreationScreen extends ConsumerWidget {
             SizedBox(
               width: 200,
               child: TextField(
-                onChanged: (value) => ref
-                    .read(creationControllerProvider.notifier)
-                    .updateName(value),
+                onChanged: (value) => creationController.updateName(value),
                 decoration: InputDecoration(
                   labelText: 'Enter character name',
                   filled: true,
@@ -31,21 +36,19 @@ class CreationScreen extends ConsumerWidget {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  errorText: state.nameError,
+                  errorText: characterState.nameError,
                 ),
                 maxLength: 15,
               ),
             ),
             ElevatedButton(
-              onPressed: state.isValid
+              onPressed: characterState.nameIsValid
                   ? () async {
-                      await ref
-                          .read(creationControllerProvider.notifier)
-                          .createAndSave();
+                      await creationController.createAndSave();
                       Modular.to.navigate('/selection');
                     }
                   : null,
-              child: const Text("Create"),
+              child: const Text('Create'),
             ),
           ],
         ),

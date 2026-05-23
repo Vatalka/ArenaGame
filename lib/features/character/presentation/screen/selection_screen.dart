@@ -1,6 +1,6 @@
 import 'package:arena_game/features/battle/presentation/controller/player_notifier.dart';
 import 'package:arena_game/features/character/presentation/controller/selection_controller.dart';
-import 'package:arena_game/features/character/presentation/widgets/character_stat_card.dart';
+import 'package:arena_game/features/character/presentation/widgets/character_card.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -12,17 +12,12 @@ class SelectionScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final charactersAsync = ref.watch(selectionControllerProvider);
+    final selectionController = ref.read(selectionControllerProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(title: const Text('SelectionScreen')),
       body: charactersAsync.when(
         data: (characters) {
-          if (characters.isEmpty) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              Modular.to.navigate('/creation');
-            });
-            return const Center(child: CircularProgressIndicator());
-          }
           final isLimitReached = characters.length >= 3;
           return Column(
             children: [
@@ -32,20 +27,22 @@ class SelectionScreen extends ConsumerWidget {
                   itemBuilder: (context, index) {
                     var char = characters[index];
                     return ListTile(
-                      title: CharacterStatCard(character: char),
+                      title: CharacterCard(character: char),
                       trailing: IconButton(
                         onPressed: () async {
                           try {
-                            await ref
-                                .read(selectionControllerProvider.notifier)
-                                .removeCharacter(char.id);
+                            await selectionController.removeCharacter(char.id);
                           } catch (e) {
                             if (kDebugMode) {
                               print('Unable to delete character: $e');
                             }
                           }
                         },
-                        icon: Icon(Icons.delete),
+                        icon: Icon(
+                          Icons.delete,
+                          color: Theme.of(context).colorScheme.errorContainer,
+                          size: 30,
+                        ),
                       ),
                       onTap: () {
                         ref.read(playerProvider.notifier).selectCharacter(char);
@@ -59,14 +56,15 @@ class SelectionScreen extends ConsumerWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: SizedBox(
                   width: double.infinity,
-                  // height: 50,
+                  height: 50,
                   child: ElevatedButton(
                     onPressed: isLimitReached
                         ? () {
+                            ScaffoldMessenger.of(context).clearSnackBars();
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: const Text(
-                                  'Maximum number of Characters 3',
+                                  'Maximum number of characters 3',
                                 ),
                                 backgroundColor: Theme.of(
                                   context,
@@ -79,12 +77,14 @@ class SelectionScreen extends ConsumerWidget {
                             Modular.to.navigate('/creation');
                           },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: isLimitReached ? Colors.grey : null,
+                      backgroundColor: isLimitReached
+                          ? Theme.of(context).colorScheme.surfaceContainer
+                          : Theme.of(context).colorScheme.secondaryContainer,
                     ),
                     child: const Text(
-                      'Create new Character',
+                      'Create new character',
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
