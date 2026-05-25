@@ -1,5 +1,5 @@
 import 'package:arena_game/features/battle/domain/entities/battle_selection.dart';
-import 'package:arena_game/features/battle/presentation/controller/player_notifier.dart';
+import 'package:arena_game/features/battle/presentation/controllers/player_notifier.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'battle_notifier.g.dart';

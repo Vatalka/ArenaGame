@@ -1,6 +1,6 @@
-import 'package:arena_game/features/battle/presentation/controller/player_notifier.dart';
+import 'package:arena_game/features/battle/presentation/controllers/player_notifier.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
-import 'package:arena_game/features/character/presentation/controller/selection_controller.dart';
+import 'package:arena_game/features/character/presentation/controllers/selection_controller.dart';
 import 'package:arena_game/features/character/presentation/widgets/character_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';

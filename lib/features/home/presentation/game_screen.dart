@@ -1,5 +1,5 @@
-import 'package:arena_game/features/battle/presentation/controller/battle_notifier.dart';
-import 'package:arena_game/features/battle/presentation/controller/player_notifier.dart';
+import 'package:arena_game/features/battle/presentation/controllers/battle_notifier.dart';
+import 'package:arena_game/features/battle/presentation/controllers/player_notifier.dart';
 import 'package:arena_game/features/battle/presentation/widgets/attack_confirm_button.dart';
 import 'package:arena_game/features/battle/presentation/widgets/restore_hp_button.dart';
 import 'package:arena_game/features/battle/presentation/widgets/selection_group.dart';

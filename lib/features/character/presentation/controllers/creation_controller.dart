@@ -1,6 +1,6 @@
 import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:arena_game/features/character/domain/repositories/i_character_repository.dart';
-import 'package:arena_game/features/character/presentation/controller/selection_controller.dart';
+import 'package:arena_game/features/character/presentation/controllers/selection_controller.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'creation_controller.g.dart';

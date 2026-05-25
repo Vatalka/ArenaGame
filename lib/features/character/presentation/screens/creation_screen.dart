@@ -1,4 +1,4 @@
-import 'package:arena_game/features/character/presentation/controller/creation_controller.dart';
+import 'package:arena_game/features/character/presentation/controllers/creation_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
