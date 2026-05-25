@@ -1,4 +1,4 @@
-import 'package:arena_game/features/battle/domain/entities/battle_log_item.dart';
+import 'package:arena_game/features/battle/domain/entities/log/battle_log_item.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 

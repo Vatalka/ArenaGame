@@ -1,6 +1,7 @@
 import 'package:arena_game/features/battle/presentation/controllers/battle_notifier.dart';
 import 'package:arena_game/features/battle/presentation/controllers/player_notifier.dart';
 import 'package:arena_game/features/battle/presentation/widgets/attack_confirm_button.dart';
+import 'package:arena_game/features/battle/presentation/widgets/log/battle_log_view.dart';
 import 'package:arena_game/features/battle/presentation/widgets/restore_hp_button.dart';
 import 'package:arena_game/features/battle/presentation/widgets/selection_group.dart';
 import 'package:arena_game/features/character/presentation/widgets/character_card.dart';
@@ -26,9 +27,7 @@ class GameScreen extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(
-                child: Placeholder(child: Center(child: Text('Battle Logs'))),
-              ),
+              Expanded(child: BattleLogView()),
               Row(
                 children: [
                   Expanded(child: CharacterCard(character: activeChar)),

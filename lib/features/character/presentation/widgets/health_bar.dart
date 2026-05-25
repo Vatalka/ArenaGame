@@ -6,26 +6,6 @@ class HealthBar extends StatelessWidget {
 
   const HealthBar({super.key, required this.hp});
 
-  Color getHealthBarColor(BuildContext context, double value) {
-    final gameColors = Theme.of(context).extension<GameColors>()!;
-
-    if (value > 0.66) {
-      return Color.lerp(
-        gameColors.healthMedium,
-        gameColors.healthHigh,
-        (value - 0.66) / 0.33,
-      )!;
-    } else if (value > 0.33) {
-      return Color.lerp(
-        gameColors.healthLow,
-        gameColors.healthMedium,
-        (value - 0.33) / 0.33,
-      )!;
-    } else {
-      return gameColors.healthLow;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -63,7 +43,7 @@ class HealthBar extends StatelessWidget {
                     minHeight: 10,
                     backgroundColor: Colors.transparent,
                     valueColor: AlwaysStoppedAnimation<Color>(
-                      getHealthBarColor(context, value),
+                      _getHealthBarColor(context, value),
                     ),
                   );
                 },
@@ -73,5 +53,25 @@ class HealthBar extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Color _getHealthBarColor(BuildContext context, double value) {
+    final gameColors = Theme.of(context).extension<GameColors>()!;
+
+    if (value > 0.66) {
+      return Color.lerp(
+        gameColors.healthMedium,
+        gameColors.healthHigh,
+        (value - 0.66) / 0.33,
+      )!;
+    } else if (value > 0.33) {
+      return Color.lerp(
+        gameColors.healthLow,
+        gameColors.healthMedium,
+        (value - 0.33) / 0.33,
+      )!;
+    } else {
+      return gameColors.healthLow;
+    }
   }
 }
