@@ -46,8 +46,8 @@ class AppModule extends Module {
   @override
   void routes(r) {
     r.child('/', child: (_) => LoginScreen());
-    r.child('/selection', child: (_) => SelectionScreen());
     r.child('/creation', child: (_) => CreationScreen());
+    r.child('/selection', child: (_) => SelectionScreen());
     r.child('/game', child: (_) => GameScreen());
   }
 }

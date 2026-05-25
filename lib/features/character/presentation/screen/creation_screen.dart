@@ -11,46 +11,53 @@ class CreationScreen extends ConsumerWidget {
     final characterState = ref.watch(creationControllerProvider);
     final creationController = ref.read(creationControllerProvider.notifier);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Creation'),
-        leading: IconButton(
-          onPressed: () => Modular.to.navigate('/'),
-          icon: Icon(Icons.arrow_back),
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) async {
+        if (didPop) return;
+        Modular.to.navigate('/');
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Creation'),
+          leading: IconButton(
+            onPressed: () => Modular.to.navigate('/'),
+            icon: Icon(Icons.arrow_back),
+          ),
         ),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: 200,
-              child: TextField(
-                onChanged: (value) => creationController.updateName(value),
-                decoration: InputDecoration(
-                  labelText: 'Enter character name',
-                  filled: true,
-                  fillColor: Theme.of(
-                    context,
-                  ).colorScheme.surfaceContainerLowest,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 200,
+                child: TextField(
+                  onChanged: (value) => creationController.updateName(value),
+                  decoration: InputDecoration(
+                    labelText: 'Enter Character name',
+                    filled: true,
+                    fillColor: Theme.of(
+                      context,
+                    ).colorScheme.surfaceContainerLowest,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    errorText: characterState.nameError,
                   ),
-                  errorText: characterState.nameError,
+                  maxLength: 15,
                 ),
-                maxLength: 15,
               ),
-            ),
-            ElevatedButton(
-              onPressed: characterState.nameIsValid
-                  ? () async {
-                      await creationController.createAndSave();
-                      Modular.to.navigate('/selection');
-                    }
-                  : null,
-              child: const Text('Create'),
-            ),
-          ],
+              ElevatedButton(
+                onPressed: characterState.nameIsValid
+                    ? () async {
+                        await creationController.createAndSave();
+                        Modular.to.navigate('/selection');
+                      }
+                    : null,
+                child: const Text('Create'),
+              ),
+            ],
+          ),
         ),
       ),
     );

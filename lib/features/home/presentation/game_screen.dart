@@ -15,66 +15,75 @@ class GameScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final activeChar = ref.watch(playerProvider);
     final bot = ref.watch(playerProvider);
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Placeholder(child: Center(child: Text('Battle log'))),
-            ),
-            Row(
-              children: [
-                Expanded(child: CharacterCard(character: activeChar)),
-                Expanded(child: CharacterCard(character: bot)),
-              ],
-            ),
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) async {
+        if (didPop) return;
+        Modular.to.navigate('/selection');
+      },
+      child: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Placeholder(child: Center(child: Text('Battle Logs'))),
+              ),
+              Row(
+                children: [
+                  Expanded(child: CharacterCard(character: activeChar)),
+                  Expanded(child: CharacterCard(character: bot)),
+                ],
+              ),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Expanded(
-                  child: SelectionGroup(
-                    title: 'Attack',
-                    currentSelection: ref.watch(battleProvider).selectedAttack,
-                    onSelected: (area) =>
-                        ref.read(battleProvider.notifier).selectAttack(area),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: SelectionGroup(
+                      title: 'Attack',
+                      currentSelection: ref
+                          .watch(battleProvider)
+                          .selectedAttack,
+                      onSelected: (area) =>
+                          ref.read(battleProvider.notifier).selectAttack(area),
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: SelectionGroup(
-                    title: 'Block',
-                    currentSelection: ref.watch(battleProvider).selectedBlock,
-                    onSelected: (area) =>
-                        ref.read(battleProvider.notifier).selectBlock(area),
+                  Expanded(
+                    child: SelectionGroup(
+                      title: 'Block',
+                      currentSelection: ref.watch(battleProvider).selectedBlock,
+                      onSelected: (area) =>
+                          ref.read(battleProvider.notifier).selectBlock(area),
+                    ),
                   ),
-                ),
-              ],
-            ),
-            AttackConfirmButton(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () => Modular.to.navigate('/selection'),
-                  child: Text('Select'),
-                ),
-                RestoreHpButton(
-                  onTap: () {
-                    ref.read(playerProvider.notifier).restoreHp();
-                  },
-                ),
-                ElevatedButton(
-                  onPressed: () => Modular.to.navigate('/'),
-                  child: Text('Login'),
-                ),
-              ],
-            ),
-            SizedBox(height: 8, width: 8),
-            Expanded(
-              child: Placeholder(child: Center(child: Text('Game chat'))),
-            ),
-          ],
+                ],
+              ),
+              AttackConfirmButton(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () => Modular.to.navigate('/selection'),
+                    child: Text('Select'),
+                  ),
+                  RestoreHpButton(
+                    onTap: () {
+                      ref.read(playerProvider.notifier).restoreHp();
+                    },
+                  ),
+                  ElevatedButton(
+                    onPressed: () => Modular.to.navigate('/'),
+                    child: Text('Login'),
+                  ),
+                ],
+              ),
+              SizedBox(height: 8, width: 8),
+              Expanded(
+                child: Placeholder(child: Center(child: Text('Game Chat'))),
+              ),
+            ],
+          ),
         ),
       ),
     );

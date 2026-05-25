@@ -26,8 +26,14 @@ class SelectionGroup extends StatelessWidget {
               children: Area.values.map((area) {
                 final isSelected = currentSelection == area;
                 return Padding(
-                  padding: const EdgeInsets.all(2.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 2,
+                  ),
                   child: ChoiceChip(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
                     pressElevation: 2,
                     label: SizedBox(
                       width: double.infinity,
