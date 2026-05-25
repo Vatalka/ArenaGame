@@ -8,11 +8,22 @@ class AttackConfirmButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(battleProvider);
-    return ElevatedButton(
-      onPressed: state.isTurnReady
-          ? ref.read(battleProvider.notifier).confirmTurn
-          : null,
-      child: const Text("Attack"),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SizedBox(
+        width: double.infinity,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: state.isTurnReady
+                ? Theme.of(context).colorScheme.primaryContainer
+                : Theme.of(context).colorScheme.secondaryContainer,
+          ),
+          onPressed: state.isTurnReady
+              ? ref.read(battleProvider.notifier).confirmTurn
+              : null,
+          child: const Text("Attack"),
+        ),
+      ),
     );
   }
 }

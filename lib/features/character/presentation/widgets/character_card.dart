@@ -11,9 +11,9 @@ class CharacterCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final hpPercent = character.currentHp / character.maxHp;
     return Card(
-      color: Theme.of(context).colorScheme.secondaryContainer,
+      color: Theme.of(context).colorScheme.primaryContainer,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(4.0),
         child: Column(
           children: [
             Text(

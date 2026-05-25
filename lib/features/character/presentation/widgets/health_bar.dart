@@ -29,7 +29,7 @@ class HealthBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(3),
         child: SizedBox(

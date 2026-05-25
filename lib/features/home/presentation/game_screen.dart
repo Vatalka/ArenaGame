@@ -21,7 +21,7 @@ class GameScreen extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
-              child: Placeholder(child: Center(child: Text('Battle Log'))),
+              child: Placeholder(child: Center(child: Text('Battle log'))),
             ),
             Row(
               children: [
@@ -33,26 +33,25 @@ class GameScreen extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                SelectionGroup(
-                  title: 'Attack',
-                  currentSelection: ref.watch(battleProvider).selectedAttack,
-                  onSelected: (area) =>
-                      ref.read(battleProvider.notifier).selectAttack(area),
+                Expanded(
+                  child: SelectionGroup(
+                    title: 'Attack',
+                    currentSelection: ref.watch(battleProvider).selectedAttack,
+                    onSelected: (area) =>
+                        ref.read(battleProvider.notifier).selectAttack(area),
+                  ),
                 ),
-                SelectionGroup(
-                  title: 'Block',
-                  currentSelection: ref.watch(battleProvider).selectedBlock,
-                  onSelected: (area) =>
-                      ref.read(battleProvider.notifier).selectBlock(area),
+                Expanded(
+                  child: SelectionGroup(
+                    title: 'Block',
+                    currentSelection: ref.watch(battleProvider).selectedBlock,
+                    onSelected: (area) =>
+                        ref.read(battleProvider.notifier).selectBlock(area),
+                  ),
                 ),
               ],
             ),
             AttackConfirmButton(),
-            RestoreHpButton(
-              onTap: () {
-                ref.read(playerProvider.notifier).restoreHp();
-              },
-            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -60,11 +59,20 @@ class GameScreen extends ConsumerWidget {
                   onPressed: () => Modular.to.navigate('/selection'),
                   child: Text('Select'),
                 ),
+                RestoreHpButton(
+                  onTap: () {
+                    ref.read(playerProvider.notifier).restoreHp();
+                  },
+                ),
                 ElevatedButton(
                   onPressed: () => Modular.to.navigate('/'),
                   child: Text('Login'),
                 ),
               ],
+            ),
+            SizedBox(height: 8, width: 8),
+            Expanded(
+              child: Placeholder(child: Center(child: Text('Game chat'))),
             ),
           ],
         ),

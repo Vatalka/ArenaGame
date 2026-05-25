@@ -30,7 +30,7 @@ class SelectionGroup extends StatelessWidget {
                   child: ChoiceChip(
                     pressElevation: 2,
                     label: SizedBox(
-                      width: MediaQuery.of(context).size.width / 4,
+                      width: double.infinity,
                       child: Center(child: Text(area.name)),
                     ),
                     selected: isSelected,
