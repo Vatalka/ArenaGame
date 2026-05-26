@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'player_notifier.dart';
+part of 'creation_notifier.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,28 +9,28 @@ part of 'player_notifier.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(PlayerNotifier)
-final playerProvider = PlayerNotifierProvider._();
+@ProviderFor(CreationNotifier)
+final creationProvider = CreationNotifierProvider._();
 
-final class PlayerNotifierProvider
-    extends $NotifierProvider<PlayerNotifier, Character> {
-  PlayerNotifierProvider._()
+final class CreationNotifierProvider
+    extends $NotifierProvider<CreationNotifier, Character> {
+  CreationNotifierProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'playerProvider',
-        isAutoDispose: false,
+        name: r'creationProvider',
+        isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$playerNotifierHash();
+  String debugGetCreateSourceHash() => _$creationNotifierHash();
 
   @$internal
   @override
-  PlayerNotifier create() => PlayerNotifier();
+  CreationNotifier create() => CreationNotifier();
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(Character value) {
@@ -41,9 +41,9 @@ final class PlayerNotifierProvider
   }
 }
 
-String _$playerNotifierHash() => r'c42663aee965d18400def29ceddafa24a3dc5ade';
+String _$creationNotifierHash() => r'61198003742dd42edc67dab0e83a6399535a4127';
 
-abstract class _$PlayerNotifier extends $Notifier<Character> {
+abstract class _$CreationNotifier extends $Notifier<Character> {
   Character build();
   @$mustCallSuper
   @override

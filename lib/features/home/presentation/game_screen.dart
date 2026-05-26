@@ -1,4 +1,5 @@
 import 'package:arena_game/features/battle/presentation/controllers/battle_notifier.dart';
+import 'package:arena_game/features/battle/presentation/controllers/bot/bot_notifier.dart';
 import 'package:arena_game/features/battle/presentation/controllers/player_notifier.dart';
 import 'package:arena_game/features/battle/presentation/widgets/attack_confirm_button.dart';
 import 'package:arena_game/features/battle/presentation/widgets/log/battle_log_view.dart';
@@ -15,7 +16,7 @@ class GameScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final activeChar = ref.watch(playerProvider);
-    final bot = ref.watch(playerProvider);
+    final bot = ref.watch(botProvider);
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) async {

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'creation_controller.dart';
+part of 'bot_notifier.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,28 +9,28 @@ part of 'creation_controller.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(CreationController)
-final creationControllerProvider = CreationControllerProvider._();
+@ProviderFor(BotNotifier)
+final botProvider = BotNotifierProvider._();
 
-final class CreationControllerProvider
-    extends $NotifierProvider<CreationController, Character> {
-  CreationControllerProvider._()
+final class BotNotifierProvider
+    extends $NotifierProvider<BotNotifier, Character> {
+  BotNotifierProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'creationControllerProvider',
-        isAutoDispose: true,
+        name: r'botProvider',
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$creationControllerHash();
+  String debugGetCreateSourceHash() => _$botNotifierHash();
 
   @$internal
   @override
-  CreationController create() => CreationController();
+  BotNotifier create() => BotNotifier();
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(Character value) {
@@ -41,10 +41,9 @@ final class CreationControllerProvider
   }
 }
 
-String _$creationControllerHash() =>
-    r'35995c62d380abbb2d08230e3e1bd07357b2e993';
+String _$botNotifierHash() => r'724112df7409112cad182de2ce6799c709143fa2';
 
-abstract class _$CreationController extends $Notifier<Character> {
+abstract class _$BotNotifier extends $Notifier<Character> {
   Character build();
   @$mustCallSuper
   @override

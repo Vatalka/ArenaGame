@@ -20,11 +20,14 @@ class PlayerNotifier extends _$PlayerNotifier {
     state = state.copyWith(
       currentHp: (state.currentHp - amount).clamp(0, state.maxHp),
     );
-    _battleLogController.addLog('Гравець дає собі ляпаса', LogType.attack);
+    _battleLogController.addLog('Гравець дає собі ляпаса!', LogType.attack);
   }
 
   void restoreHp() {
     state = state.copyWith(currentHp: state.maxHp);
-    _battleLogController.addLog('Гравець відновлює здоровля', LogType.block);
+    _battleLogController.addLog(
+      'Гравець відновлює здоровля, хитрун :)',
+      LogType.block,
+    );
   }
 }

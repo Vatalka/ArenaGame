@@ -1,12 +1,12 @@
 import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:arena_game/features/character/domain/repositories/i_character_repository.dart';
-import 'package:arena_game/features/character/presentation/controllers/selection_controller.dart';
+import 'package:arena_game/features/character/presentation/controllers/selection_notifier.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'creation_controller.g.dart';
+part 'creation_notifier.g.dart';
 
 @riverpod
-class CreationController extends _$CreationController {
+class CreationNotifier extends _$CreationNotifier {
   @override
   Character build() => Character.createDefault();
 
@@ -14,6 +14,6 @@ class CreationController extends _$CreationController {
 
   Future<void> createAndSave() async {
     await ref.read(characterRepositoryProvider).saveCharacter(state);
-    ref.invalidate(selectionControllerProvider);
+    ref.invalidate(selectionProvider);
   }
 }

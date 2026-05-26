@@ -1,4 +1,4 @@
-import 'package:arena_game/features/character/presentation/controllers/creation_controller.dart';
+import 'package:arena_game/features/character/presentation/controllers/creation_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,8 +8,8 @@ class CreationScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final characterState = ref.watch(creationControllerProvider);
-    final creationController = ref.read(creationControllerProvider.notifier);
+    final characterState = ref.watch(creationProvider);
+    final controller = ref.read(creationProvider.notifier);
 
     return PopScope(
       canPop: false,
@@ -32,7 +32,7 @@ class CreationScreen extends ConsumerWidget {
               SizedBox(
                 width: 200,
                 child: TextField(
-                  onChanged: (value) => creationController.updateName(value),
+                  onChanged: (value) => controller.updateName(value),
                   decoration: InputDecoration(
                     labelText: 'Enter Character name',
                     filled: true,
@@ -50,7 +50,7 @@ class CreationScreen extends ConsumerWidget {
               ElevatedButton(
                 onPressed: characterState.nameIsValid
                     ? () async {
-                        await creationController.createAndSave();
+                        await controller.createAndSave();
                         Modular.to.navigate('/selection');
                       }
                     : null,

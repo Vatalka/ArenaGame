@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'selection_controller.dart';
+part of 'selection_notifier.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,34 +9,33 @@ part of 'selection_controller.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(SelectionController)
-final selectionControllerProvider = SelectionControllerProvider._();
+@ProviderFor(SelectionNotifier)
+final selectionProvider = SelectionNotifierProvider._();
 
-final class SelectionControllerProvider
-    extends $AsyncNotifierProvider<SelectionController, List<Character>> {
-  SelectionControllerProvider._()
+final class SelectionNotifierProvider
+    extends $AsyncNotifierProvider<SelectionNotifier, List<Character>> {
+  SelectionNotifierProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'selectionControllerProvider',
+        name: r'selectionProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$selectionControllerHash();
+  String debugGetCreateSourceHash() => _$selectionNotifierHash();
 
   @$internal
   @override
-  SelectionController create() => SelectionController();
+  SelectionNotifier create() => SelectionNotifier();
 }
 
-String _$selectionControllerHash() =>
-    r'8454f4e0be516f29b8b5f28cc6f0c36617234839';
+String _$selectionNotifierHash() => r'bf41ff7e288602cf11d87883a2a53d7340cee28c';
 
-abstract class _$SelectionController extends $AsyncNotifier<List<Character>> {
+abstract class _$SelectionNotifier extends $AsyncNotifier<List<Character>> {
   FutureOr<List<Character>> build();
   @$mustCallSuper
   @override

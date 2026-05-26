@@ -1,6 +1,6 @@
 import 'package:arena_game/features/battle/presentation/controllers/player_notifier.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
-import 'package:arena_game/features/character/presentation/controllers/selection_controller.dart';
+import 'package:arena_game/features/character/presentation/controllers/selection_notifier.dart';
 import 'package:arena_game/features/character/presentation/widgets/character_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -9,43 +9,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class SelectionScreen extends ConsumerWidget {
   const SelectionScreen({super.key});
 
-  Future<void> _showDeleteConfirmation(
-    BuildContext context,
-    Character char,
-    SelectionController controller,
-  ) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext dialogContext) {
-        return AlertDialog(
-          title: const Text('Delete Character'),
-          content: Text('Are you sure you want to delete ${char.name}?'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.of(dialogContext).pop(),
-              child: const Text('Cancel'),
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
-                foregroundColor: Theme.of(context).colorScheme.error,
-              ),
-              onPressed: () async {
-                Navigator.of(dialogContext).pop();
-                await controller.removeCharacter(char.id);
-              },
-              child: const Text('Delete'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final charactersAsync = ref.watch(selectionControllerProvider);
-    final controller = ref.read(selectionControllerProvider.notifier);
+    final charactersAsync = ref.watch(selectionProvider);
+    final controller = ref.read(selectionProvider.notifier);
     final player = ref.read(playerProvider.notifier);
 
     return PopScope(
@@ -141,6 +108,39 @@ class SelectionScreen extends ConsumerWidget {
           error: (e, st) => Center(child: Text('Error: $e')),
         ),
       ),
+    );
+  }
+
+  Future<void> _showDeleteConfirmation(
+    BuildContext context,
+    Character char,
+    SelectionNotifier controller,
+  ) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: const Text('Delete Character'),
+          content: Text('Are you sure you want to delete ${char.name}?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                foregroundColor: Theme.of(context).colorScheme.error,
+              ),
+              onPressed: () async {
+                Navigator.of(dialogContext).pop();
+                await controller.removeCharacter(char.id);
+              },
+              child: const Text('Delete'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

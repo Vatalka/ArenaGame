@@ -4,10 +4,10 @@ import 'package:arena_game/features/character/domain/repositories/i_character_re
 import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'selection_controller.g.dart';
+part 'selection_notifier.g.dart';
 
 @riverpod
-class SelectionController extends _$SelectionController {
+class SelectionNotifier extends _$SelectionNotifier {
   @override
   FutureOr<List<Character>> build() async {
     return ref.watch(characterRepositoryProvider).getAllCharacters();
