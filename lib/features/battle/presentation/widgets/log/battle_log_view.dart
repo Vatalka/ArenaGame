@@ -1,14 +1,16 @@
+import 'package:arena_game/core/theme/game_colors.dart';
 import 'package:arena_game/features/battle/domain/entities/log/battle_log_item.dart';
-import 'package:arena_game/features/battle/presentation/controllers/log/battle_log_controller.dart';
+import 'package:arena_game/features/battle/presentation/controllers/log/battle_log_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 class BattleLogView extends ConsumerWidget {
   const BattleLogView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final logs = ref.watch(battleLogControllerProvider);
+    final logs = ref.watch(battleLogProvider);
     return ListView.builder(
       reverse: true,
       itemCount: logs.length,
@@ -21,27 +23,29 @@ class BattleLogView extends ConsumerWidget {
           ),
           child: Text(
             '[${_formatTime(log.timestamp)}] ${log.message}',
-            style: TextStyle(color: _getLogColor(log.type), fontSize: 14),
+            style: TextStyle(
+              color: _getLogColor(context, log.type),
+              fontSize: 14,
+            ),
           ),
         );
       },
     );
   }
 
-  Color _getLogColor(LogType type) {
+  Color _getLogColor(BuildContext context, LogType type) {
+    final gameColors = Theme.of(context).extension<GameColors>()!;
     switch (type) {
       case LogType.attack:
-        return Colors.orange;
+        return gameColors.logAttack;
       case LogType.damage:
-        return Colors.redAccent;
+        return gameColors.logDamage;
       case LogType.block:
-        return Colors.green;
+        return gameColors.logBlock;
       case LogType.info:
-        return Colors.grey;
+        return gameColors.logInfo;
     }
   }
 
-  String _formatTime(DateTime time) {
-    return "${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}:${time.second.toString().padLeft(2, '0')}";
-  }
+  String _formatTime(DateTime time) => DateFormat('HH:mm:ss').format(time);
 }

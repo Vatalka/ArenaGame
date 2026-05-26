@@ -1,5 +1,5 @@
 import 'package:arena_game/features/battle/domain/entities/log/battle_log_item.dart';
-import 'package:arena_game/features/battle/presentation/controllers/log/battle_log_controller.dart';
+import 'package:arena_game/features/battle/presentation/controllers/log/battle_log_notifier.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -10,9 +10,7 @@ class PlayerNotifier extends _$PlayerNotifier {
   @override
   Character build() => Character.createDefault();
 
-  late final _battleLogController = ref.read(
-    battleLogControllerProvider.notifier,
-  );
+  late final _battleLogController = ref.read(battleLogProvider.notifier);
 
   void selectCharacter(Character character) => state = character;
 

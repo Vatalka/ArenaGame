@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'battle_log_controller.dart';
+part of 'battle_log_notifier.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,28 +9,28 @@ part of 'battle_log_controller.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(BattleLogController)
-final battleLogControllerProvider = BattleLogControllerProvider._();
+@ProviderFor(BattleLogNotifier)
+final battleLogProvider = BattleLogNotifierProvider._();
 
-final class BattleLogControllerProvider
-    extends $NotifierProvider<BattleLogController, List<BattleLogItem>> {
-  BattleLogControllerProvider._()
+final class BattleLogNotifierProvider
+    extends $NotifierProvider<BattleLogNotifier, List<BattleLogItem>> {
+  BattleLogNotifierProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'battleLogControllerProvider',
+        name: r'battleLogProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$battleLogControllerHash();
+  String debugGetCreateSourceHash() => _$battleLogNotifierHash();
 
   @$internal
   @override
-  BattleLogController create() => BattleLogController();
+  BattleLogNotifier create() => BattleLogNotifier();
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(List<BattleLogItem> value) {
@@ -41,10 +41,9 @@ final class BattleLogControllerProvider
   }
 }
 
-String _$battleLogControllerHash() =>
-    r'96943deee153d649315220fe474219e02ff9e9d0';
+String _$battleLogNotifierHash() => r'918a653dfc5a8d0892ca8893868109ec5dcac2d2';
 
-abstract class _$BattleLogController extends $Notifier<List<BattleLogItem>> {
+abstract class _$BattleLogNotifier extends $Notifier<List<BattleLogItem>> {
   List<BattleLogItem> build();
   @$mustCallSuper
   @override

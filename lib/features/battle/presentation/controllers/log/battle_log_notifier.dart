@@ -2,10 +2,10 @@ import 'package:arena_game/features/battle/domain/entities/log/battle_log_item.d
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 
-part 'battle_log_controller.g.dart';
+part 'battle_log_notifier.g.dart';
 
 @riverpod
-class BattleLogController extends _$BattleLogController {
+class BattleLogNotifier extends _$BattleLogNotifier {
   @override
   List<BattleLogItem> build() {
     return [];
