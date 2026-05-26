@@ -41,7 +41,7 @@ final class BattleNotifierProvider
   }
 }
 
-String _$battleNotifierHash() => r'e14f56a1a506388ddf6769bb96b8144963369b7d';
+String _$battleNotifierHash() => r'8f557613e3ea44e249775a8cb55b035b937865d7';
 
 abstract class _$BattleNotifier extends $Notifier<BattleSelection> {
   BattleSelection build();

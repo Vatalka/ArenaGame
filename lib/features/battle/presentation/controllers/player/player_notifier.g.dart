@@ -41,7 +41,7 @@ final class PlayerNotifierProvider
   }
 }
 
-String _$playerNotifierHash() => r'c42663aee965d18400def29ceddafa24a3dc5ade';
+String _$playerNotifierHash() => r'b0c04fec7cbd39447da66b3f5852c52e912d59ad';
 
 abstract class _$PlayerNotifier extends $Notifier<Character> {
   Character build();

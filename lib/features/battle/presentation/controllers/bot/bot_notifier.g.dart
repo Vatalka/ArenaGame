@@ -20,7 +20,7 @@ final class BotNotifierProvider
         argument: null,
         retry: null,
         name: r'botProvider',
-        isAutoDispose: false,
+        isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -41,7 +41,7 @@ final class BotNotifierProvider
   }
 }
 
-String _$botNotifierHash() => r'724112df7409112cad182de2ce6799c709143fa2';
+String _$botNotifierHash() => r'1a9b256735d5648a62af0dd19b739fe2ea2a1f82';
 
 abstract class _$BotNotifier extends $Notifier<Character> {
   Character build();
