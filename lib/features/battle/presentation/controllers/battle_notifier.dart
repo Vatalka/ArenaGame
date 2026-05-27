@@ -28,6 +28,10 @@ class BattleNotifier extends _$BattleNotifier {
         .addLog('Почався бій між ${player.name} та ${bot.name}', LogType.info);
   }
 
+  void disableBotMode() {
+    state = state.copyWith(isBotMode: false);
+  }
+
   void confirmTurn() {
     final player = ref.read(playerProvider);
     final bot = ref.read(botProvider);
@@ -75,6 +79,33 @@ class BattleNotifier extends _$BattleNotifier {
           );
     }
     ref.read(playerProvider.notifier).takeDamage(damageToPlayer);
+
+    final updatedPlayer = ref.read(playerProvider);
+    final updatedBot = ref.read(botProvider);
+
+    final isPlayerDead = updatedPlayer.currentHp <= 0;
+    final isBotDead = updatedBot.currentHp <= 0;
+
+    if (isPlayerDead || isBotDead) {
+      String battleOverMessage = '';
+
+      if (isPlayerDead && isBotDead) {
+        battleOverMessage = 'Бій завершено нічиєю! Обидва бійці непритомні.';
+      } else if (isBotDead) {
+        battleOverMessage =
+            'Бій завершено! Переміг ${player.name}!';
+      } else if (isPlayerDead) {
+        battleOverMessage =
+            'Бій завершено! Переміг ${bot.name}. Спробуйте ще раз!';
+      }
+      ref
+          .read(battleLogProvider.notifier)
+          .addLog(
+            battleOverMessage,
+            LogType.info,
+          );
+      disableBotMode();
+    }
   }
 
   Area _getRandomArea() {
