@@ -2,6 +2,7 @@ import 'package:arena_game/features/battle/presentation/controllers/battle_notif
 import 'package:arena_game/features/battle/presentation/controllers/bot/bot_notifier.dart';
 import 'package:arena_game/features/battle/presentation/controllers/player/player_notifier.dart';
 import 'package:arena_game/features/battle/presentation/widgets/attack_confirm_button.dart';
+import 'package:arena_game/features/battle/presentation/widgets/battle_mode_selector.dart';
 import 'package:arena_game/features/battle/presentation/widgets/log/battle_log_view.dart';
 import 'package:arena_game/features/battle/presentation/widgets/restore_hp_button.dart';
 import 'package:arena_game/features/battle/presentation/widgets/selection_group.dart';
@@ -15,6 +16,7 @@ class GameScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final gameMode = ref.watch(battleProvider);
     final player = ref.watch(playerProvider);
     final bot = ref.watch(botProvider);
     return PopScope(
@@ -33,10 +35,14 @@ class GameScreen extends ConsumerWidget {
                 Row(
                   children: [
                     Expanded(child: CharacterCard(character: player)),
-                    Expanded(child: CharacterCard(character: bot)),
+                    Expanded(
+                      child: gameMode.isBotMode
+                          ? CharacterCard(character: bot)
+                          : const BattleModeSelector(),
+                    ),
                   ],
                 ),
-          
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -46,14 +52,17 @@ class GameScreen extends ConsumerWidget {
                         currentSelection: ref
                             .watch(battleProvider)
                             .selectedAttack,
-                        onSelected: (area) =>
-                            ref.read(battleProvider.notifier).selectAttack(area),
+                        onSelected: (area) => ref
+                            .read(battleProvider.notifier)
+                            .selectAttack(area),
                       ),
                     ),
                     Expanded(
                       child: SelectionGroup(
                         title: 'Block',
-                        currentSelection: ref.watch(battleProvider).selectedBlock,
+                        currentSelection: ref
+                            .watch(battleProvider)
+                            .selectedBlock,
                         onSelected: (area) =>
                             ref.read(battleProvider.notifier).selectBlock(area),
                       ),

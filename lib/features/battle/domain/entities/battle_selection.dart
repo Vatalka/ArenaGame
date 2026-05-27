@@ -8,8 +8,11 @@ enum Area { head, body, legs }
 
 @freezed
 abstract class BattleSelection with _$BattleSelection {
-  const factory BattleSelection({Area? selectedAttack, Area? selectedBlock}) =
-  _BattleSelection;
+  const factory BattleSelection({
+    Area? selectedAttack,
+    Area? selectedBlock,
+    @Default(false) bool isBotMode,
+  }) = _BattleSelection;
 
   const BattleSelection._();
 

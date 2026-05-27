@@ -15,17 +15,22 @@ class BattleNotifier extends _$BattleNotifier {
   @override
   BattleSelection build() => const BattleSelection();
 
-  void selectAttack(Area? area) {
-    state = state.copyWith(selectedAttack: area);
-  }
+  void selectAttack(Area? area) => state = state.copyWith(selectedAttack: area);
 
-  void selectBlock(Area? area) {
-    state = state.copyWith(selectedBlock: area);
+  void selectBlock(Area? area) => state = state.copyWith(selectedBlock: area);
+
+  void enableBotMode() {
+    final player = ref.read(playerProvider);
+    final bot = ref.read(botProvider);
+    state = state.copyWith(isBotMode: true);
+    ref
+        .read(battleLogProvider.notifier)
+        .addLog('Почався бій між ${player.name} та ${bot.name}', LogType.info);
   }
 
   void confirmTurn() {
-    final player = ref.watch(playerProvider);
-    final bot = ref.watch(botProvider);
+    final player = ref.read(playerProvider);
+    final bot = ref.read(botProvider);
 
     final playerAttackArea = state.selectedAttack;
     final playerBlockArea = state.selectedBlock;

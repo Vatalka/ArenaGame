@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$BattleSelection {
 
- Area? get selectedAttack; Area? get selectedBlock;
+ Area? get selectedAttack; Area? get selectedBlock; bool get isBotMode;
 /// Create a copy of BattleSelection
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $BattleSelectionCopyWith<BattleSelection> get copyWith => _$BattleSelectionCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BattleSelection&&(identical(other.selectedAttack, selectedAttack) || other.selectedAttack == selectedAttack)&&(identical(other.selectedBlock, selectedBlock) || other.selectedBlock == selectedBlock));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BattleSelection&&(identical(other.selectedAttack, selectedAttack) || other.selectedAttack == selectedAttack)&&(identical(other.selectedBlock, selectedBlock) || other.selectedBlock == selectedBlock)&&(identical(other.isBotMode, isBotMode) || other.isBotMode == isBotMode));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,selectedAttack,selectedBlock);
+int get hashCode => Object.hash(runtimeType,selectedAttack,selectedBlock,isBotMode);
 
 @override
 String toString() {
-  return 'BattleSelection(selectedAttack: $selectedAttack, selectedBlock: $selectedBlock)';
+  return 'BattleSelection(selectedAttack: $selectedAttack, selectedBlock: $selectedBlock, isBotMode: $isBotMode)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $BattleSelectionCopyWith<$Res>  {
   factory $BattleSelectionCopyWith(BattleSelection value, $Res Function(BattleSelection) _then) = _$BattleSelectionCopyWithImpl;
 @useResult
 $Res call({
- Area? selectedAttack, Area? selectedBlock
+ Area? selectedAttack, Area? selectedBlock, bool isBotMode
 });
 
 
@@ -65,11 +65,12 @@ class _$BattleSelectionCopyWithImpl<$Res>
 
 /// Create a copy of BattleSelection
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? selectedAttack = freezed,Object? selectedBlock = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? selectedAttack = freezed,Object? selectedBlock = freezed,Object? isBotMode = null,}) {
   return _then(_self.copyWith(
 selectedAttack: freezed == selectedAttack ? _self.selectedAttack : selectedAttack // ignore: cast_nullable_to_non_nullable
 as Area?,selectedBlock: freezed == selectedBlock ? _self.selectedBlock : selectedBlock // ignore: cast_nullable_to_non_nullable
-as Area?,
+as Area?,isBotMode: null == isBotMode ? _self.isBotMode : isBotMode // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -154,10 +155,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Area? selectedAttack,  Area? selectedBlock)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Area? selectedAttack,  Area? selectedBlock,  bool isBotMode)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _BattleSelection() when $default != null:
-return $default(_that.selectedAttack,_that.selectedBlock);case _:
+return $default(_that.selectedAttack,_that.selectedBlock,_that.isBotMode);case _:
   return orElse();
 
 }
@@ -175,10 +176,10 @@ return $default(_that.selectedAttack,_that.selectedBlock);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Area? selectedAttack,  Area? selectedBlock)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Area? selectedAttack,  Area? selectedBlock,  bool isBotMode)  $default,) {final _that = this;
 switch (_that) {
 case _BattleSelection():
-return $default(_that.selectedAttack,_that.selectedBlock);case _:
+return $default(_that.selectedAttack,_that.selectedBlock,_that.isBotMode);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -195,10 +196,10 @@ return $default(_that.selectedAttack,_that.selectedBlock);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Area? selectedAttack,  Area? selectedBlock)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Area? selectedAttack,  Area? selectedBlock,  bool isBotMode)?  $default,) {final _that = this;
 switch (_that) {
 case _BattleSelection() when $default != null:
-return $default(_that.selectedAttack,_that.selectedBlock);case _:
+return $default(_that.selectedAttack,_that.selectedBlock,_that.isBotMode);case _:
   return null;
 
 }
@@ -210,11 +211,12 @@ return $default(_that.selectedAttack,_that.selectedBlock);case _:
 @JsonSerializable()
 
 class _BattleSelection extends BattleSelection {
-  const _BattleSelection({this.selectedAttack, this.selectedBlock}): super._();
+  const _BattleSelection({this.selectedAttack, this.selectedBlock, this.isBotMode = false}): super._();
   factory _BattleSelection.fromJson(Map<String, dynamic> json) => _$BattleSelectionFromJson(json);
 
 @override final  Area? selectedAttack;
 @override final  Area? selectedBlock;
+@override@JsonKey() final  bool isBotMode;
 
 /// Create a copy of BattleSelection
 /// with the given fields replaced by the non-null parameter values.
@@ -229,16 +231,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BattleSelection&&(identical(other.selectedAttack, selectedAttack) || other.selectedAttack == selectedAttack)&&(identical(other.selectedBlock, selectedBlock) || other.selectedBlock == selectedBlock));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BattleSelection&&(identical(other.selectedAttack, selectedAttack) || other.selectedAttack == selectedAttack)&&(identical(other.selectedBlock, selectedBlock) || other.selectedBlock == selectedBlock)&&(identical(other.isBotMode, isBotMode) || other.isBotMode == isBotMode));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,selectedAttack,selectedBlock);
+int get hashCode => Object.hash(runtimeType,selectedAttack,selectedBlock,isBotMode);
 
 @override
 String toString() {
-  return 'BattleSelection(selectedAttack: $selectedAttack, selectedBlock: $selectedBlock)';
+  return 'BattleSelection(selectedAttack: $selectedAttack, selectedBlock: $selectedBlock, isBotMode: $isBotMode)';
 }
 
 
@@ -249,7 +251,7 @@ abstract mixin class _$BattleSelectionCopyWith<$Res> implements $BattleSelection
   factory _$BattleSelectionCopyWith(_BattleSelection value, $Res Function(_BattleSelection) _then) = __$BattleSelectionCopyWithImpl;
 @override @useResult
 $Res call({
- Area? selectedAttack, Area? selectedBlock
+ Area? selectedAttack, Area? selectedBlock, bool isBotMode
 });
 
 
@@ -266,11 +268,12 @@ class __$BattleSelectionCopyWithImpl<$Res>
 
 /// Create a copy of BattleSelection
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? selectedAttack = freezed,Object? selectedBlock = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? selectedAttack = freezed,Object? selectedBlock = freezed,Object? isBotMode = null,}) {
   return _then(_BattleSelection(
 selectedAttack: freezed == selectedAttack ? _self.selectedAttack : selectedAttack // ignore: cast_nullable_to_non_nullable
 as Area?,selectedBlock: freezed == selectedBlock ? _self.selectedBlock : selectedBlock // ignore: cast_nullable_to_non_nullable
-as Area?,
+as Area?,isBotMode: null == isBotMode ? _self.isBotMode : isBotMode // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
