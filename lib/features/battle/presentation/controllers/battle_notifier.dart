@@ -33,16 +33,19 @@ class BattleNotifier extends _$BattleNotifier {
   }
 
   void confirmTurn() {
+    _processPlayerTurn();
+    _processBotTurn();
+    _checkBattleOver();
+  }
+
+  void _processPlayerTurn() {
     final player = ref.read(playerProvider);
     final bot = ref.read(botProvider);
-
     final playerAttackArea = state.selectedAttack;
-    final playerBlockArea = state.selectedBlock;
-
-    final botAttackArea = _getRandomArea();
     final botBlockArea = _getRandomArea();
 
     int damageToBot = player.strength;
+
     if (playerAttackArea == botBlockArea) {
       damageToBot = 0;
       ref
@@ -55,13 +58,22 @@ class BattleNotifier extends _$BattleNotifier {
       ref
           .read(battleLogProvider.notifier)
           .addLog(
-            '${player.name} влупив у $playerAttackArea на $damageToBot шкоди!',
+            '${player.name} влучив у $playerAttackArea на $damageToBot шкоди!',
             LogType.attack,
           );
     }
+
     ref.read(botProvider.notifier).takeDamage(damageToBot);
+  }
+
+  void _processBotTurn() {
+    final player = ref.read(playerProvider);
+    final bot = ref.read(botProvider);
+    final botAttackArea = _getRandomArea();
+    final playerBlockArea = state.selectedBlock;
 
     int damageToPlayer = bot.strength;
+
     if (botAttackArea == playerBlockArea) {
       damageToPlayer = 0;
       ref
@@ -78,39 +90,39 @@ class BattleNotifier extends _$BattleNotifier {
             LogType.attack,
           );
     }
+
     ref.read(playerProvider.notifier).takeDamage(damageToPlayer);
-
-    final updatedPlayer = ref.read(playerProvider);
-    final updatedBot = ref.read(botProvider);
-
-    final isPlayerDead = updatedPlayer.currentHp <= 0;
-    final isBotDead = updatedBot.currentHp <= 0;
-
-    if (isPlayerDead || isBotDead) {
-      String battleOverMessage = '';
-
-      if (isPlayerDead && isBotDead) {
-        battleOverMessage = 'Бій завершено нічиєю! Обидва бійці непритомні.';
-      } else if (isBotDead) {
-        battleOverMessage =
-            'Бій завершено! Переміг ${player.name}!';
-      } else if (isPlayerDead) {
-        battleOverMessage =
-            'Бій завершено! Переміг ${bot.name}. Спробуйте ще раз!';
-      }
-      ref
-          .read(battleLogProvider.notifier)
-          .addLog(
-            battleOverMessage,
-            LogType.info,
-          );
-      disableBotMode();
-    }
   }
 
   Area _getRandomArea() {
     final areas = Area.values;
     final randomIndex = _random.nextInt(areas.length);
     return areas[randomIndex];
+  }
+
+  void _checkBattleOver() {
+    final player = ref.read(playerProvider);
+    final bot = ref.read(botProvider);
+
+    final isPlayerLose = player.currentHp <= 0;
+    final isBotLose = bot.currentHp <= 0;
+
+    if (isPlayerLose || isBotLose) {
+      String gameOverMessage = '';
+
+      if (isPlayerLose && isBotLose) {
+        gameOverMessage = 'Бій завершено нічиєю! Обидва бійці непритомні!';
+      } else if (isBotLose) {
+        gameOverMessage = 'Бій завершено! Переміг гравець ${player.name}!';
+      } else if (isPlayerLose) {
+        gameOverMessage =
+            'Бій завершено! Переміг ${bot.name}. Спробуйте ще раз!';
+      }
+
+      ref
+          .read(battleLogProvider.notifier)
+          .addLog(gameOverMessage, LogType.info);
+      disableBotMode();
+    }
   }
 }
