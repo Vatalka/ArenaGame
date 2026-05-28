@@ -10,8 +10,6 @@ part 'battle_notifier.g.dart';
 
 @riverpod
 class BattleNotifier extends _$BattleNotifier {
-  final _random = Random();
-
   @override
   BattleSelection build() => const BattleSelection();
 
@@ -22,7 +20,11 @@ class BattleNotifier extends _$BattleNotifier {
   void enableBotMode() {
     final player = ref.read(playerProvider);
     final bot = ref.read(botProvider);
-    state = state.copyWith(isBotMode: true);
+    state = state.copyWith(
+      isBotMode: true,
+      selectedAttack: null,
+      selectedBlock: null,
+    );
     ref
         .read(battleLogProvider.notifier)
         .addLog('Почався бій між ${player.name} та ${bot.name}', LogType.info);
@@ -33,6 +35,7 @@ class BattleNotifier extends _$BattleNotifier {
   }
 
   void confirmTurn() {
+    if (!state.isBotMode) return;
     _processPlayerTurn();
     _processBotTurn();
     _checkBattleOver();
@@ -95,8 +98,9 @@ class BattleNotifier extends _$BattleNotifier {
   }
 
   Area _getRandomArea() {
+    final random = Random();
     final areas = Area.values;
-    final randomIndex = _random.nextInt(areas.length);
+    final randomIndex = random.nextInt(areas.length);
     return areas[randomIndex];
   }
 
@@ -122,6 +126,7 @@ class BattleNotifier extends _$BattleNotifier {
       ref
           .read(battleLogProvider.notifier)
           .addLog(gameOverMessage, LogType.info);
+
       disableBotMode();
     }
   }

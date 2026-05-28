@@ -8,6 +8,7 @@ class AttackConfirmButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(battleProvider);
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
@@ -18,7 +19,7 @@ class AttackConfirmButton extends ConsumerWidget {
                 ? Theme.of(context).colorScheme.primaryContainer
                 : Theme.of(context).colorScheme.secondaryContainer,
           ),
-          onPressed: state.isTurnReady
+          onPressed: (state.isTurnReady && state.isBotMode)
               ? ref.read(battleProvider.notifier).confirmTurn
               : null,
           child: const Text("Attack"),

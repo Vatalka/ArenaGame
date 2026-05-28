@@ -7,9 +7,7 @@ part 'battle_log_notifier.g.dart';
 @riverpod
 class BattleLogNotifier extends _$BattleLogNotifier {
   @override
-  List<BattleLogItem> build() {
-    return [];
-  }
+  List<BattleLogItem> build() => [];
 
   void addLog(String message, LogType type) {
     final newItem = BattleLogItem(

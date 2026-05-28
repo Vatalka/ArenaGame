@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 class SelectionGroup extends StatelessWidget {
   final String title;
   final Area? currentSelection;
-  final Function(Area?) onSelected;
+  final void Function(Area?)? onSelected;
 
   const SelectionGroup({
     super.key,
     required this.title,
     this.currentSelection,
-    required this.onSelected,
+    this.onSelected,
   });
 
   @override
@@ -40,9 +40,11 @@ class SelectionGroup extends StatelessWidget {
                       child: Center(child: Text(area.name)),
                     ),
                     selected: isSelected,
-                    onSelected: (bool selected) {
-                      onSelected(selected ? area : null);
-                    },
+                    onSelected: onSelected != null
+                        ? (bool selected) {
+                            onSelected!.call(selected ? area : null);
+                          }
+                        : null,
                     elevation: 4,
                     showCheckmark: false,
                   ),

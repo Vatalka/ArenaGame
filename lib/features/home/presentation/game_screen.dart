@@ -16,9 +16,9 @@ class GameScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final gameMode = ref.watch(battleProvider);
+    final isFightMode = ref.watch(battleProvider).isBotMode;
     final player = ref.watch(playerProvider);
-    final bot = ref.watch(botProvider);
+
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) async {
@@ -36,8 +36,8 @@ class GameScreen extends ConsumerWidget {
                   children: [
                     Expanded(child: CharacterCard(character: player)),
                     Expanded(
-                      child: gameMode.isBotMode
-                          ? CharacterCard(character: bot)
+                      child: isFightMode
+                          ? CharacterCard(character: ref.watch(botProvider))
                           : const BattleModeSelector(),
                     ),
                   ],
@@ -52,9 +52,11 @@ class GameScreen extends ConsumerWidget {
                         currentSelection: ref
                             .watch(battleProvider)
                             .selectedAttack,
-                        onSelected: (area) => ref
-                            .read(battleProvider.notifier)
-                            .selectAttack(area),
+                        onSelected: isFightMode
+                            ? (area) => ref
+                                  .read(battleProvider.notifier)
+                                  .selectAttack(area)
+                            : null,
                       ),
                     ),
                     Expanded(
@@ -63,8 +65,11 @@ class GameScreen extends ConsumerWidget {
                         currentSelection: ref
                             .watch(battleProvider)
                             .selectedBlock,
-                        onSelected: (area) =>
-                            ref.read(battleProvider.notifier).selectBlock(area),
+                        onSelected: isFightMode
+                            ? (area) => ref
+                                  .read(battleProvider.notifier)
+                                  .selectBlock(area)
+                            : null,
                       ),
                     ),
                   ],
@@ -89,9 +94,9 @@ class GameScreen extends ConsumerWidget {
                   ],
                 ),
                 SizedBox(height: 8, width: 8),
-                Expanded(
-                  child: Placeholder(child: Center(child: Text('Game Chat'))),
-                ),
+                // Expanded(
+                //   child: Placeholder(child: Center(child: Text('Game Chat'))),
+                // ),
               ],
             ),
           ),
