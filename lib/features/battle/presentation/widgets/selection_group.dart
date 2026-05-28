@@ -1,10 +1,12 @@
 import 'package:arena_game/features/battle/domain/entities/battle_selection.dart';
 import 'package:flutter/material.dart';
 
+typedef AreaSelectionCallback = void Function(Area? area);
+
 class SelectionGroup extends StatelessWidget {
   final String title;
   final Area? currentSelection;
-  final void Function(Area?)? onSelected;
+  final AreaSelectionCallback? onSelected;
 
   const SelectionGroup({
     super.key,

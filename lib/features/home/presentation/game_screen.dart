@@ -94,9 +94,9 @@ class GameScreen extends ConsumerWidget {
                   ],
                 ),
                 SizedBox(height: 8, width: 8),
-                // Expanded(
-                //   child: Placeholder(child: Center(child: Text('Game Chat'))),
-                // ),
+                Expanded(
+                  child: Placeholder(child: Center(child: Text('Game Chat'))),
+                ),
               ],
             ),
           ),

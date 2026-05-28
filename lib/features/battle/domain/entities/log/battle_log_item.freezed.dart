@@ -11,11 +11,38 @@ part of 'battle_log_item.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
+BattleLogItem _$BattleLogItemFromJson(
+  Map<String, dynamic> json
+) {
+        switch (json['runtimeType']) {
+                  case 'info':
+          return _InfoLog.fromJson(
+            json
+          );
+                case 'attack':
+          return _AttackLog.fromJson(
+            json
+          );
+                case 'block':
+          return _BlockLog.fromJson(
+            json
+          );
+        
+          default:
+            throw CheckedFromJsonException(
+  json,
+  'runtimeType',
+  'BattleLogItem',
+  'Invalid union type "${json['runtimeType']}"!'
+);
+        }
+      
+}
 
 /// @nodoc
 mixin _$BattleLogItem {
 
- String get id; DateTime get timestamp; String get message; LogType get type;
+ String get id; DateTime get timestamp;
 /// Create a copy of BattleLogItem
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +55,16 @@ $BattleLogItemCopyWith<BattleLogItem> get copyWith => _$BattleLogItemCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BattleLogItem&&(identical(other.id, id) || other.id == id)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&(identical(other.message, message) || other.message == message)&&(identical(other.type, type) || other.type == type));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BattleLogItem&&(identical(other.id, id) || other.id == id)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,timestamp,message,type);
+int get hashCode => Object.hash(runtimeType,id,timestamp);
 
 @override
 String toString() {
-  return 'BattleLogItem(id: $id, timestamp: $timestamp, message: $message, type: $type)';
+  return 'BattleLogItem(id: $id, timestamp: $timestamp)';
 }
 
 
@@ -48,7 +75,7 @@ abstract mixin class $BattleLogItemCopyWith<$Res>  {
   factory $BattleLogItemCopyWith(BattleLogItem value, $Res Function(BattleLogItem) _then) = _$BattleLogItemCopyWithImpl;
 @useResult
 $Res call({
- String id, DateTime timestamp, String message, LogType type
+ String id, DateTime timestamp
 });
 
 
@@ -65,13 +92,11 @@ class _$BattleLogItemCopyWithImpl<$Res>
 
 /// Create a copy of BattleLogItem
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? timestamp = null,Object? message = null,Object? type = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? timestamp = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,timestamp: null == timestamp ? _self.timestamp : timestamp // ignore: cast_nullable_to_non_nullable
-as DateTime,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
-as LogType,
+as DateTime,
   ));
 }
 
@@ -92,11 +117,13 @@ extension BattleLogItemPatterns on BattleLogItem {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _BattleLogItem value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _InfoLog value)?  info,TResult Function( _AttackLog value)?  attack,TResult Function( _BlockLog value)?  block,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _BattleLogItem() when $default != null:
-return $default(_that);case _:
+case _InfoLog() when info != null:
+return info(_that);case _AttackLog() when attack != null:
+return attack(_that);case _BlockLog() when block != null:
+return block(_that);case _:
   return orElse();
 
 }
@@ -114,11 +141,13 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _BattleLogItem value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _InfoLog value)  info,required TResult Function( _AttackLog value)  attack,required TResult Function( _BlockLog value)  block,}){
 final _that = this;
 switch (_that) {
-case _BattleLogItem():
-return $default(_that);case _:
+case _InfoLog():
+return info(_that);case _AttackLog():
+return attack(_that);case _BlockLog():
+return block(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -135,11 +164,13 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _BattleLogItem value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _InfoLog value)?  info,TResult? Function( _AttackLog value)?  attack,TResult? Function( _BlockLog value)?  block,}){
 final _that = this;
 switch (_that) {
-case _BattleLogItem() when $default != null:
-return $default(_that);case _:
+case _InfoLog() when info != null:
+return info(_that);case _AttackLog() when attack != null:
+return attack(_that);case _BlockLog() when block != null:
+return block(_that);case _:
   return null;
 
 }
@@ -156,10 +187,12 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  DateTime timestamp,  String message,  LogType type)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String id,  DateTime timestamp,  String message)?  info,TResult Function( String id,  DateTime timestamp,  String attackerName,  Area area,  int damage)?  attack,TResult Function( String id,  DateTime timestamp,  String defenderName,  Area area)?  block,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _BattleLogItem() when $default != null:
-return $default(_that.id,_that.timestamp,_that.message,_that.type);case _:
+case _InfoLog() when info != null:
+return info(_that.id,_that.timestamp,_that.message);case _AttackLog() when attack != null:
+return attack(_that.id,_that.timestamp,_that.attackerName,_that.area,_that.damage);case _BlockLog() when block != null:
+return block(_that.id,_that.timestamp,_that.defenderName,_that.area);case _:
   return orElse();
 
 }
@@ -177,10 +210,12 @@ return $default(_that.id,_that.timestamp,_that.message,_that.type);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  DateTime timestamp,  String message,  LogType type)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String id,  DateTime timestamp,  String message)  info,required TResult Function( String id,  DateTime timestamp,  String attackerName,  Area area,  int damage)  attack,required TResult Function( String id,  DateTime timestamp,  String defenderName,  Area area)  block,}) {final _that = this;
 switch (_that) {
-case _BattleLogItem():
-return $default(_that.id,_that.timestamp,_that.message,_that.type);case _:
+case _InfoLog():
+return info(_that.id,_that.timestamp,_that.message);case _AttackLog():
+return attack(_that.id,_that.timestamp,_that.attackerName,_that.area,_that.damage);case _BlockLog():
+return block(_that.id,_that.timestamp,_that.defenderName,_that.area);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -197,10 +232,12 @@ return $default(_that.id,_that.timestamp,_that.message,_that.type);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  DateTime timestamp,  String message,  LogType type)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String id,  DateTime timestamp,  String message)?  info,TResult? Function( String id,  DateTime timestamp,  String attackerName,  Area area,  int damage)?  attack,TResult? Function( String id,  DateTime timestamp,  String defenderName,  Area area)?  block,}) {final _that = this;
 switch (_that) {
-case _BattleLogItem() when $default != null:
-return $default(_that.id,_that.timestamp,_that.message,_that.type);case _:
+case _InfoLog() when info != null:
+return info(_that.id,_that.timestamp,_that.message);case _AttackLog() when attack != null:
+return attack(_that.id,_that.timestamp,_that.attackerName,_that.area,_that.damage);case _BlockLog() when block != null:
+return block(_that.id,_that.timestamp,_that.defenderName,_that.area);case _:
   return null;
 
 }
@@ -211,49 +248,52 @@ return $default(_that.id,_that.timestamp,_that.message,_that.type);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _BattleLogItem implements BattleLogItem {
-  const _BattleLogItem({required this.id, required this.timestamp, required this.message, required this.type});
-  factory _BattleLogItem.fromJson(Map<String, dynamic> json) => _$BattleLogItemFromJson(json);
+class _InfoLog implements BattleLogItem {
+  const _InfoLog({required this.id, required this.timestamp, required this.message, final  String? $type}): $type = $type ?? 'info';
+  factory _InfoLog.fromJson(Map<String, dynamic> json) => _$InfoLogFromJson(json);
 
 @override final  String id;
 @override final  DateTime timestamp;
-@override final  String message;
-@override final  LogType type;
+ final  String message;
+
+@JsonKey(name: 'runtimeType')
+final String $type;
+
 
 /// Create a copy of BattleLogItem
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$BattleLogItemCopyWith<_BattleLogItem> get copyWith => __$BattleLogItemCopyWithImpl<_BattleLogItem>(this, _$identity);
+_$InfoLogCopyWith<_InfoLog> get copyWith => __$InfoLogCopyWithImpl<_InfoLog>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$BattleLogItemToJson(this, );
+  return _$InfoLogToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BattleLogItem&&(identical(other.id, id) || other.id == id)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&(identical(other.message, message) || other.message == message)&&(identical(other.type, type) || other.type == type));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _InfoLog&&(identical(other.id, id) || other.id == id)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&(identical(other.message, message) || other.message == message));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,timestamp,message,type);
+int get hashCode => Object.hash(runtimeType,id,timestamp,message);
 
 @override
 String toString() {
-  return 'BattleLogItem(id: $id, timestamp: $timestamp, message: $message, type: $type)';
+  return 'BattleLogItem.info(id: $id, timestamp: $timestamp, message: $message)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$BattleLogItemCopyWith<$Res> implements $BattleLogItemCopyWith<$Res> {
-  factory _$BattleLogItemCopyWith(_BattleLogItem value, $Res Function(_BattleLogItem) _then) = __$BattleLogItemCopyWithImpl;
+abstract mixin class _$InfoLogCopyWith<$Res> implements $BattleLogItemCopyWith<$Res> {
+  factory _$InfoLogCopyWith(_InfoLog value, $Res Function(_InfoLog) _then) = __$InfoLogCopyWithImpl;
 @override @useResult
 $Res call({
- String id, DateTime timestamp, String message, LogType type
+ String id, DateTime timestamp, String message
 });
 
 
@@ -261,22 +301,181 @@ $Res call({
 
 }
 /// @nodoc
-class __$BattleLogItemCopyWithImpl<$Res>
-    implements _$BattleLogItemCopyWith<$Res> {
-  __$BattleLogItemCopyWithImpl(this._self, this._then);
+class __$InfoLogCopyWithImpl<$Res>
+    implements _$InfoLogCopyWith<$Res> {
+  __$InfoLogCopyWithImpl(this._self, this._then);
 
-  final _BattleLogItem _self;
-  final $Res Function(_BattleLogItem) _then;
+  final _InfoLog _self;
+  final $Res Function(_InfoLog) _then;
 
 /// Create a copy of BattleLogItem
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? timestamp = null,Object? message = null,Object? type = null,}) {
-  return _then(_BattleLogItem(
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? timestamp = null,Object? message = null,}) {
+  return _then(_InfoLog(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,timestamp: null == timestamp ? _self.timestamp : timestamp // ignore: cast_nullable_to_non_nullable
 as DateTime,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
-as LogType,
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _AttackLog implements BattleLogItem {
+  const _AttackLog({required this.id, required this.timestamp, required this.attackerName, required this.area, required this.damage, final  String? $type}): $type = $type ?? 'attack';
+  factory _AttackLog.fromJson(Map<String, dynamic> json) => _$AttackLogFromJson(json);
+
+@override final  String id;
+@override final  DateTime timestamp;
+ final  String attackerName;
+ final  Area area;
+ final  int damage;
+
+@JsonKey(name: 'runtimeType')
+final String $type;
+
+
+/// Create a copy of BattleLogItem
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$AttackLogCopyWith<_AttackLog> get copyWith => __$AttackLogCopyWithImpl<_AttackLog>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$AttackLogToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AttackLog&&(identical(other.id, id) || other.id == id)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&(identical(other.attackerName, attackerName) || other.attackerName == attackerName)&&(identical(other.area, area) || other.area == area)&&(identical(other.damage, damage) || other.damage == damage));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,timestamp,attackerName,area,damage);
+
+@override
+String toString() {
+  return 'BattleLogItem.attack(id: $id, timestamp: $timestamp, attackerName: $attackerName, area: $area, damage: $damage)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$AttackLogCopyWith<$Res> implements $BattleLogItemCopyWith<$Res> {
+  factory _$AttackLogCopyWith(_AttackLog value, $Res Function(_AttackLog) _then) = __$AttackLogCopyWithImpl;
+@override @useResult
+$Res call({
+ String id, DateTime timestamp, String attackerName, Area area, int damage
+});
+
+
+
+
+}
+/// @nodoc
+class __$AttackLogCopyWithImpl<$Res>
+    implements _$AttackLogCopyWith<$Res> {
+  __$AttackLogCopyWithImpl(this._self, this._then);
+
+  final _AttackLog _self;
+  final $Res Function(_AttackLog) _then;
+
+/// Create a copy of BattleLogItem
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? timestamp = null,Object? attackerName = null,Object? area = null,Object? damage = null,}) {
+  return _then(_AttackLog(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,timestamp: null == timestamp ? _self.timestamp : timestamp // ignore: cast_nullable_to_non_nullable
+as DateTime,attackerName: null == attackerName ? _self.attackerName : attackerName // ignore: cast_nullable_to_non_nullable
+as String,area: null == area ? _self.area : area // ignore: cast_nullable_to_non_nullable
+as Area,damage: null == damage ? _self.damage : damage // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _BlockLog implements BattleLogItem {
+  const _BlockLog({required this.id, required this.timestamp, required this.defenderName, required this.area, final  String? $type}): $type = $type ?? 'block';
+  factory _BlockLog.fromJson(Map<String, dynamic> json) => _$BlockLogFromJson(json);
+
+@override final  String id;
+@override final  DateTime timestamp;
+ final  String defenderName;
+ final  Area area;
+
+@JsonKey(name: 'runtimeType')
+final String $type;
+
+
+/// Create a copy of BattleLogItem
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$BlockLogCopyWith<_BlockLog> get copyWith => __$BlockLogCopyWithImpl<_BlockLog>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$BlockLogToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BlockLog&&(identical(other.id, id) || other.id == id)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&(identical(other.defenderName, defenderName) || other.defenderName == defenderName)&&(identical(other.area, area) || other.area == area));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,timestamp,defenderName,area);
+
+@override
+String toString() {
+  return 'BattleLogItem.block(id: $id, timestamp: $timestamp, defenderName: $defenderName, area: $area)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$BlockLogCopyWith<$Res> implements $BattleLogItemCopyWith<$Res> {
+  factory _$BlockLogCopyWith(_BlockLog value, $Res Function(_BlockLog) _then) = __$BlockLogCopyWithImpl;
+@override @useResult
+$Res call({
+ String id, DateTime timestamp, String defenderName, Area area
+});
+
+
+
+
+}
+/// @nodoc
+class __$BlockLogCopyWithImpl<$Res>
+    implements _$BlockLogCopyWith<$Res> {
+  __$BlockLogCopyWithImpl(this._self, this._then);
+
+  final _BlockLog _self;
+  final $Res Function(_BlockLog) _then;
+
+/// Create a copy of BattleLogItem
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? timestamp = null,Object? defenderName = null,Object? area = null,}) {
+  return _then(_BlockLog(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,timestamp: null == timestamp ? _self.timestamp : timestamp // ignore: cast_nullable_to_non_nullable
+as DateTime,defenderName: null == defenderName ? _self.defenderName : defenderName // ignore: cast_nullable_to_non_nullable
+as String,area: null == area ? _self.area : area // ignore: cast_nullable_to_non_nullable
+as Area,
   ));
 }
 

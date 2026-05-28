@@ -1,3 +1,4 @@
+import 'package:arena_game/features/battle/domain/entities/battle_selection.dart';
 import 'package:arena_game/features/battle/domain/entities/log/battle_log_item.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
@@ -9,14 +10,41 @@ class BattleLogNotifier extends _$BattleLogNotifier {
   @override
   List<BattleLogItem> build() => [];
 
-  void addLog(String message, LogType type) {
-    final newItem = BattleLogItem(
-      id: const Uuid().v4(),
-      timestamp: DateTime.now(),
-      message: message,
-      type: type,
+  void addInfoLog(String message) {
+    _addLog(
+      BattleLogItem.info(
+        id: const Uuid().v4(),
+        timestamp: DateTime.now(),
+        message: message,
+      ),
     );
-    state = [...state, newItem];
+  }
+
+  void addAttackLog(String attackerName, Area area, int damage) {
+    _addLog(
+      BattleLogItem.attack(
+        id: const Uuid().v4(),
+        timestamp: DateTime.now(),
+        attackerName: attackerName,
+        area: area,
+        damage: damage,
+      ),
+    );
+  }
+
+  void addBlockLog(String defenderName, Area area) {
+    _addLog(
+      BattleLogItem.block(
+        id: const Uuid().v4(),
+        timestamp: DateTime.now(),
+        defenderName: defenderName,
+        area: area,
+      ),
+    );
+  }
+
+  void _addLog(BattleLogItem item) {
+    state = [...state, item];
   }
 
   void clearLog() {

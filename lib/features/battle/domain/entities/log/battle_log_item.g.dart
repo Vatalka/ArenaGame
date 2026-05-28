@@ -6,25 +6,53 @@ part of 'battle_log_item.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_BattleLogItem _$BattleLogItemFromJson(Map<String, dynamic> json) =>
-    _BattleLogItem(
-      id: json['id'] as String,
-      timestamp: DateTime.parse(json['timestamp'] as String),
-      message: json['message'] as String,
-      type: $enumDecode(_$LogTypeEnumMap, json['type']),
-    );
+_InfoLog _$InfoLogFromJson(Map<String, dynamic> json) => _InfoLog(
+  id: json['id'] as String,
+  timestamp: DateTime.parse(json['timestamp'] as String),
+  message: json['message'] as String,
+  $type: json['runtimeType'] as String?,
+);
 
-Map<String, dynamic> _$BattleLogItemToJson(_BattleLogItem instance) =>
+Map<String, dynamic> _$InfoLogToJson(_InfoLog instance) => <String, dynamic>{
+  'id': instance.id,
+  'timestamp': instance.timestamp.toIso8601String(),
+  'message': instance.message,
+  'runtimeType': instance.$type,
+};
+
+_AttackLog _$AttackLogFromJson(Map<String, dynamic> json) => _AttackLog(
+  id: json['id'] as String,
+  timestamp: DateTime.parse(json['timestamp'] as String),
+  attackerName: json['attackerName'] as String,
+  area: $enumDecode(_$AreaEnumMap, json['area']),
+  damage: (json['damage'] as num).toInt(),
+  $type: json['runtimeType'] as String?,
+);
+
+Map<String, dynamic> _$AttackLogToJson(_AttackLog instance) =>
     <String, dynamic>{
       'id': instance.id,
       'timestamp': instance.timestamp.toIso8601String(),
-      'message': instance.message,
-      'type': _$LogTypeEnumMap[instance.type]!,
+      'attackerName': instance.attackerName,
+      'area': _$AreaEnumMap[instance.area]!,
+      'damage': instance.damage,
+      'runtimeType': instance.$type,
     };
 
-const _$LogTypeEnumMap = {
-  LogType.info: 'info',
-  LogType.attack: 'attack',
-  LogType.block: 'block',
-  LogType.damage: 'damage',
+const _$AreaEnumMap = {Area.head: 'head', Area.body: 'body', Area.legs: 'legs'};
+
+_BlockLog _$BlockLogFromJson(Map<String, dynamic> json) => _BlockLog(
+  id: json['id'] as String,
+  timestamp: DateTime.parse(json['timestamp'] as String),
+  defenderName: json['defenderName'] as String,
+  area: $enumDecode(_$AreaEnumMap, json['area']),
+  $type: json['runtimeType'] as String?,
+);
+
+Map<String, dynamic> _$BlockLogToJson(_BlockLog instance) => <String, dynamic>{
+  'id': instance.id,
+  'timestamp': instance.timestamp.toIso8601String(),
+  'defenderName': instance.defenderName,
+  'area': _$AreaEnumMap[instance.area]!,
+  'runtimeType': instance.$type,
 };

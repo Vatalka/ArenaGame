@@ -1,4 +1,3 @@
-import 'package:arena_game/features/battle/domain/entities/log/battle_log_item.dart';
 import 'package:arena_game/features/battle/presentation/controllers/log/battle_log_notifier.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -22,6 +21,6 @@ class PlayerNotifier extends _$PlayerNotifier {
     state = state.copyWith(currentHp: state.maxHp);
     ref
         .read(battleLogProvider.notifier)
-        .addLog('Гравець відновлює здоровля, хитрун :)', LogType.block);
+        .addInfoLog('Гравець відновлює здоровля, хитрун :)');
   }
 }
