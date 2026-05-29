@@ -56,3 +56,26 @@ Map<String, dynamic> _$BlockLogToJson(_BlockLog instance) => <String, dynamic>{
   'area': _$AreaEnumMap[instance.area]!,
   'runtimeType': instance.$type,
 };
+
+_GameOverLog _$GameOverLogFromJson(Map<String, dynamic> json) => _GameOverLog(
+  id: json['id'] as String,
+  timestamp: DateTime.parse(json['timestamp'] as String),
+  result: $enumDecode(_$BattleResultEnumMap, json['result']),
+  winnerName: json['winnerName'] as String,
+  $type: json['runtimeType'] as String?,
+);
+
+Map<String, dynamic> _$GameOverLogToJson(_GameOverLog instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'timestamp': instance.timestamp.toIso8601String(),
+      'result': _$BattleResultEnumMap[instance.result]!,
+      'winnerName': instance.winnerName,
+      'runtimeType': instance.$type,
+    };
+
+const _$BattleResultEnumMap = {
+  BattleResult.draw: 'draw',
+  BattleResult.playerWin: 'playerWin',
+  BattleResult.botWin: 'botWin',
+};

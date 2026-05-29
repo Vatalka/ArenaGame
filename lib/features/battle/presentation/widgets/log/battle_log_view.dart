@@ -64,6 +64,31 @@ class BattleLogView extends ConsumerWidget {
                       text: ' успішно заблокував удар у ${area.toLogString}!',
                     ),
                   ],
+                  gameOver: (id, time, result, winnerName) {
+                    return [
+                      TextSpan(
+                        text: switch (result) {
+                          BattleResult.draw =>
+                            'Бій завершено нічиєю! Обидва бійці непритомні!',
+                          BattleResult.playerWin ||
+                          BattleResult.botWin => 'Бій завершено! Переміг ',
+                        },
+                        style: TextStyle(color: gameColors.logInfo),
+                      ),
+                      if (result != BattleResult.draw) ...[
+                        TextSpan(
+                          text: winnerName,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '!',
+                          style: TextStyle(color: gameColors.logInfo),
+                        ),
+                      ],
+                    ];
+                  },
                 ),
               ],
             ),

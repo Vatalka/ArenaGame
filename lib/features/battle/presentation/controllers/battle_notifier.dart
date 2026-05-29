@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:arena_game/features/battle/domain/entities/battle_selection.dart';
+import 'package:arena_game/features/battle/domain/entities/log/battle_log_item.dart';
 import 'package:arena_game/features/battle/presentation/controllers/bot/bot_notifier.dart';
 import 'package:arena_game/features/battle/presentation/controllers/log/battle_log_notifier.dart';
 import 'package:arena_game/features/battle/presentation/controllers/player/player_notifier.dart';
@@ -103,18 +104,14 @@ class BattleNotifier extends _$BattleNotifier {
     final isBotLose = bot.currentHp <= 0;
 
     if (isPlayerLose || isBotLose) {
-      String gameOverMessage = '';
+      final (result, winnerName) = switch ((isPlayerLose, isBotLose)) {
+        (true, true) => (BattleResult.draw, ''),
+        (false, true) => (BattleResult.playerWin, player.name),
+        (true, false) => (BattleResult.botWin, bot.name),
+        _ => (BattleResult.draw, ''),
+      };
 
-      if (isPlayerLose && isBotLose) {
-        gameOverMessage = 'Бій завершено нічиєю! Обидва бійці непритомні!';
-      } else if (isBotLose) {
-        gameOverMessage = 'Бій завершено! Переміг ${player.name}!';
-      } else if (isPlayerLose) {
-        gameOverMessage =
-            'Бій завершено! Переміг ${bot.name}!';
-      }
-
-      ref.read(battleLogProvider.notifier).addInfoLog(gameOverMessage);
+      ref.read(battleLogProvider.notifier).addGameOverLog(result, winnerName);
 
       disableBotMode();
     }

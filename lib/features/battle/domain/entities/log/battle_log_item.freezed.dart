@@ -27,6 +27,10 @@ BattleLogItem _$BattleLogItemFromJson(
           return _BlockLog.fromJson(
             json
           );
+                case 'gameOver':
+          return _GameOverLog.fromJson(
+            json
+          );
         
           default:
             throw CheckedFromJsonException(
@@ -117,13 +121,14 @@ extension BattleLogItemPatterns on BattleLogItem {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _InfoLog value)?  info,TResult Function( _AttackLog value)?  attack,TResult Function( _BlockLog value)?  block,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _InfoLog value)?  info,TResult Function( _AttackLog value)?  attack,TResult Function( _BlockLog value)?  block,TResult Function( _GameOverLog value)?  gameOver,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _InfoLog() when info != null:
 return info(_that);case _AttackLog() when attack != null:
 return attack(_that);case _BlockLog() when block != null:
-return block(_that);case _:
+return block(_that);case _GameOverLog() when gameOver != null:
+return gameOver(_that);case _:
   return orElse();
 
 }
@@ -141,13 +146,14 @@ return block(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _InfoLog value)  info,required TResult Function( _AttackLog value)  attack,required TResult Function( _BlockLog value)  block,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _InfoLog value)  info,required TResult Function( _AttackLog value)  attack,required TResult Function( _BlockLog value)  block,required TResult Function( _GameOverLog value)  gameOver,}){
 final _that = this;
 switch (_that) {
 case _InfoLog():
 return info(_that);case _AttackLog():
 return attack(_that);case _BlockLog():
-return block(_that);case _:
+return block(_that);case _GameOverLog():
+return gameOver(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -164,13 +170,14 @@ return block(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _InfoLog value)?  info,TResult? Function( _AttackLog value)?  attack,TResult? Function( _BlockLog value)?  block,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _InfoLog value)?  info,TResult? Function( _AttackLog value)?  attack,TResult? Function( _BlockLog value)?  block,TResult? Function( _GameOverLog value)?  gameOver,}){
 final _that = this;
 switch (_that) {
 case _InfoLog() when info != null:
 return info(_that);case _AttackLog() when attack != null:
 return attack(_that);case _BlockLog() when block != null:
-return block(_that);case _:
+return block(_that);case _GameOverLog() when gameOver != null:
+return gameOver(_that);case _:
   return null;
 
 }
@@ -187,12 +194,13 @@ return block(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String id,  DateTime timestamp,  String message)?  info,TResult Function( String id,  DateTime timestamp,  String attackerName,  Area area,  int damage)?  attack,TResult Function( String id,  DateTime timestamp,  String defenderName,  Area area)?  block,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String id,  DateTime timestamp,  String message)?  info,TResult Function( String id,  DateTime timestamp,  String attackerName,  Area area,  int damage)?  attack,TResult Function( String id,  DateTime timestamp,  String defenderName,  Area area)?  block,TResult Function( String id,  DateTime timestamp,  BattleResult result,  String winnerName)?  gameOver,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _InfoLog() when info != null:
 return info(_that.id,_that.timestamp,_that.message);case _AttackLog() when attack != null:
 return attack(_that.id,_that.timestamp,_that.attackerName,_that.area,_that.damage);case _BlockLog() when block != null:
-return block(_that.id,_that.timestamp,_that.defenderName,_that.area);case _:
+return block(_that.id,_that.timestamp,_that.defenderName,_that.area);case _GameOverLog() when gameOver != null:
+return gameOver(_that.id,_that.timestamp,_that.result,_that.winnerName);case _:
   return orElse();
 
 }
@@ -210,12 +218,13 @@ return block(_that.id,_that.timestamp,_that.defenderName,_that.area);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String id,  DateTime timestamp,  String message)  info,required TResult Function( String id,  DateTime timestamp,  String attackerName,  Area area,  int damage)  attack,required TResult Function( String id,  DateTime timestamp,  String defenderName,  Area area)  block,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String id,  DateTime timestamp,  String message)  info,required TResult Function( String id,  DateTime timestamp,  String attackerName,  Area area,  int damage)  attack,required TResult Function( String id,  DateTime timestamp,  String defenderName,  Area area)  block,required TResult Function( String id,  DateTime timestamp,  BattleResult result,  String winnerName)  gameOver,}) {final _that = this;
 switch (_that) {
 case _InfoLog():
 return info(_that.id,_that.timestamp,_that.message);case _AttackLog():
 return attack(_that.id,_that.timestamp,_that.attackerName,_that.area,_that.damage);case _BlockLog():
-return block(_that.id,_that.timestamp,_that.defenderName,_that.area);case _:
+return block(_that.id,_that.timestamp,_that.defenderName,_that.area);case _GameOverLog():
+return gameOver(_that.id,_that.timestamp,_that.result,_that.winnerName);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -232,12 +241,13 @@ return block(_that.id,_that.timestamp,_that.defenderName,_that.area);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String id,  DateTime timestamp,  String message)?  info,TResult? Function( String id,  DateTime timestamp,  String attackerName,  Area area,  int damage)?  attack,TResult? Function( String id,  DateTime timestamp,  String defenderName,  Area area)?  block,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String id,  DateTime timestamp,  String message)?  info,TResult? Function( String id,  DateTime timestamp,  String attackerName,  Area area,  int damage)?  attack,TResult? Function( String id,  DateTime timestamp,  String defenderName,  Area area)?  block,TResult? Function( String id,  DateTime timestamp,  BattleResult result,  String winnerName)?  gameOver,}) {final _that = this;
 switch (_that) {
 case _InfoLog() when info != null:
 return info(_that.id,_that.timestamp,_that.message);case _AttackLog() when attack != null:
 return attack(_that.id,_that.timestamp,_that.attackerName,_that.area,_that.damage);case _BlockLog() when block != null:
-return block(_that.id,_that.timestamp,_that.defenderName,_that.area);case _:
+return block(_that.id,_that.timestamp,_that.defenderName,_that.area);case _GameOverLog() when gameOver != null:
+return gameOver(_that.id,_that.timestamp,_that.result,_that.winnerName);case _:
   return null;
 
 }
@@ -476,6 +486,85 @@ as String,timestamp: null == timestamp ? _self.timestamp : timestamp // ignore: 
 as DateTime,defenderName: null == defenderName ? _self.defenderName : defenderName // ignore: cast_nullable_to_non_nullable
 as String,area: null == area ? _self.area : area // ignore: cast_nullable_to_non_nullable
 as Area,
+  ));
+}
+
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _GameOverLog implements BattleLogItem {
+  const _GameOverLog({required this.id, required this.timestamp, required this.result, required this.winnerName, final  String? $type}): $type = $type ?? 'gameOver';
+  factory _GameOverLog.fromJson(Map<String, dynamic> json) => _$GameOverLogFromJson(json);
+
+@override final  String id;
+@override final  DateTime timestamp;
+ final  BattleResult result;
+ final  String winnerName;
+
+@JsonKey(name: 'runtimeType')
+final String $type;
+
+
+/// Create a copy of BattleLogItem
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$GameOverLogCopyWith<_GameOverLog> get copyWith => __$GameOverLogCopyWithImpl<_GameOverLog>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$GameOverLogToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GameOverLog&&(identical(other.id, id) || other.id == id)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&(identical(other.result, result) || other.result == result)&&(identical(other.winnerName, winnerName) || other.winnerName == winnerName));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,timestamp,result,winnerName);
+
+@override
+String toString() {
+  return 'BattleLogItem.gameOver(id: $id, timestamp: $timestamp, result: $result, winnerName: $winnerName)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$GameOverLogCopyWith<$Res> implements $BattleLogItemCopyWith<$Res> {
+  factory _$GameOverLogCopyWith(_GameOverLog value, $Res Function(_GameOverLog) _then) = __$GameOverLogCopyWithImpl;
+@override @useResult
+$Res call({
+ String id, DateTime timestamp, BattleResult result, String winnerName
+});
+
+
+
+
+}
+/// @nodoc
+class __$GameOverLogCopyWithImpl<$Res>
+    implements _$GameOverLogCopyWith<$Res> {
+  __$GameOverLogCopyWithImpl(this._self, this._then);
+
+  final _GameOverLog _self;
+  final $Res Function(_GameOverLog) _then;
+
+/// Create a copy of BattleLogItem
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? timestamp = null,Object? result = null,Object? winnerName = null,}) {
+  return _then(_GameOverLog(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,timestamp: null == timestamp ? _self.timestamp : timestamp // ignore: cast_nullable_to_non_nullable
+as DateTime,result: null == result ? _self.result : result // ignore: cast_nullable_to_non_nullable
+as BattleResult,winnerName: null == winnerName ? _self.winnerName : winnerName // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 
