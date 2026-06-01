@@ -31,6 +31,7 @@ class CharacterCard extends StatelessWidget {
             Tooltip(
               message: "Strength: 1 STR = 1 Damage",
               triggerMode: TooltipTriggerMode.tap,
+              preferBelow: false,
               child: Text('STR: ${character.strength}'),
             ),
           ],

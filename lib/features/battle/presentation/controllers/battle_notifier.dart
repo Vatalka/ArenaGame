@@ -105,7 +105,6 @@ class BattleNotifier extends _$BattleNotifier {
 
     if (isPlayerLose || isBotLose) {
       final (result, winnerName) = switch ((isPlayerLose, isBotLose)) {
-        (true, true) => (BattleResult.draw, ''),
         (false, true) => (BattleResult.playerWin, player.name),
         (true, false) => (BattleResult.botWin, bot.name),
         _ => (BattleResult.draw, ''),

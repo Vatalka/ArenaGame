@@ -34,7 +34,7 @@ class HealthBar extends StatelessWidget {
               ),
               // Top layer
               TweenAnimationBuilder<double>(
-                duration: const Duration(milliseconds: 300),
+                duration: const Duration(milliseconds: 500),
                 curve: Curves.easeOutCirc,
                 tween: Tween<double>(begin: hp, end: hp),
                 builder: (context, value, child) {

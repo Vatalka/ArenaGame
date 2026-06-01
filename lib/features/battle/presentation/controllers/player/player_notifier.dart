@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:math';
+import 'package:arena_game/features/battle/presentation/controllers/battle_notifier.dart';
 import 'package:arena_game/features/battle/presentation/controllers/log/battle_log_notifier.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -6,8 +9,34 @@ part 'player_notifier.g.dart';
 
 @Riverpod(keepAlive: true)
 class PlayerNotifier extends _$PlayerNotifier {
+  Timer? _regenTimer;
+
   @override
-  Character build() => Character.createDefault();
+  Character build() {
+    ref.onDispose(() => _stopRegen());
+    _startRegen();
+    return Character.createDefault();
+  }
+
+  void _startRegen() {
+    _stopRegen();
+    _regenTimer = Timer.periodic(const Duration(seconds: 2), (timer) {
+
+      final isBattleActive = ref.read(battleProvider).isBotMode;
+      if (isBattleActive) return;
+      if (state.currentHp >= state.maxHp) return;
+
+      final regenAmount = (state.maxHp * 0.01).ceil();
+      state = state.copyWith(
+        currentHp: min(state.currentHp + regenAmount, state.maxHp),
+      );
+    });
+  }
+
+  void _stopRegen() {
+    _regenTimer?.cancel();
+    _regenTimer = null;
+  }
 
   void selectCharacter(Character character) => state = character;
 
