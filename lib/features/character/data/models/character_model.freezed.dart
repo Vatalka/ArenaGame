@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CharacterModel {
 
- String get id; String get name; int get currentHp; int get vitality; int get strength; int get lastUpdateTime;
+ String get id; String get name; int get currentHp; int get vitality; int get strength;@JsonKey(defaultValue: 0) int get lastUpdateTime;
 /// Create a copy of CharacterModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $CharacterModelCopyWith<$Res>  {
   factory $CharacterModelCopyWith(CharacterModel value, $Res Function(CharacterModel) _then) = _$CharacterModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, int currentHp, int vitality, int strength, int lastUpdateTime
+ String id, String name, int currentHp, int vitality, int strength,@JsonKey(defaultValue: 0) int lastUpdateTime
 });
 
 
@@ -158,7 +158,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  int currentHp,  int vitality,  int strength,  int lastUpdateTime)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  int currentHp,  int vitality,  int strength, @JsonKey(defaultValue: 0)  int lastUpdateTime)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CharacterModel() when $default != null:
 return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strength,_that.lastUpdateTime);case _:
@@ -179,7 +179,7 @@ return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strengt
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  int currentHp,  int vitality,  int strength,  int lastUpdateTime)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  int currentHp,  int vitality,  int strength, @JsonKey(defaultValue: 0)  int lastUpdateTime)  $default,) {final _that = this;
 switch (_that) {
 case _CharacterModel():
 return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strength,_that.lastUpdateTime);case _:
@@ -199,7 +199,7 @@ return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strengt
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  int currentHp,  int vitality,  int strength,  int lastUpdateTime)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  int currentHp,  int vitality,  int strength, @JsonKey(defaultValue: 0)  int lastUpdateTime)?  $default,) {final _that = this;
 switch (_that) {
 case _CharacterModel() when $default != null:
 return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strength,_that.lastUpdateTime);case _:
@@ -214,7 +214,7 @@ return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strengt
 @JsonSerializable()
 
 class _CharacterModel implements CharacterModel {
-  const _CharacterModel({required this.id, required this.name, required this.currentHp, required this.vitality, required this.strength, required this.lastUpdateTime});
+  const _CharacterModel({required this.id, required this.name, required this.currentHp, required this.vitality, required this.strength, @JsonKey(defaultValue: 0) required this.lastUpdateTime});
   factory _CharacterModel.fromJson(Map<String, dynamic> json) => _$CharacterModelFromJson(json);
 
 @override final  String id;
@@ -222,7 +222,7 @@ class _CharacterModel implements CharacterModel {
 @override final  int currentHp;
 @override final  int vitality;
 @override final  int strength;
-@override final  int lastUpdateTime;
+@override@JsonKey(defaultValue: 0) final  int lastUpdateTime;
 
 /// Create a copy of CharacterModel
 /// with the given fields replaced by the non-null parameter values.
@@ -257,7 +257,7 @@ abstract mixin class _$CharacterModelCopyWith<$Res> implements $CharacterModelCo
   factory _$CharacterModelCopyWith(_CharacterModel value, $Res Function(_CharacterModel) _then) = __$CharacterModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, int currentHp, int vitality, int strength, int lastUpdateTime
+ String id, String name, int currentHp, int vitality, int strength,@JsonKey(defaultValue: 0) int lastUpdateTime
 });
 
 

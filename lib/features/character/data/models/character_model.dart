@@ -13,7 +13,7 @@ abstract class CharacterModel with _$CharacterModel {
     required int currentHp,
     required int vitality,
     required int strength,
-    required int lastUpdateTime,
+    @JsonKey(defaultValue: 0) required int lastUpdateTime,
   }) = _CharacterModel;
 
   factory CharacterModel.fromJson(Map<String, dynamic> json) =>

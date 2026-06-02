@@ -13,7 +13,7 @@ _CharacterModel _$CharacterModelFromJson(Map<String, dynamic> json) =>
       currentHp: (json['currentHp'] as num).toInt(),
       vitality: (json['vitality'] as num).toInt(),
       strength: (json['strength'] as num).toInt(),
-      lastUpdateTime: (json['lastUpdateTime'] as num).toInt(),
+      lastUpdateTime: (json['lastUpdateTime'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$CharacterModelToJson(_CharacterModel instance) =>
