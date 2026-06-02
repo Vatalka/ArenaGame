@@ -13,6 +13,7 @@ abstract class CharacterModel with _$CharacterModel {
     required int currentHp,
     required int vitality,
     required int strength,
+    required int lastUpdateTime,
   }) = _CharacterModel;
 
   factory CharacterModel.fromJson(Map<String, dynamic> json) =>
@@ -25,6 +26,7 @@ abstract class CharacterModel with _$CharacterModel {
       currentHp: character.currentHp,
       strength: character.strength,
       vitality: character.vitality,
+      lastUpdateTime: character.lastUpdateTime,
     );
   }
 }
@@ -37,6 +39,7 @@ extension CharacterModelX on CharacterModel {
       currentHp: currentHp,
       strength: strength,
       vitality: vitality,
+      lastUpdateTime: lastUpdateTime,
     );
   }
 }

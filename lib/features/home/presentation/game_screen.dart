@@ -16,7 +16,7 @@ class GameScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isFightMode = ref.watch(battleProvider).isBotMode;
+    final isCombatMode = ref.watch(battleProvider).isBotMode;
     final player = ref.watch(playerProvider);
 
     return PopScope(
@@ -36,7 +36,7 @@ class GameScreen extends ConsumerWidget {
                   children: [
                     Expanded(child: CharacterCard(character: player)),
                     Expanded(
-                      child: isFightMode
+                      child: isCombatMode
                           ? CharacterCard(character: ref.watch(botProvider))
                           : const BattleModeSelector(),
                     ),
@@ -52,7 +52,7 @@ class GameScreen extends ConsumerWidget {
                         currentSelection: ref
                             .watch(battleProvider)
                             .selectedAttack,
-                        onSelected: isFightMode
+                        onSelected: isCombatMode
                             ? (area) => ref
                                   .read(battleProvider.notifier)
                                   .selectAttack(area)
@@ -65,7 +65,7 @@ class GameScreen extends ConsumerWidget {
                         currentSelection: ref
                             .watch(battleProvider)
                             .selectedBlock,
-                        onSelected: isFightMode
+                        onSelected: isCombatMode
                             ? (area) => ref
                                   .read(battleProvider.notifier)
                                   .selectBlock(area)

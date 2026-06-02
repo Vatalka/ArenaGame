@@ -111,8 +111,8 @@ class BattleNotifier extends _$BattleNotifier {
       };
 
       ref.read(battleLogProvider.notifier).addGameOverLog(result, winnerName);
-
       disableBotMode();
+      ref.read(playerProvider.notifier).savePlayerState();
     }
   }
 }

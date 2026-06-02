@@ -12,6 +12,7 @@ abstract class Character with _$Character {
     required int currentHp,
     required int vitality,
     required int strength,
+    required int lastUpdateTime,
   }) = _Character;
 
   int get maxHp => vitality * 10;
@@ -26,6 +27,7 @@ abstract class Character with _$Character {
       currentHp: defaultValue * 10,
       vitality: defaultValue,
       strength: defaultValue,
+      lastUpdateTime: 0,
     );
   }
 
