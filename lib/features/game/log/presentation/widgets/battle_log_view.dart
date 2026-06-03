@@ -64,7 +64,31 @@ class BattleLogView extends ConsumerWidget {
                       text: ' успішно заблокував удар у ${area.toLogString}!',
                     ),
                   ],
-                  gameOver: (id, time, result, winnerName) {
+                  startBattle: (id, time, playerName, botName) => [
+                    TextSpan(
+                      text: 'Почався бій між ',
+                      style: TextStyle(color: gameColors.logInfo),
+                    ),
+                    TextSpan(
+                      text: playerName,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: gameColors.logInfo,
+                      ),
+                    ),
+                    TextSpan(
+                      text: ' та ',
+                      style: TextStyle(color: gameColors.logInfo),
+                    ),
+                    TextSpan(
+                      text: botName,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: gameColors.logInfo,
+                      ),
+                    ),
+                  ],
+                  endBattle: (id, time, result, winnerName) {
                     return [
                       TextSpan(
                         text: switch (result) {
@@ -78,9 +102,7 @@ class BattleLogView extends ConsumerWidget {
                       if (result != BattleResult.draw) ...[
                         TextSpan(
                           text: winnerName,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         TextSpan(
                           text: '!',

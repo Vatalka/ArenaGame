@@ -43,9 +43,18 @@ class BattleLogNotifier extends _$BattleLogNotifier {
     );
   }
 
-  void addGameOverLog(BattleResult result, String winnerName) {
+  void addStartBattleLog(String playerName, String botName) {
+    _addLog(BattleLogItem.startBattle(
+      id: const Uuid().v4(),
+      timestamp: DateTime.now(),
+      playerName: playerName,
+      botName: botName,
+    ));
+  }
+
+  void addEndBattleLog(BattleResult result, String winnerName) {
     _addLog(
-      BattleLogItem.gameOver(
+      BattleLogItem.endBattle(
         id: const Uuid().v4(),
         timestamp: DateTime.now(),
         result: result,

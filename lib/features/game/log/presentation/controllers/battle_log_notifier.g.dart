@@ -41,7 +41,7 @@ final class BattleLogNotifierProvider
   }
 }
 
-String _$battleLogNotifierHash() => r'f647924eb02d4d49a16fb3c95671c40c4ec019b4';
+String _$battleLogNotifierHash() => r'710eb190cb64e2849d72ee7aba8e51d323044681';
 
 abstract class _$BattleLogNotifier extends $Notifier<List<BattleLogItem>> {
   List<BattleLogItem> build();

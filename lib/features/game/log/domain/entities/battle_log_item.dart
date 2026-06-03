@@ -30,12 +30,19 @@ abstract class BattleLogItem with _$BattleLogItem {
     required Area area,
   }) = _BlockLog;
 
-  const factory BattleLogItem.gameOver({
+  const factory BattleLogItem.startBattle({
+    required String id,
+    required DateTime timestamp,
+    required String playerName,
+    required String botName,
+  }) = _StartBattleLog;
+
+  const factory BattleLogItem.endBattle({
     required String id,
     required DateTime timestamp,
     required BattleResult result,
     required String winnerName,
-  }) = _GameOverLog;
+  }) = _EndBattleLog;
 
   factory BattleLogItem.fromJson(Map<String, dynamic> json) =>
       _$BattleLogItemFromJson(json);

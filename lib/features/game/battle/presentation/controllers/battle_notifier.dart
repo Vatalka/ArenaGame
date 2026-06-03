@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:arena_game/features/game/battle/domain/entities/battle_selection.dart';
 import 'package:arena_game/features/game/log/domain/entities/battle_log_item.dart';
 import 'package:arena_game/features/game/bot/bot_notifier.dart';
@@ -29,7 +28,7 @@ class BattleNotifier extends _$BattleNotifier {
 
     ref
         .read(battleLogProvider.notifier)
-        .addInfoLog('Почався бій між ${player.name} та ${bot.name}');
+        .addStartBattleLog(player.name, bot.name);
   }
 
   void disableBotMode() {
@@ -48,7 +47,7 @@ class BattleNotifier extends _$BattleNotifier {
     final bot = ref.read(botProvider);
 
     final playerAttackArea = state.selectedAttack;
-    final botBlockArea = _getRandomArea();
+    final botBlockArea = ref.read(botProvider.notifier).getRandomArea();
 
     int damageToBot = player.strength;
 
@@ -70,7 +69,7 @@ class BattleNotifier extends _$BattleNotifier {
     final player = ref.read(playerProvider);
     final bot = ref.read(botProvider);
 
-    final botAttackArea = _getRandomArea();
+    final botAttackArea = ref.read(botProvider.notifier).getRandomArea();
     final playerBlockArea = state.selectedBlock;
 
     int damageToPlayer = bot.strength;
@@ -89,13 +88,6 @@ class BattleNotifier extends _$BattleNotifier {
     ref.read(playerProvider.notifier).takeDamage(damageToPlayer);
   }
 
-  Area _getRandomArea() {
-    final random = Random();
-    final areas = Area.values;
-    final randomIndex = random.nextInt(areas.length);
-    return areas[randomIndex];
-  }
-
   void _checkBattleOver() {
     final player = ref.read(playerProvider);
     final bot = ref.read(botProvider);
@@ -110,7 +102,7 @@ class BattleNotifier extends _$BattleNotifier {
         _ => (BattleResult.draw, ''),
       };
 
-      ref.read(battleLogProvider.notifier).addGameOverLog(result, winnerName);
+      ref.read(battleLogProvider.notifier).addEndBattleLog(result, winnerName);
       disableBotMode();
       ref.read(playerProvider.notifier).savePlayerState();
     }

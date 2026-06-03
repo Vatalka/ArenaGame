@@ -41,7 +41,7 @@ final class BotNotifierProvider
   }
 }
 
-String _$botNotifierHash() => r'4ddd9d9b021f8fcd8e93318bdf86111a40a1df4b';
+String _$botNotifierHash() => r'33c197a46256739c80e4b8b190792a9aeeedd994';
 
 abstract class _$BotNotifier extends $Notifier<Character> {
   Character build();
