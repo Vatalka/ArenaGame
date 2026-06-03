@@ -1,8 +1,8 @@
 import 'package:arena_game/core/theme/game_colors.dart';
 import 'package:arena_game/features/auth/presentation/screens/login_screen.dart';
 import 'package:arena_game/features/character/presentation/screens/creation_screen.dart';
-import 'package:arena_game/features/home/presentation/game_screen.dart';
-import 'package:arena_game/firebase_options.dart';
+import 'package:arena_game/home/presentation/game_screen.dart';
+import 'package:arena_game/home/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

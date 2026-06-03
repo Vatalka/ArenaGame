@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math';
-import 'package:arena_game/features/battle/presentation/controllers/battle_notifier.dart';
-import 'package:arena_game/features/battle/presentation/controllers/log/battle_log_notifier.dart';
+import 'package:arena_game/features/game/battle/presentation/controllers/battle_notifier.dart';
+import 'package:arena_game/features/game/log/presentation/controllers/battle_log_notifier.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:arena_game/features/character/domain/repositories/i_character_repository.dart';
 import 'package:flutter/cupertino.dart';

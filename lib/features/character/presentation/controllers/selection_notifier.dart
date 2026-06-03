@@ -1,4 +1,4 @@
-import 'package:arena_game/features/battle/presentation/controllers/player/player_notifier.dart';
+import 'package:arena_game/features/game/player/player_notifier.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:arena_game/features/character/domain/repositories/i_character_repository.dart';
 import 'package:flutter/foundation.dart';

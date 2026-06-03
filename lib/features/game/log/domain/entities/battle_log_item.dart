@@ -1,4 +1,4 @@
-import 'package:arena_game/features/battle/domain/entities/battle_selection.dart';
+import 'package:arena_game/features/game/battle/domain/entities/battle_selection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'battle_log_item.freezed.dart';
