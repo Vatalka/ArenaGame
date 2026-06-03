@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'player_notifier.dart';
+part of 'regeneration_notifier.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,51 +9,51 @@ part of 'player_notifier.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(PlayerNotifier)
-final playerProvider = PlayerNotifierProvider._();
+@ProviderFor(Regeneration)
+final regenerationProvider = RegenerationProvider._();
 
-final class PlayerNotifierProvider
-    extends $NotifierProvider<PlayerNotifier, Character> {
-  PlayerNotifierProvider._()
+final class RegenerationProvider
+    extends $NotifierProvider<Regeneration, dynamic> {
+  RegenerationProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'playerProvider',
+        name: r'regenerationProvider',
         isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$playerNotifierHash();
+  String debugGetCreateSourceHash() => _$regenerationHash();
 
   @$internal
   @override
-  PlayerNotifier create() => PlayerNotifier();
+  Regeneration create() => Regeneration();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(Character value) {
+  Override overrideWithValue(dynamic value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<Character>(value),
+      providerOverride: $SyncValueProvider<dynamic>(value),
     );
   }
 }
 
-String _$playerNotifierHash() => r'dd258643cb0703c839513362511cf793cf691b33';
+String _$regenerationHash() => r'bbcd61bf7b5826341c1bbe45694d973b722d1f97';
 
-abstract class _$PlayerNotifier extends $Notifier<Character> {
-  Character build();
+abstract class _$Regeneration extends $Notifier<dynamic> {
+  dynamic build();
   @$mustCallSuper
   @override
   void runBuild() {
-    final ref = this.ref as $Ref<Character, Character>;
+    final ref = this.ref as $Ref<dynamic, dynamic>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<Character, Character>,
-              Character,
+              AnyNotifier<dynamic, dynamic>,
+              dynamic,
               Object?,
               Object?
             >;

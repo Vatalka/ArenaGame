@@ -79,16 +79,23 @@ class GameScreen extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ElevatedButton(
-                      onPressed: () => Modular.to.navigate('/selection'),
+                      onPressed: () {
+                        ref.read(playerProvider.notifier).savePlayerState();
+                        Modular.to.navigate('/selection');
+                      },
                       child: Text('Select'),
                     ),
                     RestoreHpButton(
                       onTap: () {
                         ref.read(playerProvider.notifier).restoreHp();
+                        ref.read(playerProvider.notifier).savePlayerState();
                       },
                     ),
                     ElevatedButton(
-                      onPressed: () => Modular.to.navigate('/'),
+                      onPressed: () {
+                        ref.read(playerProvider.notifier).savePlayerState();
+                        Modular.to.navigate('/');
+                      },
                       child: Text('Login'),
                     ),
                   ],

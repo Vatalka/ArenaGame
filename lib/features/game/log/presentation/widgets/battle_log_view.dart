@@ -73,7 +73,6 @@ class BattleLogView extends ConsumerWidget {
                       text: playerName,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: gameColors.logInfo,
                       ),
                     ),
                     TextSpan(
@@ -84,8 +83,11 @@ class BattleLogView extends ConsumerWidget {
                       text: botName,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: gameColors.logInfo,
                       ),
+                    ),
+                    TextSpan(
+                      text: '!',
+                      style: TextStyle(color: gameColors.logInfo),
                     ),
                   ],
                   endBattle: (id, time, result, winnerName) {
@@ -95,7 +97,7 @@ class BattleLogView extends ConsumerWidget {
                           BattleResult.draw =>
                             'Бій завершено нічиєю! Обидва бійці непритомні!',
                           BattleResult.playerWin ||
-                          BattleResult.botWin => 'Бій завершено! Переміг ',
+                          BattleResult.botWin => 'Бій завершено, переміг ',
                         },
                         style: TextStyle(color: gameColors.logInfo),
                       ),

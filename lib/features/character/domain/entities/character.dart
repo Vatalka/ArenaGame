@@ -31,6 +31,26 @@ abstract class Character with _$Character {
     );
   }
 
+  int get actualHp {
+    if (lastUpdateTime == 0 || currentHp >= maxHp) {
+      return currentHp;
+    }
+
+    final int now = DateTime.now().millisecondsSinceEpoch;
+    final int differenceInMs = now - lastUpdateTime;
+    final int secondsPassed = differenceInMs ~/ 1000;
+    final int totalTicks = secondsPassed ~/ 2;
+
+    if (totalTicks > 0) {
+      final int hpPerTick = (maxHp * 0.01).ceil();
+      final int totalHpRegenerated = totalTicks * hpPerTick;
+
+      return (currentHp + totalHpRegenerated).clamp(0, maxHp);
+    }
+
+    return currentHp;
+  }
+
   bool get nameIsValid => name.trim().length >= 3;
 
   String? get nameError {
