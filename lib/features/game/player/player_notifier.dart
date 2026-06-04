@@ -21,6 +21,7 @@ class PlayerNotifier extends _$PlayerNotifier {
   }
 
   void updateHp(int newHp) {
+    if (state.name == '') return;
     state = state.copyWith(
       currentHp: newHp,
       lastUpdateTime: DateTime.now().millisecondsSinceEpoch,

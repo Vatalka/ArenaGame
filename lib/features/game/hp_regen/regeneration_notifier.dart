@@ -12,44 +12,30 @@ class Regeneration extends _$Regeneration {
 
   @override
   build() {
+    final hasActivePlayer = ref.watch(
+      playerProvider.select((player) => player.name != ''),
+    );
     final isCombatMode = ref.watch(
       battleProvider.select((state) => state.isBotMode),
     );
 
-    Future.microtask(() {
-      if (isCombatMode) {
-        _stopTimer();
-      } else {
-        _initRegen();
-      }
-    });
-  }
-
-  void _initRegen() {
-    _offlineRegen();
-    _startTimer();
-  }
-
-  void _offlineRegen() {
-    final playerNotifier = ref.read(playerProvider.notifier);
-    final player = playerNotifier.state;
-
-    if (player.lastUpdateTime != 0 && player.currentHp < player.maxHp) {
-      final newHp = player.actualHp;
-
-      playerNotifier.updateHp(newHp);
+    if (hasActivePlayer && !isCombatMode) {
+      Future.microtask(() => _startRegen());
+    } else {
+      _stopRegen();
     }
+    ref.onDispose(() => _stopRegen());
   }
 
-  void _startTimer() {
-    _stopTimer();
+  void _startRegen() {
+    _stopRegen();
 
     _timer = Timer.periodic(const Duration(seconds: 2), (timer) {
       final playerNotifier = ref.read(playerProvider.notifier);
       final player = playerNotifier.state;
 
-      if (player.currentHp >= player.maxHp) {
-        _stopTimer();
+      if (player.name != '' || player.currentHp >= player.maxHp) {
+        _stopRegen();
         return;
       }
 
@@ -60,7 +46,7 @@ class Regeneration extends _$Regeneration {
     });
   }
 
-  void _stopTimer() {
+  void _stopRegen() {
     _timer?.cancel();
     _timer = null;
   }

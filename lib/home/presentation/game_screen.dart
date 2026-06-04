@@ -1,5 +1,6 @@
 import 'package:arena_game/features/game/battle/presentation/controllers/battle_notifier.dart';
 import 'package:arena_game/features/game/bot/bot_notifier.dart';
+import 'package:arena_game/features/game/hp_regen/regeneration_notifier.dart';
 import 'package:arena_game/features/game/player/player_notifier.dart';
 import 'package:arena_game/features/game/battle/presentation/widgets/attack_confirm_button.dart';
 import 'package:arena_game/features/game/battle/presentation/widgets/battle_mode_selector.dart';
@@ -16,6 +17,7 @@ class GameScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(regenerationProvider);
     final isCombatMode = ref.watch(battleProvider).isBotMode;
     final player = ref.watch(playerProvider);
 
@@ -80,7 +82,7 @@ class GameScreen extends ConsumerWidget {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        ref.read(playerProvider.notifier).savePlayerState();
+                        // ref.read(playerProvider.notifier).savePlayerState();
                         Modular.to.navigate('/selection');
                       },
                       child: Text('Select'),
@@ -88,12 +90,12 @@ class GameScreen extends ConsumerWidget {
                     RestoreHpButton(
                       onTap: () {
                         ref.read(playerProvider.notifier).restoreHp();
-                        ref.read(playerProvider.notifier).savePlayerState();
+                        // ref.read(playerProvider.notifier).savePlayerState();
                       },
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        ref.read(playerProvider.notifier).savePlayerState();
+                        // ref.read(playerProvider.notifier).savePlayerState();
                         Modular.to.navigate('/');
                       },
                       child: Text('Login'),

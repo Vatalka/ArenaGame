@@ -21,7 +21,7 @@ class CreationScreen extends ConsumerWidget {
         appBar: AppBar(
           title: const Text('Creation'),
           leading: IconButton(
-            onPressed: () => Modular.to.navigate('/'),
+            onPressed: () => Modular.to.navigate('/selection'),
             icon: Icon(Icons.arrow_back),
           ),
         ),
