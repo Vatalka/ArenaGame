@@ -12,15 +12,12 @@ class Regeneration extends _$Regeneration {
 
   @override
   build() {
-    final hasActivePlayer = ref.watch(
-      playerProvider.select((player) => player.name != ''),
-    );
     final isCombatMode = ref.watch(
       battleProvider.select((state) => state.isBotMode),
     );
 
-    if (hasActivePlayer && !isCombatMode) {
-      Future.microtask(() => _startRegen());
+    if (isCombatMode == false) {
+      _startRegen();
     } else {
       _stopRegen();
     }
@@ -34,7 +31,7 @@ class Regeneration extends _$Regeneration {
       final playerNotifier = ref.read(playerProvider.notifier);
       final player = playerNotifier.state;
 
-      if (player.name != '' || player.currentHp >= player.maxHp) {
+      if (player.currentHp >= player.maxHp) {
         _stopRegen();
         return;
       }

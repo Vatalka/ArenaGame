@@ -1,4 +1,5 @@
 import 'package:arena_game/features/character/domain/repositories/i_character_repository.dart';
+import 'package:arena_game/features/character/presentation/controllers/selection_notifier.dart';
 import 'package:arena_game/features/game/log/presentation/controllers/battle_log_notifier.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:flutter/foundation.dart';
@@ -12,7 +13,21 @@ class PlayerNotifier extends _$PlayerNotifier {
   @override
   Character build() => Character.createDefault();
 
-  void selectCharacter(Character character) => state = character;
+  void selectCharacter(Character character) {
+    final selectionState = ref.read(selectionProvider);
+
+    if (selectionState is AsyncData<List<Character>>) {
+      final updatedCharacters = selectionState.value;
+      final player = updatedCharacters.firstWhere(
+        (char) => char.id == character.id,
+        orElse: () => character,
+      );
+
+      state = player;
+      return;
+    }
+    state = character;
+  }
 
   void takeDamage(int amount) {
     state = state.copyWith(

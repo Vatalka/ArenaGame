@@ -1,3 +1,4 @@
+import 'package:arena_game/features/character/presentation/controllers/selection_notifier.dart';
 import 'package:arena_game/features/game/battle/domain/entities/battle_selection.dart';
 import 'package:arena_game/features/game/log/domain/entities/battle_log_item.dart';
 import 'package:arena_game/features/game/bot/bot_notifier.dart';
@@ -105,6 +106,7 @@ class BattleNotifier extends _$BattleNotifier {
       ref.read(battleLogProvider.notifier).addEndBattleLog(result, winnerName);
       disableBotMode();
       ref.read(playerProvider.notifier).savePlayerState();
+      ref.invalidate(selectionProvider);
     }
   }
 }
