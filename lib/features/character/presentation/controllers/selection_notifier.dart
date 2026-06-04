@@ -1,7 +1,5 @@
-import 'package:arena_game/features/game/player/player_notifier.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:arena_game/features/character/domain/repositories/i_character_repository.dart';
-import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'selection_notifier.g.dart';
@@ -10,20 +8,39 @@ part 'selection_notifier.g.dart';
 class SelectionNotifier extends _$SelectionNotifier {
   @override
   FutureOr<List<Character>> build() async {
-    return ref.watch(characterRepositoryProvider).getAllCharacters();
+    return _loadCharacters();
+  }
+
+  Future<List<Character>> _loadCharacters() async {
+    final rawCharacters = await ref
+        .watch(characterRepositoryProvider)
+        .getAllCharacters();
+    final updatedCharacters = <Character>[];
+
+    for (var char in rawCharacters) {
+      if (char.currentHp < char.maxHp && char.lastUpdateTime != 0) {
+        final actualHealth = char.actualHp;
+
+        if (actualHealth > char.currentHp) {
+          char = char.copyWith(
+            currentHp: actualHealth,
+            lastUpdateTime: DateTime.now().millisecondsSinceEpoch,
+          );
+          await ref.read(characterRepositoryProvider).saveCharacter(char);
+        }
+      }
+      updatedCharacters.add(char);
+    }
+
+    return updatedCharacters;
   }
 
   Future<void> removeCharacter(String id) async {
-    try {
-      state = const AsyncValue.loading();
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(() async {
       await ref.read(characterRepositoryProvider).deleteCharacter(id);
-      ref.invalidateSelf();
-      ref.invalidate(playerProvider);
-    } catch (e, st) {
-      state = AsyncValue.error(e, st);
-      if (kDebugMode) {
-        print('Unable to delete character: $e');
-      }
-    }
+      return _loadCharacters();
+    });
+    ref.invalidateSelf();
   }
 }
