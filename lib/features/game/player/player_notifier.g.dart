@@ -13,7 +13,7 @@ part of 'player_notifier.dart';
 final playerProvider = PlayerNotifierProvider._();
 
 final class PlayerNotifierProvider
-    extends $NotifierProvider<PlayerNotifier, Character> {
+    extends $NotifierProvider<PlayerNotifier, String> {
   PlayerNotifierProvider._()
     : super(
         from: null,
@@ -33,27 +33,27 @@ final class PlayerNotifierProvider
   PlayerNotifier create() => PlayerNotifier();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(Character value) {
+  Override overrideWithValue(String value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<Character>(value),
+      providerOverride: $SyncValueProvider<String>(value),
     );
   }
 }
 
-String _$playerNotifierHash() => r'3eabe6218f9f894cc9acb39c861595121370ccb3';
+String _$playerNotifierHash() => r'232551f03343d32629ddc7eab1acc5cf326bce69';
 
-abstract class _$PlayerNotifier extends $Notifier<Character> {
-  Character build();
+abstract class _$PlayerNotifier extends $Notifier<String> {
+  String build();
   @$mustCallSuper
   @override
   void runBuild() {
-    final ref = this.ref as $Ref<Character, Character>;
+    final ref = this.ref as $Ref<String, String>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<Character, Character>,
-              Character,
+              AnyNotifier<String, String>,
+              String,
               Object?,
               Object?
             >;

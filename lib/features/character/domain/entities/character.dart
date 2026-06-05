@@ -31,6 +31,18 @@ abstract class Character with _$Character {
     );
   }
 
+  factory Character.createEmpty() {
+    const defaultValue = 0;
+    return Character(
+      id: '',
+      name: '',
+      currentHp: defaultValue,
+      vitality: defaultValue,
+      strength: defaultValue,
+      lastUpdateTime: defaultValue,
+    );
+  }
+
   int get actualHp {
     if (lastUpdateTime == 0 || currentHp >= maxHp) {
       return currentHp;
