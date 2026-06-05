@@ -40,7 +40,7 @@ final class RegenerationProvider extends $NotifierProvider<Regeneration, void> {
   }
 }
 
-String _$regenerationHash() => r'c45b16578417f415b5899e317194f5efd33a7c0a';
+String _$regenerationHash() => r'109577dd556ad1a0ee167ed5e0bc44b06aa21d01';
 
 abstract class _$Regeneration extends $Notifier<void> {
   void build();

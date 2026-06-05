@@ -41,18 +41,16 @@ class SelectionNotifier extends _$SelectionNotifier {
 
       final updatedList = currentList.map((char) {
         if (char.id == id) {
-          final updatedChar = char.copyWith(
+          return char.copyWith(
             currentHp: newHP,
             lastUpdateTime: DateTime.now().millisecondsSinceEpoch,
           );
-          ref.read(characterRepositoryProvider).saveCharacter(updatedChar);
-          return updatedChar;
         }
         return char;
       }).toList();
 
-      // final updatedChar = updatedList.firstWhere((char) => char.id == id);
-      // ref.read(characterRepositoryProvider).saveCharacter(updatedChar);
+      final updatedChar = updatedList.firstWhere((char) => char.id == id);
+      ref.read(characterRepositoryProvider).saveCharacter(updatedChar);
 
       state = AsyncData(updatedList);
     }

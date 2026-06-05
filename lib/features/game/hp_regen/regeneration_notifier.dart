@@ -1,7 +1,7 @@
 import 'dart:async';
+import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:arena_game/features/character/presentation/controllers/selection_notifier.dart';
 import 'package:arena_game/features/game/battle/presentation/controllers/battle_notifier.dart';
-import 'package:arena_game/features/game/player/active_player.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -22,6 +22,7 @@ class Regeneration extends _$Regeneration {
     } else {
       _stopRegen();
     }
+
     ref.onDispose(() => _stopRegen());
   }
 
@@ -29,20 +30,20 @@ class Regeneration extends _$Regeneration {
     if (_timer != null) return;
 
     _timer = Timer.periodic(const Duration(seconds: 2), (timer) {
-      final player = ref.read(activePlayerProvider);
+      final selectionState = ref.read(selectionProvider);
 
-      if (player.id != '' && player.currentHp < player.maxHp) {
-        final regenAmount = (player.maxHp * 0.01).ceil();
-        final newHP = (player.currentHp + regenAmount).clamp(0, player.maxHp);
+      if (selectionState is AsyncData<List<Character>>) {
+        final characters = selectionState.value;
+        for (final char in characters) {
+          if (char.currentHp < char.maxHp) {
+            final regenAmount = (char.maxHp * 0.01).ceil();
+            final newHP = (char.currentHp + regenAmount).clamp(0, char.maxHp);
 
-        ref
-            .read(selectionProvider.notifier)
-            .updateCharacterHP(player.id, newHP);
-      }
-
-      if (player.id != '' && player.currentHp >= player.maxHp) {
-        _stopRegen();
-        return;
+            ref
+                .read(selectionProvider.notifier)
+                .updateCharacterHP(char.id, newHP);
+          }
+        }
       }
     });
   }
