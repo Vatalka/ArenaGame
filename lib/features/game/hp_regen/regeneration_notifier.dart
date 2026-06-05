@@ -36,12 +36,14 @@ class Regeneration extends _$Regeneration {
         final characters = selectionState.value;
         for (final char in characters) {
           if (char.currentHp < char.maxHp) {
-            final regenAmount = (char.maxHp * 0.01).ceil();
-            final newHP = (char.currentHp + regenAmount).clamp(0, char.maxHp);
+            final newHp = (char.currentHp + char.regenPerTick).clamp(
+              0,
+              char.maxHp,
+            );
 
             ref
                 .read(selectionProvider.notifier)
-                .updateCharacterHP(char.id, newHP);
+                .updateCharacterHP(char.id, newHp);
           }
         }
       }

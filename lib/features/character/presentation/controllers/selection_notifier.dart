@@ -8,13 +8,12 @@ part 'selection_notifier.g.dart';
 class SelectionNotifier extends _$SelectionNotifier {
   @override
   FutureOr<List<Character>> build() async {
-    return _loadCharacters();
+    final repository = ref.watch(characterRepositoryProvider);
+    return _loadCharacters(repository);
   }
 
-  Future<List<Character>> _loadCharacters() async {
-    final rawCharacters = await ref
-        .watch(characterRepositoryProvider)
-        .getAllCharacters();
+  Future<List<Character>> _loadCharacters(ICharacterRepository repo) async {
+    final rawCharacters = await repo.getAllCharacters();
     final updatedCharacters = <Character>[];
 
     for (var char in rawCharacters) {
@@ -26,7 +25,7 @@ class SelectionNotifier extends _$SelectionNotifier {
             currentHp: actualHealth,
             lastUpdateTime: DateTime.now().millisecondsSinceEpoch,
           );
-          await ref.read(characterRepositoryProvider).saveCharacter(char);
+          await repo.saveCharacter(char);
         }
       }
       updatedCharacters.add(char);
@@ -35,14 +34,14 @@ class SelectionNotifier extends _$SelectionNotifier {
     return updatedCharacters;
   }
 
-  void updateCharacterHP(String id, int newHP) {
+  void updateCharacterHP(String id, int newHp) {
     if (state is AsyncData<List<Character>>) {
       final currentList = state.value!;
 
       final updatedList = currentList.map((char) {
         if (char.id == id) {
           return char.copyWith(
-            currentHp: newHP,
+            currentHp: newHp,
             lastUpdateTime: DateTime.now().millisecondsSinceEpoch,
           );
         }
@@ -58,10 +57,11 @@ class SelectionNotifier extends _$SelectionNotifier {
 
   Future<void> removeCharacter(String id) async {
     state = const AsyncLoading();
-    state = await AsyncValue.guard(() async {
+    try {
       await ref.read(characterRepositoryProvider).deleteCharacter(id);
-      return _loadCharacters();
-    });
-    ref.invalidateSelf();
+      ref.invalidateSelf();
+    } catch (e, st) {
+      state = AsyncError(e, st);
+    }
   }
 }

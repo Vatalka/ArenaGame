@@ -22,7 +22,7 @@ abstract class Character with _$Character {
   factory Character.createDefault() {
     const defaultValue = 10;
     return Character(
-      id: DateTime.now().microsecondsSinceEpoch.toString(),
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
       name: '',
       currentHp: defaultValue * 10,
       vitality: defaultValue,
@@ -43,24 +43,21 @@ abstract class Character with _$Character {
     );
   }
 
+  int get regenPerTick => (maxHp * 0.01).ceil();
+
   int get actualHp {
-    if (lastUpdateTime == 0 || currentHp >= maxHp) {
-      return currentHp;
-    }
+    if (currentHp >= maxHp) return currentHp;
 
     final int now = DateTime.now().millisecondsSinceEpoch;
     final int differenceInMs = now - lastUpdateTime;
     final int secondsPassed = differenceInMs ~/ 1000;
-    final int totalTicks = secondsPassed ~/ 2;
+    final int ticks = secondsPassed ~/ 2;
 
-    if (totalTicks > 0) {
-      final int hpPerTick = (maxHp * 0.01).ceil();
-      final int totalHpRegenerated = totalTicks * hpPerTick;
+    if (ticks <= 0) return currentHp;
 
-      return (currentHp + totalHpRegenerated).clamp(0, maxHp);
-    }
-
-    return currentHp;
+    final regenAmount = ticks * regenPerTick;
+    final newHp = (currentHp + regenAmount).clamp(0, maxHp);
+    return newHp;
   }
 
   bool get nameIsValid => name.trim().length >= 3;
