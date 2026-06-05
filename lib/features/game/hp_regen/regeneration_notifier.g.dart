@@ -12,8 +12,7 @@ part of 'regeneration_notifier.dart';
 @ProviderFor(Regeneration)
 final regenerationProvider = RegenerationProvider._();
 
-final class RegenerationProvider
-    extends $NotifierProvider<Regeneration, dynamic> {
+final class RegenerationProvider extends $NotifierProvider<Regeneration, void> {
   RegenerationProvider._()
     : super(
         from: null,
@@ -33,27 +32,27 @@ final class RegenerationProvider
   Regeneration create() => Regeneration();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(dynamic value) {
+  Override overrideWithValue(void value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<dynamic>(value),
+      providerOverride: $SyncValueProvider<void>(value),
     );
   }
 }
 
-String _$regenerationHash() => r'd9b56218faa500746eeac457c5dca82c05edc15d';
+String _$regenerationHash() => r'c45b16578417f415b5899e317194f5efd33a7c0a';
 
-abstract class _$Regeneration extends $Notifier<dynamic> {
-  dynamic build();
+abstract class _$Regeneration extends $Notifier<void> {
+  void build();
   @$mustCallSuper
   @override
   void runBuild() {
-    final ref = this.ref as $Ref<dynamic, dynamic>;
+    final ref = this.ref as $Ref<void, void>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<dynamic, dynamic>,
-              dynamic,
+              AnyNotifier<void, void>,
+              void,
               Object?,
               Object?
             >;

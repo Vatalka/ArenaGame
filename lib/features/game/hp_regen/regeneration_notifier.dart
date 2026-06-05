@@ -12,15 +12,12 @@ class Regeneration extends _$Regeneration {
   Timer? _timer;
 
   @override
-  build() {
-    final player = ref.watch(activePlayerProvider);
-    final activePlayer = player.id != '';
-
+  void build() {
     final isCombatMode = ref.watch(
       battleProvider.select((state) => state.isBotMode),
     );
 
-    if (activePlayer == true && isCombatMode == false) {
+    if (!isCombatMode) {
       _startRegen();
     } else {
       _stopRegen();
@@ -29,7 +26,7 @@ class Regeneration extends _$Regeneration {
   }
 
   void _startRegen() {
-    _stopRegen();
+    if (_timer != null) return;
 
     _timer = Timer.periodic(const Duration(seconds: 2), (timer) {
       final player = ref.read(activePlayerProvider);
@@ -43,7 +40,7 @@ class Regeneration extends _$Regeneration {
             .updateCharacterHP(player.id, newHP);
       }
 
-      if (player.currentHp >= player.maxHp) {
+      if (player.id != '' && player.currentHp >= player.maxHp) {
         _stopRegen();
         return;
       }

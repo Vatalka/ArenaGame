@@ -33,7 +33,7 @@ final class SelectionNotifierProvider
   SelectionNotifier create() => SelectionNotifier();
 }
 
-String _$selectionNotifierHash() => r'4254fa4c8cc81dfcaea753325b5ed7231d197ad0';
+String _$selectionNotifierHash() => r'f37cf8849dbc1afabea7e2589463e564637c68d6';
 
 abstract class _$SelectionNotifier extends $AsyncNotifier<List<Character>> {
   FutureOr<List<Character>> build();
