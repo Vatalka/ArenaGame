@@ -3,7 +3,7 @@ import 'package:arena_game/features/game/battle/domain/entities/battle_selection
 import 'package:arena_game/features/game/log/domain/entities/battle_log_item.dart';
 import 'package:arena_game/features/game/bot/bot_notifier.dart';
 import 'package:arena_game/features/game/log/presentation/controllers/battle_log_notifier.dart';
-import 'package:arena_game/features/game/player/player_notifier.dart';
+import 'package:arena_game/features/game/player/active_player.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'battle_notifier.g.dart';
@@ -18,7 +18,7 @@ class BattleNotifier extends _$BattleNotifier {
   void selectBlock(Area? area) => state = state.copyWith(selectedBlock: area);
 
   void enableBotMode() {
-    final player = ref.read(playerProvider);
+    final player = ref.read(activePlayerProvider);
     final bot = ref.read(botProvider);
 
     state = state.copyWith(
@@ -44,7 +44,7 @@ class BattleNotifier extends _$BattleNotifier {
   }
 
   void _processPlayerTurn() {
-    final player = ref.read(playerProvider);
+    final player = ref.read(activePlayerProvider);
     final bot = ref.read(botProvider);
 
     final playerAttackArea = state.selectedAttack;
@@ -67,7 +67,7 @@ class BattleNotifier extends _$BattleNotifier {
   }
 
   void _processBotTurn() {
-    final player = ref.read(playerProvider);
+    final player = ref.read(activePlayerProvider);
     final bot = ref.read(botProvider);
 
     final botAttackArea = ref.read(botProvider.notifier).getRandomArea();
@@ -86,11 +86,13 @@ class BattleNotifier extends _$BattleNotifier {
           .addAttackLog(bot.name, botAttackArea, damageToPlayer);
     }
 
-    ref.read(playerProvider.notifier).takeDamage(damageToPlayer);
+    final newHP = player.currentHp - damageToPlayer;
+
+    ref.read(selectionProvider.notifier).updateCharacterHP(player.id, newHP);
   }
 
   void _checkBattleOver() {
-    final player = ref.read(playerProvider);
+    final player = ref.read(activePlayerProvider);
     final bot = ref.read(botProvider);
 
     final isPlayerLose = player.currentHp <= 0;
@@ -105,7 +107,6 @@ class BattleNotifier extends _$BattleNotifier {
 
       ref.read(battleLogProvider.notifier).addEndBattleLog(result, winnerName);
       disableBotMode();
-      ref.read(playerProvider.notifier).savePlayerState();
       ref.invalidate(selectionProvider);
     }
   }

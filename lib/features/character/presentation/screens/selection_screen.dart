@@ -13,7 +13,6 @@ class SelectionScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final charactersAsync = ref.watch(selectionProvider);
     final controller = ref.read(selectionProvider.notifier);
-    final player = ref.read(playerProvider.notifier);
 
     return PopScope(
       canPop: false,
@@ -54,7 +53,9 @@ class SelectionScreen extends ConsumerWidget {
                           tooltip: 'delete',
                         ),
                         onTap: () {
-                          player.selectCharacter(char);
+                          ref
+                              .read(playerProvider.notifier)
+                              .selectCharacter(char.id);
                           Modular.to.navigate('/game');
                         },
                       );

@@ -41,7 +41,7 @@ final class RegenerationProvider
   }
 }
 
-String _$regenerationHash() => r'6d3ecfdfd856c02fd2558da515cd7267b864caa5';
+String _$regenerationHash() => r'd9b56218faa500746eeac457c5dca82c05edc15d';
 
 abstract class _$Regeneration extends $Notifier<dynamic> {
   dynamic build();

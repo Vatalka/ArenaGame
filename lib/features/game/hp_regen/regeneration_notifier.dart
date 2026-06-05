@@ -1,6 +1,7 @@
 import 'dart:async';
+import 'package:arena_game/features/character/presentation/controllers/selection_notifier.dart';
 import 'package:arena_game/features/game/battle/presentation/controllers/battle_notifier.dart';
-import 'package:arena_game/features/game/player/player_notifier.dart';
+import 'package:arena_game/features/game/player/active_player.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -12,11 +13,14 @@ class Regeneration extends _$Regeneration {
 
   @override
   build() {
+    final player = ref.watch(activePlayerProvider);
+    final activePlayer = player.id != '';
+
     final isCombatMode = ref.watch(
       battleProvider.select((state) => state.isBotMode),
     );
 
-    if (isCombatMode == false) {
+    if (activePlayer == true && isCombatMode == false) {
       _startRegen();
     } else {
       _stopRegen();
@@ -28,18 +32,21 @@ class Regeneration extends _$Regeneration {
     _stopRegen();
 
     _timer = Timer.periodic(const Duration(seconds: 2), (timer) {
-      final playerNotifier = ref.read(playerProvider.notifier);
-      final player = playerNotifier.state;
+      final player = ref.read(activePlayerProvider);
+
+      if (player.id != '' && player.currentHp < player.maxHp) {
+        final regenAmount = (player.maxHp * 0.01).ceil();
+        final newHP = (player.currentHp + regenAmount).clamp(0, player.maxHp);
+
+        ref
+            .read(selectionProvider.notifier)
+            .updateCharacterHP(player.id, newHP);
+      }
 
       if (player.currentHp >= player.maxHp) {
         _stopRegen();
         return;
       }
-
-      final regenAmount = (player.maxHp * 0.01).ceil();
-      final newHp = (player.currentHp + regenAmount).clamp(0, player.maxHp);
-
-      playerNotifier.updateHp(newHp);
     });
   }
 

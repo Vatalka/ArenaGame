@@ -35,6 +35,47 @@ class SelectionNotifier extends _$SelectionNotifier {
     return updatedCharacters;
   }
 
+  void updateCharacterHP(String id, int newHP) {
+    if (state is AsyncData<List<Character>>) {
+      final currentList = state.value!;
+
+      final updatedList = currentList.map((char) {
+        if (char.id == id) {
+          final updatedChar = char.copyWith(
+            currentHp: newHP,
+            lastUpdateTime: DateTime.now().millisecondsSinceEpoch,
+          );
+          ref.read(characterRepositoryProvider).saveCharacter(updatedChar);
+          return updatedChar;
+        }
+        return char;
+      }).toList();
+
+      state = AsyncData(updatedList);
+    }
+  }
+
+  // void takeDamage(String id, int amount) {
+  //   if (state is AsyncData<List<Character>>) {
+  //     final currentList = state.value!;
+  //
+  //     final updatedList = currentList.map((char) {
+  //       if (char.id == id) {
+  //         final newHp = (char.currentHp - amount).clamp(0, char.maxHp);
+  //         final updatedChar = char.copyWith(
+  //           currentHp: newHp,
+  //           lastUpdateTime: DateTime.now().millisecondsSinceEpoch,
+  //         );
+  //         ref.read(characterRepositoryProvider).saveCharacter(updatedChar);
+  //         return updatedChar;
+  //       }
+  //       return char;
+  //     }).toList();
+  //
+  //     state = AsyncData(updatedList);
+  //   }
+  // }
+
   Future<void> removeCharacter(String id) async {
     state = const AsyncLoading();
     state = await AsyncValue.guard(() async {
