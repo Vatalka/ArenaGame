@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'active_player.dart';
+part of 'active_player_notifier.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,7 +9,7 @@ part of 'active_player.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(activePlayer)
+@ProviderFor(activePlayerNotifier)
 final activePlayerProvider = ActivePlayerProvider._();
 
 final class ActivePlayerProvider
@@ -36,7 +36,7 @@ final class ActivePlayerProvider
 
   @override
   Character create(Ref ref) {
-    return activePlayer(ref);
+    return activePlayerNotifier(ref);
   }
 
   /// {@macro riverpod.override_with_value}

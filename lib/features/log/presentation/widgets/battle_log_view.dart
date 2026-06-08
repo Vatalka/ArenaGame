@@ -45,23 +45,30 @@ class BattleLogView extends ConsumerWidget {
                       text: attackerName,
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    TextSpan(text: ' завдав удар у ${area.toLogString} на '),
+                    TextSpan(text: ' завдав удар у'),
                     TextSpan(
-                      text: '$damage',
+                      text: ' ${area.toLogString}',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    TextSpan(text: ' на'),
+                    TextSpan(
+                      text: ' $damage',
                       style: TextStyle(
                         color: gameColors.logDamage,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const TextSpan(text: ' шкоди!'),
+                    const TextSpan(text: ' шкоди'),
                   ],
                   block: (id, time, defenderName, area) => [
                     TextSpan(
                       text: defenderName,
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
+                    TextSpan(text: ' заблокував удар у'),
                     TextSpan(
-                      text: ' успішно заблокував удар у ${area.toLogString}!',
+                      text: ' ${area.toLogString}',
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ],
                   startBattle: (id, time, playerName, botName) => [
@@ -71,9 +78,7 @@ class BattleLogView extends ConsumerWidget {
                     ),
                     TextSpan(
                       text: playerName,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     TextSpan(
                       text: ' та ',
@@ -81,9 +86,7 @@ class BattleLogView extends ConsumerWidget {
                     ),
                     TextSpan(
                       text: botName,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     TextSpan(
                       text: '!',

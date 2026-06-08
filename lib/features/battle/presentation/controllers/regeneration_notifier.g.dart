@@ -9,10 +9,10 @@ part of 'regeneration_notifier.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(Regeneration)
+@ProviderFor(RegenerationNotifier)
 final regenerationProvider = RegenerationProvider._();
 
-final class RegenerationProvider extends $NotifierProvider<Regeneration, void> {
+final class RegenerationProvider extends $NotifierProvider<RegenerationNotifier, void> {
   RegenerationProvider._()
     : super(
         from: null,
@@ -29,7 +29,7 @@ final class RegenerationProvider extends $NotifierProvider<Regeneration, void> {
 
   @$internal
   @override
-  Regeneration create() => Regeneration();
+  RegenerationNotifier create() => RegenerationNotifier();
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(void value) {

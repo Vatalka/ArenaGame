@@ -4,7 +4,7 @@ import 'package:arena_game/features/battle/domain/entities/battle_selection.dart
 import 'package:arena_game/features/log/domain/entities/battle_log_item.dart';
 import 'package:arena_game/features/battle/presentation/controllers/bot_notifier.dart';
 import 'package:arena_game/features/log/presentation/controllers/battle_log_notifier.dart';
-import 'package:arena_game/features/battle/presentation/controllers/active_player.dart';
+import 'package:arena_game/features/battle/presentation/controllers/active_player_notifier.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'battle_notifier.g.dart';
@@ -51,7 +51,7 @@ class BattleNotifier extends _$BattleNotifier {
     final playerAttackArea = state.selectedAttack;
     final botBlockArea = ref.read(botProvider.notifier).getRandomArea();
 
-    int damageToBot = player.strength;
+    int damageToBot = player.strength * 2;
 
     if (playerAttackArea == botBlockArea) {
       damageToBot = 0;
@@ -74,7 +74,7 @@ class BattleNotifier extends _$BattleNotifier {
     final botAttackArea = ref.read(botProvider.notifier).getRandomArea();
     final playerBlockArea = state.selectedBlock;
 
-    int damageToPlayer = bot.strength;
+    int damageToPlayer = bot.strength * 2;
 
     if (botAttackArea == playerBlockArea) {
       damageToPlayer = 0;

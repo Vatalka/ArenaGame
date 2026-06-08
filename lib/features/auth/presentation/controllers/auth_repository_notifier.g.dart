@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth_repository_provider.dart';
+part of 'auth_repository_notifier.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,7 +9,7 @@ part of 'auth_repository_provider.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(authRepository)
+@ProviderFor(authRepositoryNotifier)
 final authRepositoryProvider = AuthRepositoryProvider._();
 
 final class AuthRepositoryProvider
@@ -37,7 +37,7 @@ final class AuthRepositoryProvider
 
   @override
   IAuthRepository create(Ref ref) {
-    return authRepository(ref);
+    return authRepositoryNotifier(ref);
   }
 
   /// {@macro riverpod.override_with_value}
@@ -51,7 +51,7 @@ final class AuthRepositoryProvider
 
 String _$authRepositoryHash() => r'5690097f4ef1050185aa12adccdd119b843ac42e';
 
-@ProviderFor(authState)
+@ProviderFor(authStateNotifier)
 final authStateProvider = AuthStateProvider._();
 
 final class AuthStateProvider
@@ -78,7 +78,7 @@ final class AuthStateProvider
 
   @override
   Stream<User?> create(Ref ref) {
-    return authState(ref);
+    return authStateNotifier(ref);
   }
 }
 

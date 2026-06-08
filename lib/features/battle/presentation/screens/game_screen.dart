@@ -1,7 +1,7 @@
 import 'package:arena_game/features/battle/presentation/controllers/battle_notifier.dart';
 import 'package:arena_game/features/battle/presentation/controllers/bot_notifier.dart';
 import 'package:arena_game/features/battle/presentation/controllers/regeneration_notifier.dart';
-import 'package:arena_game/features/battle/presentation/controllers/active_player.dart';
+import 'package:arena_game/features/battle/presentation/controllers/active_player_notifier.dart';
 import 'package:arena_game/features/battle/presentation/widgets/attack_confirm_button.dart';
 import 'package:arena_game/features/battle/presentation/widgets/battle_mode_selector.dart';
 import 'package:arena_game/features/log/presentation/widgets/battle_log_view.dart';
