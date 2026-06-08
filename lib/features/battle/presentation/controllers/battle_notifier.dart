@@ -1,10 +1,10 @@
 import 'package:arena_game/features/character/domain/repositories/i_character_repository.dart';
 import 'package:arena_game/features/character/presentation/controllers/selection_notifier.dart';
-import 'package:arena_game/features/game/battle/domain/entities/battle_selection.dart';
-import 'package:arena_game/features/game/log/domain/entities/battle_log_item.dart';
-import 'package:arena_game/features/game/bot/bot_notifier.dart';
-import 'package:arena_game/features/game/log/presentation/controllers/battle_log_notifier.dart';
-import 'package:arena_game/features/game/player/active_player.dart';
+import 'package:arena_game/features/battle/domain/entities/battle_selection.dart';
+import 'package:arena_game/features/log/domain/entities/battle_log_item.dart';
+import 'package:arena_game/features/battle/presentation/controllers/bot_notifier.dart';
+import 'package:arena_game/features/log/presentation/controllers/battle_log_notifier.dart';
+import 'package:arena_game/features/battle/presentation/controllers/active_player.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'battle_notifier.g.dart';

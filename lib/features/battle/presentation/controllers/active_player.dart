@@ -1,6 +1,6 @@
 import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:arena_game/features/character/presentation/controllers/selection_notifier.dart';
-import 'package:arena_game/features/game/player/player_notifier.dart';
+import 'package:arena_game/features/battle/presentation/controllers/player_notifier.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'active_player.g.dart';

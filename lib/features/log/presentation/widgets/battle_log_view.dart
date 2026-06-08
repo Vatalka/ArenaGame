@@ -1,7 +1,7 @@
 import 'package:arena_game/core/theme/game_colors.dart';
-import 'package:arena_game/features/game/battle/domain/entities/battle_selection.dart';
-import 'package:arena_game/features/game/log/domain/entities/battle_log_item.dart';
-import 'package:arena_game/features/game/log/presentation/controllers/battle_log_notifier.dart';
+import 'package:arena_game/features/battle/domain/entities/battle_selection.dart';
+import 'package:arena_game/features/log/domain/entities/battle_log_item.dart';
+import 'package:arena_game/features/log/presentation/controllers/battle_log_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';

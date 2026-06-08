@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:arena_game/features/character/presentation/controllers/selection_notifier.dart';
-import 'package:arena_game/features/game/battle/presentation/controllers/battle_notifier.dart';
+import 'package:arena_game/features/battle/presentation/controllers/battle_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
