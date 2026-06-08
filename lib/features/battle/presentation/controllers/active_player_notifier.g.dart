@@ -10,12 +10,12 @@ part of 'active_player_notifier.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(activePlayerNotifier)
-final activePlayerProvider = ActivePlayerProvider._();
+final activePlayerProvider = ActivePlayerNotifierProvider._();
 
-final class ActivePlayerProvider
+final class ActivePlayerNotifierProvider
     extends $FunctionalProvider<Character, Character, Character>
     with $Provider<Character> {
-  ActivePlayerProvider._()
+  ActivePlayerNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -27,7 +27,7 @@ final class ActivePlayerProvider
       );
 
   @override
-  String debugGetCreateSourceHash() => _$activePlayerHash();
+  String debugGetCreateSourceHash() => _$activePlayerNotifierHash();
 
   @$internal
   @override
@@ -48,4 +48,5 @@ final class ActivePlayerProvider
   }
 }
 
-String _$activePlayerHash() => r'fbda78070690218aa08e5a1494e9196cabb1c896';
+String _$activePlayerNotifierHash() =>
+    r'fd49784cef523cc82e1eff4ff685153b9476ca3e';

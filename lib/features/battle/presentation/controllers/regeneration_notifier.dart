@@ -8,7 +8,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'regeneration_notifier.g.dart';
 
 @Riverpod(keepAlive: true)
-class RegenerationNotifier extends _$Regeneration {
+class RegenerationNotifier extends _$RegenerationNotifier {
   Timer? _timer;
 
   @override

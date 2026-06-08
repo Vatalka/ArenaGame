@@ -10,10 +10,11 @@ part of 'regeneration_notifier.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(RegenerationNotifier)
-final regenerationProvider = RegenerationProvider._();
+final regenerationProvider = RegenerationNotifierProvider._();
 
-final class RegenerationProvider extends $NotifierProvider<RegenerationNotifier, void> {
-  RegenerationProvider._()
+final class RegenerationNotifierProvider
+    extends $NotifierProvider<RegenerationNotifier, void> {
+  RegenerationNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -25,7 +26,7 @@ final class RegenerationProvider extends $NotifierProvider<RegenerationNotifier,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$regenerationHash();
+  String debugGetCreateSourceHash() => _$regenerationNotifierHash();
 
   @$internal
   @override
@@ -40,9 +41,10 @@ final class RegenerationProvider extends $NotifierProvider<RegenerationNotifier,
   }
 }
 
-String _$regenerationHash() => r'90c97c081113909ad85d8d05d01f7464487746ed';
+String _$regenerationNotifierHash() =>
+    r'bfc17ac9ca65da1bd46a75404fb3420e381df5fb';
 
-abstract class _$Regeneration extends $Notifier<void> {
+abstract class _$RegenerationNotifier extends $Notifier<void> {
   void build();
   @$mustCallSuper
   @override

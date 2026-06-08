@@ -10,13 +10,13 @@ part of 'auth_repository_notifier.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(authRepositoryNotifier)
-final authRepositoryProvider = AuthRepositoryProvider._();
+final authRepositoryProvider = AuthRepositoryNotifierProvider._();
 
-final class AuthRepositoryProvider
+final class AuthRepositoryNotifierProvider
     extends
         $FunctionalProvider<IAuthRepository, IAuthRepository, IAuthRepository>
     with $Provider<IAuthRepository> {
-  AuthRepositoryProvider._()
+  AuthRepositoryNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -28,7 +28,7 @@ final class AuthRepositoryProvider
       );
 
   @override
-  String debugGetCreateSourceHash() => _$authRepositoryHash();
+  String debugGetCreateSourceHash() => _$authRepositoryNotifierHash();
 
   @$internal
   @override
@@ -49,15 +49,16 @@ final class AuthRepositoryProvider
   }
 }
 
-String _$authRepositoryHash() => r'5690097f4ef1050185aa12adccdd119b843ac42e';
+String _$authRepositoryNotifierHash() =>
+    r'73f24ba5d799c02bca7eb7024421d357dbbd8b46';
 
 @ProviderFor(authStateNotifier)
-final authStateProvider = AuthStateProvider._();
+final authStateProvider = AuthStateNotifierProvider._();
 
-final class AuthStateProvider
+final class AuthStateNotifierProvider
     extends $FunctionalProvider<AsyncValue<User?>, User?, Stream<User?>>
     with $FutureModifier<User?>, $StreamProvider<User?> {
-  AuthStateProvider._()
+  AuthStateNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -69,7 +70,7 @@ final class AuthStateProvider
       );
 
   @override
-  String debugGetCreateSourceHash() => _$authStateHash();
+  String debugGetCreateSourceHash() => _$authStateNotifierHash();
 
   @$internal
   @override
@@ -82,4 +83,4 @@ final class AuthStateProvider
   }
 }
 
-String _$authStateHash() => r'c88cb36d6c93a5c7df685b2918f2d0f0710965a0';
+String _$authStateNotifierHash() => r'f0f85d4fd047469a4f24dfe3e551575287b0073f';

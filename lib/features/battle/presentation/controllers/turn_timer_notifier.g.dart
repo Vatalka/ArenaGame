@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'battle_notifier.dart';
+part of 'turn_timer_notifier.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,51 +9,51 @@ part of 'battle_notifier.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(BattleNotifier)
-final battleProvider = BattleNotifierProvider._();
+@ProviderFor(TurnTimerNotifier)
+final turnTimerProvider = TurnTimerNotifierProvider._();
 
-final class BattleNotifierProvider
-    extends $NotifierProvider<BattleNotifier, BattleSelection> {
-  BattleNotifierProvider._()
+final class TurnTimerNotifierProvider
+    extends $NotifierProvider<TurnTimerNotifier, int> {
+  TurnTimerNotifierProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'battleProvider',
+        name: r'turnTimerProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$battleNotifierHash();
+  String debugGetCreateSourceHash() => _$turnTimerNotifierHash();
 
   @$internal
   @override
-  BattleNotifier create() => BattleNotifier();
+  TurnTimerNotifier create() => TurnTimerNotifier();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(BattleSelection value) {
+  Override overrideWithValue(int value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<BattleSelection>(value),
+      providerOverride: $SyncValueProvider<int>(value),
     );
   }
 }
 
-String _$battleNotifierHash() => r'3c978b5b10fb096f99c3ccbfbf5e2ca7398561f3';
+String _$turnTimerNotifierHash() => r'e13560dcab423959b1d938a4ba921dbeaa7ee499';
 
-abstract class _$BattleNotifier extends $Notifier<BattleSelection> {
-  BattleSelection build();
+abstract class _$TurnTimerNotifier extends $Notifier<int> {
+  int build();
   @$mustCallSuper
   @override
   void runBuild() {
-    final ref = this.ref as $Ref<BattleSelection, BattleSelection>;
+    final ref = this.ref as $Ref<int, int>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<BattleSelection, BattleSelection>,
-              BattleSelection,
+              AnyNotifier<int, int>,
+              int,
               Object?,
               Object?
             >;
