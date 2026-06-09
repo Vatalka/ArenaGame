@@ -18,7 +18,7 @@ class TurnTimerIndicator extends ConsumerWidget {
         : gameColors.healthMedium;
 
     return Opacity(
-      opacity: state.isTurnReady && state.isBotMode ? 1.0 : 0.0,
+      opacity: state.isBotMode ? 1.0 : 0.0,
       child: Stack(
         alignment: Alignment.center,
         children: [

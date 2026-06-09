@@ -25,6 +25,7 @@ class GameScreen extends ConsumerWidget {
       canPop: false,
       onPopInvokedWithResult: (didPop, result) async {
         if (didPop) return;
+        ref.read(battleProvider.notifier).disableBotMode();
         Modular.to.navigate('/selection');
       },
       child: Scaffold(
@@ -82,6 +83,7 @@ class GameScreen extends ConsumerWidget {
                   children: [
                     ElevatedButton(
                       onPressed: () {
+                        ref.read(battleProvider.notifier).disableBotMode();
                         Modular.to.navigate('/selection');
                       },
                       child: Text('Select'),
@@ -89,6 +91,7 @@ class GameScreen extends ConsumerWidget {
                     RestoreHpButton(onTap: () {}),
                     ElevatedButton(
                       onPressed: () {
+                        ref.read(battleProvider.notifier).disableBotMode();
                         Modular.to.navigate('/');
                       },
                       child: Text('Login'),

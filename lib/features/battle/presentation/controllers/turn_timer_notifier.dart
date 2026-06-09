@@ -15,7 +15,11 @@ class TurnTimerNotifier extends _$TurnTimerNotifier {
       battleProvider.select((state) => state.isBotMode),
     );
 
-    if (isCombatMode) {
+    final isTurnReady = ref.watch(
+      battleProvider.select((state) => state.isTurnReady),
+    );
+
+    if (isCombatMode && !isTurnReady) {
       _startTimer();
     } else {
       _stopTimer();
@@ -37,8 +41,7 @@ class TurnTimerNotifier extends _$TurnTimerNotifier {
         _stopTimer();
         state = 0;
 
-        // тут буде метод пропуску хода, поки що confirmTurn()
-        ref.read(battleProvider.notifier).confirmTurn();
+        ref.read(battleProvider.notifier).skipTurn();
       }
     });
   }

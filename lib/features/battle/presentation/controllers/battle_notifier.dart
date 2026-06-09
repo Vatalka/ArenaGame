@@ -42,6 +42,30 @@ class BattleNotifier extends _$BattleNotifier {
     _processPlayerTurn();
     _processBotTurn();
     _checkBattleOver();
+
+    state = state.copyWith(selectedAttack: null, selectedBlock: null);
+  }
+
+  void skipTurn() {
+    if (!state.isBotMode) return;
+
+    // 1) повний пропуск - потрібна буде null перевірка у _processBotTurn()
+    // state = state.copyWith(selectedAttack: null, selectedBlock: null);
+
+    // 2) ШІ контроль = getRandomArea()
+    final randomAttack = ref.read(botProvider.notifier).getRandomArea();
+    final randomBlock = ref.read(botProvider.notifier).getRandomArea();
+
+    state = state.copyWith(
+      selectedAttack: randomAttack,
+      selectedBlock: randomBlock,
+    );
+
+    ref
+        .read(battleLogProvider.notifier)
+        .addInfoLog('Гравець дизорієнтований...');
+
+    confirmTurn();
   }
 
   void _processPlayerTurn() {
