@@ -19,10 +19,16 @@ class AttackConfirmButton extends ConsumerWidget {
                 ? Theme.of(context).colorScheme.primaryContainer
                 : Theme.of(context).colorScheme.secondaryContainer,
           ),
-          onPressed: (state.isTurnReady && state.isBotMode)
+          onPressed: state.isTurnReady && state.isBotMode
               ? ref.read(battleProvider.notifier).confirmTurn
               : null,
-          child: const Text("Attack"),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text("Attack", style: TextStyle(fontWeight: FontWeight.bold)),
+              AttackConfirmButton(),
+            ],
+          ),
         ),
       ),
     );
