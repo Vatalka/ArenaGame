@@ -15,11 +15,11 @@ class TurnTimerNotifier extends _$TurnTimerNotifier {
       battleProvider.select((state) => state.isBotMode),
     );
 
-    final isTurnReady = ref.watch(
-      battleProvider.select((state) => state.isTurnReady),
+    final roundNumber = ref.watch(
+      battleProvider.select((state) => state.roundNumber),
     );
 
-    if (isCombatMode && !isTurnReady) {
+    if (isCombatMode && roundNumber > 0) {
       _startTimer();
     } else {
       _stopTimer();

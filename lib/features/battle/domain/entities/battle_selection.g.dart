@@ -14,6 +14,7 @@ _BattleSelection _$BattleSelectionFromJson(Map<String, dynamic> json) =>
       ),
       selectedBlock: $enumDecodeNullable(_$AreaEnumMap, json['selectedBlock']),
       isBotMode: json['isBotMode'] as bool? ?? false,
+      roundNumber: (json['roundNumber'] as num?)?.toInt() ?? 1,
     );
 
 Map<String, dynamic> _$BattleSelectionToJson(_BattleSelection instance) =>
@@ -21,6 +22,7 @@ Map<String, dynamic> _$BattleSelectionToJson(_BattleSelection instance) =>
       'selectedAttack': _$AreaEnumMap[instance.selectedAttack],
       'selectedBlock': _$AreaEnumMap[instance.selectedBlock],
       'isBotMode': instance.isBotMode,
+      'roundNumber': instance.roundNumber,
     };
 
 const _$AreaEnumMap = {Area.head: 'head', Area.body: 'body', Area.legs: 'legs'};

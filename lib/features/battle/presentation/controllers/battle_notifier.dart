@@ -43,7 +43,11 @@ class BattleNotifier extends _$BattleNotifier {
     _processBotTurn();
     _checkBattleOver();
 
-    state = state.copyWith(selectedAttack: null, selectedBlock: null);
+    state = state.copyWith(
+      selectedAttack: null,
+      selectedBlock: null,
+      roundNumber: state.roundNumber + 1,
+    );
   }
 
   void skipTurn() {

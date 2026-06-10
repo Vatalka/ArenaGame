@@ -25,6 +25,7 @@ abstract class BattleSelection with _$BattleSelection {
     Area? selectedAttack,
     Area? selectedBlock,
     @Default(false) bool isBotMode,
+    @Default(1) int roundNumber,
   }) = _BattleSelection;
 
   const BattleSelection._();

@@ -41,7 +41,7 @@ final class TurnTimerNotifierProvider
   }
 }
 
-String _$turnTimerNotifierHash() => r'e13560dcab423959b1d938a4ba921dbeaa7ee499';
+String _$turnTimerNotifierHash() => r'd2c4cc6cbd1c1925385863181362e23dcc181f3d';
 
 abstract class _$TurnTimerNotifier extends $Notifier<int> {
   int build();
