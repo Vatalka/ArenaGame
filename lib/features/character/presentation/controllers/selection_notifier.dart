@@ -34,22 +34,29 @@ class SelectionNotifier extends _$SelectionNotifier {
     return updatedCharacters;
   }
 
-  void updateCharacterHP(String id, int newHp) {
+  void updateCharacterAfterBattle({
+    required String id,
+    required int newHp,
+    int gainedExp = 0,
+  }) {
     if (state is! AsyncData<List<Character>>) return;
 
     final currentList = state.value!;
-
     final index = currentList.indexWhere((char) => char.id == id);
     if (index == -1) return;
 
     final oldChar = currentList[index];
 
-    if (oldChar.currentHp == newHp) return;
-
-    final updatedChar = oldChar.copyWith(
+    var updatedChar = oldChar.copyWith(
       currentHp: newHp,
       lastUpdateTime: DateTime.now().millisecondsSinceEpoch,
     );
+
+    if (gainedExp > 0) {
+      updatedChar = updatedChar.earnExperience(gainedExp);
+    }
+
+    if (oldChar == updatedChar) return;
 
     ref.read(characterRepositoryProvider).saveCharacter(updatedChar);
 

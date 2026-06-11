@@ -14,6 +14,9 @@ _CharacterModel _$CharacterModelFromJson(Map<String, dynamic> json) =>
       vitality: (json['vitality'] as num).toInt(),
       strength: (json['strength'] as num).toInt(),
       lastUpdateTime: (json['lastUpdateTime'] as num?)?.toInt() ?? 0,
+      level: (json['level'] as num?)?.toInt() ?? 0,
+      experience: (json['experience'] as num?)?.toInt() ?? 0,
+      statPoints: (json['statPoints'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$CharacterModelToJson(_CharacterModel instance) =>
@@ -24,4 +27,7 @@ Map<String, dynamic> _$CharacterModelToJson(_CharacterModel instance) =>
       'vitality': instance.vitality,
       'strength': instance.strength,
       'lastUpdateTime': instance.lastUpdateTime,
+      'level': instance.level,
+      'experience': instance.experience,
+      'statPoints': instance.statPoints,
     };

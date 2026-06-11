@@ -117,13 +117,14 @@ class BattleNotifier extends _$BattleNotifier {
 
     final newHP = player.currentHp - damageToPlayer;
 
-    ref.read(selectionProvider.notifier).updateCharacterHP(player.id, newHP);
+    ref
+        .read(selectionProvider.notifier)
+        .updateCharacterAfterBattle(id: player.id, newHp: newHP);
   }
 
   void _checkBattleOver() {
     final player = ref.read(activePlayerProvider);
     final bot = ref.read(botProvider);
-
     final isPlayerLose = player.currentHp <= 0;
     final isBotLose = bot.currentHp <= 0;
 
@@ -135,9 +136,20 @@ class BattleNotifier extends _$BattleNotifier {
       };
 
       ref.read(battleLogProvider.notifier).addEndBattleLog(result, winnerName);
-      disableBotMode();
-      ref.read(characterRepositoryProvider).saveCharacter(player);
-      ref.invalidate(selectionProvider);
+
+      final expReward = (result == BattleResult.playerWin) ? 100 : 0;
+
+      ref
+          .read(selectionProvider.notifier)
+          .updateCharacterAfterBattle(
+            id: player.id,
+            newHp: player.currentHp,
+            gainedExp: expReward,
+          );
     }
+
+    disableBotMode();
+    ref.read(characterRepositoryProvider).saveCharacter(player);
+    ref.invalidate(selectionProvider);
   }
 }

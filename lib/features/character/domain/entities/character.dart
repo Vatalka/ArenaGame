@@ -8,40 +8,25 @@ abstract class Character with _$Character {
 
   const factory Character({
     required String id,
-    required String name,
-    required int currentHp,
-    required int vitality,
-    required int strength,
-    required int lastUpdateTime,
+    @Default('') String name,
+    @Default(100) int currentHp,
+    @Default(10) int vitality,
+    @Default(10) int strength,
+    @Default(0) int lastUpdateTime,
+    @Default(0) int level,
+    @Default(0) int experience,
+    @Default(0) int statPoints,
   }) = _Character;
 
-  int get maxHp => vitality * 10;
-
-  int get damage => strength;
-
   factory Character.createDefault() {
-    const defaultValue = 10;
-    return Character(
-      id: DateTime.now().millisecondsSinceEpoch.toString(),
-      name: '',
-      currentHp: defaultValue * 10,
-      vitality: defaultValue,
-      strength: defaultValue,
-      lastUpdateTime: 0,
-    );
+    return Character(id: DateTime.now().millisecondsSinceEpoch.toString());
   }
 
   factory Character.createEmpty() {
-    const defaultValue = 0;
-    return Character(
-      id: '',
-      name: '',
-      currentHp: defaultValue,
-      vitality: defaultValue,
-      strength: defaultValue,
-      lastUpdateTime: defaultValue,
-    );
+    return Character(id: '');
   }
+
+  int get maxHp => vitality * 10;
 
   int get regenPerTick => (maxHp * 0.01).ceil();
 
@@ -66,5 +51,23 @@ abstract class Character with _$Character {
     if (name.isEmpty) return null;
     if (name.trim().length < 3) return 'Name is too short';
     return null;
+  }
+
+  Character earnExperience(int gainedExp) {
+    int totalExp = experience + gainedExp;
+    int currentLevel = level;
+    int currentPoints = statPoints;
+
+    while (totalExp >= (currentLevel * 100)) {
+      totalExp -= (currentLevel * 100);
+      currentLevel++;
+      currentPoints += 3;
+    }
+
+    return copyWith(
+      experience: totalExp,
+      level: currentLevel,
+      statPoints: currentPoints,
+    );
   }
 }

@@ -43,7 +43,7 @@ class RegenerationNotifier extends _$RegenerationNotifier {
 
             ref
                 .read(selectionProvider.notifier)
-                .updateCharacterHP(char.id, newHp);
+                .updateCharacterAfterBattle(id: char.id, newHp: newHp);
           }
         }
       }
