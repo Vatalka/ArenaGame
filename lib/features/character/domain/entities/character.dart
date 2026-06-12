@@ -8,22 +8,60 @@ abstract class Character with _$Character {
 
   const factory Character({
     required String id,
-    @Default('') String name,
-    @Default(100) int currentHp,
-    @Default(10) int vitality,
-    @Default(10) int strength,
-    @Default(0) int lastUpdateTime,
-    @Default(0) int level,
-    @Default(0) int experience,
-    @Default(0) int statPoints,
+    required String name,
+    required int currentHp,
+    required int vitality,
+    required int strength,
+    required int lastUpdateTime,
+    required int level,
+    required int experience,
+    required int statPoints,
   }) = _Character;
 
-  factory Character.createDefault() {
-    return Character(id: DateTime.now().millisecondsSinceEpoch.toString());
+  factory Character.createNew() {
+    return Character(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      name: '',
+      currentHp: 100,
+      vitality: 10,
+      strength: 10,
+      lastUpdateTime: 0,
+      level: 0,
+      experience: 0,
+      statPoints: 0,
+    );
   }
 
   factory Character.createEmpty() {
-    return Character(id: '');
+    return Character(
+      id: '',
+      name: '',
+      currentHp: 0,
+      vitality: 0,
+      strength: 0,
+      lastUpdateTime: 0,
+      level: 0,
+      experience: 0,
+      statPoints: 0,
+    );
+  }
+
+  Character earnExperience(int gainedExp) {
+    int totalExp = experience + gainedExp;
+    int currentLevel = level;
+    int currentPoints = statPoints;
+
+    while (totalExp >= (currentLevel * 100)) {
+      totalExp -= (currentLevel * 100);
+      currentLevel++;
+      currentPoints += 3;
+    }
+
+    return copyWith(
+      experience: totalExp,
+      level: currentLevel,
+      statPoints: currentPoints,
+    );
   }
 
   int get maxHp => vitality * 10;
@@ -51,23 +89,5 @@ abstract class Character with _$Character {
     if (name.isEmpty) return null;
     if (name.trim().length < 3) return 'Name is too short';
     return null;
-  }
-
-  Character earnExperience(int gainedExp) {
-    int totalExp = experience + gainedExp;
-    int currentLevel = level;
-    int currentPoints = statPoints;
-
-    while (totalExp >= (currentLevel * 100)) {
-      totalExp -= (currentLevel * 100);
-      currentLevel++;
-      currentPoints += 3;
-    }
-
-    return copyWith(
-      experience: totalExp,
-      level: currentLevel,
-      statPoints: currentPoints,
-    );
   }
 }

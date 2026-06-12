@@ -214,18 +214,18 @@ return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strengt
 
 
 class _Character extends Character {
-  const _Character({required this.id, this.name = '', this.currentHp = 100, this.vitality = 10, this.strength = 10, this.lastUpdateTime = 0, this.level = 0, this.experience = 0, this.statPoints = 0}): super._();
+  const _Character({required this.id, required this.name, required this.currentHp, required this.vitality, required this.strength, required this.lastUpdateTime, required this.level, required this.experience, required this.statPoints}): super._();
   
 
 @override final  String id;
-@override@JsonKey() final  String name;
-@override@JsonKey() final  int currentHp;
-@override@JsonKey() final  int vitality;
-@override@JsonKey() final  int strength;
-@override@JsonKey() final  int lastUpdateTime;
-@override@JsonKey() final  int level;
-@override@JsonKey() final  int experience;
-@override@JsonKey() final  int statPoints;
+@override final  String name;
+@override final  int currentHp;
+@override final  int vitality;
+@override final  int strength;
+@override final  int lastUpdateTime;
+@override final  int level;
+@override final  int experience;
+@override final  int statPoints;
 
 /// Create a copy of Character
 /// with the given fields replaced by the non-null parameter values.

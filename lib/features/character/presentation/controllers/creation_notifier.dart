@@ -8,7 +8,7 @@ part 'creation_notifier.g.dart';
 @riverpod
 class CreationNotifier extends _$CreationNotifier {
   @override
-  Character build() => Character.createDefault();
+  Character build() => Character.createNew();
 
   void updateName(String name) => state = state.copyWith(name: name);
 

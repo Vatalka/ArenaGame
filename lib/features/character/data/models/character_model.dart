@@ -46,6 +46,9 @@ extension CharacterModelX on CharacterModel {
       strength: strength,
       vitality: vitality,
       lastUpdateTime: lastUpdateTime,
+      level: level,
+      experience: experience,
+      statPoints: statPoints,
     );
   }
 }
