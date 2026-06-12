@@ -146,10 +146,7 @@ class BattleNotifier extends _$BattleNotifier {
             newHp: player.currentHp,
             gainedExp: expReward,
           );
+      disableBotMode();
     }
-
-    disableBotMode();
-    ref.read(characterRepositoryProvider).saveCharacter(player);
-    ref.invalidate(selectionProvider);
   }
 }
