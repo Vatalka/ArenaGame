@@ -1,4 +1,5 @@
 import 'package:arena_game/core/theme/game_colors.dart';
+import 'package:arena_game/core/widgets/game_progress_bar.dart';
 import 'package:flutter/material.dart';
 
 class HealthBar extends StatelessWidget {
@@ -8,56 +9,19 @@ class HealthBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(3),
-        child: SizedBox(
-          width: double.infinity,
-          child: Stack(
-            children: [
-              // Bottom layer
-              TweenAnimationBuilder<double>(
-                duration: const Duration(milliseconds: 1000),
-                curve: Curves.easeInOutCubic,
-                tween: Tween<double>(begin: hp, end: hp),
-                builder: (context, value, child) {
-                  return LinearProgressIndicator(
-                    value: value,
-                    minHeight: 10,
-                    backgroundColor: Theme.of(context).colorScheme.surfaceDim,
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      Theme.of(context).colorScheme.surfaceContainerLowest,
-                    ),
-                  );
-                },
-              ),
-              // Top layer
-              TweenAnimationBuilder<double>(
-                duration: const Duration(milliseconds: 500),
-                curve: Curves.easeOutCirc,
-                tween: Tween<double>(begin: hp, end: hp),
-                builder: (context, value, child) {
-                  return LinearProgressIndicator(
-                    value: value,
-                    minHeight: 10,
-                    backgroundColor: Colors.transparent,
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      _getHealthBarColor(context, value),
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
+    final theme = Theme.of(context);
+    final gameColors = theme.extension<GameColors>()!;
+
+    return GameProgressBar(
+      value: hp,
+      fillColorBuilder: (animValue) =>
+          _getHealthBarColor(gameColors, animValue),
+      backgroundColor: theme.colorScheme.surfaceDim,
+      trailingColor: theme.colorScheme.surfaceContainerLowest,
     );
   }
 
-  Color _getHealthBarColor(BuildContext context, double value) {
-    final gameColors = Theme.of(context).extension<GameColors>()!;
-
+  Color _getHealthBarColor(GameColors gameColors, double value) {
     if (value > 0.66) {
       return Color.lerp(
         gameColors.healthMedium,

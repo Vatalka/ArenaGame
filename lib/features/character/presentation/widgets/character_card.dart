@@ -1,4 +1,5 @@
 import 'package:arena_game/features/character/domain/entities/character.dart';
+import 'package:arena_game/features/character/presentation/widgets/experience_bar.dart';
 import 'package:arena_game/features/character/presentation/widgets/health_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,8 @@ class CharacterCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final hpPercent = character.currentHp / character.maxHp;
+    final xpPercent = character.experience / character.nextLevelExp;
+
     return Card(
       color: Theme.of(context).colorScheme.primaryContainer,
       child: Padding(
@@ -22,6 +25,8 @@ class CharacterCard extends StatelessWidget {
             ),
             Text('HP: ${character.currentHp} / ${character.maxHp}'),
             HealthBar(hp: hpPercent),
+            Text('EXP: ${character.experience} / ${character.nextLevelExp}'),
+            ExperienceBar(xp: xpPercent),
             Tooltip(
               message: "Vitality: 1 VIT = 10 Hit Points",
               triggerMode: TooltipTriggerMode.tap,

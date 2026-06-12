@@ -64,6 +64,8 @@ abstract class Character with _$Character {
     );
   }
 
+  int get nextLevelExp => level * 100;
+
   int get maxHp => vitality * 10;
 
   int get regenPerTick => (maxHp * 0.01).ceil();
