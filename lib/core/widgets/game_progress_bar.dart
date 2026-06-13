@@ -17,7 +17,7 @@ class GameProgressBar extends StatelessWidget {
     required this.fillColorBuilder,
     required this.backgroundColor,
     required this.trailingColor,
-    this.height = 10.0,
+    required this.height,
     this.fillDuration = const Duration(milliseconds: 500),
     this.trailingDuration = const Duration(milliseconds: 1000),
     this.fillCurve = Curves.easeOutCirc,
@@ -26,47 +26,44 @@ class GameProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(3),
-        child: SizedBox(
-          width: double.infinity,
-          child: Stack(
-            children: [
-              // Bottom layer
-              TweenAnimationBuilder<double>(
-                duration: trailingDuration,
-                curve: trailingCurve,
-                tween: Tween<double>(begin: value, end: value),
-                builder: (context, animValue, child) {
-                  return LinearProgressIndicator(
-                    value: animValue,
-                    minHeight: height,
-                    backgroundColor: backgroundColor,
-                    valueColor: AlwaysStoppedAnimation<Color>(trailingColor),
-                  );
-                },
-              ),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(3),
+      child: SizedBox(
+        width: double.infinity,
+        child: Stack(
+          children: [
+            // Bottom layer
+            TweenAnimationBuilder<double>(
+              duration: trailingDuration,
+              curve: trailingCurve,
+              tween: Tween<double>(begin: value, end: value),
+              builder: (context, animValue, child) {
+                return LinearProgressIndicator(
+                  value: animValue,
+                  minHeight: height,
+                  backgroundColor: backgroundColor,
+                  valueColor: AlwaysStoppedAnimation<Color>(trailingColor),
+                );
+              },
+            ),
 
-              // Top layer
-              TweenAnimationBuilder<double>(
-                duration: fillDuration,
-                curve: fillCurve,
-                tween: Tween<double>(begin: value, end: value),
-                builder: (context, animValue, child) {
-                  return LinearProgressIndicator(
-                    value: animValue,
-                    minHeight: height,
-                    backgroundColor: Colors.transparent,
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      fillColorBuilder(animValue),
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
+            // Top layer
+            TweenAnimationBuilder<double>(
+              duration: fillDuration,
+              curve: fillCurve,
+              tween: Tween<double>(begin: value, end: value),
+              builder: (context, animValue, child) {
+                return LinearProgressIndicator(
+                  value: animValue,
+                  minHeight: height,
+                  backgroundColor: Colors.transparent,
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    fillColorBuilder(animValue),
+                  ),
+                );
+              },
+            ),
+          ],
         ),
       ),
     );

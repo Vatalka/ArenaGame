@@ -16,9 +16,9 @@ class ExperienceBar extends StatelessWidget {
     return GameProgressBar(
       value: xp,
       fillColorBuilder: (_) => xpColor,
-      backgroundColor: theme.colorScheme.surfaceDim,
-      trailingColor: xpColor.withValues(alpha: 0.2),
-      height: 5,
+      backgroundColor: theme.colorScheme.onInverseSurface,
+      trailingColor: xpColor.withValues(alpha: 0.3),
+      height: 4,
       trailingDuration: const Duration(milliseconds: 2000),
     );
   }

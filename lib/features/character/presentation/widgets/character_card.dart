@@ -19,22 +19,93 @@ class CharacterCard extends StatelessWidget {
         padding: const EdgeInsets.all(4.0),
         child: Column(
           children: [
-            Text(
-              character.name,
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Tooltip(
+                  message: "level",
+                  triggerMode: TooltipTriggerMode.tap,
+                  preferBelow: false,
+                  child: Text('[${character.level}] '),
+                ),
+                Text(
+                  character.name,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+                ),
+              ],
             ),
-            Text('HP: ${character.currentHp} / ${character.maxHp}'),
-            HealthBar(hp: hpPercent),
-            Text('EXP: ${character.experience} / ${character.nextLevelExp}'),
-            ExperienceBar(xp: xpPercent),
+            Row(
+              children: [
+                Expanded(
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      HealthBar(hp: hpPercent),
+                      Positioned(
+                        left: 0,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 2),
+                          child: Stack(
+                            children: [
+                              Text(
+                                'HP',
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w500,
+                                  foreground: Paint()
+                                    ..style = PaintingStyle.stroke
+                                    ..strokeWidth = 2.0
+                                    ..color = Theme.of(
+                                      context,
+                                    ).colorScheme.onSurface,
+                                ),
+                              ),
+                              Text(
+                                'HP',
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w500,
+                                  color: Theme.of(context).colorScheme.surface,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        right: 0,
+                        child: Text(
+                          '${character.currentHp}/${character.maxHp}',
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
             Tooltip(
-              message: "Vitality: 1 VIT = 10 Hit Points",
+              message:
+                  'experience ${character.experience}/${character.nextLevelExp}',
+              triggerMode: TooltipTriggerMode.tap,
+              preferBelow: false,
+              child: ExperienceBar(xp: xpPercent),
+            ),
+            Tooltip(
+              message: '1 vitality = 10 HP',
               triggerMode: TooltipTriggerMode.tap,
               preferBelow: false,
               child: Text('VIT: ${character.vitality}'),
             ),
             Tooltip(
-              message: "Strength: 1 STR = 1 Damage",
+              message: '1 strength = 2 damage',
               triggerMode: TooltipTriggerMode.tap,
               preferBelow: false,
               child: Text('STR: ${character.strength}'),

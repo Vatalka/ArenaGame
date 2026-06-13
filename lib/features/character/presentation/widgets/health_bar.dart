@@ -18,6 +18,7 @@ class HealthBar extends StatelessWidget {
           _getHealthBarColor(gameColors, animValue),
       backgroundColor: theme.colorScheme.surfaceDim,
       trailingColor: theme.colorScheme.surfaceContainerLowest,
+      height: 14,
     );
   }
 
