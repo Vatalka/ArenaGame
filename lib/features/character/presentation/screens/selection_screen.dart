@@ -108,13 +108,6 @@ class SelectionScreen extends ConsumerWidget {
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (e, st) => Center(child: Text('Error: $e')),
         ),
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () {
-        //     ref.invalidate(selectionProvider);
-        //   },
-        //   tooltip: 'Оновити список',
-        //   child: const Icon(Icons.refresh),
-        // ),
       ),
     );
   }

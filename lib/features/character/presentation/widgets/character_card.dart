@@ -1,3 +1,5 @@
+import 'package:arena_game/core/widgets/game_tooltip.dart';
+import 'package:arena_game/core/widgets/stroke_text.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:arena_game/features/character/presentation/widgets/experience_bar.dart';
 import 'package:arena_game/features/character/presentation/widgets/health_bar.dart';
@@ -10,34 +12,43 @@ class CharacterCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hpPercent = character.currentHp / character.maxHp;
-    final xpPercent = character.experience / character.nextLevelExp;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    final hpPercent = character.maxHp > 0
+        ? character.currentHp / character.maxHp
+        : 0.0;
+    final xpPercent = character.nextLevelExp > 0
+        ? character.experience / character.nextLevelExp
+        : 0.0;
 
     return Card(
-      color: Theme.of(context).colorScheme.primaryContainer,
+      color: colorScheme.primaryContainer,
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: Column(
           children: [
+            // Level & name
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Tooltip(
-                  message: "level",
-                  triggerMode: TooltipTriggerMode.tap,
-                  preferBelow: false,
+                GameTooltip(
+                  message: 'level',
                   child: Text('[${character.level}] '),
                 ),
                 Text(
                   character.name,
-                  style: TextStyle(
-                    fontSize: 14,
+                  style: theme.textTheme.titleLarge?.copyWith(
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.onSurface,
+                    color: colorScheme.onSurface,
                   ),
                 ),
               ],
             ),
+            SizedBox(height: 4),
+
+            // Hit Points
             Row(
               children: [
                 Expanded(
@@ -46,38 +57,16 @@ class CharacterCard extends StatelessWidget {
                     children: [
                       HealthBar(hp: hpPercent),
                       Positioned(
-                        left: 0,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 2),
-                          child: Stack(
-                            children: [
-                              Text(
-                                'HP',
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w500,
-                                  foreground: Paint()
-                                    ..style = PaintingStyle.stroke
-                                    ..strokeWidth = 2.0
-                                    ..color = Theme.of(
-                                      context,
-                                    ).colorScheme.onSurface,
-                                ),
-                              ),
-                              Text(
-                                'HP',
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w500,
-                                  color: Theme.of(context).colorScheme.surface,
-                                ),
-                              ),
-                            ],
-                          ),
+                        left: 5,
+                        child: StrokeText(
+                          text: 'HP',
+                          fontSize: 11,
+                          textColor: colorScheme.surface,
+                          strokeColor: colorScheme.onSurface,
                         ),
                       ),
                       Positioned(
-                        right: 0,
+                        right: 5,
                         child: Text(
                           '${character.currentHp}/${character.maxHp}',
                           style: TextStyle(
@@ -91,23 +80,19 @@ class CharacterCard extends StatelessWidget {
                 ),
               ],
             ),
-            Tooltip(
+
+            // Experience & stats
+            GameTooltip(
               message:
                   'experience ${character.experience}/${character.nextLevelExp}',
-              triggerMode: TooltipTriggerMode.tap,
-              preferBelow: false,
               child: ExperienceBar(xp: xpPercent),
             ),
-            Tooltip(
+            GameTooltip(
               message: '1 vitality = 10 HP',
-              triggerMode: TooltipTriggerMode.tap,
-              preferBelow: false,
               child: Text('VIT: ${character.vitality}'),
             ),
-            Tooltip(
+            GameTooltip(
               message: '1 strength = 2 damage',
-              triggerMode: TooltipTriggerMode.tap,
-              preferBelow: false,
               child: Text('STR: ${character.strength}'),
             ),
           ],

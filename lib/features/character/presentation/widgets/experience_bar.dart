@@ -18,7 +18,7 @@ class ExperienceBar extends StatelessWidget {
       fillColorBuilder: (_) => xpColor,
       backgroundColor: theme.colorScheme.onInverseSurface,
       trailingColor: xpColor.withValues(alpha: 0.3),
-      height: 4,
+      height: 6,
       trailingDuration: const Duration(milliseconds: 2000),
     );
   }
