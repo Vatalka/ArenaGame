@@ -50,21 +50,33 @@ abstract class Character with _$Character {
     int totalExp = experience + gainedExp;
     int currentLevel = level;
     int currentPoints = statPoints;
+    int currentVitality = vitality;
+    int currentStrength = strength;
 
-    while (totalExp >= (currentLevel * 100)) {
-      totalExp -= (currentLevel * 100);
+    while (totalExp >= ((currentLevel + 1) * 100)) {
+      totalExp -= ((currentLevel + 1) * 100);
       currentLevel++;
       currentPoints += 3;
+      currentVitality += 1;
+      currentStrength += 4;
     }
+
+    final newMaxHp = currentVitality * 10;
 
     return copyWith(
       experience: totalExp,
       level: currentLevel,
       statPoints: currentPoints,
+      vitality: currentVitality,
+      strength: currentStrength,
+      currentHp: newMaxHp,
     );
   }
 
-  int get nextLevelExp => level * 100;
+  int get nextLevelExp {
+    if (level >= 10) return 0; // треба буде зупинити нарахування досвіду
+    return 100 << level; // 100 * 2^level == 100 * pow(2, level).toInt()
+  }
 
   int get maxHp => vitality * 10;
 

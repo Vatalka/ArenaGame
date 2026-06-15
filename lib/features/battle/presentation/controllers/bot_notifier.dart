@@ -17,6 +17,8 @@ class BotNotifier extends _$BotNotifier {
     );
   }
 
+  Area getTestArea() => Area.head;
+
   Area getRandomArea() {
     final random = Random();
     final areas = Area.values;

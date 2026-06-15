@@ -76,7 +76,7 @@ class BattleNotifier extends _$BattleNotifier {
     final bot = ref.read(botProvider);
 
     final playerAttackArea = state.selectedAttack;
-    final botBlockArea = ref.read(botProvider.notifier).getRandomArea();
+    final botBlockArea = ref.read(botProvider.notifier).getTestArea(); // test
 
     int damageToBot = player.strength * 2;
 
@@ -98,7 +98,7 @@ class BattleNotifier extends _$BattleNotifier {
     final player = ref.read(activePlayerProvider);
     final bot = ref.read(botProvider);
 
-    final botAttackArea = ref.read(botProvider.notifier).getRandomArea();
+    final botAttackArea = ref.read(botProvider.notifier).getTestArea(); // test
     final playerBlockArea = state.selectedBlock;
 
     int damageToPlayer = bot.strength * 2;
@@ -136,7 +136,10 @@ class BattleNotifier extends _$BattleNotifier {
 
       ref.read(battleLogProvider.notifier).addEndBattleLog(result, winnerName);
 
-      final expReward = (result == BattleResult.playerWin) ? 100 : 0;
+      int expReward = 0;
+      if (result == BattleResult.playerWin) {
+        expReward = (player.level + 1) * bot.maxHp ~/ 10;
+      }
 
       ref
           .read(selectionProvider.notifier)
