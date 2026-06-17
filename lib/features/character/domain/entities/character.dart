@@ -95,6 +95,7 @@ abstract class Character with _$Character {
 
     final double hpPerMs = (maxHp * 0.01) / 2000;
     final double gainedHp = differenceMs * hpPerMs;
+
     return (currentHp + gainedHp).clamp(0.0, maxHp.toDouble());
   }
 

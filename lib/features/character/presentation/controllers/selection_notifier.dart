@@ -13,25 +13,7 @@ class SelectionNotifier extends _$SelectionNotifier {
   }
 
   Future<List<Character>> _loadCharacters(ICharacterRepository repo) async {
-    final rawCharacters = await repo.getAllCharacters();
-    final updatedCharacters = <Character>[];
-
-    for (var char in rawCharacters) {
-      if (char.currentHp < char.maxHp && char.lastUpdateTime != 0) {
-        final actualHealth = char.actualHp;
-
-        if (actualHealth > char.currentHp) {
-          char = char.copyWith(
-            currentHp: actualHealth,
-            lastUpdateTime: DateTime.now().millisecondsSinceEpoch,
-          );
-          await repo.saveCharacter(char);
-        }
-      }
-      updatedCharacters.add(char);
-    }
-
-    return updatedCharacters;
+    return await repo.getAllCharacters();
   }
 
   void updateCharacterAfterBattle({
@@ -49,6 +31,7 @@ class SelectionNotifier extends _$SelectionNotifier {
 
     var updatedChar = oldChar.copyWith(
       currentHp: newHp,
+      isInCombat: false,
       lastUpdateTime: DateTime.now().millisecondsSinceEpoch,
     );
 
