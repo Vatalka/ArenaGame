@@ -16,6 +16,7 @@ abstract class Character with _$Character {
     required int level,
     required int experience,
     required int statPoints,
+    required bool isInCombat,
   }) = _Character;
 
   factory Character.createNew() {
@@ -29,6 +30,7 @@ abstract class Character with _$Character {
       level: 0,
       experience: 0,
       statPoints: 0,
+      isInCombat: false,
     );
   }
 
@@ -43,6 +45,7 @@ abstract class Character with _$Character {
       level: 0,
       experience: 0,
       statPoints: 0,
+      isInCombat: false,
     );
   }
 
@@ -79,6 +82,21 @@ abstract class Character with _$Character {
   }
 
   int get maxHp => vitality * 10;
+
+  double get liveHp {
+    if (currentHp >= maxHp || isInCombat) {
+      return currentHp.toDouble();
+    }
+
+    final int now = DateTime.now().millisecondsSinceEpoch;
+    final int differenceMs = now - lastUpdateTime;
+
+    if (differenceMs <= 0) return currentHp.toDouble();
+
+    final double hpPerMs = (maxHp * 0.01) / 2000;
+    final double gainedHp = differenceMs * hpPerMs;
+    return (currentHp + gainedHp).clamp(0.0, maxHp.toDouble());
+  }
 
   int get regenPerTick => (maxHp * 0.01).ceil();
 

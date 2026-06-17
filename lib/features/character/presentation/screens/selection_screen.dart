@@ -1,5 +1,4 @@
 import 'package:arena_game/features/battle/presentation/controllers/player_notifier.dart';
-import 'package:arena_game/features/battle/presentation/controllers/regeneration_notifier.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:arena_game/features/character/presentation/controllers/selection_notifier.dart';
 import 'package:arena_game/features/character/presentation/widgets/character_card.dart';
@@ -12,7 +11,6 @@ class SelectionScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(regenerationProvider);
     final charactersAsync = ref.watch(selectionProvider);
     final controller = ref.read(selectionProvider.notifier);
 

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CharacterModel {
 
- String get id; String get name; int get currentHp; int get vitality; int get strength;@JsonKey(defaultValue: 0) int get lastUpdateTime;@JsonKey(defaultValue: 0) int get level;@JsonKey(defaultValue: 0) int get experience;@JsonKey(defaultValue: 0) int get statPoints;
+ String get id; String get name; int get currentHp; int get vitality; int get strength;@JsonKey(defaultValue: 0) int get lastUpdateTime;@JsonKey(defaultValue: 0) int get level;@JsonKey(defaultValue: 0) int get experience;@JsonKey(defaultValue: 0) int get statPoints;@JsonKey(defaultValue: false) bool get isInCombat;
 /// Create a copy of CharacterModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $CharacterModelCopyWith<CharacterModel> get copyWith => _$CharacterModelCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CharacterModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.currentHp, currentHp) || other.currentHp == currentHp)&&(identical(other.vitality, vitality) || other.vitality == vitality)&&(identical(other.strength, strength) || other.strength == strength)&&(identical(other.lastUpdateTime, lastUpdateTime) || other.lastUpdateTime == lastUpdateTime)&&(identical(other.level, level) || other.level == level)&&(identical(other.experience, experience) || other.experience == experience)&&(identical(other.statPoints, statPoints) || other.statPoints == statPoints));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CharacterModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.currentHp, currentHp) || other.currentHp == currentHp)&&(identical(other.vitality, vitality) || other.vitality == vitality)&&(identical(other.strength, strength) || other.strength == strength)&&(identical(other.lastUpdateTime, lastUpdateTime) || other.lastUpdateTime == lastUpdateTime)&&(identical(other.level, level) || other.level == level)&&(identical(other.experience, experience) || other.experience == experience)&&(identical(other.statPoints, statPoints) || other.statPoints == statPoints)&&(identical(other.isInCombat, isInCombat) || other.isInCombat == isInCombat));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,currentHp,vitality,strength,lastUpdateTime,level,experience,statPoints);
+int get hashCode => Object.hash(runtimeType,id,name,currentHp,vitality,strength,lastUpdateTime,level,experience,statPoints,isInCombat);
 
 @override
 String toString() {
-  return 'CharacterModel(id: $id, name: $name, currentHp: $currentHp, vitality: $vitality, strength: $strength, lastUpdateTime: $lastUpdateTime, level: $level, experience: $experience, statPoints: $statPoints)';
+  return 'CharacterModel(id: $id, name: $name, currentHp: $currentHp, vitality: $vitality, strength: $strength, lastUpdateTime: $lastUpdateTime, level: $level, experience: $experience, statPoints: $statPoints, isInCombat: $isInCombat)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $CharacterModelCopyWith<$Res>  {
   factory $CharacterModelCopyWith(CharacterModel value, $Res Function(CharacterModel) _then) = _$CharacterModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, int currentHp, int vitality, int strength,@JsonKey(defaultValue: 0) int lastUpdateTime,@JsonKey(defaultValue: 0) int level,@JsonKey(defaultValue: 0) int experience,@JsonKey(defaultValue: 0) int statPoints
+ String id, String name, int currentHp, int vitality, int strength,@JsonKey(defaultValue: 0) int lastUpdateTime,@JsonKey(defaultValue: 0) int level,@JsonKey(defaultValue: 0) int experience,@JsonKey(defaultValue: 0) int statPoints,@JsonKey(defaultValue: false) bool isInCombat
 });
 
 
@@ -65,7 +65,7 @@ class _$CharacterModelCopyWithImpl<$Res>
 
 /// Create a copy of CharacterModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? currentHp = null,Object? vitality = null,Object? strength = null,Object? lastUpdateTime = null,Object? level = null,Object? experience = null,Object? statPoints = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? currentHp = null,Object? vitality = null,Object? strength = null,Object? lastUpdateTime = null,Object? level = null,Object? experience = null,Object? statPoints = null,Object? isInCombat = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -76,7 +76,8 @@ as int,lastUpdateTime: null == lastUpdateTime ? _self.lastUpdateTime : lastUpdat
 as int,level: null == level ? _self.level : level // ignore: cast_nullable_to_non_nullable
 as int,experience: null == experience ? _self.experience : experience // ignore: cast_nullable_to_non_nullable
 as int,statPoints: null == statPoints ? _self.statPoints : statPoints // ignore: cast_nullable_to_non_nullable
-as int,
+as int,isInCombat: null == isInCombat ? _self.isInCombat : isInCombat // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -161,10 +162,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  int currentHp,  int vitality,  int strength, @JsonKey(defaultValue: 0)  int lastUpdateTime, @JsonKey(defaultValue: 0)  int level, @JsonKey(defaultValue: 0)  int experience, @JsonKey(defaultValue: 0)  int statPoints)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  int currentHp,  int vitality,  int strength, @JsonKey(defaultValue: 0)  int lastUpdateTime, @JsonKey(defaultValue: 0)  int level, @JsonKey(defaultValue: 0)  int experience, @JsonKey(defaultValue: 0)  int statPoints, @JsonKey(defaultValue: false)  bool isInCombat)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CharacterModel() when $default != null:
-return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strength,_that.lastUpdateTime,_that.level,_that.experience,_that.statPoints);case _:
+return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strength,_that.lastUpdateTime,_that.level,_that.experience,_that.statPoints,_that.isInCombat);case _:
   return orElse();
 
 }
@@ -182,10 +183,10 @@ return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strengt
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  int currentHp,  int vitality,  int strength, @JsonKey(defaultValue: 0)  int lastUpdateTime, @JsonKey(defaultValue: 0)  int level, @JsonKey(defaultValue: 0)  int experience, @JsonKey(defaultValue: 0)  int statPoints)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  int currentHp,  int vitality,  int strength, @JsonKey(defaultValue: 0)  int lastUpdateTime, @JsonKey(defaultValue: 0)  int level, @JsonKey(defaultValue: 0)  int experience, @JsonKey(defaultValue: 0)  int statPoints, @JsonKey(defaultValue: false)  bool isInCombat)  $default,) {final _that = this;
 switch (_that) {
 case _CharacterModel():
-return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strength,_that.lastUpdateTime,_that.level,_that.experience,_that.statPoints);case _:
+return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strength,_that.lastUpdateTime,_that.level,_that.experience,_that.statPoints,_that.isInCombat);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -202,10 +203,10 @@ return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strengt
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  int currentHp,  int vitality,  int strength, @JsonKey(defaultValue: 0)  int lastUpdateTime, @JsonKey(defaultValue: 0)  int level, @JsonKey(defaultValue: 0)  int experience, @JsonKey(defaultValue: 0)  int statPoints)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  int currentHp,  int vitality,  int strength, @JsonKey(defaultValue: 0)  int lastUpdateTime, @JsonKey(defaultValue: 0)  int level, @JsonKey(defaultValue: 0)  int experience, @JsonKey(defaultValue: 0)  int statPoints, @JsonKey(defaultValue: false)  bool isInCombat)?  $default,) {final _that = this;
 switch (_that) {
 case _CharacterModel() when $default != null:
-return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strength,_that.lastUpdateTime,_that.level,_that.experience,_that.statPoints);case _:
+return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strength,_that.lastUpdateTime,_that.level,_that.experience,_that.statPoints,_that.isInCombat);case _:
   return null;
 
 }
@@ -217,7 +218,7 @@ return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strengt
 @JsonSerializable()
 
 class _CharacterModel implements CharacterModel {
-  const _CharacterModel({required this.id, required this.name, required this.currentHp, required this.vitality, required this.strength, @JsonKey(defaultValue: 0) required this.lastUpdateTime, @JsonKey(defaultValue: 0) required this.level, @JsonKey(defaultValue: 0) required this.experience, @JsonKey(defaultValue: 0) required this.statPoints});
+  const _CharacterModel({required this.id, required this.name, required this.currentHp, required this.vitality, required this.strength, @JsonKey(defaultValue: 0) required this.lastUpdateTime, @JsonKey(defaultValue: 0) required this.level, @JsonKey(defaultValue: 0) required this.experience, @JsonKey(defaultValue: 0) required this.statPoints, @JsonKey(defaultValue: false) required this.isInCombat});
   factory _CharacterModel.fromJson(Map<String, dynamic> json) => _$CharacterModelFromJson(json);
 
 @override final  String id;
@@ -229,6 +230,7 @@ class _CharacterModel implements CharacterModel {
 @override@JsonKey(defaultValue: 0) final  int level;
 @override@JsonKey(defaultValue: 0) final  int experience;
 @override@JsonKey(defaultValue: 0) final  int statPoints;
+@override@JsonKey(defaultValue: false) final  bool isInCombat;
 
 /// Create a copy of CharacterModel
 /// with the given fields replaced by the non-null parameter values.
@@ -243,16 +245,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CharacterModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.currentHp, currentHp) || other.currentHp == currentHp)&&(identical(other.vitality, vitality) || other.vitality == vitality)&&(identical(other.strength, strength) || other.strength == strength)&&(identical(other.lastUpdateTime, lastUpdateTime) || other.lastUpdateTime == lastUpdateTime)&&(identical(other.level, level) || other.level == level)&&(identical(other.experience, experience) || other.experience == experience)&&(identical(other.statPoints, statPoints) || other.statPoints == statPoints));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CharacterModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.currentHp, currentHp) || other.currentHp == currentHp)&&(identical(other.vitality, vitality) || other.vitality == vitality)&&(identical(other.strength, strength) || other.strength == strength)&&(identical(other.lastUpdateTime, lastUpdateTime) || other.lastUpdateTime == lastUpdateTime)&&(identical(other.level, level) || other.level == level)&&(identical(other.experience, experience) || other.experience == experience)&&(identical(other.statPoints, statPoints) || other.statPoints == statPoints)&&(identical(other.isInCombat, isInCombat) || other.isInCombat == isInCombat));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,currentHp,vitality,strength,lastUpdateTime,level,experience,statPoints);
+int get hashCode => Object.hash(runtimeType,id,name,currentHp,vitality,strength,lastUpdateTime,level,experience,statPoints,isInCombat);
 
 @override
 String toString() {
-  return 'CharacterModel(id: $id, name: $name, currentHp: $currentHp, vitality: $vitality, strength: $strength, lastUpdateTime: $lastUpdateTime, level: $level, experience: $experience, statPoints: $statPoints)';
+  return 'CharacterModel(id: $id, name: $name, currentHp: $currentHp, vitality: $vitality, strength: $strength, lastUpdateTime: $lastUpdateTime, level: $level, experience: $experience, statPoints: $statPoints, isInCombat: $isInCombat)';
 }
 
 
@@ -263,7 +265,7 @@ abstract mixin class _$CharacterModelCopyWith<$Res> implements $CharacterModelCo
   factory _$CharacterModelCopyWith(_CharacterModel value, $Res Function(_CharacterModel) _then) = __$CharacterModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, int currentHp, int vitality, int strength,@JsonKey(defaultValue: 0) int lastUpdateTime,@JsonKey(defaultValue: 0) int level,@JsonKey(defaultValue: 0) int experience,@JsonKey(defaultValue: 0) int statPoints
+ String id, String name, int currentHp, int vitality, int strength,@JsonKey(defaultValue: 0) int lastUpdateTime,@JsonKey(defaultValue: 0) int level,@JsonKey(defaultValue: 0) int experience,@JsonKey(defaultValue: 0) int statPoints,@JsonKey(defaultValue: false) bool isInCombat
 });
 
 
@@ -280,7 +282,7 @@ class __$CharacterModelCopyWithImpl<$Res>
 
 /// Create a copy of CharacterModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? currentHp = null,Object? vitality = null,Object? strength = null,Object? lastUpdateTime = null,Object? level = null,Object? experience = null,Object? statPoints = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? currentHp = null,Object? vitality = null,Object? strength = null,Object? lastUpdateTime = null,Object? level = null,Object? experience = null,Object? statPoints = null,Object? isInCombat = null,}) {
   return _then(_CharacterModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -291,7 +293,8 @@ as int,lastUpdateTime: null == lastUpdateTime ? _self.lastUpdateTime : lastUpdat
 as int,level: null == level ? _self.level : level // ignore: cast_nullable_to_non_nullable
 as int,experience: null == experience ? _self.experience : experience // ignore: cast_nullable_to_non_nullable
 as int,statPoints: null == statPoints ? _self.statPoints : statPoints // ignore: cast_nullable_to_non_nullable
-as int,
+as int,isInCombat: null == isInCombat ? _self.isInCombat : isInCombat // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

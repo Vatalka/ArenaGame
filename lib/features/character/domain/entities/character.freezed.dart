@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Character {
 
- String get id; String get name; int get currentHp; int get vitality; int get strength; int get lastUpdateTime; int get level; int get experience; int get statPoints;
+ String get id; String get name; int get currentHp; int get vitality; int get strength; int get lastUpdateTime; int get level; int get experience; int get statPoints; bool get isInCombat;
 /// Create a copy of Character
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $CharacterCopyWith<Character> get copyWith => _$CharacterCopyWithImpl<Character>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Character&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.currentHp, currentHp) || other.currentHp == currentHp)&&(identical(other.vitality, vitality) || other.vitality == vitality)&&(identical(other.strength, strength) || other.strength == strength)&&(identical(other.lastUpdateTime, lastUpdateTime) || other.lastUpdateTime == lastUpdateTime)&&(identical(other.level, level) || other.level == level)&&(identical(other.experience, experience) || other.experience == experience)&&(identical(other.statPoints, statPoints) || other.statPoints == statPoints));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Character&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.currentHp, currentHp) || other.currentHp == currentHp)&&(identical(other.vitality, vitality) || other.vitality == vitality)&&(identical(other.strength, strength) || other.strength == strength)&&(identical(other.lastUpdateTime, lastUpdateTime) || other.lastUpdateTime == lastUpdateTime)&&(identical(other.level, level) || other.level == level)&&(identical(other.experience, experience) || other.experience == experience)&&(identical(other.statPoints, statPoints) || other.statPoints == statPoints)&&(identical(other.isInCombat, isInCombat) || other.isInCombat == isInCombat));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,name,currentHp,vitality,strength,lastUpdateTime,level,experience,statPoints);
+int get hashCode => Object.hash(runtimeType,id,name,currentHp,vitality,strength,lastUpdateTime,level,experience,statPoints,isInCombat);
 
 @override
 String toString() {
-  return 'Character(id: $id, name: $name, currentHp: $currentHp, vitality: $vitality, strength: $strength, lastUpdateTime: $lastUpdateTime, level: $level, experience: $experience, statPoints: $statPoints)';
+  return 'Character(id: $id, name: $name, currentHp: $currentHp, vitality: $vitality, strength: $strength, lastUpdateTime: $lastUpdateTime, level: $level, experience: $experience, statPoints: $statPoints, isInCombat: $isInCombat)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $CharacterCopyWith<$Res>  {
   factory $CharacterCopyWith(Character value, $Res Function(Character) _then) = _$CharacterCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, int currentHp, int vitality, int strength, int lastUpdateTime, int level, int experience, int statPoints
+ String id, String name, int currentHp, int vitality, int strength, int lastUpdateTime, int level, int experience, int statPoints, bool isInCombat
 });
 
 
@@ -62,7 +62,7 @@ class _$CharacterCopyWithImpl<$Res>
 
 /// Create a copy of Character
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? currentHp = null,Object? vitality = null,Object? strength = null,Object? lastUpdateTime = null,Object? level = null,Object? experience = null,Object? statPoints = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? currentHp = null,Object? vitality = null,Object? strength = null,Object? lastUpdateTime = null,Object? level = null,Object? experience = null,Object? statPoints = null,Object? isInCombat = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -73,7 +73,8 @@ as int,lastUpdateTime: null == lastUpdateTime ? _self.lastUpdateTime : lastUpdat
 as int,level: null == level ? _self.level : level // ignore: cast_nullable_to_non_nullable
 as int,experience: null == experience ? _self.experience : experience // ignore: cast_nullable_to_non_nullable
 as int,statPoints: null == statPoints ? _self.statPoints : statPoints // ignore: cast_nullable_to_non_nullable
-as int,
+as int,isInCombat: null == isInCombat ? _self.isInCombat : isInCombat // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -158,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  int currentHp,  int vitality,  int strength,  int lastUpdateTime,  int level,  int experience,  int statPoints)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  int currentHp,  int vitality,  int strength,  int lastUpdateTime,  int level,  int experience,  int statPoints,  bool isInCombat)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Character() when $default != null:
-return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strength,_that.lastUpdateTime,_that.level,_that.experience,_that.statPoints);case _:
+return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strength,_that.lastUpdateTime,_that.level,_that.experience,_that.statPoints,_that.isInCombat);case _:
   return orElse();
 
 }
@@ -179,10 +180,10 @@ return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strengt
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  int currentHp,  int vitality,  int strength,  int lastUpdateTime,  int level,  int experience,  int statPoints)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  int currentHp,  int vitality,  int strength,  int lastUpdateTime,  int level,  int experience,  int statPoints,  bool isInCombat)  $default,) {final _that = this;
 switch (_that) {
 case _Character():
-return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strength,_that.lastUpdateTime,_that.level,_that.experience,_that.statPoints);case _:
+return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strength,_that.lastUpdateTime,_that.level,_that.experience,_that.statPoints,_that.isInCombat);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -199,10 +200,10 @@ return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strengt
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  int currentHp,  int vitality,  int strength,  int lastUpdateTime,  int level,  int experience,  int statPoints)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  int currentHp,  int vitality,  int strength,  int lastUpdateTime,  int level,  int experience,  int statPoints,  bool isInCombat)?  $default,) {final _that = this;
 switch (_that) {
 case _Character() when $default != null:
-return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strength,_that.lastUpdateTime,_that.level,_that.experience,_that.statPoints);case _:
+return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strength,_that.lastUpdateTime,_that.level,_that.experience,_that.statPoints,_that.isInCombat);case _:
   return null;
 
 }
@@ -214,7 +215,7 @@ return $default(_that.id,_that.name,_that.currentHp,_that.vitality,_that.strengt
 
 
 class _Character extends Character {
-  const _Character({required this.id, required this.name, required this.currentHp, required this.vitality, required this.strength, required this.lastUpdateTime, required this.level, required this.experience, required this.statPoints}): super._();
+  const _Character({required this.id, required this.name, required this.currentHp, required this.vitality, required this.strength, required this.lastUpdateTime, required this.level, required this.experience, required this.statPoints, required this.isInCombat}): super._();
   
 
 @override final  String id;
@@ -226,6 +227,7 @@ class _Character extends Character {
 @override final  int level;
 @override final  int experience;
 @override final  int statPoints;
+@override final  bool isInCombat;
 
 /// Create a copy of Character
 /// with the given fields replaced by the non-null parameter values.
@@ -237,16 +239,16 @@ _$CharacterCopyWith<_Character> get copyWith => __$CharacterCopyWithImpl<_Charac
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Character&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.currentHp, currentHp) || other.currentHp == currentHp)&&(identical(other.vitality, vitality) || other.vitality == vitality)&&(identical(other.strength, strength) || other.strength == strength)&&(identical(other.lastUpdateTime, lastUpdateTime) || other.lastUpdateTime == lastUpdateTime)&&(identical(other.level, level) || other.level == level)&&(identical(other.experience, experience) || other.experience == experience)&&(identical(other.statPoints, statPoints) || other.statPoints == statPoints));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Character&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.currentHp, currentHp) || other.currentHp == currentHp)&&(identical(other.vitality, vitality) || other.vitality == vitality)&&(identical(other.strength, strength) || other.strength == strength)&&(identical(other.lastUpdateTime, lastUpdateTime) || other.lastUpdateTime == lastUpdateTime)&&(identical(other.level, level) || other.level == level)&&(identical(other.experience, experience) || other.experience == experience)&&(identical(other.statPoints, statPoints) || other.statPoints == statPoints)&&(identical(other.isInCombat, isInCombat) || other.isInCombat == isInCombat));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,name,currentHp,vitality,strength,lastUpdateTime,level,experience,statPoints);
+int get hashCode => Object.hash(runtimeType,id,name,currentHp,vitality,strength,lastUpdateTime,level,experience,statPoints,isInCombat);
 
 @override
 String toString() {
-  return 'Character(id: $id, name: $name, currentHp: $currentHp, vitality: $vitality, strength: $strength, lastUpdateTime: $lastUpdateTime, level: $level, experience: $experience, statPoints: $statPoints)';
+  return 'Character(id: $id, name: $name, currentHp: $currentHp, vitality: $vitality, strength: $strength, lastUpdateTime: $lastUpdateTime, level: $level, experience: $experience, statPoints: $statPoints, isInCombat: $isInCombat)';
 }
 
 
@@ -257,7 +259,7 @@ abstract mixin class _$CharacterCopyWith<$Res> implements $CharacterCopyWith<$Re
   factory _$CharacterCopyWith(_Character value, $Res Function(_Character) _then) = __$CharacterCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, int currentHp, int vitality, int strength, int lastUpdateTime, int level, int experience, int statPoints
+ String id, String name, int currentHp, int vitality, int strength, int lastUpdateTime, int level, int experience, int statPoints, bool isInCombat
 });
 
 
@@ -274,7 +276,7 @@ class __$CharacterCopyWithImpl<$Res>
 
 /// Create a copy of Character
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? currentHp = null,Object? vitality = null,Object? strength = null,Object? lastUpdateTime = null,Object? level = null,Object? experience = null,Object? statPoints = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? currentHp = null,Object? vitality = null,Object? strength = null,Object? lastUpdateTime = null,Object? level = null,Object? experience = null,Object? statPoints = null,Object? isInCombat = null,}) {
   return _then(_Character(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -285,7 +287,8 @@ as int,lastUpdateTime: null == lastUpdateTime ? _self.lastUpdateTime : lastUpdat
 as int,level: null == level ? _self.level : level // ignore: cast_nullable_to_non_nullable
 as int,experience: null == experience ? _self.experience : experience // ignore: cast_nullable_to_non_nullable
 as int,statPoints: null == statPoints ? _self.statPoints : statPoints // ignore: cast_nullable_to_non_nullable
-as int,
+as int,isInCombat: null == isInCombat ? _self.isInCombat : isInCombat // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
