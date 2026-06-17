@@ -1,6 +1,5 @@
 import 'package:arena_game/features/auth/presentation/controllers/auth_repository_notifier.dart';
 import 'package:arena_game/features/character/domain/repositories/i_character_repository.dart';
-import 'package:arena_game/features/battle/presentation/controllers/regeneration_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -11,7 +10,6 @@ class LoginScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(regenerationProvider);
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) async {

@@ -138,7 +138,7 @@ class BattleNotifier extends _$BattleNotifier {
 
       int expReward = 0;
       if (result == BattleResult.playerWin) {
-        expReward = (player.level + 1) * bot.maxHp ~/ 10;
+        expReward = bot.maxHp ~/ 10;
       }
 
       ref
