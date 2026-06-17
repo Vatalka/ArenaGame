@@ -21,6 +21,8 @@ class BattleNotifier extends _$BattleNotifier {
     final player = ref.read(activePlayerProvider);
     final bot = ref.read(botProvider);
 
+    ref.read(selectionProvider.notifier).updateCharacterBeforeBattle(player.id);
+
     state = state.copyWith(
       isBotMode: true,
       selectedAttack: null,

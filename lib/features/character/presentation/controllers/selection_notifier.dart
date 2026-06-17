@@ -16,6 +16,28 @@ class SelectionNotifier extends _$SelectionNotifier {
     return await repo.getAllCharacters();
   }
 
+  void updateCharacterBeforeBattle(String id) {
+    if (state is! AsyncData<List<Character>>) return;
+
+    final currentList = state.value!;
+    final index = currentList.indexWhere((char) => char.id == id);
+    if (index == -1) return;
+
+    final oldChar = currentList[index];
+
+    final updatedChar = oldChar.copyWith(
+      currentHp: oldChar.liveHp.toInt(),
+      isInCombat: true,
+      lastUpdateTime: DateTime.now().millisecondsSinceEpoch,
+    );
+
+    ref.read(characterRepositoryProvider).saveCharacter(updatedChar);
+
+    final updatedList = [...currentList];
+    updatedList[index] = updatedChar;
+    state = AsyncData(updatedList);
+  }
+
   void updateCharacterAfterBattle({
     required String id,
     required int newHp,
