@@ -16,6 +16,7 @@ abstract class Character with _$Character {
     required int level,
     required int experience,
     required int statPoints,
+    required bool isInCombat,
   }) = _Character;
 
   factory Character.createNew() {
@@ -29,6 +30,7 @@ abstract class Character with _$Character {
       level: 0,
       experience: 0,
       statPoints: 0,
+      isInCombat: false,
     );
   }
 
@@ -43,6 +45,7 @@ abstract class Character with _$Character {
       level: 0,
       experience: 0,
       statPoints: 0,
+      isInCombat: false,
     );
   }
 
@@ -50,40 +53,53 @@ abstract class Character with _$Character {
     int totalExp = experience + gainedExp;
     int currentLevel = level;
     int currentPoints = statPoints;
+    int currentVitality = vitality;
+    int currentStrength = strength;
+    bool isLevelUp = false;
 
-    while (totalExp >= (currentLevel * 100)) {
-      totalExp -= (currentLevel * 100);
+    while (totalExp >= nextLevelExp) {
+      totalExp -= nextLevelExp;
       currentLevel++;
       currentPoints += 3;
+      currentVitality += 1;
+      currentStrength += 4;
+      isLevelUp = true;
     }
 
     return copyWith(
       experience: totalExp,
       level: currentLevel,
       statPoints: currentPoints,
+      vitality: currentVitality,
+      strength: currentStrength,
+      currentHp: isLevelUp ? maxHp : currentHp,
     );
   }
 
-  int get nextLevelExp => level * 100;
+  int get nextLevelExp {
+    if (level >= 10) return 0; // треба зупинити нарахування досвіду
+    return 10 << level; // == 10 * 2^level == 10 * pow(2, level).toInt()
+  }
 
   int get maxHp => vitality * 10;
 
-  int get regenPerTick => (maxHp * 0.01).ceil();
-
-  int get actualHp {
-    if (currentHp >= maxHp) return currentHp;
+  double get actualHp {
+    if (currentHp >= maxHp || isInCombat == true) {
+      return currentHp.toDouble();
+    }
 
     final int now = DateTime.now().millisecondsSinceEpoch;
-    final int differenceInMs = now - lastUpdateTime;
-    final int secondsPassed = differenceInMs ~/ 1000;
-    final int ticks = secondsPassed ~/ 2;
+    final int differenceMs = now - lastUpdateTime;
 
-    if (ticks <= 0) return currentHp;
+    if (differenceMs <= 0) return currentHp.toDouble();
 
-    final regenAmount = ticks * regenPerTick;
-    final newHp = (currentHp + regenAmount).clamp(0, maxHp);
-    return newHp;
+    final double hpPerMs = (maxHp * 0.01) / 2000;
+    final double gainedHp = differenceMs * hpPerMs;
+
+    return (currentHp + gainedHp).clamp(0.0, maxHp.toDouble());
   }
+
+  int get regenPerTick => (maxHp * 0.01).ceil();
 
   bool get nameIsValid => name.trim().length >= 3;
 

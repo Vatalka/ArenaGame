@@ -17,6 +17,7 @@ _CharacterModel _$CharacterModelFromJson(Map<String, dynamic> json) =>
       level: (json['level'] as num?)?.toInt() ?? 0,
       experience: (json['experience'] as num?)?.toInt() ?? 0,
       statPoints: (json['statPoints'] as num?)?.toInt() ?? 0,
+      isInCombat: json['isInCombat'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$CharacterModelToJson(_CharacterModel instance) =>
@@ -30,4 +31,5 @@ Map<String, dynamic> _$CharacterModelToJson(_CharacterModel instance) =>
       'level': instance.level,
       'experience': instance.experience,
       'statPoints': instance.statPoints,
+      'isInCombat': instance.isInCombat,
     };

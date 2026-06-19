@@ -1,25 +1,73 @@
+import 'dart:async';
 import 'package:arena_game/core/widgets/game_tooltip.dart';
 import 'package:arena_game/core/widgets/stroke_text.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:arena_game/features/character/presentation/widgets/experience_bar.dart';
 import 'package:arena_game/features/character/presentation/widgets/health_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CharacterCard extends StatelessWidget {
+class CharacterCard extends ConsumerStatefulWidget {
   final Character character;
 
   const CharacterCard({super.key, required this.character});
 
   @override
+  ConsumerState<CharacterCard> createState() => _CharacterCardState();
+}
+
+class _CharacterCardState extends ConsumerState<CharacterCard> {
+  Timer? _uiTicker;
+
+  @override
+  void initState() {
+    super.initState();
+    _startUiTicker();
+  }
+
+  @override
+  void didUpdateWidget(covariant CharacterCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _startUiTicker();
+  }
+
+  void _startUiTicker() {
+    _uiTicker?.cancel();
+
+    if (widget.character.currentHp >= widget.character.maxHp ||
+        widget.character.isInCombat) {
+      return;
+    }
+
+    _uiTicker = Timer.periodic(const Duration(milliseconds: 40), (timer) {
+      if (mounted) {
+        if (widget.character.actualHp >= widget.character.maxHp) {
+          _uiTicker?.cancel();
+        }
+        setState(() {});
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _uiTicker?.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final char = widget.character;
 
-    final hpPercent = character.maxHp > 0
-        ? character.currentHp / character.maxHp
-        : 0.0;
-    final xpPercent = character.nextLevelExp > 0
-        ? character.experience / character.nextLevelExp
+    final double exactHp = char.actualHp;
+    final displayHp = exactHp.floor();
+    final maxHp = char.maxHp;
+
+    final hpPercent = maxHp > 0 ? exactHp / maxHp : 0.0;
+    final xpPercent = char.nextLevelExp > 0
+        ? char.experience / char.nextLevelExp
         : 0.0;
 
     return Card(
@@ -32,12 +80,9 @@ class CharacterCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                GameTooltip(
-                  message: 'level',
-                  child: Text('[${character.level}] '),
-                ),
+                GameTooltip(message: 'level', child: Text('[${char.level}] ')),
                 Text(
-                  character.name,
+                  char.name,
                   style: theme.textTheme.titleLarge?.copyWith(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -68,7 +113,7 @@ class CharacterCard extends StatelessWidget {
                       Positioned(
                         right: 5,
                         child: Text(
-                          '${character.currentHp}/${character.maxHp}',
+                          '$displayHp/$maxHp',
                           style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.w500,
@@ -83,17 +128,16 @@ class CharacterCard extends StatelessWidget {
 
             // Experience & stats
             GameTooltip(
-              message:
-                  'experience ${character.experience}/${character.nextLevelExp}',
+              message: 'experience: ${char.experience}/${char.nextLevelExp}',
               child: ExperienceBar(xp: xpPercent),
             ),
             GameTooltip(
               message: '1 vitality = 10 HP',
-              child: Text('VIT: ${character.vitality}'),
+              child: Text('VIT: ${char.vitality}'),
             ),
             GameTooltip(
               message: '1 strength = 2 damage',
-              child: Text('STR: ${character.strength}'),
+              child: Text('STR: ${char.strength}'),
             ),
           ],
         ),

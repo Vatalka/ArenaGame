@@ -1,6 +1,5 @@
 import 'package:arena_game/features/battle/presentation/controllers/battle_notifier.dart';
 import 'package:arena_game/features/battle/presentation/controllers/bot_notifier.dart';
-import 'package:arena_game/features/battle/presentation/controllers/regeneration_notifier.dart';
 import 'package:arena_game/features/battle/presentation/controllers/active_player_notifier.dart';
 import 'package:arena_game/features/battle/presentation/widgets/attack_confirm_button.dart';
 import 'package:arena_game/features/battle/presentation/widgets/battle_mode_selector.dart';
@@ -17,7 +16,6 @@ class GameScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(regenerationProvider);
     final isCombatMode = ref.watch(battleProvider).isBotMode;
     final player = ref.watch(activePlayerProvider);
 

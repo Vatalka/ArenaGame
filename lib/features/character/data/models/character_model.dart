@@ -17,6 +17,7 @@ abstract class CharacterModel with _$CharacterModel {
     @JsonKey(defaultValue: 0) required int level,
     @JsonKey(defaultValue: 0) required int experience,
     @JsonKey(defaultValue: 0) required int statPoints,
+    @JsonKey(defaultValue: false) required bool isInCombat,
   }) = _CharacterModel;
 
   factory CharacterModel.fromJson(Map<String, dynamic> json) =>
@@ -33,6 +34,7 @@ abstract class CharacterModel with _$CharacterModel {
       level: character.level,
       experience: character.experience,
       statPoints: character.statPoints,
+      isInCombat: character.isInCombat,
     );
   }
 }
@@ -49,6 +51,7 @@ extension CharacterModelX on CharacterModel {
       level: level,
       experience: experience,
       statPoints: statPoints,
+      isInCombat: isInCombat,
     );
   }
 }

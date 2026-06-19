@@ -1,3 +1,4 @@
+import 'package:arena_game/features/battle/presentation/controllers/player_notifier.dart';
 import 'package:arena_game/features/character/presentation/controllers/selection_notifier.dart';
 import 'package:arena_game/features/battle/domain/entities/battle_selection.dart';
 import 'package:arena_game/features/log/domain/entities/battle_log_item.dart';
@@ -18,8 +19,14 @@ class BattleNotifier extends _$BattleNotifier {
   void selectBlock(Area? area) => state = state.copyWith(selectedBlock: area);
 
   void enableBotMode() {
-    final player = ref.read(activePlayerProvider);
+    final String playerId = ref.read(playerProvider);
     final bot = ref.read(botProvider);
+
+    ref
+        .read(selectionProvider.notifier)
+        .upgradeCharacterState(id: playerId, isInCombat: true);
+
+    final player = ref.read(activePlayerProvider);
 
     state = state.copyWith(
       isBotMode: true,
@@ -55,7 +62,7 @@ class BattleNotifier extends _$BattleNotifier {
     // 1) повний пропуск - потрібна буде null перевірка у _processBotTurn()
     // state = state.copyWith(selectedAttack: null, selectedBlock: null);
 
-    // 2) ШІ контроль = getRandomArea()
+    // 2) getRandomArea()
     final randomAttack = ref.read(botProvider.notifier).getRandomArea();
     final randomBlock = ref.read(botProvider.notifier).getRandomArea();
 
@@ -76,7 +83,7 @@ class BattleNotifier extends _$BattleNotifier {
     final bot = ref.read(botProvider);
 
     final playerAttackArea = state.selectedAttack;
-    final botBlockArea = ref.read(botProvider.notifier).getRandomArea();
+    final botBlockArea = ref.read(botProvider.notifier).getTestArea(); // test
 
     int damageToBot = player.strength * 2;
 
@@ -98,7 +105,7 @@ class BattleNotifier extends _$BattleNotifier {
     final player = ref.read(activePlayerProvider);
     final bot = ref.read(botProvider);
 
-    final botAttackArea = ref.read(botProvider.notifier).getRandomArea();
+    final botAttackArea = ref.read(botProvider.notifier).getTestArea(); // test
     final playerBlockArea = state.selectedBlock;
 
     int damageToPlayer = bot.strength * 2;
@@ -114,11 +121,11 @@ class BattleNotifier extends _$BattleNotifier {
           .addAttackLog(bot.name, botAttackArea, damageToPlayer);
     }
 
-    final newHP = player.currentHp - damageToPlayer;
+    final newHp = player.currentHp - damageToPlayer;
 
     ref
         .read(selectionProvider.notifier)
-        .updateCharacterAfterBattle(id: player.id, newHp: newHP);
+        .upgradeCharacterState(id: player.id, newHp: newHp, isInCombat: true);
   }
 
   void _checkBattleOver() {
@@ -136,13 +143,17 @@ class BattleNotifier extends _$BattleNotifier {
 
       ref.read(battleLogProvider.notifier).addEndBattleLog(result, winnerName);
 
-      final expReward = (result == BattleResult.playerWin) ? 100 : 0;
+      int expReward = 0;
+      if (result == BattleResult.playerWin) {
+        expReward = bot.maxHp ~/ 10;
+      }
 
       ref
           .read(selectionProvider.notifier)
-          .updateCharacterAfterBattle(
+          .upgradeCharacterState(
             id: player.id,
             newHp: player.currentHp,
+            isInCombat: false,
             gainedExp: expReward,
           );
       disableBotMode();

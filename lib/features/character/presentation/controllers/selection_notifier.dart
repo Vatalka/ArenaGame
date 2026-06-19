@@ -13,30 +13,13 @@ class SelectionNotifier extends _$SelectionNotifier {
   }
 
   Future<List<Character>> _loadCharacters(ICharacterRepository repo) async {
-    final rawCharacters = await repo.getAllCharacters();
-    final updatedCharacters = <Character>[];
-
-    for (var char in rawCharacters) {
-      if (char.currentHp < char.maxHp && char.lastUpdateTime != 0) {
-        final actualHealth = char.actualHp;
-
-        if (actualHealth > char.currentHp) {
-          char = char.copyWith(
-            currentHp: actualHealth,
-            lastUpdateTime: DateTime.now().millisecondsSinceEpoch,
-          );
-          await repo.saveCharacter(char);
-        }
-      }
-      updatedCharacters.add(char);
-    }
-
-    return updatedCharacters;
+    return await repo.getAllCharacters();
   }
 
-  void updateCharacterAfterBattle({
+  void upgradeCharacterState({
     required String id,
-    required int newHp,
+    int? newHp,
+    bool? isInCombat,
     int gainedExp = 0,
   }) {
     if (state is! AsyncData<List<Character>>) return;
@@ -48,13 +31,26 @@ class SelectionNotifier extends _$SelectionNotifier {
     final oldChar = currentList[index];
 
     var updatedChar = oldChar.copyWith(
-      currentHp: newHp,
+      isInCombat: isInCombat ?? oldChar.isInCombat,
       lastUpdateTime: DateTime.now().millisecondsSinceEpoch,
     );
 
+    bool leveledUp = false;
     if (gainedExp > 0) {
       updatedChar = updatedChar.earnExperience(gainedExp);
+      if (updatedChar.level > oldChar.level) {
+        leveledUp = true;
+      }
     }
+
+    updatedChar = updatedChar.copyWith(
+      currentHp: leveledUp
+          ? updatedChar.maxHp
+          : (newHp ??
+                (isInCombat == true
+                    ? oldChar.actualHp.toInt()
+                    : oldChar.currentHp)),
+    );
 
     if (oldChar == updatedChar) return;
 
