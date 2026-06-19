@@ -83,8 +83,8 @@ abstract class Character with _$Character {
 
   int get maxHp => vitality * 10;
 
-  double get liveHp {
-    if (currentHp >= maxHp || isInCombat) {
+  double get actualHp {
+    if (currentHp >= maxHp || isInCombat == true) {
       return currentHp.toDouble();
     }
 
@@ -100,21 +100,6 @@ abstract class Character with _$Character {
   }
 
   int get regenPerTick => (maxHp * 0.01).ceil();
-
-  int get actualHp {
-    if (currentHp >= maxHp) return currentHp;
-
-    final int now = DateTime.now().millisecondsSinceEpoch;
-    final int differenceInMs = now - lastUpdateTime;
-    final int secondsPassed = differenceInMs ~/ 1000;
-    final int ticks = secondsPassed ~/ 2;
-
-    if (ticks <= 0) return currentHp;
-
-    final regenAmount = ticks * regenPerTick;
-    final newHp = (currentHp + regenAmount).clamp(0, maxHp);
-    return newHp;
-  }
 
   bool get nameIsValid => name.trim().length >= 3;
 

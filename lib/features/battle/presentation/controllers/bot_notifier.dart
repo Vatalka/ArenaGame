@@ -9,7 +9,8 @@ part 'bot_notifier.g.dart';
 @riverpod
 class BotNotifier extends _$BotNotifier {
   @override
-  Character build() => Character.createNew().copyWith(name: 'Бот Залізяка');
+  Character build() =>
+      Character.createNew().copyWith(name: 'Бот Залізяка', isInCombat: true);
 
   void takeDamage(int amount) {
     state = state.copyWith(

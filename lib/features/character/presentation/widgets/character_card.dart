@@ -41,7 +41,7 @@ class _CharacterCardState extends ConsumerState<CharacterCard> {
 
     _uiTicker = Timer.periodic(const Duration(milliseconds: 40), (timer) {
       if (mounted) {
-        if (widget.character.liveHp >= widget.character.maxHp) {
+        if (widget.character.actualHp >= widget.character.maxHp) {
           _uiTicker?.cancel();
         }
         setState(() {});
@@ -61,7 +61,7 @@ class _CharacterCardState extends ConsumerState<CharacterCard> {
     final colorScheme = theme.colorScheme;
     final char = widget.character;
 
-    final double exactHp = char.liveHp;
+    final double exactHp = char.actualHp;
     final displayHp = exactHp.floor();
     final maxHp = char.maxHp;
 
