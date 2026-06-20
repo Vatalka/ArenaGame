@@ -76,17 +76,73 @@ class _CharacterCardState extends ConsumerState<CharacterCard> {
         padding: const EdgeInsets.all(4.0),
         child: Column(
           children: [
-            // Level & name
+            // Level, name & statPoints
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                GameTooltip(message: 'level', child: Text('[${char.level}] ')),
-                Text(
-                  char.name,
-                  style: theme.textTheme.titleLarge?.copyWith(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: colorScheme.onSurface,
+                Expanded(
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GameTooltip(
+                            message: 'level',
+                            child: Text('[${char.level}] '),
+                          ),
+                          Text(
+                            char.name,
+                            style: theme.textTheme.titleLarge?.copyWith(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: colorScheme.onSurface,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Positioned(
+                        right: 0,
+                        child: GameTooltip(
+                          message: 'stat points',
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.add_circle_outline_rounded,
+                              color: Theme.of(context).colorScheme.onSurface,
+                              size: 18,
+                            ),
+                            constraints: const BoxConstraints(),
+                            onPressed: () {
+                              showBottomSheet(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Container(
+                                    height: 200,
+                                    color: colorScheme.primaryContainer,
+                                    child: Center(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          const Text('BottomSheet'),
+                                          ElevatedButton(
+                                            child: const Text(
+                                              'Close BottomSheet',
+                                            ),
+                                            onPressed: () =>
+                                                Navigator.pop(context),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -125,6 +181,7 @@ class _CharacterCardState extends ConsumerState<CharacterCard> {
                 ),
               ],
             ),
+            SizedBox(height: 2),
 
             // Experience & stats
             GameTooltip(
