@@ -40,6 +40,12 @@ class BattleNotifier extends _$BattleNotifier {
   }
 
   void disableBotMode() {
+    final player = ref.read(activePlayerProvider);
+
+    ref
+        .read(selectionProvider.notifier)
+        .upgradeCharacterState(id: player.id, isInCombat: false);
+
     state = state.copyWith(isBotMode: false);
   }
 
@@ -153,7 +159,6 @@ class BattleNotifier extends _$BattleNotifier {
           .upgradeCharacterState(
             id: player.id,
             newHp: player.currentHp,
-            isInCombat: false,
             gainedExp: expReward,
           );
       disableBotMode();
