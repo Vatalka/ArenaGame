@@ -4,6 +4,7 @@ import 'package:arena_game/core/widgets/stroke_text.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:arena_game/features/character/presentation/widgets/experience_bar.dart';
 import 'package:arena_game/features/character/presentation/widgets/health_bar.dart';
+import 'package:arena_game/features/character/presentation/widgets/stat_selector_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -103,7 +104,7 @@ class _CharacterCardState extends ConsumerState<CharacterCard> {
                       Positioned(
                         right: 0,
                         child: GameTooltip(
-                          message: 'stat points',
+                          message: 'level up',
                           child: IconButton(
                             icon: Icon(
                               Icons.add_circle_outline_rounded,
@@ -112,11 +113,12 @@ class _CharacterCardState extends ConsumerState<CharacterCard> {
                             ),
                             constraints: const BoxConstraints(),
                             onPressed: () {
-                              showBottomSheet(
+                              showModalBottomSheet(
                                 context: context,
                                 builder: (BuildContext context) {
                                   return Container(
-                                    height: 200,
+                                    height:
+                                        MediaQuery.sizeOf(context).height / 3,
                                     color: colorScheme.primaryContainer,
                                     child: Center(
                                       child: Column(
@@ -124,10 +126,28 @@ class _CharacterCardState extends ConsumerState<CharacterCard> {
                                             MainAxisAlignment.center,
                                         mainAxisSize: MainAxisSize.min,
                                         children: <Widget>[
-                                          const Text('BottomSheet'),
+                                          Text(
+                                            'Unallocated stat points: ${char.statPoints}',
+                                            style: theme.textTheme.titleMedium
+                                                ?.copyWith(
+                                                  color: colorScheme.onSurface,
+                                                ),
+                                          ),
+                                          StatSelectorRow(
+                                            label: 'Vitality',
+                                            value: char.vitality,
+                                            onIncrement: () {},
+                                            onDecrement: () {},
+                                          ),
+                                          StatSelectorRow(
+                                            label: 'Strength',
+                                            value: char.strength,
+                                            onIncrement: () {},
+                                            onDecrement: () {},
+                                          ),
                                           ElevatedButton(
                                             child: const Text(
-                                              'Close BottomSheet',
+                                              'Save',
                                             ),
                                             onPressed: () =>
                                                 Navigator.pop(context),
