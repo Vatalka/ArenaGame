@@ -16,15 +16,11 @@ class SelectionNotifier extends _$SelectionNotifier {
     return await repo.getAllCharacters();
   }
 
-  // TODO(refactor): порушує SRP.
   void upgradeCharacterState({
     required String id,
     int? newHp,
     bool? isInCombat,
-    int? addedVitality,
-    int? addedStrength,
-    int? remainingPoints,
-    int? gainedExp,
+    int gainedExp = 0,
   }) {
     if (state is! AsyncData<List<Character>>) return;
 
@@ -40,8 +36,8 @@ class SelectionNotifier extends _$SelectionNotifier {
     );
 
     bool leveledUp = false;
-    if ((gainedExp ?? 0) > 0) {
-      updatedChar = updatedChar.earnExperience(gainedExp!);
+    if (gainedExp > 0) {
+      updatedChar = updatedChar.earnExperience(gainedExp);
       if (updatedChar.level > oldChar.level) {
         leveledUp = true;
       }
@@ -54,9 +50,6 @@ class SelectionNotifier extends _$SelectionNotifier {
                 (isInCombat == true
                     ? oldChar.actualHp.toInt()
                     : oldChar.currentHp)),
-      vitality: oldChar.vitality + (addedVitality ?? 0),
-      strength: oldChar.strength + (addedStrength ?? 0),
-      statPoints: remainingPoints ?? oldChar.statPoints,
     );
 
     if (oldChar == updatedChar) return;

@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:arena_game/core/widgets/game_tooltip.dart';
 import 'package:arena_game/core/widgets/stroke_text.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
-import 'package:arena_game/features/character/presentation/controllers/selection_notifier.dart';
 import 'package:arena_game/features/character/presentation/widgets/experience_bar.dart';
 import 'package:arena_game/features/character/presentation/widgets/health_bar.dart';
 import 'package:arena_game/features/character/presentation/widgets/stat_selector_row.dart';
@@ -114,123 +113,48 @@ class _CharacterCardState extends ConsumerState<CharacterCard> {
                             ),
                             constraints: const BoxConstraints(),
                             onPressed: () {
-                              int addedVit = 0;
-                              int addedStr = 0;
-
                               showModalBottomSheet(
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return StatefulBuilder(
-                                    builder:
-                                        (
-                                          BuildContext context,
-                                          StateSetter setModalState,
-                                        ) {
-                                          var remainingPoints =
-                                              char.statPoints -
-                                              (addedVit + addedStr);
-                                          return Container(
-                                            height:
-                                                MediaQuery.sizeOf(
-                                                  context,
-                                                ).height /
-                                                3,
-                                            color: colorScheme.primaryContainer,
-                                            child: Center(
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Text(
-                                                    'Unallocated points: $remainingPoints',
-                                                    style: theme
-                                                        .textTheme
-                                                        .titleMedium
-                                                        ?.copyWith(
-                                                          color: colorScheme
-                                                              .onSurface,
-                                                        ),
-                                                  ),
-
-                                                  StatSelectorRow(
-                                                    label: 'Vitality',
-                                                    value:
-                                                        char.vitality +
-                                                        addedVit,
-                                                    isDecrementEnabled:
-                                                        addedVit > 0,
-                                                    isIncrementEnabled:
-                                                        remainingPoints > 0,
-                                                    onIncrement: () {
-                                                      setModalState(() {
-                                                        addedVit++;
-                                                        remainingPoints--;
-                                                      });
-                                                    },
-                                                    onDecrement: () {
-                                                      setModalState(() {
-                                                        addedVit--;
-                                                        remainingPoints++;
-                                                      });
-                                                    },
-                                                  ),
-
-                                                  StatSelectorRow(
-                                                    label: 'Strength',
-                                                    value:
-                                                        char.strength +
-                                                        addedStr,
-                                                    isDecrementEnabled:
-                                                        addedStr > 0,
-                                                    isIncrementEnabled:
-                                                        remainingPoints > 0,
-                                                    onIncrement: () {
-                                                      setModalState(() {
-                                                        addedStr++;
-                                                        remainingPoints--;
-                                                      });
-                                                    },
-                                                    onDecrement: () {
-                                                      setModalState(() {
-                                                        addedStr--;
-                                                        remainingPoints++;
-                                                      });
-                                                    },
-                                                  ),
-                                                  ElevatedButton(
-                                                    onPressed:
-                                                        (addedVit > 0 ||
-                                                            addedStr > 0)
-                                                        ? () {
-                                                            ref
-                                                                .read(
-                                                                  selectionProvider
-                                                                      .notifier,
-                                                                )
-                                                                .upgradeCharacterState(
-                                                                  id: char.id,
-                                                                  addedVitality:
-                                                                      addedVit,
-                                                                  addedStrength:
-                                                                      addedStr,
-                                                                  remainingPoints:
-                                                                      remainingPoints,
-                                                                );
-                                                            Navigator.pop(
-                                                              context,
-                                                            );
-                                                          }
-                                                        : null,
-                                                    child: const Text(
-                                                      'Save Changes',
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
+                                  return Container(
+                                    height:
+                                        MediaQuery.sizeOf(context).height / 3,
+                                    color: colorScheme.primaryContainer,
+                                    child: Center(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          Text(
+                                            'Unallocated stat points: ${char.statPoints}',
+                                            style: theme.textTheme.titleMedium
+                                                ?.copyWith(
+                                                  color: colorScheme.onSurface,
+                                                ),
+                                          ),
+                                          StatSelectorRow(
+                                            label: 'Vitality',
+                                            value: char.vitality,
+                                            onIncrement: () {},
+                                            onDecrement: () {},
+                                          ),
+                                          StatSelectorRow(
+                                            label: 'Strength',
+                                            value: char.strength,
+                                            onIncrement: () {},
+                                            onDecrement: () {},
+                                          ),
+                                          ElevatedButton(
+                                            child: const Text(
+                                              'Save',
                                             ),
-                                          );
-                                        },
+                                            onPressed: () =>
+                                                Navigator.pop(context),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   );
                                 },
                               );
