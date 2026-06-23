@@ -4,6 +4,7 @@ import 'package:arena_game/core/widgets/stroke_text.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:arena_game/features/character/presentation/widgets/experience_bar.dart';
 import 'package:arena_game/features/character/presentation/widgets/health_bar.dart';
+import 'package:arena_game/features/character/presentation/widgets/level_up_button.dart';
 import 'package:arena_game/features/character/presentation/widgets/stat_selector_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -105,61 +106,7 @@ class _CharacterCardState extends ConsumerState<CharacterCard> {
                         right: 0,
                         child: GameTooltip(
                           message: 'level up',
-                          child: IconButton(
-                            icon: Icon(
-                              Icons.add_circle_outline_rounded,
-                              color: Theme.of(context).colorScheme.onSurface,
-                              size: 18,
-                            ),
-                            constraints: const BoxConstraints(),
-                            onPressed: () {
-                              showModalBottomSheet(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return Container(
-                                    height:
-                                        MediaQuery.sizeOf(context).height / 3,
-                                    color: colorScheme.primaryContainer,
-                                    child: Center(
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: <Widget>[
-                                          Text(
-                                            'Unallocated stat points: ${char.statPoints}',
-                                            style: theme.textTheme.titleMedium
-                                                ?.copyWith(
-                                                  color: colorScheme.onSurface,
-                                                ),
-                                          ),
-                                          StatSelectorRow(
-                                            label: 'Vitality',
-                                            value: char.vitality,
-                                            onIncrement: () {},
-                                            onDecrement: () {},
-                                          ),
-                                          StatSelectorRow(
-                                            label: 'Strength',
-                                            value: char.strength,
-                                            onIncrement: () {},
-                                            onDecrement: () {},
-                                          ),
-                                          ElevatedButton(
-                                            child: const Text(
-                                              'Save',
-                                            ),
-                                            onPressed: () =>
-                                                Navigator.pop(context),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                },
-                              );
-                            },
-                          ),
+                          child: LevelUpButton(character: char),
                         ),
                       ),
                     ],
