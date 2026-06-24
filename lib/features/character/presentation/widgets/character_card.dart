@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:arena_game/core/widgets/game_tooltip.dart';
 import 'package:arena_game/core/widgets/stroke_text.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
+import 'package:arena_game/features/character/domain/usecases/save_character_use_case.dart';
 import 'package:arena_game/features/character/presentation/widgets/experience_bar.dart';
 import 'package:arena_game/features/character/presentation/widgets/health_bar.dart';
 import 'package:arena_game/features/character/presentation/widgets/level_up_button.dart';
@@ -105,7 +106,12 @@ class _CharacterCardState extends ConsumerState<CharacterCard> {
                         right: 0,
                         child: GameTooltip(
                           message: 'level up',
-                          child: LevelUpButton(character: char),
+                          child: LevelUpButton(
+                            character: char,
+                            saveCharacterUseCase: ref.read(
+                              saveCharacterUseCaseProvider,
+                            ),
+                          ),
                         ),
                       ),
                     ],
