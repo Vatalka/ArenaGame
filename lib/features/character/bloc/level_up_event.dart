@@ -1,15 +1,17 @@
+enum StatType { strength, vitality }
+
 abstract class LevelUpEvent {}
 
-class IncreasesStatEvent extends LevelUpEvent {
-  final String statName;
+class IncreaseStatEvent extends LevelUpEvent {
+  final StatType statType;
 
-  IncreasesStatEvent(this.statName);
+  IncreaseStatEvent(this.statType);
 }
 
 class DecreaseStatEvent extends LevelUpEvent {
-  final String statName;
+  final StatType statType;
 
-  DecreaseStatEvent(this.statName);
+  DecreaseStatEvent(this.statType);
 }
 
 class ConfirmUpgradeEvent extends LevelUpEvent {}

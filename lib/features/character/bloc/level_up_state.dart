@@ -15,5 +15,19 @@ class LevelUpState {
     this.isSaving = false,
   });
 
-  // LevelUpState copyWith({}) {}
+  LevelUpState copyWith({
+    Character? character,
+    int? availablePoints,
+    int? addedStrength,
+    int? addedVitality,
+    bool? isSaving,
+  }) {
+    return LevelUpState(
+      character: character ?? this.character,
+      availablePoints: availablePoints ?? this.availablePoints,
+      addedStrength: addedStrength ?? this.addedStrength,
+      addedVitality: addedVitality ?? this.addedVitality,
+      isSaving: isSaving ?? this.isSaving,
+    );
+  }
 }

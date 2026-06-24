@@ -5,7 +5,6 @@ import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:arena_game/features/character/presentation/widgets/experience_bar.dart';
 import 'package:arena_game/features/character/presentation/widgets/health_bar.dart';
 import 'package:arena_game/features/character/presentation/widgets/level_up_button.dart';
-import 'package:arena_game/features/character/presentation/widgets/stat_selector_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

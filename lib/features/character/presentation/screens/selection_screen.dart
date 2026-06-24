@@ -62,6 +62,8 @@ class SelectionScreen extends ConsumerWidget {
                     },
                   ),
                 ),
+
+                // 'Create new Character' button
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: SizedBox(
