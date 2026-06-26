@@ -63,6 +63,14 @@ class BattleLogNotifier extends _$BattleLogNotifier {
     );
   }
 
+  void addRoundLog(int roundNumber) {
+    _addLog(BattleLogItem.round(
+      id: const Uuid().v4(),
+      timestamp: DateTime.now(),
+      roundNumber: roundNumber,
+    ));
+  }
+
   void _addLog(BattleLogItem item) {
     state = [...state, item];
   }

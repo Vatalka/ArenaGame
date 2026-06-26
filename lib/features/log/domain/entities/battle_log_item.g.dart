@@ -98,3 +98,17 @@ const _$BattleResultEnumMap = {
   BattleResult.playerWin: 'playerWin',
   BattleResult.botWin: 'botWin',
 };
+
+_RoundLog _$RoundLogFromJson(Map<String, dynamic> json) => _RoundLog(
+  id: json['id'] as String,
+  timestamp: DateTime.parse(json['timestamp'] as String),
+  roundNumber: (json['roundNumber'] as num).toInt(),
+  $type: json['runtimeType'] as String?,
+);
+
+Map<String, dynamic> _$RoundLogToJson(_RoundLog instance) => <String, dynamic>{
+  'id': instance.id,
+  'timestamp': instance.timestamp.toIso8601String(),
+  'roundNumber': instance.roundNumber,
+  'runtimeType': instance.$type,
+};

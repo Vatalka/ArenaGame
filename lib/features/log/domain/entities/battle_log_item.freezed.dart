@@ -35,6 +35,10 @@ BattleLogItem _$BattleLogItemFromJson(
           return _EndBattleLog.fromJson(
             json
           );
+                case 'round':
+          return _RoundLog.fromJson(
+            json
+          );
         
           default:
             throw CheckedFromJsonException(
@@ -125,7 +129,7 @@ extension BattleLogItemPatterns on BattleLogItem {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _InfoLog value)?  info,TResult Function( _AttackLog value)?  attack,TResult Function( _BlockLog value)?  block,TResult Function( _StartBattleLog value)?  startBattle,TResult Function( _EndBattleLog value)?  endBattle,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _InfoLog value)?  info,TResult Function( _AttackLog value)?  attack,TResult Function( _BlockLog value)?  block,TResult Function( _StartBattleLog value)?  startBattle,TResult Function( _EndBattleLog value)?  endBattle,TResult Function( _RoundLog value)?  round,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _InfoLog() when info != null:
@@ -133,7 +137,8 @@ return info(_that);case _AttackLog() when attack != null:
 return attack(_that);case _BlockLog() when block != null:
 return block(_that);case _StartBattleLog() when startBattle != null:
 return startBattle(_that);case _EndBattleLog() when endBattle != null:
-return endBattle(_that);case _:
+return endBattle(_that);case _RoundLog() when round != null:
+return round(_that);case _:
   return orElse();
 
 }
@@ -151,7 +156,7 @@ return endBattle(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _InfoLog value)  info,required TResult Function( _AttackLog value)  attack,required TResult Function( _BlockLog value)  block,required TResult Function( _StartBattleLog value)  startBattle,required TResult Function( _EndBattleLog value)  endBattle,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _InfoLog value)  info,required TResult Function( _AttackLog value)  attack,required TResult Function( _BlockLog value)  block,required TResult Function( _StartBattleLog value)  startBattle,required TResult Function( _EndBattleLog value)  endBattle,required TResult Function( _RoundLog value)  round,}){
 final _that = this;
 switch (_that) {
 case _InfoLog():
@@ -159,7 +164,8 @@ return info(_that);case _AttackLog():
 return attack(_that);case _BlockLog():
 return block(_that);case _StartBattleLog():
 return startBattle(_that);case _EndBattleLog():
-return endBattle(_that);case _:
+return endBattle(_that);case _RoundLog():
+return round(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -176,7 +182,7 @@ return endBattle(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _InfoLog value)?  info,TResult? Function( _AttackLog value)?  attack,TResult? Function( _BlockLog value)?  block,TResult? Function( _StartBattleLog value)?  startBattle,TResult? Function( _EndBattleLog value)?  endBattle,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _InfoLog value)?  info,TResult? Function( _AttackLog value)?  attack,TResult? Function( _BlockLog value)?  block,TResult? Function( _StartBattleLog value)?  startBattle,TResult? Function( _EndBattleLog value)?  endBattle,TResult? Function( _RoundLog value)?  round,}){
 final _that = this;
 switch (_that) {
 case _InfoLog() when info != null:
@@ -184,7 +190,8 @@ return info(_that);case _AttackLog() when attack != null:
 return attack(_that);case _BlockLog() when block != null:
 return block(_that);case _StartBattleLog() when startBattle != null:
 return startBattle(_that);case _EndBattleLog() when endBattle != null:
-return endBattle(_that);case _:
+return endBattle(_that);case _RoundLog() when round != null:
+return round(_that);case _:
   return null;
 
 }
@@ -201,14 +208,15 @@ return endBattle(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String id,  DateTime timestamp,  String message)?  info,TResult Function( String id,  DateTime timestamp,  String attackerName,  Area area,  int damage)?  attack,TResult Function( String id,  DateTime timestamp,  String defenderName,  Area area)?  block,TResult Function( String id,  DateTime timestamp,  String playerName,  String botName)?  startBattle,TResult Function( String id,  DateTime timestamp,  BattleResult result,  String winnerName)?  endBattle,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String id,  DateTime timestamp,  String message)?  info,TResult Function( String id,  DateTime timestamp,  String attackerName,  Area area,  int damage)?  attack,TResult Function( String id,  DateTime timestamp,  String defenderName,  Area area)?  block,TResult Function( String id,  DateTime timestamp,  String playerName,  String botName)?  startBattle,TResult Function( String id,  DateTime timestamp,  BattleResult result,  String winnerName)?  endBattle,TResult Function( String id,  DateTime timestamp,  int roundNumber)?  round,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _InfoLog() when info != null:
 return info(_that.id,_that.timestamp,_that.message);case _AttackLog() when attack != null:
 return attack(_that.id,_that.timestamp,_that.attackerName,_that.area,_that.damage);case _BlockLog() when block != null:
 return block(_that.id,_that.timestamp,_that.defenderName,_that.area);case _StartBattleLog() when startBattle != null:
 return startBattle(_that.id,_that.timestamp,_that.playerName,_that.botName);case _EndBattleLog() when endBattle != null:
-return endBattle(_that.id,_that.timestamp,_that.result,_that.winnerName);case _:
+return endBattle(_that.id,_that.timestamp,_that.result,_that.winnerName);case _RoundLog() when round != null:
+return round(_that.id,_that.timestamp,_that.roundNumber);case _:
   return orElse();
 
 }
@@ -226,14 +234,15 @@ return endBattle(_that.id,_that.timestamp,_that.result,_that.winnerName);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String id,  DateTime timestamp,  String message)  info,required TResult Function( String id,  DateTime timestamp,  String attackerName,  Area area,  int damage)  attack,required TResult Function( String id,  DateTime timestamp,  String defenderName,  Area area)  block,required TResult Function( String id,  DateTime timestamp,  String playerName,  String botName)  startBattle,required TResult Function( String id,  DateTime timestamp,  BattleResult result,  String winnerName)  endBattle,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String id,  DateTime timestamp,  String message)  info,required TResult Function( String id,  DateTime timestamp,  String attackerName,  Area area,  int damage)  attack,required TResult Function( String id,  DateTime timestamp,  String defenderName,  Area area)  block,required TResult Function( String id,  DateTime timestamp,  String playerName,  String botName)  startBattle,required TResult Function( String id,  DateTime timestamp,  BattleResult result,  String winnerName)  endBattle,required TResult Function( String id,  DateTime timestamp,  int roundNumber)  round,}) {final _that = this;
 switch (_that) {
 case _InfoLog():
 return info(_that.id,_that.timestamp,_that.message);case _AttackLog():
 return attack(_that.id,_that.timestamp,_that.attackerName,_that.area,_that.damage);case _BlockLog():
 return block(_that.id,_that.timestamp,_that.defenderName,_that.area);case _StartBattleLog():
 return startBattle(_that.id,_that.timestamp,_that.playerName,_that.botName);case _EndBattleLog():
-return endBattle(_that.id,_that.timestamp,_that.result,_that.winnerName);case _:
+return endBattle(_that.id,_that.timestamp,_that.result,_that.winnerName);case _RoundLog():
+return round(_that.id,_that.timestamp,_that.roundNumber);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -250,14 +259,15 @@ return endBattle(_that.id,_that.timestamp,_that.result,_that.winnerName);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String id,  DateTime timestamp,  String message)?  info,TResult? Function( String id,  DateTime timestamp,  String attackerName,  Area area,  int damage)?  attack,TResult? Function( String id,  DateTime timestamp,  String defenderName,  Area area)?  block,TResult? Function( String id,  DateTime timestamp,  String playerName,  String botName)?  startBattle,TResult? Function( String id,  DateTime timestamp,  BattleResult result,  String winnerName)?  endBattle,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String id,  DateTime timestamp,  String message)?  info,TResult? Function( String id,  DateTime timestamp,  String attackerName,  Area area,  int damage)?  attack,TResult? Function( String id,  DateTime timestamp,  String defenderName,  Area area)?  block,TResult? Function( String id,  DateTime timestamp,  String playerName,  String botName)?  startBattle,TResult? Function( String id,  DateTime timestamp,  BattleResult result,  String winnerName)?  endBattle,TResult? Function( String id,  DateTime timestamp,  int roundNumber)?  round,}) {final _that = this;
 switch (_that) {
 case _InfoLog() when info != null:
 return info(_that.id,_that.timestamp,_that.message);case _AttackLog() when attack != null:
 return attack(_that.id,_that.timestamp,_that.attackerName,_that.area,_that.damage);case _BlockLog() when block != null:
 return block(_that.id,_that.timestamp,_that.defenderName,_that.area);case _StartBattleLog() when startBattle != null:
 return startBattle(_that.id,_that.timestamp,_that.playerName,_that.botName);case _EndBattleLog() when endBattle != null:
-return endBattle(_that.id,_that.timestamp,_that.result,_that.winnerName);case _:
+return endBattle(_that.id,_that.timestamp,_that.result,_that.winnerName);case _RoundLog() when round != null:
+return round(_that.id,_that.timestamp,_that.roundNumber);case _:
   return null;
 
 }
@@ -654,6 +664,83 @@ as String,timestamp: null == timestamp ? _self.timestamp : timestamp // ignore: 
 as DateTime,result: null == result ? _self.result : result // ignore: cast_nullable_to_non_nullable
 as BattleResult,winnerName: null == winnerName ? _self.winnerName : winnerName // ignore: cast_nullable_to_non_nullable
 as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _RoundLog implements BattleLogItem {
+  const _RoundLog({required this.id, required this.timestamp, required this.roundNumber, final  String? $type}): $type = $type ?? 'round';
+  factory _RoundLog.fromJson(Map<String, dynamic> json) => _$RoundLogFromJson(json);
+
+@override final  String id;
+@override final  DateTime timestamp;
+ final  int roundNumber;
+
+@JsonKey(name: 'runtimeType')
+final String $type;
+
+
+/// Create a copy of BattleLogItem
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$RoundLogCopyWith<_RoundLog> get copyWith => __$RoundLogCopyWithImpl<_RoundLog>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$RoundLogToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RoundLog&&(identical(other.id, id) || other.id == id)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&(identical(other.roundNumber, roundNumber) || other.roundNumber == roundNumber));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,timestamp,roundNumber);
+
+@override
+String toString() {
+  return 'BattleLogItem.round(id: $id, timestamp: $timestamp, roundNumber: $roundNumber)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$RoundLogCopyWith<$Res> implements $BattleLogItemCopyWith<$Res> {
+  factory _$RoundLogCopyWith(_RoundLog value, $Res Function(_RoundLog) _then) = __$RoundLogCopyWithImpl;
+@override @useResult
+$Res call({
+ String id, DateTime timestamp, int roundNumber
+});
+
+
+
+
+}
+/// @nodoc
+class __$RoundLogCopyWithImpl<$Res>
+    implements _$RoundLogCopyWith<$Res> {
+  __$RoundLogCopyWithImpl(this._self, this._then);
+
+  final _RoundLog _self;
+  final $Res Function(_RoundLog) _then;
+
+/// Create a copy of BattleLogItem
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? timestamp = null,Object? roundNumber = null,}) {
+  return _then(_RoundLog(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,timestamp: null == timestamp ? _self.timestamp : timestamp // ignore: cast_nullable_to_non_nullable
+as DateTime,roundNumber: null == roundNumber ? _self.roundNumber : roundNumber // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 

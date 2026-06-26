@@ -51,6 +51,9 @@ class BattleNotifier extends _$BattleNotifier {
 
   void confirmTurn() {
     if (!state.isBotMode) return;
+
+    ref.read(battleLogProvider.notifier).addRoundLog(state.roundNumber);
+
     _processPlayerTurn();
     _processBotTurn();
     _checkBattleOver();

@@ -28,64 +28,101 @@ class BattleLogView extends ConsumerWidget {
           child: Text.rich(
             TextSpan(
               style: const TextStyle(fontSize: 14),
-              children: [
-                TextSpan(
-                  text: '[${_formatTime(log.timestamp)}] ',
-                  style: TextStyle(color: gameColors.logInfo),
-                ),
-                ...log.when(
-                  info: (id, time, message) => [
-                    TextSpan(
-                      text: message,
-                      style: TextStyle(color: gameColors.logInfo),
+              children: log.when(
+                info: (id, time, message) => [
+                  TextSpan(
+                    text: message,
+                    style: TextStyle(color: gameColors.logInfo),
+                  ),
+                ],
+                attack: (id, time, attackerName, area, damage) => [
+                  TextSpan(
+                    text: attackerName,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  TextSpan(text: ' завдав удар у'),
+                  TextSpan(
+                    text: ' ${area.toLogString}',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  TextSpan(text: ' на'),
+                  TextSpan(
+                    text: ' $damage',
+                    style: TextStyle(
+                      color: gameColors.logDamage,
+                      fontWeight: FontWeight.bold,
                     ),
-                  ],
-                  attack: (id, time, attackerName, area, damage) => [
-                    TextSpan(
-                      text: attackerName,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const TextSpan(text: ' шкоди'),
+                ],
+                block: (id, time, defenderName, area) => [
+                  TextSpan(
+                    text: defenderName,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  TextSpan(text: ' заблокував удар у'),
+                  TextSpan(
+                    text: ' ${area.toLogString}',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ],
+                round: (id, time, roundNumber) => [
+                  TextSpan(
+                    text: '[${_formatTime(time)}] ',
+                    style: TextStyle(color: gameColors.logInfo),
+                  ),
+                  TextSpan(
+                    text: 'Раунд $roundNumber',
+                    style: TextStyle(
+                      color: gameColors.logInfo,
+                      fontWeight: FontWeight.bold,
                     ),
-                    TextSpan(text: ' завдав удар у'),
+                  ),
+                ],
+                startBattle: (id, time, playerName, botName) => [
+                  TextSpan(
+                    text: '[${_formatTime(time)}] ',
+                    style: TextStyle(color: gameColors.logInfo),
+                  ),
+                  TextSpan(
+                    text: 'Почався бій між ',
+                    style: TextStyle(color: gameColors.logInfo),
+                  ),
+                  TextSpan(
+                    text: playerName,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  TextSpan(
+                    text: ' та ',
+                    style: TextStyle(color: gameColors.logInfo),
+                  ),
+                  TextSpan(
+                    text: botName,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  TextSpan(
+                    text: '!',
+                    style: TextStyle(color: gameColors.logInfo),
+                  ),
+                ],
+                endBattle: (id, time, result, winnerName) => [
+                  TextSpan(
+                    text: '[${_formatTime(time)}] ',
+                    style: TextStyle(color: gameColors.logInfo),
+                  ),
+                  TextSpan(
+                    text: switch (result) {
+                      BattleResult.draw =>
+                        'Бій завершено нічиєю! Обидва бійці непритомні!',
+                      BattleResult.playerWin ||
+                      BattleResult.botWin => 'Бій завершено, переміг ',
+                    },
+                    style: TextStyle(color: gameColors.logInfo),
+                  ),
+
+                  if (result != BattleResult.draw) ...[
                     TextSpan(
-                      text: ' ${area.toLogString}',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    TextSpan(text: ' на'),
-                    TextSpan(
-                      text: ' $damage',
-                      style: TextStyle(
-                        color: gameColors.logDamage,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const TextSpan(text: ' шкоди'),
-                  ],
-                  block: (id, time, defenderName, area) => [
-                    TextSpan(
-                      text: defenderName,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    TextSpan(text: ' заблокував удар у'),
-                    TextSpan(
-                      text: ' ${area.toLogString}',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                  startBattle: (id, time, playerName, botName) => [
-                    TextSpan(
-                      text: 'Почався бій між ',
-                      style: TextStyle(color: gameColors.logInfo),
-                    ),
-                    TextSpan(
-                      text: playerName,
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    TextSpan(
-                      text: ' та ',
-                      style: TextStyle(color: gameColors.logInfo),
-                    ),
-                    TextSpan(
-                      text: botName,
+                      text: winnerName,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     TextSpan(
@@ -93,31 +130,8 @@ class BattleLogView extends ConsumerWidget {
                       style: TextStyle(color: gameColors.logInfo),
                     ),
                   ],
-                  endBattle: (id, time, result, winnerName) {
-                    return [
-                      TextSpan(
-                        text: switch (result) {
-                          BattleResult.draw =>
-                            'Бій завершено нічиєю! Обидва бійці непритомні!',
-                          BattleResult.playerWin ||
-                          BattleResult.botWin => 'Бій завершено, переміг ',
-                        },
-                        style: TextStyle(color: gameColors.logInfo),
-                      ),
-                      if (result != BattleResult.draw) ...[
-                        TextSpan(
-                          text: winnerName,
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        TextSpan(
-                          text: '!',
-                          style: TextStyle(color: gameColors.logInfo),
-                        ),
-                      ],
-                    ];
-                  },
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );

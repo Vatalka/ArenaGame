@@ -44,6 +44,12 @@ abstract class BattleLogItem with _$BattleLogItem {
     required String winnerName,
   }) = _EndBattleLog;
 
+  const factory BattleLogItem.round({
+    required String id,
+    required DateTime timestamp,
+    required int roundNumber,
+  }) = _RoundLog;
+
   factory BattleLogItem.fromJson(Map<String, dynamic> json) =>
       _$BattleLogItemFromJson(json);
 }
