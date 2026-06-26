@@ -64,19 +64,27 @@ class LevelUpBloc extends Bloc<LevelUpEvent, LevelUpState> {
     ConfirmUpgradeEvent event,
     Emitter<LevelUpState> emit,
   ) async {
-    emit(state.copyWith(isSaving: true));
+    emit(state.copyWith(isSaving: true, saveSuccess: false));
+
+    final int currentActualHp = state.character.actualHp.toInt();
+    final int hpBonus = state.addedVitality * 10;
 
     final updatedCharacter = state.character.copyWith(
       statPoints: state.availablePoints,
       strength: state.character.strength + state.addedStrength,
       vitality: state.character.vitality + state.addedVitality,
-      currentHp: state.character.maxHp,
+      currentHp: currentActualHp + hpBonus,
+      lastUpdateTime: DateTime.now().millisecondsSinceEpoch,
     );
 
     await _saveCharacterUseCase(updatedCharacter);
 
-    emit(state.copyWith(isSaving: false, character: updatedCharacter));
-
-    // тут можна додати подію успіху щоб закрити екран
+    emit(
+      state.copyWith(
+        character: updatedCharacter,
+        isSaving: false,
+        saveSuccess: true,
+      ),
+    );
   }
 }

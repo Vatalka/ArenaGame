@@ -61,6 +61,19 @@ class SelectionNotifier extends _$SelectionNotifier {
     state = AsyncData(updatedList);
   }
 
+  void updateCharacterInList(Character updatedChar) {
+    if (state is! AsyncData<List<Character>>) return;
+
+    final currentList = state.value!;
+    final index = currentList.indexWhere((char) => char.id == updatedChar.id);
+    if (index == -1) return;
+
+    final updatedList = [...currentList];
+    updatedList[index] = updatedChar;
+
+    state = AsyncData(updatedList);
+  }
+
   Future<void> removeCharacter(String id) async {
     state = const AsyncLoading();
     try {

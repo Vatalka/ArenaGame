@@ -10,7 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class LevelUpButton extends StatelessWidget {
   final Character character;
   final SaveCharacterUseCase saveCharacterUseCase;
-  final VoidCallback? onSave;
+  final Function(Character)? onSave;
 
   const LevelUpButton({
     super.key,
@@ -40,73 +40,81 @@ class LevelUpButton extends StatelessWidget {
                 initialCharacter: character,
                 saveCharacterUseCase: saveCharacterUseCase,
               ),
-              child: BlocBuilder<LevelUpBloc, LevelUpState>(
-                builder: (blocContext, state) {
-                  return Container(
-                    height: MediaQuery.sizeOf(context).height / 3,
-                    color: colorScheme.primaryContainer,
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Text(
-                            'Unallocated stat points: ${state.availablePoints}',
-                            style: theme.textTheme.titleMedium?.copyWith(
-                              color: colorScheme.onSurface,
-                            ),
-                          ),
-                          StatSelectorRow(
-                            label: 'Vitality',
-                            value:
-                                state.character.vitality + state.addedVitality,
-                            onIncrement: () => blocContext
-                                .read<LevelUpBloc>()
-                                .add(IncreaseStatEvent(StatType.vitality)),
-                            onDecrement: () => blocContext
-                                .read<LevelUpBloc>()
-                                .add(DecreaseStatEvent(StatType.vitality)),
-                            isIncrementEnabled: state.availablePoints > 0,
-                            isDecrementEnabled: state.addedVitality > 0,
-                          ),
-                          StatSelectorRow(
-                            label: 'Strength',
-                            value:
-                                state.character.strength + state.addedStrength,
-                            onIncrement: () => blocContext
-                                .read<LevelUpBloc>()
-                                .add(IncreaseStatEvent(StatType.strength)),
-                            onDecrement: () => blocContext
-                                .read<LevelUpBloc>()
-                                .add(DecreaseStatEvent(StatType.strength)),
-                            isIncrementEnabled: state.availablePoints > 0,
-                            isDecrementEnabled: state.addedStrength > 0,
-                          ),
-                          ElevatedButton(
-                            onPressed: state.isSaving
-                                ? null
-                                : () {
-                                    blocContext.read<LevelUpBloc>().add(
-                                      ConfirmUpgradeEvent(),
-                                    );
-                                    onSave?.call();
-                                    Navigator.pop(sheetContext);
-                                  },
-                            child: state.isSaving
-                                ? const SizedBox(
-                                    width: 20,
-                                    height: 20,
-                                    child: CircularProgressIndicator(
-                                      strokeWidth: 2,
-                                    ),
-                                  )
-                                : const Text('Save'),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
+              child: BlocListener<LevelUpBloc, LevelUpState>(
+                listenWhen: (previous, current) =>
+                    !previous.saveSuccess && current.saveSuccess,
+                listener: (blocContext, state) {
+                  onSave?.call(state.character);
+                  Navigator.pop(sheetContext);
                 },
+                child: BlocBuilder<LevelUpBloc, LevelUpState>(
+                  builder: (blocContext, state) {
+                    return Container(
+                      height: MediaQuery.sizeOf(context).height / 3,
+                      color: colorScheme.primaryContainer,
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Text(
+                              'Unallocated stat points: ${state.availablePoints}',
+                              style: theme.textTheme.titleMedium?.copyWith(
+                                color: colorScheme.onSurface,
+                              ),
+                            ),
+                            StatSelectorRow(
+                              label: 'Vitality',
+                              value:
+                                  state.character.vitality +
+                                  state.addedVitality,
+                              onIncrement: () => blocContext
+                                  .read<LevelUpBloc>()
+                                  .add(IncreaseStatEvent(StatType.vitality)),
+                              onDecrement: () => blocContext
+                                  .read<LevelUpBloc>()
+                                  .add(DecreaseStatEvent(StatType.vitality)),
+                              isIncrementEnabled: state.availablePoints > 0,
+                              isDecrementEnabled: state.addedVitality > 0,
+                            ),
+                            StatSelectorRow(
+                              label: 'Strength',
+                              value:
+                                  state.character.strength +
+                                  state.addedStrength,
+                              onIncrement: () => blocContext
+                                  .read<LevelUpBloc>()
+                                  .add(IncreaseStatEvent(StatType.strength)),
+                              onDecrement: () => blocContext
+                                  .read<LevelUpBloc>()
+                                  .add(DecreaseStatEvent(StatType.strength)),
+                              isIncrementEnabled: state.availablePoints > 0,
+                              isDecrementEnabled: state.addedStrength > 0,
+                            ),
+                            ElevatedButton(
+                              onPressed: state.isSaving
+                                  ? null
+                                  : () {
+                                      blocContext.read<LevelUpBloc>().add(
+                                        ConfirmUpgradeEvent(),
+                                      );
+                                    },
+                              child: state.isSaving
+                                  ? const SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                      ),
+                                    )
+                                  : const Text('Save'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
             );
           },

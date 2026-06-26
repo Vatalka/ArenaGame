@@ -6,6 +6,7 @@ class LevelUpState {
   final int addedStrength;
   final int addedVitality;
   final bool isSaving;
+  final bool saveSuccess;
 
   LevelUpState({
     required this.character,
@@ -13,6 +14,7 @@ class LevelUpState {
     this.addedStrength = 0,
     this.addedVitality = 0,
     this.isSaving = false,
+    this.saveSuccess = false,
   });
 
   LevelUpState copyWith({
@@ -21,6 +23,7 @@ class LevelUpState {
     int? addedStrength,
     int? addedVitality,
     bool? isSaving,
+    bool? saveSuccess,
   }) {
     return LevelUpState(
       character: character ?? this.character,
@@ -28,6 +31,7 @@ class LevelUpState {
       addedStrength: addedStrength ?? this.addedStrength,
       addedVitality: addedVitality ?? this.addedVitality,
       isSaving: isSaving ?? this.isSaving,
+      saveSuccess: saveSuccess ?? this.saveSuccess,
     );
   }
 }
