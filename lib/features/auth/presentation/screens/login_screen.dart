@@ -1,3 +1,4 @@
+import 'package:arena_game/core/routes/app_routes.dart';
 import 'package:arena_game/features/auth/presentation/controllers/auth_repository_notifier.dart';
 import 'package:arena_game/features/character/domain/repositories/i_character_repository.dart';
 import 'package:flutter/material.dart';
@@ -24,9 +25,9 @@ class LoginScreen extends ConsumerWidget {
               final characterRepository = ref.read(characterRepositoryProvider);
               final characters = await characterRepository.getAllCharacters();
               if (characters.isNotEmpty) {
-                Modular.to.navigate('/selection');
+                Modular.to.navigate(AppRoutes.selection);
               } else {
-                Modular.to.navigate('/creation');
+                Modular.to.navigate(AppRoutes.creation);
               }
             },
             child: const Text('Login as a Guest'),

@@ -1,3 +1,4 @@
+import 'package:arena_game/core/routes/app_routes.dart';
 import 'package:arena_game/features/battle/presentation/controllers/battle_notifier.dart';
 import 'package:arena_game/features/battle/presentation/controllers/bot_notifier.dart';
 import 'package:arena_game/features/battle/presentation/controllers/active_player_notifier.dart';
@@ -14,17 +15,25 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class GameScreen extends ConsumerWidget {
   const GameScreen({super.key});
 
+  void _exitBattle(WidgetRef ref, String route) {
+    ref.read(battleProvider.notifier).disableBotMode();
+    Modular.to.navigate(route);
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isCombatMode = ref.watch(battleProvider).isBotMode;
     final player = ref.watch(activePlayerProvider);
+
+    final isCombatMode = ref.watch(battleProvider).isBotMode;
+    final notifier = ref.read(battleProvider.notifier);
+    final attackHandler = isCombatMode ? notifier.selectAttack : null;
+    final blockHandler = isCombatMode ? notifier.selectBlock : null;
 
     return PopScope(
       canPop: false,
-      onPopInvokedWithResult: (didPop, result) async {
+      onPopInvokedWithResult: (didPop, result) {
         if (didPop) return;
-        ref.read(battleProvider.notifier).disableBotMode();
-        Modular.to.navigate('/selection');
+        _exitBattle(ref, AppRoutes.selection);
       },
       child: Scaffold(
         body: SafeArea(
@@ -53,11 +62,7 @@ class GameScreen extends ConsumerWidget {
                         currentSelection: ref
                             .watch(battleProvider)
                             .selectedAttack,
-                        onSelected: isCombatMode
-                            ? (area) => ref
-                                  .read(battleProvider.notifier)
-                                  .selectAttack(area)
-                            : null,
+                        onSelected: attackHandler,
                       ),
                     ),
                     Expanded(
@@ -66,11 +71,7 @@ class GameScreen extends ConsumerWidget {
                         currentSelection: ref
                             .watch(battleProvider)
                             .selectedBlock,
-                        onSelected: isCombatMode
-                            ? (area) => ref
-                                  .read(battleProvider.notifier)
-                                  .selectBlock(area)
-                            : null,
+                        onSelected: blockHandler,
                       ),
                     ),
                   ],
@@ -80,19 +81,13 @@ class GameScreen extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ElevatedButton(
-                      onPressed: () {
-                        ref.read(battleProvider.notifier).disableBotMode();
-                        Modular.to.navigate('/selection');
-                      },
-                      child: Text('Select'),
+                      onPressed: () => _exitBattle(ref, AppRoutes.selection),
+                      child: Text('Select Screen'),
                     ),
                     RestoreHpButton(onTap: () {}),
                     ElevatedButton(
-                      onPressed: () {
-                        ref.read(battleProvider.notifier).disableBotMode();
-                        Modular.to.navigate('/');
-                      },
-                      child: Text('Login'),
+                      onPressed: () => _exitBattle(ref, AppRoutes.login),
+                      child: Text('Login Screen'),
                     ),
                   ],
                 ),

@@ -1,3 +1,4 @@
+import 'package:arena_game/core/routes/app_routes.dart';
 import 'package:arena_game/features/character/presentation/controllers/creation_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -15,13 +16,13 @@ class CreationScreen extends ConsumerWidget {
       canPop: false,
       onPopInvokedWithResult: (didPop, result) async {
         if (didPop) return;
-        Modular.to.navigate('/');
+        Modular.to.navigate(AppRoutes.login);
       },
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Creation'),
           leading: IconButton(
-            onPressed: () => Modular.to.navigate('/selection'),
+            onPressed: () => Modular.to.navigate(AppRoutes.selection),
             icon: Icon(Icons.arrow_back),
           ),
         ),
@@ -51,7 +52,7 @@ class CreationScreen extends ConsumerWidget {
                 onPressed: characterState.nameIsValid
                     ? () async {
                         await controller.createAndSave();
-                        Modular.to.navigate('/selection');
+                        Modular.to.navigate(AppRoutes.selection);
                       }
                     : null,
                 child: const Text('Create'),

@@ -1,3 +1,4 @@
+import 'package:arena_game/core/routes/app_routes.dart';
 import 'package:arena_game/core/theme/game_colors.dart';
 import 'package:arena_game/features/auth/presentation/screens/login_screen.dart';
 import 'package:arena_game/features/character/presentation/screens/creation_screen.dart';
@@ -45,10 +46,10 @@ class AppModule extends Module {
 
   @override
   void routes(r) {
-    r.child('/', child: (_) => LoginScreen());
-    r.child('/creation', child: (_) => CreationScreen());
-    r.child('/selection', child: (_) => SelectionScreen());
-    r.child('/game', child: (_) => GameScreen());
+    r.child(AppRoutes.login, child: (_) => LoginScreen());
+    r.child(AppRoutes.creation, child: (_) => CreationScreen());
+    r.child(AppRoutes.selection, child: (_) => SelectionScreen());
+    r.child(AppRoutes.game, child: (_) => GameScreen());
   }
 }
 

@@ -1,3 +1,4 @@
+import 'package:arena_game/core/routes/app_routes.dart';
 import 'package:arena_game/features/battle/presentation/controllers/player_notifier.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:arena_game/features/character/presentation/controllers/selection_notifier.dart';
@@ -18,7 +19,7 @@ class SelectionScreen extends ConsumerWidget {
       canPop: false,
       onPopInvokedWithResult: (didPop, result) async {
         if (didPop) return;
-        Modular.to.navigate('/creation');
+        Modular.to.navigate(AppRoutes.creation);
       },
       child: Scaffold(
         appBar: AppBar(title: const Text('Characters')),
@@ -56,7 +57,7 @@ class SelectionScreen extends ConsumerWidget {
                           ref
                               .read(playerProvider.notifier)
                               .selectCharacter(char.id);
-                          Modular.to.navigate('/game');
+                          Modular.to.navigate(AppRoutes.game);
                         },
                       );
                     },
@@ -87,7 +88,7 @@ class SelectionScreen extends ConsumerWidget {
                               );
                             }
                           : () {
-                              Modular.to.navigate('/creation');
+                              Modular.to.navigate(AppRoutes.creation);
                             },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: isLimitReached
