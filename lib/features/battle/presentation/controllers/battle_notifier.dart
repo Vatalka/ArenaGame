@@ -40,6 +40,8 @@ class BattleNotifier extends _$BattleNotifier {
   }
 
   void disableBotMode() {
+    if (!state.isBotMode) return;
+
     final player = ref.read(activePlayerProvider);
 
     ref

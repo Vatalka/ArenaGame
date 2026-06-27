@@ -46,10 +46,7 @@ class SelectionNotifier extends _$SelectionNotifier {
     updatedChar = updatedChar.copyWith(
       currentHp: leveledUp
           ? updatedChar.maxHp
-          : (newHp ??
-                (isInCombat == true
-                    ? oldChar.actualHp.toInt()
-                    : oldChar.currentHp)),
+          : (newHp ?? oldChar.actualHp.toInt()),
     );
 
     if (oldChar == updatedChar) return;
