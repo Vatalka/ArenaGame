@@ -26,6 +26,7 @@ class SelectionScreen extends ConsumerWidget {
         body: charactersAsync.when(
           data: (characters) {
             final isLimitReached = characters.length >= 3;
+
             return Column(
               children: [
                 Expanded(

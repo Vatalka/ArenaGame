@@ -11,7 +11,7 @@ class CharacterRepositoryImpl implements ICharacterRepository {
     final box = await Hive.openBox<Map>(_characterBoxName);
 
     if (box.length >= 3 && !box.containsKey(character.id)) {
-      throw Exception('Character limit reached (maximum 3)!');
+      throw Exception('Character limit 3');
     }
 
     final characterModel = CharacterModel.fromEntity(character);

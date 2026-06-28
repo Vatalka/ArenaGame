@@ -12,8 +12,13 @@ class CreationNotifier extends _$CreationNotifier {
 
   void updateName(String name) => state = state.copyWith(name: name);
 
-  Future<void> createAndSave() async {
-    await ref.read(characterRepositoryProvider).saveCharacter(state);
-    ref.invalidate(selectionProvider);
+  Future<String?> createAndSave() async {
+    try {
+      await ref.read(characterRepositoryProvider).saveCharacter(state);
+      ref.invalidate(selectionProvider);
+      return null;
+    } catch (e) {
+      return 'Не вдалося створити персонажа: ${e.toString()}';
+    }
   }
 }

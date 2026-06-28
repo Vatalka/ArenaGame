@@ -51,8 +51,16 @@ class CreationScreen extends ConsumerWidget {
               ElevatedButton(
                 onPressed: characterState.nameIsValid
                     ? () async {
-                        await controller.createAndSave();
-                        Modular.to.navigate(AppRoutes.selection);
+                        final error = await controller.createAndSave();
+                        if (!context.mounted) return;
+
+                        if (error == null) {
+                          Modular.to.navigate(AppRoutes.selection);
+                        } else {
+                          ScaffoldMessenger.of(
+                            context,
+                          ).showSnackBar(SnackBar(content: Text(error)));
+                        }
                       }
                     : null,
                 child: const Text('Create'),
