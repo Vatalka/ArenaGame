@@ -104,8 +104,6 @@ abstract class Character with _$Character {
     return (currentHp + gainedHp).clamp(0.0, maxHp.toDouble());
   }
 
-  int get regenPerTick => (maxHp * 0.01).ceil();
-
   bool get nameIsValid => name.trim().length >= 3;
 
   String? get nameError {
