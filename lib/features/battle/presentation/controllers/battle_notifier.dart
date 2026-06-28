@@ -94,7 +94,7 @@ class BattleNotifier extends _$BattleNotifier {
     final bot = ref.read(botProvider);
 
     final playerAttackArea = state.selectedAttack;
-    final botBlockArea = ref.read(botProvider.notifier).getTestArea(); // test
+    final botBlockArea = ref.read(botProvider.notifier).getTestArea();
 
     int damageToBot = player.strength * 2;
 
@@ -116,7 +116,7 @@ class BattleNotifier extends _$BattleNotifier {
     final player = ref.read(activePlayerProvider);
     final bot = ref.read(botProvider);
 
-    final botAttackArea = ref.read(botProvider.notifier).getTestArea(); // test
+    final botAttackArea = ref.read(botProvider.notifier).getTestArea();
     final playerBlockArea = state.selectedBlock;
 
     int damageToPlayer = bot.strength * 2;
