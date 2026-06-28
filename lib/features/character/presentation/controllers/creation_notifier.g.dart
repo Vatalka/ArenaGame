@@ -41,7 +41,7 @@ final class CreationNotifierProvider
   }
 }
 
-String _$creationNotifierHash() => r'5c809c931a8e06e71e62a50a115edbdd682d5479';
+String _$creationNotifierHash() => r'7a14c59f91a6a7f15dd01c7ab3538df1d4c22c6f';
 
 abstract class _$CreationNotifier extends $Notifier<Character> {
   Character build();

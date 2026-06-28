@@ -50,7 +50,7 @@ final class AuthRepositoryNotifierProvider
 }
 
 String _$authRepositoryNotifierHash() =>
-    r'73f24ba5d799c02bca7eb7024421d357dbbd8b46';
+    r'7a605700be9cdef66330a6da7f51f4eafa1b1a46';
 
 @ProviderFor(authStateNotifier)
 final authStateProvider = AuthStateNotifierProvider._();
