@@ -35,6 +35,7 @@ config.json
 .pub-cache/
 .pub/
 /build/
+/coverage/
 
 # Symbolication related
 app.*.symbols

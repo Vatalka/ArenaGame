@@ -78,6 +78,16 @@ void main() {
       expect(result.level, 1);
       expect(result.experience, 15);
     });
+
+    test('величезний досвід не зависає і не перестрибує межу рівня 10', () {
+      final character = Character.createNew().copyWith(level: 9, experience: 0);
+
+      // expForLevel(9) = 5120 exp, рівень 10 — стоп
+      final result = character.earnExperience(100000);
+
+      expect(result.level, 10);
+      expect(result.experience, anything);
+    });
   });
 
   group('actualHp — регенерація', () {
@@ -118,6 +128,33 @@ void main() {
 
       // Параметри регенерації: 1% maxHp every 2s, або 100% every 200s
       expect(character.actualHp, 100);
+    });
+
+    test('регенерує пропорційно часу, не одразу до максимуму', () {
+      final character = Character.createNew().copyWith(
+        currentHp: 50,
+        vitality: 10,
+        isInCombat: false,
+        lastUpdateTime: DateTime.now()
+            .subtract(const Duration(milliseconds: 1000))
+            .millisecondsSinceEpoch,
+      );
+
+      // hpPerMs = (100 * 0.01) / 2000 = 0.0005; за 1000мс += 0.5
+      expect(character.actualHp, closeTo(50.5, 0.1));
+    });
+
+    test('lastUpdateTime у майбутньому (differenceMs <= 0) не зменшує HP', () {
+      final character = Character.createNew().copyWith(
+        currentHp: 50,
+        vitality: 10,
+        isInCombat: false,
+        lastUpdateTime: DateTime.now()
+            .add(const Duration(seconds: 10))
+            .millisecondsSinceEpoch,
+      );
+
+      expect(character.actualHp, 50);
     });
   });
 }
