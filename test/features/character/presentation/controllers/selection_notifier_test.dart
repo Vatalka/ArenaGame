@@ -13,6 +13,7 @@ void main() {
   });
   late MockCharacterRepository mockRepository;
   late ProviderContainer container;
+  late Character existingCharacter;
 
   setUp(() {
     mockRepository = MockCharacterRepository();
@@ -20,6 +21,15 @@ void main() {
       overrides: [
         characterRepositoryProvider.overrideWithValue(mockRepository),
       ],
+    );
+
+    existingCharacter = Character.createNew().copyWith(
+      id: '5',
+      name: 'FakeAragon',
+      vitality: 17,
+      currentHp: 136,
+      isInCombat: false,
+      lastUpdateTime: 0,
     );
   });
 
@@ -41,31 +51,22 @@ void main() {
     verify(() => mockRepository.getAllCharacters()).called(1);
   });
 
-  group('upgradeCharacterState', () {
-    late Character existingCharacter;
+  Future<void> setupLoadedState() async {
+    when(
+      () => mockRepository.getAllCharacters(),
+    ).thenAnswer((_) async => [existingCharacter]);
 
-    setUp(() async {
-      existingCharacter = Character.createNew().copyWith(
-        id: '5',
-        name: 'FakeAragon',
-        vitality: 17,
-        currentHp: 136,
-        isInCombat: false,
-        lastUpdateTime: 0,
-      );
+    when(() => mockRepository.saveCharacter(any())).thenAnswer((_) async {});
+    await container.read(selectionProvider.future);
+  }
 
-      when(
-        () => mockRepository.getAllCharacters(),
-      ).thenAnswer((_) async => [existingCharacter]);
-      when(() => mockRepository.saveCharacter(any())).thenAnswer((_) async {});
-
-      await container.read(selectionProvider.future);
-    });
+  group('setCombatState', () {
+    setUp(() async => await setupLoadedState());
 
     test('id не знайдено в списку — стан не змінюється', () {
       final notifier = container.read(selectionProvider.notifier);
 
-      notifier.upgradeCharacterState(id: 'unknown-id', isInCombat: true);
+      notifier.setCombatState(id: 'unknown-id', isInCombat: true);
 
       final state = container.read(selectionProvider).value!;
       expect(state.first.isInCombat, false);
@@ -81,7 +82,7 @@ void main() {
         ),
       );
 
-      notifier.upgradeCharacterState(id: '5', isInCombat: true);
+      notifier.setCombatState(id: '5', isInCombat: true);
 
       final updatedChar = container.read(selectionProvider).value!.first;
       expect(updatedChar.isInCombat, true);
@@ -89,7 +90,7 @@ void main() {
       verify(() => mockRepository.saveCharacter(any())).called(1);
     });
 
-    test('isInCombat: false - зберігає actualHp, а не застиглий currentHp', () {
+    test('isInCombat: false - зберігає actualHp', () {
       existingCharacter = existingCharacter.copyWith(
         lastUpdateTime: DateTime.now()
             .subtract(const Duration(hours: 1))
@@ -99,20 +100,40 @@ void main() {
       final notifier = container.read(selectionProvider.notifier);
       notifier.updateCharacterInList(existingCharacter);
 
-      notifier.upgradeCharacterState(id: '5', isInCombat: false);
+      notifier.setCombatState(id: '5', isInCombat: false);
 
       final updatedChar = container.read(selectionProvider).value!.first;
       expect(updatedChar.currentHp, 170);
     });
+  });
+
+  group('applyExperience', () {
+    setUp(() async => await setupLoadedState());
 
     test('gainedExp підвищує рівень, currentHp скидається до нового maxHp', () {
       final notifier = container.read(selectionProvider.notifier);
 
-      notifier.upgradeCharacterState(id: '5', gainedExp: 10);
+      notifier.applyExperience(id: '5', gainedExp: 10);
 
       final updatedChar = container.read(selectionProvider).value!.first;
       expect(updatedChar.level, 1);
       expect(updatedChar.currentHp, updatedChar.maxHp);
+    });
+  });
+
+  group('takeDamage', () {
+    setUp(() async => await setupLoadedState());
+
+    test('зменшує currentHp та не опускається нижче нуля', () {
+      final notifier = container.read(selectionProvider.notifier);
+
+      notifier.takeDamage(id: '5', damage: 36);
+      expect(container.read(selectionProvider).value!.first.currentHp, 100);
+
+      notifier.takeDamage(id: '5', damage: 150);
+      expect(container.read(selectionProvider).value!.first.currentHp, 0);
+
+      verify(() => mockRepository.saveCharacter(any())).called(2);
     });
   });
 }
