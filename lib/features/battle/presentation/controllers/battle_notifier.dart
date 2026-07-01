@@ -24,7 +24,7 @@ class BattleNotifier extends _$BattleNotifier {
 
     ref
         .read(selectionProvider.notifier)
-        .upgradeCharacterState(id: playerId, isInCombat: true);
+        .setCombatState(id: playerId, isInCombat: true);
 
     final player = ref.read(activePlayerProvider);
 
@@ -46,7 +46,7 @@ class BattleNotifier extends _$BattleNotifier {
 
     ref
         .read(selectionProvider.notifier)
-        .upgradeCharacterState(id: player.id, isInCombat: false);
+        .setCombatState(id: player.id, isInCombat: false);
 
     state = state.copyWith(isBotMode: false);
   }
@@ -132,11 +132,13 @@ class BattleNotifier extends _$BattleNotifier {
           .addAttackLog(bot.name, botAttackArea, damageToPlayer);
     }
 
-    final newHp = player.currentHp - damageToPlayer;
+    ref
+        .read(selectionProvider.notifier)
+        .setCombatState(id: player.id, isInCombat: true);
 
     ref
         .read(selectionProvider.notifier)
-        .upgradeCharacterState(id: player.id, newHp: newHp, isInCombat: true);
+        .takeDamage(id: player.id, damage: damageToPlayer);
   }
 
   void _checkBattleOver() {
@@ -154,18 +156,14 @@ class BattleNotifier extends _$BattleNotifier {
 
       ref.read(battleLogProvider.notifier).addEndBattleLog(result, winnerName);
 
-      int expReward = 0;
-      if (result == BattleResult.playerWin) {
-        expReward = bot.maxHp ~/ 10;
+      final expReward = result == BattleResult.playerWin ? bot.maxHp ~/ 10 : 0;
+
+      if (expReward > 0) {
+        ref
+            .read(selectionProvider.notifier)
+            .applyExperience(id: player.id, gainedExp: expReward);
       }
 
-      ref
-          .read(selectionProvider.notifier)
-          .upgradeCharacterState(
-            id: player.id,
-            newHp: player.currentHp,
-            gainedExp: expReward,
-          );
       disableBotMode();
     }
   }

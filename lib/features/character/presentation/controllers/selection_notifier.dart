@@ -16,12 +16,29 @@ class SelectionNotifier extends _$SelectionNotifier {
     return await repo.getAllCharacters();
   }
 
-  void upgradeCharacterState({
-    required String id,
-    int? newHp,
-    bool? isInCombat,
-    int gainedExp = 0,
-  }) {
+  void setCombatState({required String id, required bool isInCombat}) {
+    _updateAndSave(
+      id,
+      (char) => char.copyWith(
+        isInCombat: isInCombat,
+        lastUpdateTime: DateTime.now().millisecondsSinceEpoch,
+        currentHp: char.actualHp.toInt(),
+      ),
+    );
+  }
+
+  void applyExperience({required String id, required int gainedExp}) {
+    if (gainedExp <= 0) return;
+    _updateAndSave(id, (char) => char.earnExperience(gainedExp));
+  }
+
+  void takeDamage({required String id, required int damage}) {
+    _updateAndSave(id, (char) => char.copyWith(
+      currentHp: (char.currentHp - damage).clamp(0, char.maxHp),
+    ));
+  }
+
+  void _updateAndSave(String id, Character Function(Character) update) {
     if (state is! AsyncData<List<Character>>) return;
 
     final currentList = state.value!;
@@ -29,26 +46,7 @@ class SelectionNotifier extends _$SelectionNotifier {
     if (index == -1) return;
 
     final oldChar = currentList[index];
-
-    var updatedChar = oldChar.copyWith(
-      isInCombat: isInCombat ?? oldChar.isInCombat,
-      lastUpdateTime: DateTime.now().millisecondsSinceEpoch,
-    );
-
-    bool leveledUp = false;
-    if (gainedExp > 0) {
-      updatedChar = updatedChar.earnExperience(gainedExp);
-      if (updatedChar.level > oldChar.level) {
-        leveledUp = true;
-      }
-    }
-
-    updatedChar = updatedChar.copyWith(
-      currentHp: leveledUp
-          ? updatedChar.maxHp
-          : (newHp ?? oldChar.actualHp.toInt()),
-    );
-
+    final updatedChar = update(oldChar);
     if (oldChar == updatedChar) return;
 
     ref.read(characterRepositoryProvider).saveCharacter(updatedChar);
@@ -57,6 +55,48 @@ class SelectionNotifier extends _$SelectionNotifier {
     updatedList[index] = updatedChar;
     state = AsyncData(updatedList);
   }
+
+  // void upgradeCharacterState({
+  //   required String id,
+  //   int? newHp,
+  //   bool? isInCombat,
+  //   int gainedExp = 0,
+  // }) {
+  //   if (state is! AsyncData<List<Character>>) return;
+  //
+  //   final currentList = state.value!;
+  //   final index = currentList.indexWhere((char) => char.id == id);
+  //   if (index == -1) return;
+  //
+  //   final oldChar = currentList[index];
+  //
+  //   var updatedChar = oldChar.copyWith(
+  //     isInCombat: isInCombat ?? oldChar.isInCombat,
+  //     lastUpdateTime: DateTime.now().millisecondsSinceEpoch,
+  //   );
+  //
+  //   bool leveledUp = false;
+  //   if (gainedExp > 0) {
+  //     updatedChar = updatedChar.earnExperience(gainedExp);
+  //     if (updatedChar.level > oldChar.level) {
+  //       leveledUp = true;
+  //     }
+  //   }
+  //
+  //   updatedChar = updatedChar.copyWith(
+  //     currentHp: leveledUp
+  //         ? updatedChar.maxHp
+  //         : (newHp ?? oldChar.actualHp.toInt()),
+  //   );
+  //
+  //   if (oldChar == updatedChar) return;
+  //
+  //   ref.read(characterRepositoryProvider).saveCharacter(updatedChar);
+  //
+  //   final updatedList = [...currentList];
+  //   updatedList[index] = updatedChar;
+  //   state = AsyncData(updatedList);
+  // }
 
   void updateCharacterInList(Character updatedChar) {
     if (state is! AsyncData<List<Character>>) return;

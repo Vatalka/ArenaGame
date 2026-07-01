@@ -12,9 +12,9 @@ class BotNotifier extends _$BotNotifier {
   Character build() =>
       Character.createNew().copyWith(name: 'Бот Залізяка', isInCombat: true);
 
-  void takeDamage(int amount) {
+  void takeDamage(int damage) {
     state = state.copyWith(
-      currentHp: (state.currentHp - amount).clamp(0, state.maxHp),
+      currentHp: (state.currentHp - damage).clamp(0, state.maxHp),
     );
   }
 
