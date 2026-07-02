@@ -175,19 +175,14 @@ void main() {
       when(() => mockRepository.deleteCharacter('5')).thenAnswer((_) async {});
 
       final notifier = container.read(selectionProvider.notifier);
-      final future = notifier.removeCharacter('5');
 
-      expect(
-        container.read(selectionProvider),
-        const AsyncLoading<List<Character>>(),
-      );
+      await notifier.removeCharacter('5');
 
-      await future;
       verify(() => mockRepository.deleteCharacter('5')).called(1);
     });
 
-    test('у разі помилки репозиторію - перехід State в AsyncError', () async {
-      final exception = Exception('Database error');
+    test('у разі Error репозиторію прокидає її далі через rethrow', () async {
+      final exception = Exception('Hive disk error');
 
       when(
         () => mockRepository.deleteCharacter('5'),
@@ -195,11 +190,9 @@ void main() {
 
       final notifier = container.read(selectionProvider.notifier);
 
-      await notifier.removeCharacter('5');
+      expect(() => notifier.removeCharacter('5'), throwsA(equals(exception)));
 
-      final state = container.read(selectionProvider);
-      expect(state, isA<AsyncError<List<Character>>>());
-      expect(state.error, exception);
+      expect(container.read(selectionProvider) is! AsyncError, true);
     });
   });
 }
