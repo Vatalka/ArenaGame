@@ -1,9 +1,12 @@
 import 'package:arena_game/core/routes/app_routes.dart';
 import 'package:arena_game/features/battle/presentation/controllers/player_notifier.dart';
+import 'package:arena_game/features/character/presentation/cubit/delete_character_cubit.dart';
+import 'package:arena_game/features/character/presentation/cubit/delete_character_state.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:arena_game/features/character/presentation/controllers/selection_notifier.dart';
 import 'package:arena_game/features/character/presentation/widgets/character_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -125,25 +128,66 @@ class SelectionScreen extends ConsumerWidget {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext dialogContext) {
-        return AlertDialog(
-          title: const Text('Delete Character'),
-          content: Text('Are you sure you want to delete ${char.name}?'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.of(dialogContext).pop(),
-              child: const Text('Cancel'),
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
-                foregroundColor: Theme.of(context).colorScheme.error,
-              ),
-              onPressed: () async {
+        return BlocProvider(
+          create: (context) => DeleteCharacterCubit(),
+          child: BlocListener<DeleteCharacterCubit, DeleteCharacterState>(
+            listener: (blocContext, state) {
+              if (state is DeleteCharacterSuccess) {
                 Navigator.of(dialogContext).pop();
-                await controller.removeCharacter(char.id);
+              }
+              if (state is DeleteCharacterError) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Failed to delete: ${state.message}'),
+                    backgroundColor: Theme.of(context).colorScheme.error,
+                  ),
+                );
+              }
+            },
+            child: BlocBuilder<DeleteCharacterCubit, DeleteCharacterState>(
+              builder: (blocContext, state) {
+                final isLoading = state is DeleteCharacterLoading;
+
+                return AlertDialog(
+                  title: const Text('Delete Character'),
+                  content: isLoading
+                      ? const Row(
+                          children: [
+                            CircularProgressIndicator(),
+                            SizedBox(width: 16),
+                            Text('Deleting from storage...'),
+                          ],
+                        )
+                      : Text('Are you sure you want to delete ${char.name}?'),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: isLoading
+                          ? null
+                          : () => Navigator.of(dialogContext).pop(),
+                      child: const Text('Cancel'),
+                    ),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        foregroundColor: Theme.of(context).colorScheme.error,
+                      ),
+                      onPressed: isLoading
+                          ? null
+                          : () {
+                              BlocProvider.of<DeleteCharacterCubit>(
+                                blocContext,
+                              ).delete(
+                                id: char.id,
+                                // tear-off: (id) => controller.removeCharacter(id)
+                                onDeleteAction: controller.removeCharacter,
+                              );
+                            },
+                      child: const Text('Delete'),
+                    ),
+                  ],
+                );
               },
-              child: const Text('Delete'),
             ),
-          ],
+          ),
         );
       },
     );

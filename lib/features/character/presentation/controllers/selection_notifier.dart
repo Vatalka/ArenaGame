@@ -33,9 +33,12 @@ class SelectionNotifier extends _$SelectionNotifier {
   }
 
   void takeDamage({required String id, required int damage}) {
-    _updateAndSave(id, (char) => char.copyWith(
-      currentHp: (char.currentHp - damage).clamp(0, char.maxHp),
-    ));
+    _updateAndSave(
+      id,
+      (char) => char.copyWith(
+        currentHp: (char.currentHp - damage).clamp(0, char.maxHp),
+      ),
+    );
   }
 
   void _updateAndSave(String id, Character Function(Character) update) {
@@ -70,12 +73,11 @@ class SelectionNotifier extends _$SelectionNotifier {
   }
 
   Future<void> removeCharacter(String id) async {
-    state = const AsyncLoading();
     try {
       await ref.read(characterRepositoryProvider).deleteCharacter(id);
       ref.invalidateSelf();
-    } catch (e, st) {
-      state = AsyncError(e, st);
+    } catch (e) {
+      rethrow;
     }
   }
 }
