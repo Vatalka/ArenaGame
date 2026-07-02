@@ -136,4 +136,70 @@ void main() {
       verify(() => mockRepository.saveCharacter(any())).called(2);
     });
   });
+
+  group('updateCharacterInList', () {
+    setUp(() async => await setupLoadedState());
+
+    test('успішно оновлює State персонажа БЕЗ виклику репозиторію', () {
+      final notifier = container.read(selectionProvider.notifier);
+
+      final upgradedChar = existingCharacter.copyWith(
+        vitality: 20,
+        strength: 20,
+        level: 2,
+      );
+
+      notifier.updateCharacterInList(upgradedChar);
+
+      final state = container.read(selectionProvider).value!;
+      expect(state.first.level, 2);
+      expect(state.first.vitality, 20);
+
+      verifyNever(() => mockRepository.saveCharacter(any()));
+    });
+
+    test('id не знайдено в списку — стан залишається незмінним', () {
+      final notifier = container.read(selectionProvider.notifier);
+      final unknownChar = existingCharacter.copyWith(id: 'id', name: 'Name');
+
+      notifier.updateCharacterInList(unknownChar);
+
+      final state = container.read(selectionProvider).value!;
+      expect(state.first.id, '5');
+      expect(state.first.name, 'FakeAragon');
+    });
+  });
+
+  group('removeCharacter', () {
+    test('успішно видаляє персонажа та викликає invalidateSelf()', () async {
+      when(() => mockRepository.deleteCharacter('5')).thenAnswer((_) async {});
+
+      final notifier = container.read(selectionProvider.notifier);
+      final future = notifier.removeCharacter('5');
+
+      expect(
+        container.read(selectionProvider),
+        const AsyncLoading<List<Character>>(),
+      );
+
+      await future;
+      verify(() => mockRepository.deleteCharacter('5')).called(1);
+    });
+
+    test('у разі помилки репозиторію - перехід State в AsyncError', () async {
+      final exception = Exception('Database error');
+
+      when(
+        () => mockRepository.deleteCharacter('5'),
+      ).thenAnswer((_) async => throw exception);
+
+      final notifier = container.read(selectionProvider.notifier);
+
+      await notifier.removeCharacter('5');
+
+      final state = container.read(selectionProvider);
+      expect(state, isA<AsyncError<List<Character>>>());
+      expect(state.error, exception);
+    });
+  });
 }

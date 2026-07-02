@@ -56,48 +56,6 @@ class SelectionNotifier extends _$SelectionNotifier {
     state = AsyncData(updatedList);
   }
 
-  // void upgradeCharacterState({
-  //   required String id,
-  //   int? newHp,
-  //   bool? isInCombat,
-  //   int gainedExp = 0,
-  // }) {
-  //   if (state is! AsyncData<List<Character>>) return;
-  //
-  //   final currentList = state.value!;
-  //   final index = currentList.indexWhere((char) => char.id == id);
-  //   if (index == -1) return;
-  //
-  //   final oldChar = currentList[index];
-  //
-  //   var updatedChar = oldChar.copyWith(
-  //     isInCombat: isInCombat ?? oldChar.isInCombat,
-  //     lastUpdateTime: DateTime.now().millisecondsSinceEpoch,
-  //   );
-  //
-  //   bool leveledUp = false;
-  //   if (gainedExp > 0) {
-  //     updatedChar = updatedChar.earnExperience(gainedExp);
-  //     if (updatedChar.level > oldChar.level) {
-  //       leveledUp = true;
-  //     }
-  //   }
-  //
-  //   updatedChar = updatedChar.copyWith(
-  //     currentHp: leveledUp
-  //         ? updatedChar.maxHp
-  //         : (newHp ?? oldChar.actualHp.toInt()),
-  //   );
-  //
-  //   if (oldChar == updatedChar) return;
-  //
-  //   ref.read(characterRepositoryProvider).saveCharacter(updatedChar);
-  //
-  //   final updatedList = [...currentList];
-  //   updatedList[index] = updatedChar;
-  //   state = AsyncData(updatedList);
-  // }
-
   void updateCharacterInList(Character updatedChar) {
     if (state is! AsyncData<List<Character>>) return;
 
