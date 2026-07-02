@@ -1,5 +1,5 @@
-import 'package:arena_game/features/character/bloc/level_up_event.dart';
-import 'package:arena_game/features/character/bloc/level_up_state.dart';
+import 'package:arena_game/features/character/presentation/bloc/level_up_event.dart';
+import 'package:arena_game/features/character/presentation/bloc/level_up_state.dart';
 import 'package:arena_game/features/character/domain/entities/character.dart';
 import 'package:arena_game/features/character/domain/usecases/save_character_use_case.dart';
 import 'package:bloc/bloc.dart';
