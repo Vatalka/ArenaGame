@@ -32,6 +32,7 @@ class BattleNotifier extends _$BattleNotifier {
       isBotMode: true,
       selectedAttack: null,
       selectedBlock: null,
+      roundNumber: 0,
     );
 
     ref
