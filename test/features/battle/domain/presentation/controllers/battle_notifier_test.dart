@@ -110,6 +110,15 @@ void main() {
 
   tearDown(() => container.dispose());
 
+  test('Початковий стан BattleSelection відповідає дефолтним значенням', () {
+    final state = container.read(battleProvider);
+
+    expect(state.selectedAttack, null);
+    expect(state.selectedBlock, null);
+    expect(state.isBotMode, false);
+    expect(state.roundNumber, 1);
+  });
+
   group('enableBotMode', () {
     test('виставляє isBotMode: true і скидає вибір зон', () {
       container.read(battleProvider.notifier).enableBotMode();
@@ -118,6 +127,11 @@ void main() {
       expect(state.isBotMode, true);
       expect(state.selectedAttack, isNull);
       expect(state.selectedBlock, isNull);
+    });
+
+    test('enableBotMode скидає roundNumber до 0', () {
+      container.read(battleProvider.notifier).enableBotMode();
+      expect(container.read(battleProvider).roundNumber, 0);
     });
   });
 
@@ -183,6 +197,26 @@ void main() {
 
       final botHpAfter = container.read(botProvider).currentHp;
       expect(botHpAfter, lessThan(botHpBefore));
+    });
+  });
+
+  group('BattleResult.playerWin', () {
+    test('при падінні HP до 0 нараховується досвід, BotMode вимикається', () {
+      // TODO: зробити цей тест
+    });
+  });
+
+  group('skipTurn', () {
+    setUp(() {
+      container.read(battleProvider.notifier).enableBotMode();
+    });
+
+    test('підставляє зони і викликає confirmTurn (roundNumber зростає)', () {
+      final roundBefore = container.read(battleProvider).roundNumber;
+
+      container.read(battleProvider.notifier).skipTurn();
+
+      expect(container.read(battleProvider).roundNumber, roundBefore + 1);
     });
   });
 }
