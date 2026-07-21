@@ -201,8 +201,32 @@ void main() {
   });
 
   group('BattleResult.playerWin', () {
+    setUp(() {
+      container.read(battleProvider.notifier).enableBotMode();
+    });
     test('при падінні HP до 0 нараховується досвід, BotMode вимикається', () {
-      // TODO: зробити цей тест
+      final levelBefore =
+          (container.read(selectionProvider) as AsyncData<List<Character>>)
+              .value
+              .firstWhere((c) => c.id == 'player-1')
+              .level;
+
+      final weakBot = container.read(botProvider).copyWith(currentHp: 1);
+      container.read(botProvider.notifier).state = weakBot;
+
+      container.read(battleProvider.notifier)
+        ..selectAttack(Area.body) // бот блокує head → body пройде
+        ..selectBlock(Area.head)
+        ..confirmTurn();
+
+      expect(container.read(battleProvider).isBotMode, false);
+
+      final player =
+          (container.read(selectionProvider) as AsyncData<List<Character>>)
+              .value
+              .firstWhere((c) => c.id == 'player-1');
+
+      expect(player.level, greaterThan(levelBefore));
     });
   });
 
