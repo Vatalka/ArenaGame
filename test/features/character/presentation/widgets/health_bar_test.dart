@@ -1,28 +1,9 @@
-import 'package:arena_game/core/theme/game_colors.dart';
 import 'package:arena_game/core/widgets/game_progress_bar.dart';
 import 'package:arena_game/features/character/presentation/widgets/health_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-Widget buildWithTheme({required Widget child}) {
-  return MaterialApp(
-    theme: ThemeData(
-      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      extensions: [
-        GameColors(
-          healthHigh: Colors.green,
-          healthMedium: Colors.yellow,
-          healthLow: Colors.red,
-          logAttack: Colors.orangeAccent,
-          logDamage: Colors.redAccent,
-          logBlock: Colors.brown,
-          logInfo: Colors.blueGrey,
-        ),
-      ],
-    ),
-    home: Scaffold(body: child),
-  );
-}
+import '../../../../helpers/test_theme.dart';
 
 void main() {
   group('HealthBar — відображення', () {
