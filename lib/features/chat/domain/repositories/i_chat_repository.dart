@@ -5,7 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'i_chat_repository.g.dart';
 
 abstract interface class IChatRepository {
-  Stream<List<ChatMessage>> watchMessages({int limit});
+  Stream<List<ChatMessage>> watchMessages({int limit = 50});
 
   Future<void> sendMessage({
     required String senderId,
